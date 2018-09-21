@@ -4,6 +4,9 @@
 - https://electronjs.org
 - https://developer.apple.com/documentation/callkit
 
+## Server-Libraries
+- https://github.com/jlaine/aiortc
+
 ## Device / Hardware
 - Raspberry Pi Zero W
 - http://raspi.tv/2015/ethernet-on-pi-zero-how-to-put-an-ethernet-port-on-your-pi
