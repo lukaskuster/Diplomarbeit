@@ -100,6 +100,11 @@ ENV/
 # mypy
 .mypy_cache/
 
-
 #Mac
 *.DS_Store
+
+#Github Repo
+aiortc/
+
+#IDE Config
+**/.idea/
