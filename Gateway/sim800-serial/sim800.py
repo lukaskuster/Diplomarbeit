@@ -1,16 +1,16 @@
+#! /usr/bin/python3.6
+
 import serial
 import re
 from threading import Thread
 from pyee import EventEmitter
+from queue import Queue
 
 
 # Decorator to add a callback to a command function,
 # that gets called when the serial loop gets a return value from the serial interface
 def _serial_return(func):
     def wrapper(self, *args, **kwargs):
-        # Set the event name in the serial loop to the function name
-        self.serial_loop.event = func.__name__
-
         if 'callback' in kwargs:
             # Add a listener on the event with the callback arg
             self.on(func.__name__, kwargs['callback'])
@@ -18,71 +18,60 @@ def _serial_return(func):
         else:
             self.on(func.__name__, lambda e: None)
 
-        return func(self, *args, **kwargs)
+        data = func(self, *args, **kwargs)
+
+        # Set the event name in the serial loop to the function name
+        self.serial_loop.command_queue.put({'event': func.__name__, 'data': data})
     return wrapper
 
 
 class SerialLoop(Thread):
-    def __init__(self, sim):
+    def __init__(self, sim, serial_port, debug):
         super(SerialLoop, self).__init__()
+
+        # If debug is enabled the serial connection is emulated with the commandline
+        self.debug = debug
+
+        if not debug:
+            # Initialize a new serial connection
+            self.serial = serial.Serial(serial_port, baudrate=9600, timeout=5)
 
         # Set the sim800 object to emit events
         self.sim = sim
 
-        # The Event that should be emitted, when a message returns from the serial interface
-        self.event = None
+        # The Events that should be written and emitted, when a message returns from the serial interface
+        self.command_queue = Queue(64)
 
         # Set running to False to stop the loop
         self.running = True
 
     def run(self):
         while self.running:
-            # When debug mode is enabled get the data from the command line
-            if self.sim.debug:
-                sim_data = str.encode(input())
-            else:
-                # Read the data from the serial interface
-                sim_data = self.sim.serial.readline()
 
-            if sim_data == b'RING':
-                self.sim.emit('ring')
+            # Write the event to the serial interface and emit the returning value
+            if not self.command_queue.empty():
+                event = self.command_queue.get()
+                self._write(event['data'])
 
-            elif self.event is not None:
+                sim_data = self._read()
+
                 # Emit an event to the last called command function
-                self.sim.emit(self.event, sim_data)
-                self.event = None
+                self.sim.emit(event['event'], sim_data)
 
+            # If no events are in the queue, just listen on the serial port
+            else:
+                sim_data = self._read()
 
-class Sim800(EventEmitter):
+                if sim_data == b'RING':
+                    self.sim.emit('ring')
 
-    def __init__(self, serial_port='/dev/serial0', debug=False):
-        super().__init__()
-
-        self.debug = debug
-
-        # Create serial loop and pass the current obj as argument
-        self.serial_loop = SerialLoop(self)
-
-        # Start the thread
-        self.serial_loop.start()
-
-        if not debug:
-            # Initialize a new serial connection
-            self.serial = serial.Serial(serial_port, baudrate=9600, timeout=5)
-
-    @_serial_return
-    def answer_call(self):
-        self._write('ATA\r\n')
-
-    @_serial_return
-    def hang_up_call(self):
-        self._write('ATH\r\n')
-
-    @_serial_return
-    def dial_number(self, number):
-        # Remove all \n and \r from the number
-        number = re.sub('(\n|\r)', '', number)
-        self._write('ATD%s;\r\n' % number)
+    def _read(self):
+        # When debug mode is enabled get the data from the command line
+        if self.debug:
+            return str.encode(input())
+        else:
+            # Read the data from the serial interface
+            return self.serial.readline()
 
     def _write(self, data):
 
@@ -101,3 +90,30 @@ class Sim800(EventEmitter):
 
         # Else write the data to the serial interface
         self.serial.write(data)
+
+
+class Sim800(EventEmitter):
+
+    def __init__(self, serial_port='/dev/serial0', debug=False):
+        super().__init__()
+
+        # Create serial loop
+        self.serial_loop = SerialLoop(self, serial_port, debug)
+
+        # Start the thread
+        self.serial_loop.start()
+
+    @_serial_return
+    def answer_call(self):
+        return 'ATA\r\n'
+
+    @_serial_return
+    def hang_up_call(self):
+        return 'ATH\r\n'
+
+    @_serial_return
+    def dial_number(self, number):
+        # Remove all \n and \r from the number
+        number = re.sub('(\n|\r)', '', number)
+        return 'ATD%s;\r\n' % number
+

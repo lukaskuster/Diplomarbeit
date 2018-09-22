@@ -1,3 +1,5 @@
+#! /usr/bin/python3.6
+
 import argparse
 from sim800 import Sim800
 
@@ -21,9 +23,9 @@ if __name__ == '__main__':
     # Run the specified AT-Command
     if args.answer:
         sim.answer_call(callback=on_serial_return)
-    elif args.hangup:
+    if args.hangup:
         sim.hang_up_call(callback=on_serial_return)
-    elif args.call:
+    if args.call:
         sim.dial_number(args.call, callback=on_serial_return)
 
     # Gets called when the sim800 module gets an incomming call
