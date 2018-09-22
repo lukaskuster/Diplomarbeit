@@ -8,7 +8,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Serial connection sending AT-Commands to Sim800')
     parser.add_argument('--hangup', '-u', action='count')
     parser.add_argument('--answer', '-a', action='count')
-    parser.add_argument('--call', '-c')
+    parser.add_argument('--dial', '-d')
+    parser.add_argument('--custom', '-c')
 
     # Initialize new Sim800 object with debug enabled
     sim = Sim800(debug=True)
@@ -25,11 +26,12 @@ if __name__ == '__main__':
         sim.answer_call(callback=on_serial_return)
     if args.hangup:
         sim.hang_up_call(callback=on_serial_return)
-    if args.call:
-        sim.dial_number(args.call, callback=on_serial_return)
+    if args.dial:
+        sim.dial_number(args.dial, callback=on_serial_return)
+    if args.custom:
+        sim.custom_command(args.custom, callback=on_serial_return)
 
     # Gets called when the sim800 module gets an incomming call
     @sim.on('ring')
     def ring():
         print("ring")
-

@@ -1,6 +1,6 @@
 #! /usr/bin/python3.6
 
-import serial
+from serial import Serial
 import re
 from threading import Thread
 from pyee import EventEmitter
@@ -34,7 +34,7 @@ class SerialLoop(Thread):
 
         if not debug:
             # Initialize a new serial connection
-            self.serial = serial.Serial(serial_port, baudrate=9600, timeout=5)
+            self.serial = Serial(serial_port, baudrate=9600, timeout=1)
 
         # Set the sim800 object to emit events
         self.sim = sim
@@ -104,6 +104,11 @@ class Sim800(EventEmitter):
         self.serial_loop.start()
 
     @_serial_return
+    def custom_command(self, command):
+        command = re.sub('([\n\r])', '', command)
+        return command + '\r\n'
+
+    @_serial_return
     def answer_call(self):
         return 'ATA\r\n'
 
@@ -114,6 +119,5 @@ class Sim800(EventEmitter):
     @_serial_return
     def dial_number(self, number):
         # Remove all \n and \r from the number
-        number = re.sub('(\n|\r)', '', number)
-        return 'ATD%s;\r\n' % number
-
+        number = re.sub('([\n\r])', '', number)
+        return 'ATD{};\r\n'.format(number)
