@@ -2,6 +2,7 @@
 
 import argparse
 from sim800 import Sim800
+from functools import partial
 
 
 if __name__ == '__main__':
@@ -9,27 +10,47 @@ if __name__ == '__main__':
     parser.add_argument('--hangup', '-u', action='count')
     parser.add_argument('--answer', '-a', action='count')
     parser.add_argument('--dial', '-d')
-    parser.add_argument('--custom', '-c')
-
-    # Initialize new Sim800 object with debug enabled
-    sim = Sim800(debug=True)
+    parser.add_argument('--debug', action='count')
 
     # Callback function for the commands, that just prints the return value from the serial interface
-    def on_serial_return(e):
+    #  and closes the sim800 object
+    def on_serial_return(sim800, e):
         print(e)
+        sim800.close()
 
     # Parse commandline arguments
     args = parser.parse_args()
 
+    debug = True if args.debug else False
+
+    # Initialize new Sim800 object with debug enabled
+    sim = Sim800(debug=debug)
+
+    # Bind the sim object to the function
+    on_serial_return = partial(on_serial_return, sim)
+
     # Run the specified AT-Command
     if args.answer:
         sim.answer_call(callback=on_serial_return)
-    if args.hangup:
+    elif args.hangup:
         sim.hang_up_call(callback=on_serial_return)
-    if args.dial:
+    elif args.dial:
         sim.dial_number(args.dial, callback=on_serial_return)
-    if args.custom:
-        sim.custom_command(args.custom, callback=on_serial_return)
+
+    # Custom AT-Commands while running
+    # Only available if debug mode is not enabled
+    if not debug:
+        while True:
+            cmd = input('AT-Command: ')
+            # Strip all whitespaces
+            cmd.strip()
+
+            # Exit the loop and close the sim800 object if 'exit' is typed
+            if cmd is 'exit':
+                sim.close()
+                break
+            # Send the command
+            sim.custom_command(cmd, callback=on_serial_return)
 
     # Gets called when the sim800 module gets an incomming call
     @sim.on('ring')

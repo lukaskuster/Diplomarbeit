@@ -103,6 +103,9 @@ class Sim800(EventEmitter):
         # Start the thread
         self.serial_loop.start()
 
+    def close(self):
+        self.serial_loop.running = False
+
     @_serial_return
     def custom_command(self, command):
         command = re.sub('([\n\r])', '', command)
