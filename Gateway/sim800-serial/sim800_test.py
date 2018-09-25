@@ -16,7 +16,8 @@ if __name__ == '__main__':
     #  and closes the sim800 object
     def on_serial_return(sim800, e):
         print(e)
-        sim800.close()
+        if sim800.debug:
+            sim800.close()
 
     # Parse commandline arguments
     args = parser.parse_args()
@@ -25,6 +26,9 @@ if __name__ == '__main__':
 
     # Initialize new Sim800 object with debug enabled
     sim = Sim800(debug=debug)
+
+    # Print ring when the sim800 module gets an incomming call
+    sim.on('ring', lambda: print('Incoming call!'))
 
     # Bind the sim object to the function
     on_serial_return = partial(on_serial_return, sim)
@@ -41,18 +45,13 @@ if __name__ == '__main__':
     # Only available if debug mode is not enabled
     if not debug:
         while True:
-            cmd = input('AT-Command: ')
+            cmd = input()
             # Strip all whitespaces
             cmd.strip()
 
             # Exit the loop and close the sim800 object if 'exit' is typed
-            if cmd is 'exit':
+            if cmd == 'exit':
                 sim.close()
                 break
             # Send the command
             sim.custom_command(cmd, callback=on_serial_return)
-
-    # Gets called when the sim800 module gets an incomming call
-    @sim.on('ring')
-    def ring():
-        print("ring")
