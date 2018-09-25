@@ -18,7 +18,6 @@ def clear_str(string):
     return re.sub('([\n\r])', '', string)
 
 
-#
 def _serial_return(func):
     """
     Decorator to add a callback to a command function,
@@ -47,7 +46,7 @@ class Event:
     """
     Event encapsulates an error and a content list.
     """
-    def __init__(self, error=True):
+    def __init__(self, name, error=False):
         """
         Construct a new 'Event' object.
 
@@ -55,6 +54,8 @@ class Event:
         :return: returns nothing
         """
         self.error = error
+        self.error_message = None
+        self.name = name
         self.content = []
 
     def __str__(self):
@@ -65,7 +66,8 @@ class Event:
         """
 
         content = '\n'.join(self.content)
-        return 'Error: {}\nContent:\n{}'.format(self.error, content)
+        return 'Name: {}\nError: {}\nError Message: {}\nContent:\n{}'.format(
+            self.name, self.error, self.error_message, content)
 
 
 class SerialLoop(Thread):
@@ -131,7 +133,7 @@ class SerialLoop(Thread):
                     continue
 
                 # Create new event object
-                event = Event()
+                event = Event(command['name'])
 
                 # Listen on the serial interface until an error or success
                 while True:
@@ -142,6 +144,7 @@ class SerialLoop(Thread):
                         event.error = False
                         break
                     elif 'ERROR' in response:
+                        event.error_message = response
                         event.error = True
                         break
                     elif len(response) > 0:
