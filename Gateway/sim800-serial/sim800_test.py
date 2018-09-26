@@ -13,7 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='count')
 
     # Callback function for the commands, that just prints the return value from the serial interface
-    #  and closes the sim800 object
+    # and closes the sim800 object
     def on_serial_return(sim800, e):
         print(e)
         if sim800.debug:
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     # Initialize new Sim800 object with debug enabled
     sim = Sim800(debug=debug)
 
-    # Print ring when the sim800 module gets an incomming call
+    # Print ring when the sim800 module gets an incoming call
     sim.on('ring', lambda: print('Incoming call!'))
 
     # Bind the sim object to the function
