@@ -8,8 +8,8 @@ def _serial_return(func):
     Decorator to add a callback to a command function,
     that gets called when the serial loop gets a return value from the serial interface
 
-    :param func: Function that returns the command as String
-    :return: New Function with an callback argument
+    :param func: function that returns the command as String
+    :return: new Function with an callback argument
     """
 
     def wrapper(self, *args, **kwargs):
@@ -20,10 +20,18 @@ def _serial_return(func):
         else:
             self.on(func.__name__, lambda e: None)
 
-        data = func(self, *args, **kwargs)
+        command = func(self, *args, **kwargs)
 
-        # Set the event name in the serial loop to the function name
-        self.serial_loop.command_queue.put({'name': func.__name__, 'data': data})
+        # Create the event
+        event = {'name': func.__name__}
+        if isinstance(command, dict):
+            event['command'] = command['command']
+            event['data'] = command['data']
+        else:
+            event['command'] = command
+
+        # Add the event to the serial loop queue
+        self.serial_loop.event_queue.put(event)
     return wrapper
 
 
@@ -63,7 +71,7 @@ class Sim800(EventEmitter):
     @_serial_return
     def custom_command(self, command):
         """
-        :param command: Command that should be written to the serial interface
+        :param command: command that should be written to the serial interface
         :return: returns the command with trailing \r\n
         """
 
@@ -89,10 +97,23 @@ class Sim800(EventEmitter):
     @_serial_return
     def dial_number(self, number):
         """
-        :param number: Number that should be dialed
+        :param number: number that should be dialed
         :return: returns the dial AT-Command
         """
 
         # Remove all \n and \r from the number
         number = clear_str(number)
         return 'ATD{};\r\n'.format(number)
+
+    @_serial_return
+    def send_sms(self, number, text):
+        """
+        :param number: number the sms should be send to
+        :param text: text of the sms
+        :return: returns the send sms AT-Command
+        """
+
+        # Remove all \n and \r from the number
+        number = clear_str(number)
+
+        return {'command': 'AT+CMGS="{}"\r'.format(number), 'data': text}

@@ -33,7 +33,7 @@ class SerialLoop(Thread):
         self.sim = sim
 
         # The Events that should be written and emitted, when a message returns from the serial interface
-        self.command_queue = Queue(64)
+        self.event_queue = Queue(64)
 
         # Set running to False to stop the loop
         self.running = True
@@ -47,28 +47,32 @@ class SerialLoop(Thread):
         while self.running:
 
             # Write the event to the serial interface and emit the returning value
-            if not self.command_queue.empty():
+            if not self.event_queue.empty():
 
-                # Get the next command from the queue
-                command = self.command_queue.get()
+                # Get the next event from the queue
+                event = self.event_queue.get()
 
                 # Write the command to the serial interface
-                self._write(command['data'])
+                self._write(event['command'])
 
                 # Remove \r\n
-                data = clear_str(command['data'])
+                data = clear_str(event['command'])
 
                 # Get the data from the serial interface, remove \r\n and convert it to a string
                 response = clear_str(self._read().decode('utf-8'))
 
-                # The sim800 module sends the same command back first
-                if response != data:
+                # If the prompt char is send back, serial800 expects some kind of data
+                if response == '>':
+                    self._write(event['data'] + '\r')
+
+                # The sim800 module sends usually the same command back first
+                elif response != data:
                     # Print an error and continue with the next command if not the same is send back
                     print("Error: Wrong event returned on serial port! Got: {}, Command: {}".format(response, data))
                     continue
 
                 # Create new event object
-                event = Event(command['name'])
+                e = Event(event['name'])
 
                 # Listen on the serial interface until an error or success
                 while True:
@@ -76,18 +80,18 @@ class SerialLoop(Thread):
                     response = clear_str(self._read().decode('utf-8'))
 
                     if 'OK' in response:
-                        event.error = False
+                        e.error = False
                         break
                     elif 'ERROR' in response:
-                        event.error_message = response
-                        event.error = True
+                        e.error_message = response
+                        e.error = True
                         break
                     elif len(response) > 0:
                         # Save the transmitted data in the content property of the event
-                        event.content.append(response)
+                        e.content.append(response)
 
                 # Emit an event to the last called command function
-                self.sim.emit(command['name'], event)
+                self.sim.emit(event['name'], e)
 
             # If no events are in the queue, just listen on the serial port
             else:
