@@ -17,6 +17,9 @@ class SerialLoop(Thread):
         :param sim: Sim800 object
         :param serial_port: port of the serial interface
         :param debug: indicates debug mode
+        :type sim: object
+        :type serial_port: str
+        :type debug: bool
         :return: returns nothing
         """
 
@@ -41,6 +44,7 @@ class SerialLoop(Thread):
     def run(self):
         """
         Is there for writing commands to the serial interface and reading the response
+
         :return: returns nothing
         """
 
@@ -56,19 +60,19 @@ class SerialLoop(Thread):
                 self._write(event['command'])
 
                 # Remove \r\n
-                data = clear_str(event['command'])
+                command = clear_str(event['command'])
 
                 # Get the data from the serial interface, remove \r\n and convert it to a string
                 response = clear_str(self._read().decode('utf-8'))
 
                 # If the prompt char is send back, serial800 expects some kind of data
                 if response == '>':
-                    self._write(event['data'] + '\r')
+                    self._write(event['data'])
 
                 # The sim800 module sends usually the same command back first
-                elif response != data:
+                elif response != command:
                     # Print an error and continue with the next command if not the same is send back
-                    print("Error: Wrong event returned on serial port! Got: {}, Command: {}".format(response, data))
+                    print("Error: Wrong event returned on serial port! Got: {}, Command: {}".format(response, command))
                     continue
 
                 # Create new event object
@@ -105,7 +109,9 @@ class SerialLoop(Thread):
     def _read(self):
         """
         Reads from the serial interface
+
         :return: returns the value from the serial interface
+        :rtype: bytearray
         """
 
         # When debug mode is enabled get the data from the command line
@@ -120,6 +126,7 @@ class SerialLoop(Thread):
         Writes data to the serial interface
 
         :param data: data that should be written
+        :type data: bytearray, str
         :return: returns nothing
         """
 

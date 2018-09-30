@@ -6,7 +6,10 @@ class Event:
         """
         Construct a new 'Event' object.
 
+        :param name: name of the event
         :param error: error of event
+        :type name: str
+        :type error: bool
         :return: returns nothing
         """
         self.error = error
@@ -19,6 +22,7 @@ class Event:
         Returns the event as a human readable string
 
         :return: human readable string of the event
+        :rtype: str
         """
 
         content = '\n'.join(self.content)

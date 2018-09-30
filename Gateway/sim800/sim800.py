@@ -46,6 +46,8 @@ class Sim800(EventEmitter):
 
         :param serial_port: port of the serial interface
         :param debug: indicates debug mode
+        :type serial_port: str
+        :type debug: bool
         :return: returns nothing
         """
 
@@ -64,6 +66,7 @@ class Sim800(EventEmitter):
         Closes the SerialLoop thread
 
         :return: returns nothing
+        :rtype: str
         """
 
         self.serial_loop.running = False
@@ -72,7 +75,9 @@ class Sim800(EventEmitter):
     def custom_command(self, command):
         """
         :param command: command that should be written to the serial interface
+        :type command: str
         :return: returns the command with trailing \r\n
+        :rtype: str
         """
 
         command = clear_str(command)
@@ -82,6 +87,7 @@ class Sim800(EventEmitter):
     def answer_call(self):
         """
         :return: returns the answer call AT-Command
+        :rtype: str
         """
 
         return 'ATA\r\n'
@@ -90,6 +96,7 @@ class Sim800(EventEmitter):
     def hang_up_call(self):
         """
         :return: returns the hang up AT-Command
+        :rtype: str
         """
 
         return 'ATH\r\n'
@@ -98,7 +105,9 @@ class Sim800(EventEmitter):
     def dial_number(self, number):
         """
         :param number: number that should be dialed
+        :type number: str
         :return: returns the dial AT-Command
+        :rtype: str
         """
 
         # Remove all \n and \r from the number
@@ -110,10 +119,99 @@ class Sim800(EventEmitter):
         """
         :param number: number the sms should be send to
         :param text: text of the sms
+        :type number: str
+        :type text: str
         :return: returns the send sms AT-Command
+        :rtype: str
         """
 
-        # Remove all \n and \r from the number
         number = clear_str(number)
+        if not text.endswith('\r'):
+            text += '\r'
 
         return {'command': 'AT+CMGS="{}"\r'.format(number), 'data': text}
+
+    @_serial_return
+    def list_unread_sms(self):
+        """
+        :return: returns the AT-Command for all unread sms'
+        :rtype: str
+        """
+
+        return 'AT+CMGL="REC UNREAD"\r\n'
+
+    @_serial_return
+    def list_all_sms(self):
+        """
+        :return: returns the AT-Command for all sms'
+        :rtype: str
+        """
+
+        return 'AT+CMGL="ALL"\r\n'
+
+    @_serial_return
+    def set_sms_mode(self, mode):
+        """
+        :param mode: sms message format
+        :type mode: int
+        :return: returns the sms message format AT-Command
+        :rtype: str
+
+        Mode can be either 0 or 1
+        0: PDU mode
+        1: Text mode
+        """
+
+        return 'AT+CMGF={}\r\n'.format(mode)
+
+    @_serial_return
+    def power_off(self, mode):
+        """
+        :param mode: power off mode
+        :type mode: int
+        :return: returns the power off AT-Command
+        :rtype: str
+
+        Mode can be either 0 or 1
+        0: Power off urgently
+        1: Normal power off
+        """
+
+        return 'AT+CPOWD={}\r\n'.format(mode)
+
+    @_serial_return
+    def signal_quality(self):
+        """
+        :return: returns the signal quality report AT-Command'
+        :rtype: str
+        """
+
+        return 'AT+CSQ\r\n'
+
+    @_serial_return
+    def reset_default_configuration(self):
+        """
+        :return: returns the reset default configuration AT-Command'
+        :rtype: str
+        """
+
+        return 'ATZ\r\n'
+
+    @_serial_return
+    def enter_pin(self, pin):
+        """
+        :param pin: can be pin, puk, etc...
+        :return: returns the enter pin write AT-Command'
+        :rtype: str
+        """
+
+        return 'AT+CPIN={}\r\n'.format(pin)
+
+    @_serial_return
+    def pin_required(self):
+        """
+        :return: returns the enter pin read AT-Command'
+        :rtype: str
+        """
+
+        return 'AT+CPIN?\r\n'
