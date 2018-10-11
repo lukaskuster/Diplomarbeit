@@ -126,8 +126,8 @@ class Sim800(EventEmitter):
         """
 
         number = clear_str(number)
-        if not text.endswith('\r'):
-            text += '\r'
+        text = clear_str(text)
+        text += '\x1A'
 
         return {'command': 'AT+CMGS="{}"\r'.format(number), 'data': text}
 
