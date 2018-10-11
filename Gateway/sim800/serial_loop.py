@@ -30,7 +30,7 @@ class SerialLoop(Thread):
 
         if not debug:
             # Initialize a new serial connection
-            self.serial = Serial(serial_port, baudrate=9600, timeout=1)
+            self.serial = Serial(serial_port, baudrate=115200, timeout=1)
 
         # Set the sim800 object to emit events
         self.sim = sim
@@ -65,12 +65,8 @@ class SerialLoop(Thread):
                 # Get the data from the serial interface, remove \r\n and convert it to a string
                 response = clear_str(self._read().decode('utf-8'))
 
-                # If the prompt char is send back, serial800 expects some kind of data
-                if response == '>':
-                    self._write(event['data'])
-
                 # The sim800 module sends usually the same command back first
-                elif response != command:
+                if response != command:
                     # Print an error and continue with the next command if not the same is send back
                     print("Error: Wrong event returned on serial port! Got: {}, Command: {}".format(response, command))
                     continue
@@ -80,19 +76,30 @@ class SerialLoop(Thread):
 
                 # Listen on the serial interface until an error or success
                 while True:
-                    # Get the data from the serial interface, remove \r\n and convert it to a string
-                    response = clear_str(self._read().decode('utf-8'))
 
-                    if 'OK' in response:
-                        e.error = False
-                        break
-                    elif 'ERROR' in response:
-                        e.error_message = response
-                        e.error = True
-                        break
-                    elif len(response) > 0:
-                        # Save the transmitted data in the content property of the event
-                        e.content.append(response)
+                    res = self._read()
+                    # Get the data from the serial interface, remove \r\n and convert it to a string
+                    try:
+                        response = clear_str(res.decode('utf-8'))
+
+                        # If the prompt char is send back, serial800 expects some kind of data
+                        if ('>' in response) and ('data' in event):
+                            print(event)
+                            self._write(event['data'])
+                            continue
+
+                        if 'OK' in response:
+                            e.error = False
+                            break
+                        elif 'ERROR' in response:
+                            e.error_message = response
+                            e.error = True
+                            break
+                        elif len(response) > 0:
+                            # Save the transmitted data in the content property of the event
+                            e.content.append(response)
+                    except UnicodeDecodeError:
+                        print("Could not decode the message from the serial interface! Message: {}".format(res))
 
                 # Emit an event to the last called command function
                 self.sim.emit(event['name'], e)
@@ -100,11 +107,15 @@ class SerialLoop(Thread):
             # If no events are in the queue, just listen on the serial port
             else:
                 # Get the data from the serial interface, remove \r\n and convert it to a string
-                response = clear_str(self._read().decode('utf-8'))
+                res = self._read()
+                try:
+                    response = clear_str(res.decode('utf-8'))
 
-                if response == 'RING':
-                    # Emit the ring event
-                    self.sim.emit('ring')
+                    if response == 'RING':
+                        # Emit the ring event
+                        self.sim.emit('ring')
+                except UnicodeDecodeError:
+                    print("Could not decode the message from the serial interface! Message: {}".format(res))
 
     def _read(self):
         """
