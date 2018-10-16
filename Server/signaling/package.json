@@ -1,0 +1,11 @@
+{
+  "name": "signaling-server",
+  "version": "1.0.0",
+  "description": "Signaling-Server for SIMplePhone",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "Quentin Wendegass",
+  "license": "ISC"
+}
