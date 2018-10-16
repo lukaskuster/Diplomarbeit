@@ -2,10 +2,16 @@
   "name": "signaling-server",
   "version": "1.0.0",
   "description": "Signaling-Server for SIMplePhone",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Quentin Wendegass",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4"
+  }
 }
