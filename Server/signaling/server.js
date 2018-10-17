@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routes = require('./controller');
+const auth = require('./auth');
 
 
 const app = express();
@@ -17,6 +18,7 @@ let db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(auth);
 app.use(bodyParser.json());
 app.use('/api', routes);
 
