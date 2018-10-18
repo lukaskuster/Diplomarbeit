@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pyserial = "*"
 pyee = "*"
+socketIO-client-nexus = "*"
 
 [dev-packages]
 
