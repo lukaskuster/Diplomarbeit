@@ -22,7 +22,44 @@
 		D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188D2178549200E650DB /* VoicemailTableViewController.swift */; };
 		D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188F2178572500E650DB /* VoicemailTableViewCell.swift */; };
 		D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */; };
+		D678189421788C8200E650DB /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = D678189321788C8200E650DB /* Cartfile */; };
+		D678189821788E8A00E650DB /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D678189621788E8A00E650DB /* Starscream.framework */; };
+		D678189921788E8A00E650DB /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D678189621788E8A00E650DB /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D678189A21788E8A00E650DB /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D678189721788E8A00E650DB /* SocketIO.framework */; };
+		D678189B21788E8A00E650DB /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D678189721788E8A00E650DB /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D67818A72178929B00E650DB /* SIMplePhoneKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D67818A52178929B00E650DB /* SIMplePhoneKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D67818A32178929B00E650DB /* SIMplePhoneKit.framework */; };
+		D67818AB2178929B00E650DB /* SIMplePhoneKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D67818A32178929B00E650DB /* SIMplePhoneKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D67818B021789CB200E650DB /* ICEExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818AF21789CB200E650DB /* ICEExchange.swift */; };
+		D67818B121789D4100E650DB /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D678189721788E8A00E650DB /* SocketIO.framework */; };
+		D67818B221789D4100E650DB /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D678189621788E8A00E650DB /* Starscream.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D67818A82178929B00E650DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6781842216CD16D00E650DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D67818A22178929B00E650DB;
+			remoteInfo = SIMplePhoneKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D678189C21788E8B00E650DB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D67818AB2178929B00E650DB /* SIMplePhoneKit.framework in Embed Frameworks */,
+				D678189921788E8A00E650DB /* Starscream.framework in Embed Frameworks */,
+				D678189B21788E8A00E650DB /* SocketIO.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D678184A216CD16D00E650DB /* SIMplePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMplePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,7 +73,6 @@
 		D6781868216CD80000E650DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D678186D216CE22400E650DB /* ContactsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
 		D678186E216CE22400E650DB /* ContactsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
-		D6781872216CE7E700E650DB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		D6781874216F432900E650DB /* ChatsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		D6781875216F432900E650DB /* ChatsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPreviewTableViewCell.h; sourceTree = "<group>"; };
@@ -49,6 +85,13 @@
 		D678188D2178549200E650DB /* VoicemailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewController.swift; sourceTree = "<group>"; };
 		D678188F2178572500E650DB /* VoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewCell.swift; sourceTree = "<group>"; };
 		D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedVoicemailTableViewCell.swift; sourceTree = "<group>"; };
+		D678189321788C8200E650DB /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		D678189621788E8A00E650DB /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		D678189721788E8A00E650DB /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
+		D67818A32178929B00E650DB /* SIMplePhoneKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SIMplePhoneKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67818A52178929B00E650DB /* SIMplePhoneKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIMplePhoneKit.h; sourceTree = "<group>"; };
+		D67818A62178929B00E650DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D67818AF21789CB200E650DB /* ICEExchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICEExchange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +99,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
+				D678189821788E8A00E650DB /* Starscream.framework in Frameworks */,
+				D678189A21788E8A00E650DB /* SocketIO.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D67818A02178929B00E650DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D67818B121789D4100E650DB /* SocketIO.framework in Frameworks */,
+				D67818B221789D4100E650DB /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				D678184C216CD16D00E650DB /* SIMplePhone */,
+				D67818A42178929B00E650DB /* SIMplePhoneKit */,
 				D6781866216CD1B600E650DB /* .gitignore */,
+				D678189321788C8200E650DB /* Cartfile */,
 				D678184B216CD16D00E650DB /* Products */,
 				D6781871216CE7E600E650DB /* Frameworks */,
 			);
@@ -76,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				D678184A216CD16D00E650DB /* SIMplePhone.app */,
+				D67818A32178929B00E650DB /* SIMplePhoneKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,7 +153,8 @@
 		D6781871216CE7E600E650DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D6781872216CE7E700E650DB /* AddressBook.framework */,
+				D678189721788E8A00E650DB /* SocketIO.framework */,
+				D678189621788E8A00E650DB /* Starscream.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,7 +207,28 @@
 			path = SupportFiles;
 			sourceTree = "<group>";
 		};
+		D67818A42178929B00E650DB /* SIMplePhoneKit */ = {
+			isa = PBXGroup;
+			children = (
+				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
+				D67818A62178929B00E650DB /* Info.plist */,
+				D67818AF21789CB200E650DB /* ICEExchange.swift */,
+			);
+			path = SIMplePhoneKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D678189E2178929B00E650DB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D67818A72178929B00E650DB /* SIMplePhoneKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		D6781849216CD16D00E650DB /* SIMplePhone */ = {
@@ -158,15 +238,36 @@
 				D6781846216CD16D00E650DB /* Sources */,
 				D6781847216CD16D00E650DB /* Frameworks */,
 				D6781848216CD16D00E650DB /* Resources */,
+				D678189C21788E8B00E650DB /* Embed Frameworks */,
+				D678189521788E2800E650DB /* Carthage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D67818A92178929B00E650DB /* PBXTargetDependency */,
 			);
 			name = SIMplePhone;
 			productName = SIMplePhone;
 			productReference = D678184A216CD16D00E650DB /* SIMplePhone.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D67818A22178929B00E650DB /* SIMplePhoneKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D67818AC2178929B00E650DB /* Build configuration list for PBXNativeTarget "SIMplePhoneKit" */;
+			buildPhases = (
+				D678189E2178929B00E650DB /* Headers */,
+				D678189F2178929B00E650DB /* Sources */,
+				D67818A02178929B00E650DB /* Frameworks */,
+				D67818A12178929B00E650DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SIMplePhoneKit;
+			productName = SIMplePhoneKit;
+			productReference = D67818A32178929B00E650DB /* SIMplePhoneKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -178,6 +279,10 @@
 				ORGANIZATIONNAME = "Lukas Kuster";
 				TargetAttributes = {
 					D6781849216CD16D00E650DB = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+					};
+					D67818A22178929B00E650DB = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
 					};
@@ -197,6 +302,7 @@
 			projectRoot = "";
 			targets = (
 				D6781849216CD16D00E650DB /* SIMplePhone */,
+				D67818A22178929B00E650DB /* SIMplePhoneKit */,
 			);
 		};
 /* End PBXProject section */
@@ -206,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D678189421788C8200E650DB /* Cartfile in Resources */,
 				D6781867216CD1B600E650DB /* .gitignore in Resources */,
 				D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */,
 				D6781869216CD80000E650DB /* Assets.xcassets in Resources */,
@@ -213,7 +320,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D67818A12178929B00E650DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D678189521788E2800E650DB /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D6781846216CD16D00E650DB /* Sources */ = {
@@ -234,7 +371,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D678189F2178929B00E650DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D67818B021789CB200E650DB /* ICEExchange.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D67818A92178929B00E650DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D67818A22178929B00E650DB /* SIMplePhoneKit */;
+			targetProxy = D67818A82178929B00E650DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D6781856216CD16D00E650DB /* Main.storyboard */ = {
@@ -371,11 +524,16 @@
 		D6781864216CD16F00E650DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UBFF39V752;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SIMplePhone/SupportFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -393,11 +551,16 @@
 		D6781865216CD16F00E650DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UBFF39V752;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = SIMplePhone/SupportFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -408,6 +571,76 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SIMplePhone/SIMplePhone-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D67818AD2178929B00E650DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UBFF39V752;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SIMplePhoneKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhoneKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D67818AE2178929B00E650DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UBFF39V752;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = SIMplePhoneKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhoneKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -428,6 +661,15 @@
 			buildConfigurations = (
 				D6781864216CD16F00E650DB /* Debug */,
 				D6781865216CD16F00E650DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D67818AC2178929B00E650DB /* Build configuration list for PBXNativeTarget "SIMplePhoneKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D67818AD2178929B00E650DB /* Debug */,
+				D67818AE2178929B00E650DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

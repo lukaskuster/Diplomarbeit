@@ -11,19 +11,24 @@ import Contacts
 
 class VoicemailTableViewController: UITableViewController {
 
-    let currentGateway = Gateway(imei: "98DEF5FD-3596-4003-92D3-A28263A5E479", name: "Home", number: CNPhoneNumber(stringValue: "+43 6641817908"))
+    let currentGateway = Gateway(imei: "98DEF5FD-3596-4003-92D3-A28263A5E479", name: "Home", number: CNPhoneNumber(stringValue: "00436641817908"))
     var voicemails: [Voicemail] = []
+    var selectedRow: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "+43 6648338455", audio: "avlocation"))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "+43 6648338456", audio: "avlocation"))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "+43 6648338457", audio: "avlocation"))
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338455", audio: "avlocation"))
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338456", audio: "avlocation"))
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338457", audio: "avlocation"))
         
         print(voicemails)
         
         self.tabBarItem.badgeValue = "\(voicemails.count)"
+        
+        self.tableView.allowsMultipleSelection = false
+        self.tableView.allowsSelection = true
+        self.tableView.tableFooterView = UIView()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,11 +47,18 @@ class VoicemailTableViewController: UITableViewController {
         return voicemails.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> VoicemailTableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "voicemailMessageCell", for: indexPath) as! VoicemailTableViewCell
-        cell.voicemail = voicemails[indexPath.row]
-        
-        return cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.selectedRow == indexPath && self.tableView.cellForRow(at: indexPath)?.reuseIdentifier == "voicemailMessageCell" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "expandedVoicemailMessageCell", for: indexPath) as! SelectedVoicemailTableViewCell
+            cell.voicemail = voicemails[indexPath.row]
+            
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "voicemailMessageCell", for: indexPath) as! VoicemailTableViewCell
+            cell.voicemail = voicemails[indexPath.row]
+            
+            return cell
+        }
     }
 
     /*
@@ -68,17 +80,14 @@ class VoicemailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.beginUpdates()
-        self.tableView.endUpdates()
-        
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == self.tableView.indexPathForSelectedRow {
-            return 140.0
-        }else{
-            return 60.0
+        let cache: IndexPath? = self.selectedRow
+        self.selectedRow = indexPath
+        if let oldCell = cache {
+            if oldCell != indexPath {
+                self.tableView.reloadRows(at: [oldCell], with: .fade)
+            }
         }
+        self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     /*
