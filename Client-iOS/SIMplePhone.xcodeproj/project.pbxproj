@@ -8,25 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		D678184F216CD16D00E650DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D678184E216CD16D00E650DB /* AppDelegate.m */; };
-		D6781852216CD16D00E650DB /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781851216CD16D00E650DB /* FirstViewController.m */; };
-		D6781855216CD16D00E650DB /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781854216CD16D00E650DB /* SecondViewController.m */; };
 		D6781858216CD16D00E650DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6781856216CD16D00E650DB /* Main.storyboard */; };
 		D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D678185B216CD16F00E650DB /* LaunchScreen.storyboard */; };
 		D6781860216CD16F00E650DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D678185F216CD16F00E650DB /* main.m */; };
 		D6781867216CD1B600E650DB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D6781866216CD1B600E650DB /* .gitignore */; };
 		D6781869216CD80000E650DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6781868216CD80000E650DB /* Assets.xcassets */; };
 		D678186F216CE22400E650DB /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D678186E216CE22400E650DB /* ContactsTableViewController.m */; };
-		D6781873216CE7E700E650DB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6781872216CE7E700E650DB /* AddressBook.framework */; };
+		D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781875216F432900E650DB /* ChatsTableViewController.m */; };
+		D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */; };
+		D67818832176097C00E650DB /* SMSChat.m in Sources */ = {isa = PBXBuildFile; fileRef = D67818822176097C00E650DB /* SMSChat.m */; };
+		D678188A21777B4800E650DB /* Voicemail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188921777B4800E650DB /* Voicemail.swift */; };
+		D678188C2178537100E650DB /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188B2178537100E650DB /* Gateway.swift */; };
+		D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188D2178549200E650DB /* VoicemailTableViewController.swift */; };
+		D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188F2178572500E650DB /* VoicemailTableViewCell.swift */; };
+		D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D678184A216CD16D00E650DB /* SIMplePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMplePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D678184D216CD16D00E650DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D678184E216CD16D00E650DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D6781850216CD16D00E650DB /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		D6781851216CD16D00E650DB /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		D6781853216CD16D00E650DB /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		D6781854216CD16D00E650DB /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		D6781857216CD16D00E650DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D678185C216CD16F00E650DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D678185E216CD16F00E650DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +37,18 @@
 		D678186D216CE22400E650DB /* ContactsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
 		D678186E216CE22400E650DB /* ContactsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
 		D6781872216CE7E700E650DB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		D6781874216F432900E650DB /* ChatsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
+		D6781875216F432900E650DB /* ChatsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
+		D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPreviewTableViewCell.h; sourceTree = "<group>"; };
+		D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatPreviewTableViewCell.m; sourceTree = "<group>"; };
+		D67818812176097C00E650DB /* SMSChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSChat.h; sourceTree = "<group>"; };
+		D67818822176097C00E650DB /* SMSChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSChat.m; sourceTree = "<group>"; };
+		D678188821777B4800E650DB /* SIMplePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SIMplePhone-Bridging-Header.h"; sourceTree = "<group>"; };
+		D678188921777B4800E650DB /* Voicemail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voicemail.swift; sourceTree = "<group>"; };
+		D678188B2178537100E650DB /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
+		D678188D2178549200E650DB /* VoicemailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewController.swift; sourceTree = "<group>"; };
+		D678188F2178572500E650DB /* VoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewCell.swift; sourceTree = "<group>"; };
+		D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedVoicemailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6781873216CE7E700E650DB /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,19 +83,11 @@
 		D678184C216CD16D00E650DB /* SIMplePhone */ = {
 			isa = PBXGroup;
 			children = (
-				D678184D216CD16D00E650DB /* AppDelegate.h */,
-				D678184E216CD16D00E650DB /* AppDelegate.m */,
-				D6781850216CD16D00E650DB /* FirstViewController.h */,
-				D6781868216CD80000E650DB /* Assets.xcassets */,
-				D6781851216CD16D00E650DB /* FirstViewController.m */,
-				D6781853216CD16D00E650DB /* SecondViewController.h */,
-				D6781854216CD16D00E650DB /* SecondViewController.m */,
-				D6781856216CD16D00E650DB /* Main.storyboard */,
-				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
-				D678185E216CD16F00E650DB /* Info.plist */,
-				D678185F216CD16F00E650DB /* main.m */,
-				D678186D216CE22400E650DB /* ContactsTableViewController.h */,
-				D678186E216CE22400E650DB /* ContactsTableViewController.m */,
+				D6781884217617B200E650DB /* Controllers */,
+				D67818862176180100E650DB /* Models */,
+				D6781885217617F600E650DB /* Views */,
+				D67818872176180700E650DB /* SupportFiles */,
+				D678188821777B4800E650DB /* SIMplePhone-Bridging-Header.h */,
 			);
 			path = SIMplePhone;
 			sourceTree = "<group>";
@@ -94,6 +98,54 @@
 				D6781872216CE7E700E650DB /* AddressBook.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6781884217617B200E650DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D6781874216F432900E650DB /* ChatsTableViewController.h */,
+				D6781875216F432900E650DB /* ChatsTableViewController.m */,
+				D678186D216CE22400E650DB /* ContactsTableViewController.h */,
+				D678186E216CE22400E650DB /* ContactsTableViewController.m */,
+				D678188D2178549200E650DB /* VoicemailTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D6781885217617F600E650DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */,
+				D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */,
+				D678188F2178572500E650DB /* VoicemailTableViewCell.swift */,
+				D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D67818862176180100E650DB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D67818812176097C00E650DB /* SMSChat.h */,
+				D67818822176097C00E650DB /* SMSChat.m */,
+				D678188921777B4800E650DB /* Voicemail.swift */,
+				D678188B2178537100E650DB /* Gateway.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D67818872176180700E650DB /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D678185E216CD16F00E650DB /* Info.plist */,
+				D678185F216CD16F00E650DB /* main.m */,
+				D678184D216CD16D00E650DB /* AppDelegate.h */,
+				D678184E216CD16D00E650DB /* AppDelegate.m */,
+				D6781868216CD80000E650DB /* Assets.xcassets */,
+				D6781856216CD16D00E650DB /* Main.storyboard */,
+				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +179,7 @@
 				TargetAttributes = {
 					D6781849216CD16D00E650DB = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -167,11 +220,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6781855216CD16D00E650DB /* SecondViewController.m in Sources */,
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D678186F216CE22400E650DB /* ContactsTableViewController.m in Sources */,
+				D678188C2178537100E650DB /* Gateway.swift in Sources */,
+				D678188A21777B4800E650DB /* Voicemail.swift in Sources */,
+				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
+				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
-				D6781852216CD16D00E650DB /* FirstViewController.m in Sources */,
+				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
+				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
+				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
+				D67818832176097C00E650DB /* SMSChat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,15 +372,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UBFF39V752;
-				INFOPLIST_FILE = SIMplePhone/Info.plist;
+				INFOPLIST_FILE = SIMplePhone/SupportFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SIMplePhone/SIMplePhone-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -330,15 +394,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = UBFF39V752;
-				INFOPLIST_FILE = SIMplePhone/Info.plist;
+				INFOPLIST_FILE = SIMplePhone/SupportFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SIMplePhone/SIMplePhone-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
