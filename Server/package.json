@@ -4,8 +4,8 @@
   "description": "API for SIMplePhone",
   "main": "web-server.js",
   "scripts": {
-    "signaling": "node worker/signaling-server.js",
-    "web": "node worker/web-server.js"
+    "signaling": "node worker/signaling.js",
+    "api": "node worker/api.js"
   },
   "keywords": [],
   "author": "Quentin Wendegass",
