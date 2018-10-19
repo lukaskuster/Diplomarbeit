@@ -16,16 +16,18 @@ if __name__ == '__main__':
     if not args.description:
         args.description = "Test Description"
     if not args.host:
-        args.host = "localhost"
+        args.host = "https://signaling.da.digitalsubmarine.com"
     if not args.port:
-        args.port = 10001
+        args.port = 443
 
     # Get the description of an other connected client
     if args.rule == 'answer':
-        desc = get_peer_description('answer', args.description, args.host, args.port, 'quentin@wendegass.com', 'test123')
+        desc = get_peer_description('answer', args.description, args.host, args.port,
+                                    'quentin@wendegass.com', 'test123')
 
     else:
-        desc = get_peer_description('offer', args.description,  args.host, args.port, 'quentin@wendegass.com', 'test123')
+        desc = get_peer_description('offer', args.description,  args.host, args.port,
+                                    'quentin@wendegass.com', 'test123')
 
     # Print out the description of the other client
     print("Remote description:", desc)

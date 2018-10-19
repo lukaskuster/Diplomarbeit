@@ -5,11 +5,10 @@ const routes = require('../controller');
 
 const app = express();
 
-const HOST = '127.0.0.1';
-const COLLECTION_NAME = 'simple-phone';
-const PORT = 3000;
+const collection = 'simple-phone';
+const port = 3000;
 
-mongoose.connect('mongodb://' + HOST + '/' + COLLECTION_NAME);
+mongoose.connect('mongodb://localhost/' + collection);
 mongoose.Promise = global.Promise;
 
 let db = mongoose.connection;
@@ -17,8 +16,8 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
-app.use('/api', routes);
+app.use('/v1', routes);
 
-app.listen(PORT, function () {
-    console.log('Listening on port ' + PORT);
+app.listen(port, function () {
+    console.log('Listening on port ' + port);
 });
