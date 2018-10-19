@@ -16,9 +16,9 @@ if __name__ == '__main__':
     if not args.description:
         args.description = "Test Description"
     if not args.host:
-        args.host = "localhost"
+        args.host = "https://signaling.da.digitalsubmarine.com"
     if not args.port:
-        args.port = 10001
+        args.port = 443
 
     # Get the description of an other connected client
     if args.rule == 'answer':
