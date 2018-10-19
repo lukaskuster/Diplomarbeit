@@ -1,0 +1,22 @@
+{
+  "name": "simplephone-api",
+  "version": "1.0.0",
+  "description": "API for SIMplePhone",
+  "main": "web-server.js",
+  "scripts": {
+    "signaling": "node worker/signaling-server.js",
+    "web": "node worker/web-server.js"
+  },
+  "keywords": [],
+  "author": "Quentin Wendegass",
+  "license": "ISC",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "md5": "^2.2.1",
+    "mongoose": "^5.3.4",
+    "mongoose-unique-validator": "^2.0.2",
+    "socket.io": "^2.1.1"
+  }
+}
