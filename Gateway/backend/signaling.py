@@ -20,10 +20,14 @@ def get_peer_description(rule, local_description, host, port, username, password
     :param local_description: the local description
     :param host: hostname or ip-address of the server
     :param port: port of the server
+    :param username: username for authentication
+    :param password: password for authentication
     :type rule: str
     :type local_description: str
     :type host: str
     :type port: int
+    :type username: str
+    :type password: str
     :return: returns the peer description
     """
 
@@ -107,4 +111,3 @@ def get_peer_description(rule, local_description, host, port, username, password
 
     # Return the description of the peer client
     return description
-
