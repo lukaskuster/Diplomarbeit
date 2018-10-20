@@ -1,6 +1,6 @@
 const http = require('http');
 const io = require('socket.io');
-const User = require('../model/user-model');
+const User = require('../model/user');
 const md5 = require('md5');
 const mongoose = require('mongoose');
 
