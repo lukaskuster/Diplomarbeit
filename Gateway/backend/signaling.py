@@ -1,113 +1,141 @@
-from socketIO_client_nexus import SocketIO
+import json
+from aiortc.contrib.signaling import object_from_string, object_to_string
 
 
-class AuthenticationError(Exception):
-    def __init__(self, message):
-        """
-        Construct a new 'AuthenticationError' object.
-
-        :param message: error message
-        """
-        # Call the base class constructor with the parameters it needs
-        super().__init__(message)
-
-
-def get_peer_description(rule, local_description, host, port, username, password):
+async def authenticate(socket, rule, username, password):
     """
-    Get the description of a client to establish a p2p connection with an other client.
+    Send the authentication event to the signaling server
 
-    :param rule: type of the description (offer or answer)
-    :param local_description: the local description
-    :param host: hostname or ip-address of the server
-    :param port: port of the server
-    :param username: username for authentication
-    :param password: password for authentication
+    :param socket: websocket client
+    :param rule: rule of the connection (offer, answer)
+    :param username: username of the client
+    :param password: password of the client
+    :type socket: object
     :type rule: str
-    :type local_description: str
-    :type host: str
-    :type port: int
     :type username: str
     :type password: str
-    :return: returns the peer description
+    :return: boolean if the authentication is successful
     """
 
-    # The remote description that will be returned from the method
-    description = ""
+    # Authenticate request
+    # Must contain username and password
+    request = {
+        'event': 'authenticate',
+        'username': username,
+        'password': password,
+        'rule': rule
+    }
 
-    # Define a new socket.io client
-    client = SocketIO(host, port)
+    # Send the request to the signaling server
+    await socket.send(json.dumps(request))
 
-    def on_authenticated(data):
-        """
-        Response to authenticate event.
+    # Get the response and parse the json string
+    data = await socket.recv()
+    response = json.loads(data)
 
-        :param data: object with authenticated and error
-        :type data: dict
-        :return: nothing
-        """
+    # Check if the right response arrived
+    if 'event' not in response or 'authenticated' not in response:
+        raise KeyError()
+    if response['event'] != 'authenticate':
+        raise ValueError
 
-        if not data['authenticated']:
-            raise AuthenticationError(data['error'])
+    # return the outcome of the authentication
+    return response
 
-    client.on('authenticated', on_authenticated)
 
-    def on_start():
-        """
-        Event from server to start the description exchange
+async def recv_answer(socket):
+    """
+    Get the ice description answer of the peer client
 
-        :return: nothing
-        """
+    :param socket: websocket client
+    :type socket: object
+    :return: answer RTCSessionDescription
+    """
 
-        # Send the offer description
-        client.emit('offer', local_description)
+    # Get the answer event from the server
+    data = await socket.recv()
+    response = json.loads(data)
 
-    def on_answer(data):
-        """
-        Event from server that contains the answer description from the peer client.
+    # Check if the right response arrived
+    if 'event' not in response or 'message' not in response:
+        raise KeyError()
+    if response['event'] != 'answer':
+        raise ValueError()
 
-        :param data: answer description
-        :type data: str
-        :return: nothing
-        """
+    # Convert the description string to a RTCSessionDescription object an return it
+    return object_from_string(response['message'])
 
-        # Saves the peer description to the outer description variable.
-        nonlocal description
-        description = data
 
-        # Disconnect from the server to keep to return the description
-        client.disconnect()
+async def recv_offer(socket):
+    """
+    Get the ice description offer of the peer client
 
-    def on_offer(data):
-        """
-        Event from server that contains the offer description from the peer client.
-        Also sends back the answer description.
+    :param socket: websocket client
+    :type socket: object
+    :return: offer RTCSessionDescription
+    """
 
-        :param data: offer description
-        :type data: str
-        :return: nothing
-        """
+    # Get the offer event from the server
+    data = await socket.recv()
+    response = json.loads(data)
 
-        # Saves the peer description to the outer description variable
-        nonlocal description
-        description = data
+    # Check if the right response arrived
+    if 'event' not in response or 'message' not in response:
+        raise KeyError()
+    if response['event'] != 'offer':
+        raise ValueError()
 
-        # Send the answer description
-        client.emit('answer', local_description)
+    # Convert the description string to a RTCSessionDescription object an return it
+    return object_from_string(response['message'])
 
-        # Disconnect from the server to keep to return the description
-        client.disconnect()
 
-    # Listen to incoming events
-    client.on('start', on_start)
-    client.on('answer', on_answer)
-    client.on('offer', on_offer)
+async def send_answer(socket, desc):
+    """
+    Send the answer ice description to the peer client.
 
-    # Authenticate with the username and password
-    # Also the given rule can be sent
-    client.emit('authenticate', {'username': username, 'password': password, 'rule': rule})
+    :param socket: websocket client
+    :param desc: RTCSessionDescription answer
+    :type socket: object
+    :type desc: object
+    :return: nothing
+    """
 
-    # Wait until the socket.io client disconnects from the server
-    client.wait()
+    # Answer event request
+    request = {
+        'event': 'answer',
+        # message contains the description object as a json string
+        'message': object_to_string(desc)
+    }
+    # Send the request to the server
+    await socket.send(json.dumps(request))
 
-    # Return the description of the peer client
-    return description
+
+async def send_offer(socket, desc):
+    """
+    Send the offer ice description to the peer client.
+
+    :param socket: websocket client
+    :param desc: RTCSessionDescription offer
+    :type socket: object
+    :type desc: object
+    :return: nothing
+    """
+    # Wait for the start event, that indicates the peer client connected to the server
+    data = await socket.recv()
+    response = json.loads(data)
+
+    # Check if the right response arrived
+    if 'event' not in response:
+        raise KeyError()
+    if response['event'] != 'start':
+        raise ValueError()
+
+    # Offer event request
+    request = {
+        'event': 'offer',
+        # message contains the description object as a json string
+        'message': object_to_string(desc)
+    }
+
+    # Send the request to the server
+    await socket.send(json.dumps(request))

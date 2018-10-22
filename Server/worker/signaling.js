@@ -1,6 +1,5 @@
-const http = require('http');
-const io = require('socket.io');
-const User = require('../model/user-model');
+const WebSocket = require('ws');
+const User = require('../model/user');
 const md5 = require('md5');
 const mongoose = require('mongoose');
 
@@ -21,69 +20,80 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-// Create a http server and pass it to socket.io to get the socket.io server socket
-let webServer = http.createServer();
-let server = io(webServer, {cookie: false});
-
+const server = new WebSocket.Server({ port: port });
 
 let peers = new WeakMap();
 let pendingUser = {};
 
-
-// Set a callback to the connection event
-server.on('connection', function (socket) {
+server.on('connection', function connection(socket) {
 
     // Indicates if the client is authorized to use the exchange events
     let authenticated = false;
 
-    // Custom authenticate event that requires username and password
-    socket.on('authenticate', function ({username, password, rule}) {
+    // Authentication event that requires username and password
+    const authenticate = function({username, password, rule}) {
 
         // If the rule is not passed, set it to offer
         if(!rule){
             rule = 'offer';
         }
 
+        let response = {
+            event: 'authenticate',
+            authenticated: false,
+            error: ''
+        };
+
         // Send an authorization error if the username or password is not passed
         if(!username || !password){
-            socket.emit('authenticated', {authenticated: false, error: "No username, password or rule was in the request!"});
+            response.error = 'No username or password was in the request!';
+            socket.send(JSON.stringify(response));
             return;
         }
 
         // Search mongo db for the requested mail
-        User.findOne({mail: username}, function (err, user) {
+        User.findById(username, function (err, user) {
             if(err || !user){
                 // Send an authorization error if the username doesn't exist
-                socket.emit('authenticated', {authenticated: false, error: "Username does not exist!"});
+                response.error = 'Username does not exist!';
+                socket.send(JSON.stringify(response));
                 return;
             }
 
             if(md5(password) !== user.password){
                 // Send an authorization error if the password is wrong
-                socket.emit('authenticated', {authenticated: false, error: "Wrong password!"});
+                response.error = 'Wrong password!';
+                socket.send(JSON.stringify(response));
                 return;
             }
 
             // The authorization was successful
-            socket.emit('authenticated', {authenticated: true, error: ""});
             authenticated = true;
+            response.authenticated = true;
+            socket.send(JSON.stringify(response));
 
             // Check if a socket with that user is already connected.
-            if(user.id in pendingUser){
+            if(user._id in pendingUser){
 
                 // Get the already connected socket
-                let peerUser = pendingUser[user.id];
+                let peerUser = pendingUser[user._id];
 
                 // Set the remote peer for both sockets
-                peers.set(peerUser.socket, socket.id);
-                peers.set(socket, peerUser.socket.id);
+                peers.set(peerUser.socket, socket);
+                peers.set(socket, peerUser.socket);
 
                 // Check if the first user set answer as rule and start the interconnection accordingly
                 // The rule of the second connected client is ignored
                 if(peerUser.rule === "answer"){
-                    socket.emit('start');
+                    socket.send(JSON.stringify({event: 'start'}))
                 }else {
-                    peerUser.socket.emit('start');
+                    try {
+                        peerUser.socket.send(JSON.stringify({event: 'start'}));
+                    }catch (e) {
+                        // If the peer user is disconnected
+                        pendingUser[user._id] = {socket: socket, rule: rule};
+                        return;
+                    }
                 }
 
                 // Now the first user pending any more
@@ -91,26 +101,40 @@ server.on('connection', function (socket) {
 
             }else {
                 // If no client with that user is connected, set the current client as pending
-                pendingUser[user.id] = {socket: socket, rule: rule};
+                pendingUser[user._id] = {socket: socket, rule: rule};
             }
         });
-    });
+    };
 
-
-    // Routes the offer to the peer client
-    socket.on('offer', function (data) {
+    // Routes the message to the peer client
+    const forwardMessage = function (data) {
         if(authenticated){
-            server.to(peers.get(socket)).emit('offer', data);
+           peers.get(socket).send(JSON.stringify(data));
         }
-    });
+    };
 
-    // Routes the answer to the peer client
-    socket.on('answer', function (data) {
-        if(authenticated){
-            server.to(peers.get(socket)).emit('answer', data);
+
+    socket.on('message', function incoming(message) {
+        try {
+            // Get the data as object
+            let data = JSON.parse(message);
+
+            // Call the event methods
+            if('event' in data){
+                switch (data['event']) {
+                    case 'authenticate':
+                        authenticate(data);
+                        break;
+                    case 'offer':
+                        forwardMessage(data);
+                        break;
+                    case 'answer':
+                        forwardMessage(data);
+                        break
+                }
+            }
+        }catch (e) {
+            console.log(e)
         }
     });
 });
-
-// Listen on the given port
-webServer.listen(port);

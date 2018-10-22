@@ -17,6 +17,7 @@
     "md5": "^2.2.1",
     "mongoose": "^5.3.4",
     "mongoose-unique-validator": "^2.0.2",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "ws": "^6.1.0"
   }
 }
