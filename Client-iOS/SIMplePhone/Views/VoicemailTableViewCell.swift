@@ -35,11 +35,6 @@ class VoicemailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
-        if selected {
-            self.accessoryType = .none
-        }else{
-            self.accessoryType = .detailButton
-        }
     }
     
     func fillCellWithData() {

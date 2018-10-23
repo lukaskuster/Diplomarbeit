@@ -18,9 +18,11 @@ class VoicemailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338455", audio: "avlocation"))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338456", audio: "avlocation"))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338457", audio: "avlocation"))
+        let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
+        
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338455", audio: sampleAudio))
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338456", audio: sampleAudio))
+        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338457", audio: sampleAudio))
         
         print(voicemails)
         
@@ -28,6 +30,7 @@ class VoicemailTableViewController: UITableViewController {
         
         self.tableView.allowsMultipleSelection = false
         self.tableView.allowsSelection = true
+        self.tableView.allowsSelectionDuringEditing = false
         self.tableView.tableFooterView = UIView()
         
         // Uncomment the following line to preserve selection between presentations
@@ -51,6 +54,7 @@ class VoicemailTableViewController: UITableViewController {
         if self.selectedRow == indexPath && self.tableView.cellForRow(at: indexPath)?.reuseIdentifier == "voicemailMessageCell" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "expandedVoicemailMessageCell", for: indexPath) as! SelectedVoicemailTableViewCell
             cell.voicemail = voicemails[indexPath.row]
+            cell.parentVC = self
             
             return cell
         }else{
@@ -61,13 +65,16 @@ class VoicemailTableViewController: UITableViewController {
         }
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+        // Disable editing while expanded
+        if let selection = self.selectedRow {
+            if selection == indexPath && self.tableView.cellForRow(at: indexPath) is SelectedVoicemailTableViewCell {
+                return false
+            }
+        }
         return true
     }
-    */
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -89,6 +96,17 @@ class VoicemailTableViewController: UITableViewController {
         }
         self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
+    
+//    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+//        print(indexPath)
+//        if let selectedCell = self.selectedRow {
+//            if selectedCell == indexPath {
+//                print("match")
+//                self.selectedRow = nil
+//                self.tableView.reloadRows(at: [indexPath], with: .fade)
+//            }
+//        }
+//    }
     
     /*
     // Override to support rearranging the table view.

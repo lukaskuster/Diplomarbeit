@@ -15,24 +15,32 @@ import AVFoundation
     var date: Date
     var originPhoneNumber: String
     var gateway: Gateway
-    var audioFilePath: String
+    var audioFile: URL
     var duration: TimeInterval?
     
-    @objc init(_ gateway: Gateway, date: Date, origin originNumber: String, audio audioPath: String) {
+    @objc init(_ gateway: Gateway, date: Date, origin originNumber: String, audio audioURL: URL) {
         self.heard = false
         self.date = date
         self.originPhoneNumber = originNumber
         self.gateway = gateway
-        self.audioFilePath = audioPath
+        self.audioFile = audioURL
         
         super.init()
-        self.duration = calcDuration(forPath: audioPath)
+        self.duration = calcDuration(forPath: audioURL)
+    }
+    
+    func markAsHeard() {
+        self.heard = true
+    }
+    
+    func markAsNew() {
+        self.heard = false
     }
 }
 
 extension Voicemail {
-    private func calcDuration(forPath fileURL: String) -> TimeInterval {
-        let asset = AVURLAsset(url: URL(fileURLWithPath: fileURL))
+    private func calcDuration(forPath fileURL: URL) -> TimeInterval {
+        let asset = AVURLAsset(url: fileURL)
         let duration = asset.duration
         return duration.seconds
     }
