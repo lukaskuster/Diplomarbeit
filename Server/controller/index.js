@@ -13,6 +13,8 @@ router.post('/gateway', basicAuth, gatewayController.postGateway);
 router.get('/gateway/:id', basicAuth, gatewayController.getGateway);
 router.get('/gateways', basicAuth, gatewayController.getGateways);
 router.delete('/gateway/:id', basicAuth, gatewayController.deleteGateway);
+router.put('/gateway/:id', basicAuth, gatewayController.putGateway);
+
 
 
 module.exports = router;
