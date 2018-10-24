@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6358715217F49E900B395F9 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358713217F49E900B395F9 /* WebRTC.framework */; };
 		D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358714217F49E900B395F9 /* Starscream.framework */; };
 		D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358717217F544800B395F9 /* SwiftyJSON.framework */; };
 		D635871A217F88B700B395F9 /* RTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6358719217F88B700B395F9 /* RTCClient.swift */; };
-		D635871D217F8B3900B395F9 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358713217F49E900B395F9 /* WebRTC.framework */; };
 		D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */; };
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
+		D65FD70021809C9300BBE679 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD6FF21809C9300BBE679 /* WebRTC.framework */; };
+		D65FD70121809C9300BBE679 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD6FF21809C9300BBE679 /* WebRTC.framework */; };
 		D678184F216CD16D00E650DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D678184E216CD16D00E650DB /* AppDelegate.m */; };
 		D6781858216CD16D00E650DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6781856216CD16D00E650DB /* Main.storyboard */; };
 		D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D678185B216CD16F00E650DB /* LaunchScreen.storyboard */; };
@@ -63,12 +63,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D6358713217F49E900B395F9 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D6358714217F49E900B395F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		D6358717217F544800B395F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		D6358719217F88B700B395F9 /* RTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCClient.swift; sourceTree = "<group>"; };
 		D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureState.swift; sourceTree = "<group>"; };
+		D65FD6FF21809C9300BBE679 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D678184A216CD16D00E650DB /* SIMplePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMplePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D678184D216CD16D00E650DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D678184E216CD16D00E650DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
 				D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */,
-				D6358715217F49E900B395F9 /* WebRTC.framework in Frameworks */,
+				D65FD70021809C9300BBE679 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D635871D217F8B3900B395F9 /* WebRTC.framework in Frameworks */,
+				D65FD70121809C9300BBE679 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,9 +160,9 @@
 		D6781871216CE7E600E650DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D65FD6FF21809C9300BBE679 /* WebRTC.framework */,
 				D6358717217F544800B395F9 /* SwiftyJSON.framework */,
 				D6358714217F49E900B395F9 /* Starscream.framework */,
-				D6358713217F49E900B395F9 /* WebRTC.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -353,7 +353,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WebRTC.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = Carthage;

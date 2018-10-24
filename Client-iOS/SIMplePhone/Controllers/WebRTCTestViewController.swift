@@ -18,13 +18,14 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
     var signaling: SignalingClient?
     var rtc: RTCClient?
     
+    var sdpOfferString: String = ""
     
 //    let iceServers = [RTCIceServer(urlStrings: <#T##[String]#>, username: <#T##String?#>, credential: <#T##String?#>)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.usernameField.text = "quentin@wendegass.com"
+        self.usernameField.text = "mail@lukaskuster.com"
         self.passwordField.text = "test123"
         
         self.setupRTC()
@@ -49,20 +50,22 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
         let username = self.usernameField.text!
         let password = self.passwordField.text!
         
+        self.signaling = SignalingClient(username: username, password: password, type: .answer)
+        self.signaling?.delegate = self
+        self.signaling?.connect()
         self.rtc?.makeOffer()
         
 //        self.signaling = SignalingClient(username: username, password: password, type: .offer)
 //        self.signaling?.delegate = self
 //        self.signaling?.connect()
-        
+//
 //        self.signaling?.sendOffer(withSdp: "test")
     }
     
     func signalingClient(client: SignalingClient, didReceiveOfferWithSdp sdp: String) {
         self.lprint("Received Offer: \(sdp)")
         
-//        self.rtc?.createAnswerForOfferReceived(withRemoteSDP: sdp)
-//        self.rtc?.makeOffer()
+        self.rtc?.createAnswerForOfferReceived(withRemoteSDP: sdp)
     }
     
     func signalingClient(client: SignalingClient, didAuthenticateOnServer authenticated: Bool, error: SignalingClientError?) {
@@ -74,22 +77,30 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
     }
     
     func rtcClient(client: RTCClient, startCallWithSdp sdp: String) {
-        self.lprint("startCallWithSdp")
-        print(sdp)
+        self.signaling?.respondToOffer(withLocalSdp: sdp)
     }
     
-    func rtcClient(client: RTCClient, didGenerateIceCandidate iceCandidate: RTCIceCandidate) {
-        self.lprint("didGenerateIceCandidate")
-        print(iceCandidate)
+    func rtcClient(client: RTCClient, didGenerateIceCandidates iceCandidates: [RTCIceCandidate]) {
+//        self.lprint("didGenerateIceCandidate")
+        print("didGenerateIceCandidate")
+        debugPrint(iceCandidates)
+//        print(iceCandidate)
     }
     
     func rtcClient(client: RTCClient, didReceiveError error: Error) {
-        self.lprint("didReceiveError")
+//        self.lprint("didReceiveError")
+        print("didReceiveError")
         print(error)
     }
     
     func rtcClient(client: RTCClient, didChangeState state: RTCClientState) {
         print(state)
+        DispatchQueue.main.async {
+            self.lprint("\(state)")
+        }
+        if state == .connected {
+            self.rtc?.startConnection()
+        }
     }
     
 

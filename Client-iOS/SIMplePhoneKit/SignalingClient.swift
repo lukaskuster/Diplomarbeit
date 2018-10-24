@@ -51,6 +51,24 @@ public class SignalingClient: NSObject {
         self.socket?.connect()
     }
     
+    public func respondToOffer(withLocalSdp sdp: String) {
+        let request: [String: String] = [
+            "event": "answer",
+            "sdp": sdp
+        ]
+        
+        do {
+            let data = try JSON(request).rawData()
+            if let socket = self.socket {
+                socket.write(data: data)
+            }else{
+                self.handleError(.socketNotInitialized)
+            }
+        }catch{
+            self.handleError(.jsonDecodingFailed)
+        }
+    }
+    
     func didConnect(withSocket socket: WebSocketClient) {
         self.authenticate(socket: socket, type: self.type!)
     }
@@ -85,10 +103,8 @@ public class SignalingClient: NSObject {
             }
             
             if event == "offer" {
-                if let message = json["message"].string {
-                    if let sdp = JSON.init(parseJSON: message)["sdp"].string {
-                        self.handleOffer(sdp: sdp)
-                    }
+                if let sdp = json["sdp"].string {
+                    self.handleOffer(sdp: sdp)
                 }
             }
         }

@@ -8,6 +8,7 @@
 
 import Foundation
 import WebRTC
+import AVFoundation
 
 public enum RTCClientState {
     case disconnected
@@ -22,7 +23,7 @@ public protocol RTCClientDelegate: class {
     func rtcClient(client: RTCClient, didReceiveError error: Error)
     func rtcClient(client: RTCClient, didChangeConnectionState connectionState: RTCIceConnectionState)
     func rtcClient(client: RTCClient, didChangeState state: RTCClientState)
-    func rtcClient(client: RTCClient, didGenerateIceCandidate iceCandidate: RTCIceCandidate)
+    func rtcClient(client: RTCClient, didGenerateIceCandidates iceCandidates: [RTCIceCandidate])
 //    func rtcClient(client: RTCClient, didCreateLocalCapturer capturer: RTCCameraVideoCapturer)
 }
 
@@ -44,7 +45,8 @@ public extension RTCClientDelegate {
 public class RTCClient: NSObject {
     fileprivate var iceServers: [RTCIceServer] = []
     fileprivate var peerConnection: RTCPeerConnection?
-    fileprivate var connectionFactory: RTCPeerConnectionFactory = RTCPeerConnectionFactory()
+    fileprivate let connectionFactory = RTCPeerConnectionFactory()
+//    fileprivate var connectionFactory: RTCPeerConnectionFactory = RTCPeerConnectionFactory()
     fileprivate var remoteIceCandidates: [RTCIceCandidate] = []
     
     public weak var delegate: RTCClientDelegate?
@@ -57,6 +59,10 @@ public class RTCClient: NSObject {
 //        return self.isVideoCall ? self.videoCallConstraint : self.audioCallConstraint
         return self.audioCallConstraint
     }
+    
+    var audioPlayer: AVAudioPlayer?
+    
+    fileprivate var localIceCandidates: [RTCIceCandidate] = []
     
     fileprivate let defaultConnectionConstraint = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: ["DtlsSrtpKeyAgreement": "true"])
     
@@ -216,16 +222,20 @@ private extension RTCClient {
     }
     
     func initialisePeerConnectionFactory () {
+//        [[RTCPeerConnectionFactory alloc] init]
+        
         RTCPeerConnectionFactory.initialize()
-        self.connectionFactory = RTCPeerConnectionFactory.init()
+
+//        self.connectionFactory = RTCPeerConnectionFactory.init()
     }
     
     func initialisePeerConnection () {
         let configuration = RTCConfiguration()
-        configuration.iceServers = self.iceServers
-        self.peerConnection = self.connectionFactory.peerConnection(with: configuration,
-                                                                    constraints: self.defaultConnectionConstraint,
-                                                                    delegate: self)
+        let peer = self.connectionFactory.peerConnection(with: configuration,
+                                                                constraints: self.defaultConnectionConstraint,
+                                                                delegate: self)
+        
+        self.peerConnection = peer
     }
     
     func handleSdpGenerated(sdpDescription: RTCSessionDescription?) {
@@ -239,8 +249,10 @@ private extension RTCClient {
             this.delegate?.rtcClient(client: this, didReceiveError: error)
         })
         //  Signal to server to pass this sdp with for the session call
+        print(sdpDescription.type)
         self.delegate?.rtcClient(client: self, startCallWithSdp: sdpDescription.sdp)
     }
+    
 }
 
 extension RTCClient: RTCPeerConnectionDelegate {
@@ -250,7 +262,9 @@ extension RTCClient: RTCPeerConnectionDelegate {
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
+        let audioStream = stream.audioTracks.first!
         
+        print(audioStream)
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {
@@ -266,11 +280,16 @@ extension RTCClient: RTCPeerConnectionDelegate {
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {
-
+        if newState == RTCIceGatheringState.complete {
+            self.delegate?.rtcClient(client: self, didGenerateIceCandidates: self.localIceCandidates)
+        }
+        
+        print("\(newState)")
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
-        self.delegate?.rtcClient(client: self, didGenerateIceCandidate: candidate)
+        print("added")
+        self.localIceCandidates.append(candidate)
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {
@@ -278,6 +297,6 @@ extension RTCClient: RTCPeerConnectionDelegate {
     }
 
     public func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
-
+        
     }
 }
