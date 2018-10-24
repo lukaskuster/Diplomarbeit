@@ -2,7 +2,7 @@ import argparse
 import asyncio
 import websockets
 from backend import recv_answer, recv_offer, send_offer, send_answer, authenticate
-from aiortc import RTCPeerConnection, AudioStreamTrack
+from aiortc import RTCPeerConnection, AudioStreamTrack, RTCConfiguration, RTCIceServer
 from aiortc.mediastreams import MediaStreamError
 
 
@@ -61,8 +61,10 @@ if __name__ == '__main__':
     parser.add_argument('role', choices=['offer', 'answer'])
     args = parser.parse_args()
 
+    stun = RTCIceServer('stun:stun.l.google.com:19302')
+    conf = RTCConfiguration([stun])
     # create peer connection
-    peer = RTCPeerConnection()
+    peer = RTCPeerConnection(configuration=conf)
 
     # run event loop
     loop = asyncio.get_event_loop()
