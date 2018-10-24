@@ -1,5 +1,6 @@
 import json
 from aiortc.contrib.signaling import object_from_string, object_to_string
+from aiortc import RTCSessionDescription
 
 
 async def authenticate(socket, rule, username, password):
@@ -57,13 +58,13 @@ async def recv_answer(socket):
     response = json.loads(data)
 
     # Check if the right response arrived
-    if 'event' not in response or 'message' not in response:
+    if 'event' not in response or 'sdp' not in response:
         raise KeyError()
     if response['event'] != 'answer':
         raise ValueError()
 
-    # Convert the description string to a RTCSessionDescription object an return it
-    return object_from_string(response['message'])
+    # Create a RTCSessionDescription object an return it
+    return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
 
 
 async def recv_offer(socket):
@@ -80,13 +81,13 @@ async def recv_offer(socket):
     response = json.loads(data)
 
     # Check if the right response arrived
-    if 'event' not in response or 'message' not in response:
+    if 'event' not in response or 'sdp' not in response:
         raise KeyError()
     if response['event'] != 'offer':
         raise ValueError()
 
-    # Convert the description string to a RTCSessionDescription object an return it
-    return object_from_string(response['message'])
+    # Create a RTCSessionDescription object an return it
+    return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
 
 
 async def send_answer(socket, desc):
@@ -104,7 +105,7 @@ async def send_answer(socket, desc):
     request = {
         'event': 'answer',
         # message contains the description object as a json string
-        'message': object_to_string(desc)
+        'sdp': desc.sdp
     }
     # Send the request to the server
     await socket.send(json.dumps(request))
@@ -134,7 +135,7 @@ async def send_offer(socket, desc):
     request = {
         'event': 'offer',
         # message contains the description object as a json string
-        'message': object_to_string(desc)
+        'sdp': desc.sdp
     }
 
     # Send the request to the server
