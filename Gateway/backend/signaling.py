@@ -1,6 +1,6 @@
 import json
-from aiortc.contrib.signaling import object_from_string, object_to_string
 from aiortc import RTCSessionDescription
+from websockets import WebSocketClientProtocol
 
 
 async def authenticate(socket, rule, username, password):
@@ -17,6 +17,10 @@ async def authenticate(socket, rule, username, password):
     :type password: str
     :return: boolean if the authentication is successful
     """
+
+    # Check parameter types
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
 
     # Authenticate request
     # Must contain username and password
@@ -53,6 +57,10 @@ async def recv_answer(socket):
     :return: answer RTCSessionDescription
     """
 
+    # Check parameter types
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Get the answer event from the server
     data = await socket.recv()
     response = json.loads(data)
@@ -75,6 +83,10 @@ async def recv_offer(socket):
     :type socket: object
     :return: offer RTCSessionDescription
     """
+
+    # Check parameter type
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
 
     # Get the offer event from the server
     data = await socket.recv()
@@ -101,6 +113,13 @@ async def send_answer(socket, desc):
     :return: nothing
     """
 
+    # Check parameter types
+    if not isinstance(desc, RTCSessionDescription):
+        raise TypeError('Description must be of type RTCSessionDescription!')
+
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Answer event request
     request = {
         'event': 'answer',
@@ -121,6 +140,14 @@ async def send_offer(socket, desc):
     :type desc: object
     :return: nothing
     """
+
+    # Check parameter types
+    if not isinstance(desc, RTCSessionDescription):
+        raise TypeError('Description must be of type RTCSessionDescription!')
+
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Wait for the start event, that indicates the peer client connected to the server
     data = await socket.recv()
     response = json.loads(data)

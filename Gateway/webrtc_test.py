@@ -19,6 +19,7 @@ async def run(pc, role):
 
         # Ice description exchange with the signaling server
         async with websockets.connect('wss://signaling.da.digitalsubmarine.com:443') as socket:
+            print(type(socket))
             print('Connected')
             auth = await authenticate(socket, 'answer', 'quentin@wendegass.com', 'test123')
             if not auth['authenticated']:
