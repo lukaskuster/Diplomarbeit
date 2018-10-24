@@ -40,9 +40,9 @@ async def authenticate(socket, rule, username, password):
 
     # Check if the right response arrived
     if 'event' not in response or 'authenticated' not in response:
-        raise KeyError()
+        raise KeyError('event or authenticated is missing in response: ' + response)
     if response['event'] != 'authenticate':
-        raise ValueError
+        raise ValueError('event should be authenticate! event: ' + response['event'])
 
     # return the outcome of the authentication
     return response
@@ -67,9 +67,9 @@ async def recv_answer(socket):
 
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
-        raise KeyError()
+        raise KeyError('event or sdp is missing in response: ' + response)
     if response['event'] != 'answer':
-        raise ValueError()
+        raise ValueError('event should be answer! event: ' + response['event'])
 
     # Create a RTCSessionDescription object an return it
     return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
@@ -94,9 +94,9 @@ async def recv_offer(socket):
 
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
-        raise KeyError()
+        raise KeyError('event or sdp is missing in response: ' + response)
     if response['event'] != 'offer':
-        raise ValueError()
+        raise ValueError('event should be offer! event: ' + response['event'])
 
     # Create a RTCSessionDescription object an return it
     return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
@@ -154,9 +154,9 @@ async def send_offer(socket, desc):
 
     # Check if the right response arrived
     if 'event' not in response:
-        raise KeyError()
+        raise KeyError('event is missing in response: ' + response)
     if response['event'] != 'start':
-        raise ValueError()
+        raise ValueError('event should be start! event: ' + response['event'])
 
     # Offer event request
     request = {
