@@ -7,6 +7,22 @@ from aiortc.mediastreams import MediaStreamError
 
 
 async def run(pc, role):
+    print('Connection State: ' + pc.iceConnectionState)
+    print('Gathering State: ' + pc.iceGatheringState)
+    print('Signaling State: ' + pc.signalingState)
+
+    @pc.on('iceconnectionstatechange')
+    def iceconnectionstatechange():
+        print('Connection State: ' + pc.iceConnectionState)
+
+    @pc.on('icegatheringstatechange')
+    def icegatheringstatechange():
+        print('Gathering State: ' + pc.iceGatheringState)
+
+    @pc.on('signalingstatechange')
+    def signalingstatechange():
+        print('Signaling State: ' + pc.signalingState)
+
     if role == 'answer':
         remote_track = None
 
