@@ -61,16 +61,16 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # create peer connection
-    pc = RTCPeerConnection()
+    peer = RTCPeerConnection()
 
     # run event loop
     loop = asyncio.get_event_loop()
     try:
         loop.run_until_complete(run(
-            pc=pc,
+            pc=peer,
             role=args.role))
     except KeyboardInterrupt:
         pass
     finally:
         # cleanup
-        loop.run_until_complete(pc.close())
+        loop.run_until_complete(peer.close())
