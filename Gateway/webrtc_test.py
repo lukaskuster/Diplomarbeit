@@ -65,6 +65,7 @@ async def run(pc, role):
     @pc.on('track')
     def on_track(track):
         nonlocal remote_track
+
         logger.info('Mediatrack', 'Received remote media track ({})'.format(track.id))
         if track.kind == 'audio':
             remote_track = track
@@ -107,7 +108,7 @@ async def run(pc, role):
             async with websockets.connect('wss://signaling.da.digitalsubmarine.com:443') as socket:
                 logger.info('Signaling', 'Connected with signaling server!')
                 await pc.setLocalDescription(await pc.createOffer())
-                auth = await authenticate(socket, 'answer', 'quentin@wendegass.com', 'test123')
+                auth = await authenticate(socket, 'offer', 'quentin@wendegass.com', 'test123')
                 if not auth['authenticated']:
                     logger.error('Signaling', 'Authentication failed!')
                     raise RuntimeError(auth['error'])
