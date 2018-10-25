@@ -2,54 +2,55 @@ import requests
 
 
 class API:
+    """
+    Wrapper to send requests to the REST-API.
+    """
+
     def __init__(self, username, password, host='https://api.da.digitalsubmarine.com/v1'):
-        self.username = username
-        self.password = password
+        self.auth = (username, password)
         self.host = host
 
     def get_gateway(self, _id):
-        response = requests.get(self.host + '/gateway/' + _id, auth=(self.username, self.password))
-        data = response.json()
-        return data
+        return self._request('/gateway/' + _id, requests.get)
 
     def get_gateways(self):
-        response = requests.get(self.host + '/gateways', auth=(self.username, self.password))
-        data = response.json()
-        return data
+        return self._request('/gateways', requests.get)
 
     def post_gateway(self, _id):
-        response = requests.post(self.host + '/gateway', auth=(self.username, self.password), json={'id': _id})
-        data = response.json()
-        return data
+        return self._request('/gateway', requests.post, {'id': _id})
 
     def delete_gateway(self, _id):
-        response = requests.delete(self.host + '/gateway/' + _id, auth=(self.username, self.password))
-        print(response.status_code)
-        return True if response.status_code == 200 else False
+        return self._request('/gateway/' + _id, requests.delete)
 
     def put_gateway(self, _id, signal_strength=None):
-        request = {}
+        body = {}
         if signal_strength:
-            request['signalStrength'] = signal_strength
+            body['signalStrength'] = signal_strength
 
-        response = requests.put(self.host + '/gateway/' + _id, auth=(self.username, self.password), json=request)
-        data = response.json()
-        return data
+        return self._request('/gateway/' + _id, requests.put, body)
 
     def get_user(self):
-        response = requests.get(self.host + '/user', auth=(self.username, self.password))
-        data = response.json()
-        return data
+        return self._request('/user', requests.get)
 
     def put_user(self, first_name=None, last_name=None, password=None):
-        request = {}
+        body = {}
         if first_name:
-            request['firstName'] = first_name
+            body['firstName'] = first_name
         if last_name:
-            request['lastName'] = last_name
+            body['lastName'] = last_name
         if password:
-            request['password'] = password
+            body['password'] = password
 
-        response = requests.put(self.host + '/user', auth=(self.username, self.password), json=request)
+        return self._request('/user', requests.put, body)
+
+    def _request(self, url, method, body=None):
+        if type(body) is not dict and body is not None:
+            raise ValueError('Body has to be of type dict!')
+
+        if body is None:
+            response = method(self.host + url, auth=self.auth)
+        else:
+            response = method(self.host + url, auth=self.auth, json=body)
+
         data = response.json()
-        return data
+        return data, response.status_code

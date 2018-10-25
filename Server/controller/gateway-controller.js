@@ -50,7 +50,7 @@ module.exports.deleteGateway = function (req, res) {
 
     user.gateway = user.gateway.filter(element => element !== gateway);
     user.save();
-    return res.json();
+    return res.json({});
 };
 
 module.exports.putGateway = function (req, res) {
