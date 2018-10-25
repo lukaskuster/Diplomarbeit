@@ -1,5 +1,5 @@
 from pyee import EventEmitter
-from sim800.utils import clear_str
+from utils import clear_str
 from sim800.serial_loop import SerialLoop
 
 

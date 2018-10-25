@@ -1,7 +1,7 @@
 from serial import Serial
 from queue import Queue
 from threading import Thread
-from sim800.utils import clear_str
+from utils import clear_str
 from sim800.event import Event
 from sim800.sim800 import Sim800
 
