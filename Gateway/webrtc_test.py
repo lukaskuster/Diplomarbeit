@@ -55,9 +55,9 @@ async def run(pc, role):
                      + logger.AnsiEscapeSequence.UNDERLINE + pc.signalingState + logger.AnsiEscapeSequence.DEFAULT)
 
     # Add the track to the peer connection
-    track = TestAudioStreamTrack(role)
-    pc.addTrack(track)
-    logger.info('Mediatrack', 'Add local media track ({})'.format(track.id))
+    local_track = TestAudioStreamTrack(role)
+    pc.addTrack(local_track)
+    logger.info('Mediatrack', 'Add local media track ({})'.format(local_track.id))
 
     # Set the remove track
     remote_track = None
