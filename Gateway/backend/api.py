@@ -1,14 +1,39 @@
 import requests
+from pyee import EventEmitter
+from backend.sse import SSE
 
 
-class API:
+class API(EventEmitter):
     """
     Wrapper to send requests to the REST-API.
     """
 
     def __init__(self, username, password, host='https://api.da.digitalsubmarine.com/v1'):
+        super(API, self).__init__()
         self.auth = (username, password)
         self.host = host
+        self.id = 'test_id'
+
+        # Create an new sse connection, that emits the incoming push notifications on the API object
+        self.sse = SSE(self)
+
+    def start(self):
+        """
+        Start the sse thread.
+
+        :return: nothing
+        """
+
+        self.sse.start()
+
+    def close(self):
+        """
+        Close the sse thread.
+
+        :return: noting
+        """
+
+        self.sse.running = False
 
     def get_gateway(self, _id):
         return self._request('/gateway/' + _id, requests.get)
@@ -43,14 +68,28 @@ class API:
 
         return self._request('/user', requests.put, body)
 
-    def _request(self, url, method, body=None):
+    def _request(self, path, method, body=None):
+        """
+        Sends a http request to the server with a given http method
+        and returns the json body in a dict
+
+        :param path: path of the endpoint
+        :param method: http method from requests module
+        :param body: json data in form of a dict
+        :type path: str
+        :type method: request function
+        :type body: dict
+        :return: body of the response and status code in a tuple
+        :returns: dict
+        """
+
         if type(body) is not dict and body is not None:
             raise ValueError('Body has to be of type dict!')
 
         if body is None:
-            response = method(self.host + url, auth=self.auth)
+            response = method(self.host + path, auth=self.auth)
         else:
-            response = method(self.host + url, auth=self.auth, json=body)
+            response = method(self.host + path, auth=self.auth, json=body)
 
         data = response.json()
         return data, response.status_code

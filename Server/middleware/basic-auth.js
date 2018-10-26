@@ -1,5 +1,5 @@
 const basicAuth = require('basic-auth');
-const User = require('./model/user');
+const User = require('../model/user');
 const md5 = require('md5');
 
 module.exports = async function (request, response, next) {
