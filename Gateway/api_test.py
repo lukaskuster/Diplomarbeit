@@ -3,7 +3,7 @@ from utils import logger
 
 
 def run():
-    api = API('quentin@wendegass.com', 'test123', 'wed', host='http://localhost:3000/v1')
+    api = API('quentin@wendegass.com', 'test123', 'wed')
 
     @api.on('test')
     def test_notification(data):
