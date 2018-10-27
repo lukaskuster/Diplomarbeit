@@ -1,5 +1,5 @@
 const basicAuth = require('basic-auth');
-const User = require('./model/user');
+const User = require('../model/user');
 const md5 = require('md5');
 
 module.exports = async function (request, response, next) {
@@ -9,7 +9,8 @@ module.exports = async function (request, response, next) {
 
     if(!user || !requestUser || user.password !== md5(requestUser.pass)){
         response.set('WWW-Authenticate', 'Basic realm="simplephone"');
-        return response.status(401).send();
+        response.status(401);
+        return response.json({error: 'Not authorized!'});
     }
 
     response.locals.user = user;

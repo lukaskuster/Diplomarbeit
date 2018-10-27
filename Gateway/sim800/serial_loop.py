@@ -1,8 +1,9 @@
 from serial import Serial
 from queue import Queue
 from threading import Thread
-from sim800.utils import clear_str
+from utils import clear_str
 from sim800.event import Event
+from sim800.sim800 import Sim800
 
 
 class SerialLoop(Thread):
@@ -31,6 +32,10 @@ class SerialLoop(Thread):
         if not debug:
             # Initialize a new serial connection
             self.serial = Serial(serial_port, baudrate=115200, timeout=1)
+
+        # Check type of sim
+        if not isinstance(sim, Sim800):
+            raise TypeError('sim must be of type Sim800!')
 
         # Set the sim800 object to emit events
         self.sim = sim

@@ -11,6 +11,17 @@ let UserSchema = new mongoose.Schema({
     gateway: [gateway]
 },{ _id: false });
 
+UserSchema.method('toClient', function() {
+    let obj = this.toObject({ versionKey: false });
+
+    obj.mail = obj._id;
+    delete obj._id;
+    delete obj.password;
+    delete obj.gateway;
+
+    return obj;
+});
+
 UserSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', UserSchema);

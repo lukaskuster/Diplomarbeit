@@ -1,5 +1,6 @@
 import json
-from aiortc.contrib.signaling import object_from_string, object_to_string
+from aiortc import RTCSessionDescription
+from websockets import WebSocketClientProtocol
 
 
 async def authenticate(socket, rule, username, password):
@@ -16,6 +17,10 @@ async def authenticate(socket, rule, username, password):
     :type password: str
     :return: boolean if the authentication is successful
     """
+
+    # Check parameter types
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
 
     # Authenticate request
     # Must contain username and password
@@ -35,9 +40,9 @@ async def authenticate(socket, rule, username, password):
 
     # Check if the right response arrived
     if 'event' not in response or 'authenticated' not in response:
-        raise KeyError()
+        raise KeyError('Event or authenticated is missing in response: ' + str(response))
     if response['event'] != 'authenticate':
-        raise ValueError
+        raise ValueError('Event should be authenticate! Event: ' + response['event'])
 
     # return the outcome of the authentication
     return response
@@ -52,18 +57,22 @@ async def recv_answer(socket):
     :return: answer RTCSessionDescription
     """
 
+    # Check parameter types
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Get the answer event from the server
     data = await socket.recv()
     response = json.loads(data)
 
     # Check if the right response arrived
-    if 'event' not in response or 'message' not in response:
-        raise KeyError()
+    if 'event' not in response or 'sdp' not in response:
+        raise KeyError('Event or sdp is missing in response: ' + str(response))
     if response['event'] != 'answer':
-        raise ValueError()
+        raise ValueError('Event should be answer! Event: ' + response['event'])
 
-    # Convert the description string to a RTCSessionDescription object an return it
-    return object_from_string(response['message'])
+    # Create a RTCSessionDescription object an return it
+    return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
 
 
 async def recv_offer(socket):
@@ -75,18 +84,22 @@ async def recv_offer(socket):
     :return: offer RTCSessionDescription
     """
 
+    # Check parameter type
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Get the offer event from the server
     data = await socket.recv()
     response = json.loads(data)
 
     # Check if the right response arrived
-    if 'event' not in response or 'message' not in response:
-        raise KeyError()
+    if 'event' not in response or 'sdp' not in response:
+        raise KeyError('Event or sdp is missing in response: ' + str(response))
     if response['event'] != 'offer':
-        raise ValueError()
+        raise ValueError('Event should be offer! Event: ' + response['event'])
 
-    # Convert the description string to a RTCSessionDescription object an return it
-    return object_from_string(response['message'])
+    # Create a RTCSessionDescription object an return it
+    return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
 
 
 async def send_answer(socket, desc):
@@ -100,11 +113,18 @@ async def send_answer(socket, desc):
     :return: nothing
     """
 
+    # Check parameter types
+    if not isinstance(desc, RTCSessionDescription):
+        raise TypeError('Description must be of type RTCSessionDescription!')
+
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Answer event request
     request = {
         'event': 'answer',
         # message contains the description object as a json string
-        'message': object_to_string(desc)
+        'sdp': desc.sdp
     }
     # Send the request to the server
     await socket.send(json.dumps(request))
@@ -120,21 +140,29 @@ async def send_offer(socket, desc):
     :type desc: object
     :return: nothing
     """
+
+    # Check parameter types
+    if not isinstance(desc, RTCSessionDescription):
+        raise TypeError('Description must be of type RTCSessionDescription!')
+
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
     # Wait for the start event, that indicates the peer client connected to the server
     data = await socket.recv()
     response = json.loads(data)
 
     # Check if the right response arrived
     if 'event' not in response:
-        raise KeyError()
+        raise KeyError('Event is missing in response: ' + str(response))
     if response['event'] != 'start':
-        raise ValueError()
+        raise ValueError('Event should be start! Event: ' + response['event'])
 
     # Offer event request
     request = {
         'event': 'offer',
         # message contains the description object as a json string
-        'message': object_to_string(desc)
+        'sdp': desc.sdp
     }
 
     # Send the request to the server

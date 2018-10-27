@@ -8,7 +8,6 @@ pyserial = "*"
 pyee = "*"
 websockets = "*"
 aiortc = "*"
-numpy = "*"
 av = "*"
 
 [dev-packages]
