@@ -18,9 +18,8 @@ router.get('/gateways', basicAuth, gatewayController.getGateways);
 router.delete('/gateway/:id', basicAuth, gatewayController.deleteGateway);
 router.put('/gateway/:id', basicAuth, gatewayController.putGateway);
 
-router.get('/stream', sse, streamController.stream);
-router.get('/test', streamController.test);
-
+router.get('/stream', basicAuth, sse, streamController.stream);
+router.post('/event', basicAuth, streamController.event);
 
 
 module.exports = router;

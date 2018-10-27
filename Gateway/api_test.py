@@ -3,7 +3,7 @@ from utils import logger
 
 
 def run():
-    api = API('quentin@wendegass.com', 'test123', host='http://localhost:3000/v1')
+    api = API('quentin@wendegass.com', 'test123', 'wed', host='http://localhost:3000/v1')
 
     @api.on('test')
     def test_notification(data):
@@ -13,6 +13,10 @@ def run():
     def on_connection_state_change(state):
         state = logger.AnsiEscapeSequence.UNDERLINE + state + logger.AnsiEscapeSequence.DEFAULT
         logger.info('Connection State', 'Connection state changed to ' + state)
+
+    @api.on('connectionfailed')
+    def on_connection_failed(error):
+        logger.error('Connection', 'An error occurred (' + error['error'] + ')')
 
     @api.on('connectionaborted')
     def on_connection_aborted():

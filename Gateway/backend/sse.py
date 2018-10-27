@@ -76,6 +76,12 @@ class SSE(Thread):
                             self.emitter.emit(notification['event'], notification['data'])
                         except ValueError:    # Json failed to load
                             pass              # For now ignore when a wrong message arrived
+                        except KeyError:      # An error occurred if event and data is not available
+                            break
+
+                if response.status_code != 200 and notification:
+                    self.emitter.emit('connectionfailed', notification)
+                    time.sleep(self.timeout)
 
             except ConnectionError:           # Failed to connect
                 self.emitter.emit('connectionrefused')

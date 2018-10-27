@@ -8,11 +8,11 @@ class API(EventEmitter):
     Wrapper to send requests to the REST-API.
     """
 
-    def __init__(self, username, password, host='https://api.da.digitalsubmarine.com/v1'):
+    def __init__(self, username, password, _id, host='https://api.da.digitalsubmarine.com/v1'):
         super(API, self).__init__()
         self.auth = (username, password)
         self.host = host
-        self.id = 'test_id'
+        self.id = _id
 
         # Create an new sse connection, that emits the incoming push notifications on the API object
         self.sse = SSE(self)
