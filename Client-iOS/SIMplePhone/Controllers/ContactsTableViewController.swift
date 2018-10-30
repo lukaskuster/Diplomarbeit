@@ -221,6 +221,7 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
                 alert.addAction(action)
             }
             alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            alert.popoverPresentationController?.barButtonItem = sender
             self.present(alert, animated: true, completion: nil)
 
         } catch let error as NSError {
