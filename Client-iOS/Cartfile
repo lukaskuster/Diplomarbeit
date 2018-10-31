@@ -1,3 +1,2 @@
 github "daltoniam/Starscream" >= 3.0.2
 github "SwiftyJSON/SwiftyJSON" ~> 4.0
-github "Anakros/WebRTC"
