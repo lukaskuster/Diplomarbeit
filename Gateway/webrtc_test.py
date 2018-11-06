@@ -5,11 +5,11 @@ from backend import recv_answer, recv_offer, send_offer, send_answer, authentica
 from aiortc import RTCPeerConnection, AudioStreamTrack, RTCConfiguration, RTCIceServer
 from aiortc.mediastreams import MediaStreamError
 import av
-from utils import logger
+from utils import logger, AnsiEscapeSequence, Level
 import signal
 
 # Set log level to debug
-logger.level = logger.Level.DEBUG
+logger.level = Level.DEBUG
 
 
 class TestAudioStreamTrack(AudioStreamTrack):
@@ -33,26 +33,26 @@ class TestAudioStreamTrack(AudioStreamTrack):
 
 async def run(pc, role):
     logger.debug('Connection State', 'Ice connection state set to '
-                 + logger.AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + logger.AnsiEscapeSequence.DEFAULT)
+                 + AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + AnsiEscapeSequence.DEFAULT)
     logger.debug('Gathering State', 'Ice gathering state set to '
-                 + logger.AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + logger.AnsiEscapeSequence.DEFAULT)
+                 + AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + AnsiEscapeSequence.DEFAULT)
     logger.debug('Signaling State', 'signaling state set to '
-                 + logger.AnsiEscapeSequence.UNDERLINE + pc.signalingState + logger.AnsiEscapeSequence.DEFAULT)
+                 + AnsiEscapeSequence.UNDERLINE + pc.signalingState + AnsiEscapeSequence.DEFAULT)
 
     @pc.on('iceconnectionstatechange')
     def ice_connection_state_change():
         logger.debug('Connection State', 'Ice connection state changed to '
-                     + logger.AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + logger.AnsiEscapeSequence.DEFAULT)
+                     + AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + AnsiEscapeSequence.DEFAULT)
 
     @pc.on('icegatheringstatechange')
     def ice_gathering_state_change():
         logger.debug('Gathering State', 'Ice gathering state changed to '
-                     + logger.AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + logger.AnsiEscapeSequence.DEFAULT)
+                     + AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + AnsiEscapeSequence.DEFAULT)
 
     @pc.on('signalingstatechange')
     def signaling_state_change():
         logger.debug('Signaling State', 'signaling state changed to '
-                     + logger.AnsiEscapeSequence.UNDERLINE + pc.signalingState + logger.AnsiEscapeSequence.DEFAULT)
+                     + AnsiEscapeSequence.UNDERLINE + pc.signalingState + AnsiEscapeSequence.DEFAULT)
 
     # Add the track to the peer connection
     local_track = TestAudioStreamTrack(role)
@@ -93,14 +93,14 @@ async def run(pc, role):
                     raise RuntimeError(auth['error'])
                 logger.info('Signaling', 'Successfully authenticated!')
                 offer = await recv_offer(socket)
-                logger.debug('Signaling', 'Received offer with sdp:\n' + logger.AnsiEscapeSequence.HEADER
-                             + offer.sdp + logger.AnsiEscapeSequence.DEFAULT)
+                logger.debug('Signaling', 'Received offer with sdp:\n' + AnsiEscapeSequence.HEADER
+                             + offer.sdp + AnsiEscapeSequence.DEFAULT)
                 await pc.setRemoteDescription(offer)
 
                 await pc.setLocalDescription(await pc.createAnswer())
                 await send_answer(socket, pc.localDescription)
-                logger.debug('Signaling', 'Send answer with sdp:\n' + logger.AnsiEscapeSequence.HEADER
-                             + pc.localDescription.sdp + logger.AnsiEscapeSequence.DEFAULT)
+                logger.debug('Signaling', 'Send answer with sdp:\n' + AnsiEscapeSequence.HEADER
+                             + pc.localDescription.sdp + AnsiEscapeSequence.DEFAULT)
                 logger.info('Signaling', 'Completed signaling process!')
 
         else:
@@ -114,11 +114,11 @@ async def run(pc, role):
                     raise RuntimeError(auth['error'])
                 logger.info('Signaling', 'Successfully authenticated!')
                 await send_offer(socket, pc.localDescription)
-                logger.debug('Signaling', 'Send offer with sdp:\n' + logger.AnsiEscapeSequence.HEADER
-                             + pc.localDescription.sdp + logger.AnsiEscapeSequence.DEFAULT)
+                logger.debug('Signaling', 'Send offer with sdp:\n' + AnsiEscapeSequence.HEADER
+                             + pc.localDescription.sdp + AnsiEscapeSequence.DEFAULT)
                 answer = await recv_answer(socket)
-                logger.debug('Signaling', 'Received answer with sdp:\n' + logger.AnsiEscapeSequence.HEADER
-                             + answer.sdp + logger.AnsiEscapeSequence.DEFAULT)
+                logger.debug('Signaling', 'Received answer with sdp:\n' + AnsiEscapeSequence.HEADER
+                             + answer.sdp + AnsiEscapeSequence.DEFAULT)
                 await pc.setRemoteDescription(answer)
     except Exception as e:
         logger.error('Signaling', e.args[0])

@@ -1,5 +1,5 @@
 from backend import API
-from utils import logger
+from utils import logger, AnsiEscapeSequence, Level
 
 
 def run():
@@ -11,7 +11,7 @@ def run():
 
     @api.on('connectionstatechange')
     def on_connection_state_change(state):
-        state = logger.AnsiEscapeSequence.UNDERLINE + state + logger.AnsiEscapeSequence.DEFAULT
+        state = AnsiEscapeSequence.UNDERLINE + state + AnsiEscapeSequence.DEFAULT
         logger.info('Connection State', 'Connection state changed to ' + state)
 
     @api.on('connectionfailed')
@@ -41,7 +41,7 @@ def run():
 
 
 if __name__ == '__main__':
-    logger.level = logger.Level.DEBUG
+    logger.level = Level.DEBUG
 
     try:
         run()
