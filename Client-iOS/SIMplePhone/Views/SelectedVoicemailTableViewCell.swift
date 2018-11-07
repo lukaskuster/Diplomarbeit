@@ -8,11 +8,12 @@
 
 import UIKit
 import AVFoundation
+import SIMplePhoneKit
 
 class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
 
     var parentVC: UITableViewController?
-    var voicemail: Voicemail? {
+    var voicemail: SPVoicemail? {
         didSet {
             self.fillCellWithData()
         }
@@ -37,9 +38,6 @@ class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
         
         self.playbackBackgroundView.backgroundColor = UIColor.darkGray
         self.playbackBackgroundView.layer.cornerRadius = 12.0
-        
-        self.player?.delegate = self
-        self.markVoicemailAsHeard()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,20 +49,37 @@ class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     func fillCellWithData() {
         if let data = self.voicemail {
             self.heardIndicatorView.isHidden = data.heard
-            self.originPhoneNumberLabel.text = data.originPhoneNumber
-            self.originGatewayLabel.text = "Gateway: \(data.gateway.name)"
-            self.dateLabel.text = DateFormatter.localizedString(from: data.date, dateStyle: .long, timeStyle: .short)
+            if let contact = data.secondParty.contact {
+                if contact.givenName != "" && contact.familyName != "" {
+                    self.originPhoneNumberLabel.text = contact.givenName+" "+contact.familyName
+                }else{
+                    self.originPhoneNumberLabel.text = contact.organizationName
+                }
+            }else{
+                self.originPhoneNumberLabel.text = data.secondParty.prettyPhoneNumber()
+            }
+            self.originGatewayLabel.text = "Gateway: \(String(describing: data.gateway?.name))"
+            self.dateLabel.text = DateFormatter.localizedString(from: data.time, dateStyle: .long, timeStyle: .short)
+            
             do {
-                self.player = try AVAudioPlayer(contentsOf: data.audioFile)
+                let path = data.getAudioFilePath()
+                print(path)
                 
-                
+                self.player = try AVAudioPlayer(contentsOf: path)
                 
                 if let player = self.player {
+                    player.delegate = self
+                    
                     let s: Int = Int(player.currentTime) % 60
                     let m: Int = Int(player.currentTime) / 60
                     self.playbackProgressLabel.text = String(format: "%0d:%02d", m, s)
-                    self.playbackProgressSlider.value = Float(player.currentTime)
-                    player.currentTime = TimeInterval(self.playbackProgressSlider.value)
+                    
+                    
+                    let remainingMinutes = Int(player.duration-player.currentTime) / 60
+                    let remainingSeconds = Int(player.duration-player.currentTime) % 60
+                    self.playbackRemainingLabel.text = String(format: "-%0d:%02d", remainingMinutes, remainingSeconds)
+                }else{
+                    print("error")
                 }
             } catch let error {
                 print(error.localizedDescription)
@@ -93,7 +108,7 @@ class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     
     @IBAction func shareVoicemailBtn(_ sender: UIButton) {
         DispatchQueue.global(qos: .userInteractive).async {
-            let voicemailFile = NSData(contentsOf: self.voicemail!.audioFile)
+            let voicemailFile = NSData(contentsOf: (self.voicemail?.getAudioFilePath())!)
             let activityViewController = UIActivityViewController(activityItems: [voicemailFile!], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
             
@@ -109,7 +124,7 @@ class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     }
     
     func markVoicemailAsHeard() {
-        self.voicemail?.markAsHeard()
+        SPManager.shared.markVoicemailAsHeard(self.voicemail!)
         self.heardIndicatorView.isHidden = true
     }
     

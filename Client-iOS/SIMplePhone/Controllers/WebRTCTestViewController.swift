@@ -25,7 +25,7 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.usernameField.text = "mail@lukaskuster.com"
+        self.usernameField.text = "quentin@wendegass.com"
         self.passwordField.text = "test123"
         
         self.setupRTC()
@@ -65,7 +65,9 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
     func signalingClient(client: SignalingClient, didReceiveOfferWithSdp sdp: String) {
         self.lprint("Received Offer: \(sdp)")
         
+        self.rtc?.startConnection()
         self.rtc?.createAnswerForOfferReceived(withRemoteSDP: sdp)
+        
     }
     
     func signalingClient(client: SignalingClient, didAuthenticateOnServer authenticated: Bool, error: SignalingClientError?) {
@@ -96,10 +98,34 @@ class WebRTCTestViewController: UIViewController, SignalingClientDelegate, RTCCl
     func rtcClient(client: RTCClient, didChangeState state: RTCClientState) {
         print(state)
         DispatchQueue.main.async {
-            self.lprint("\(state)")
+            self.lprint("RTCClientState: \(state)")
         }
-        if state == .connected {
-            self.rtc?.startConnection()
+    }
+    
+    func rtcClient(client: RTCClient, didChangeConnectionState connectionState: RTCIceConnectionState) {
+        print(connectionState)
+        var state = ""
+        switch connectionState {
+        case .checking:
+            state = "checking"
+        case .new:
+            state = "new"
+        case .connected:
+            state = "connected"
+        case .completed:
+            state = "completed"
+        case .failed:
+            state = "failed"
+        case .disconnected:
+            state = "disconnected"
+            self.rtc?.disconnect()
+        case .closed:
+            state = "closed"
+        case .count:
+            state = "count"
+        }
+        DispatchQueue.main.async {
+            self.lprint("RTCIceConnectionState: \(state)")
         }
     }
     

@@ -8,10 +8,10 @@
 
 import UIKit
 import Contacts
+import SIMplePhoneKit
 
 class VoicemailTableViewCell: UITableViewCell {
-
-    var voicemail: Voicemail? {
+    var voicemail: SPVoicemail? {
         didSet {
             self.fillCellWithData()
         }
@@ -40,15 +40,20 @@ class VoicemailTableViewCell: UITableViewCell {
     func fillCellWithData() {
         if let data = self.voicemail {
             self.heardIndicatorLabel.isHidden = data.heard
-            self.originPhoneNumberLabel.text = data.originPhoneNumber
-            self.originGatewayLabel.text = "Gateway: \(data.gateway.name)"
-            self.dateLabel.text = DateFormatter.localizedString(from: data.date, dateStyle: .none, timeStyle: .short)
-            if let duration = data.duration {
-                let s: Int = Int(duration) % 60
-                let m: Int = Int(duration) / 60
-                self.durationLabel.text = String(format: "%0d:%02d", m, s)
+            if let contact = data.secondParty.contact {
+                if contact.givenName != "" && contact.familyName != "" {
+                    self.originPhoneNumberLabel.text = contact.givenName+" "+contact.familyName
+                }else{
+                    self.originPhoneNumberLabel.text = contact.organizationName
+                }
+            }else{
+                self.originPhoneNumberLabel.text = data.secondParty.prettyPhoneNumber()
             }
-            
+            self.originGatewayLabel.text = "Gateway: \(String(describing: data.gateway?.name))"
+            self.dateLabel.text = DateFormatter.localizedString(from: data.time, dateStyle: .none, timeStyle: .short)
+            let s: Int = Int(data.duration) % 60
+            let m: Int = Int(data.duration) / 60
+            self.durationLabel.text = String(format: "%0d:%02d", m, s)
         }
     }
 

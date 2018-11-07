@@ -17,7 +17,38 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (! error) {
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+            NSLog( @"Push registration success." );
+        }else{
+            NSLog( @"Push registration FAILED" );
+            NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+            NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );
+        }
+    }];
+    
+    [self updateBadges];
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    SPManager *manager = [SPManager sharedInstance];
+    [manager receivedPushDeviceToken:deviceToken];
+}
+
+- (void)updateBadges {
+    SPManager *manager = [SPManager sharedInstance];
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    // Recent calls
+    NSInteger recentCallsCount = [manager getCountOfUnseenRecentCalls];
+    [[tabController.viewControllers objectAtIndex:0] tabBarItem].badgeValue = (recentCallsCount == 0) ? nil : [@(recentCallsCount) stringValue];
+    
+    // Voicemails
+    NSInteger voicemailCount = [manager getCountOfUnheardVoicemails];
+    [[tabController.viewControllers objectAtIndex:3] tabBarItem].badgeValue = (voicemailCount == 0) ? nil : [@(voicemailCount) stringValue];
 }
 
 

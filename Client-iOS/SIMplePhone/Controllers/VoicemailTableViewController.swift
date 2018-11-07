@@ -8,36 +8,39 @@
 
 import UIKit
 import Contacts
+import SIMplePhoneKit
 
 class VoicemailTableViewController: UITableViewController {
 
-    let currentGateway = Gateway(imei: "98DEF5FD-3596-4003-92D3-A28263A5E479", name: "Home", number: CNPhoneNumber(stringValue: "00436641817908"))
-    var voicemails: [Voicemail] = []
+    var voicemails: [SPVoicemail] {
+        return SPManager.shared.getVoicemails() ?? []
+    }
     var selectedRow: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
-        
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338455", audio: sampleAudio))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338456", audio: sampleAudio))
-        voicemails.append(Voicemail(currentGateway, date: Date(), origin: "00436648338457", audio: sampleAudio))
-        
-        print(voicemails)
-        
         self.tabBarItem.badgeValue = "\(voicemails.count)"
         
         self.tableView.allowsMultipleSelection = false
         self.tableView.allowsSelection = true
         self.tableView.allowsSelectionDuringEditing = false
         self.tableView.tableFooterView = UIView()
-        
+                
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func addVoicemailsToDB() {
+        let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
+        
+        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455")
+        
+        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436641817908"), audio: sampleAudio))
+        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338456"), audio: sampleAudio))
+        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338457"), audio: sampleAudio))
     }
 
     // MARK: - Table view data source

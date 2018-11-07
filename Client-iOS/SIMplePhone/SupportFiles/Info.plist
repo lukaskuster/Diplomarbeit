@@ -28,6 +28,10 @@
 	<string>Ability to display and call contacts on device</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Ability to transmit microphone audio</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>voip</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

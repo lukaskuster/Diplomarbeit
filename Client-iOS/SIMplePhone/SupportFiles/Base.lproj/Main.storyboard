@@ -12,19 +12,66 @@
         <!--Recents-->
         <scene sceneID="yhi-2C-vy7">
             <objects>
-                <tableViewController id="BQV-sU-wo9" sceneMemberID="viewController">
+                <tableViewController id="BQV-sU-wo9" customClass="RecentCallsTableViewController" customModule="SIMplePhone" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nFZ-oh-6cI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5IK-xc-mX5">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="recentCallCell" rowHeight="60" id="5IK-xc-mX5" customClass="RecentCallsTableViewCell" customModule="SIMplePhone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5IK-xc-mX5" id="B2p-iV-YKW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBq-P3-cyj">
+                                            <rect key="frame" x="39" y="8" width="44" height="21"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-3L-4Ue">
+                                            <rect key="frame" x="39" y="29" width="44" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRQ-lX-Onu">
+                                            <rect key="frame" x="287.5" y="20" width="39.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="phone-out" translatesAutoresizingMaskIntoConstraints="NO" id="7fr-fX-zlc">
+                                            <rect key="frame" x="16" y="9.5" width="18" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="8l1-82-Nht"/>
+                                                <constraint firstAttribute="width" constant="18" id="zpO-jT-v8t"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fBq-P3-cyj" firstAttribute="top" secondItem="B2p-iV-YKW" secondAttribute="top" constant="10" id="1UZ-HM-cnB"/>
+                                        <constraint firstAttribute="bottom" secondItem="i8v-3L-4Ue" secondAttribute="bottom" constant="10" id="8Yv-le-KLK"/>
+                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="leading" secondItem="fBq-P3-cyj" secondAttribute="leading" id="AeL-dp-dfb"/>
+                                        <constraint firstItem="7fr-fX-zlc" firstAttribute="centerY" secondItem="fBq-P3-cyj" secondAttribute="centerY" id="Ahr-HQ-J1J"/>
+                                        <constraint firstItem="bRQ-lX-Onu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBq-P3-cyj" secondAttribute="trailing" constant="8" symbolic="YES" id="N2z-S5-JCh"/>
+                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="top" secondItem="fBq-P3-cyj" secondAttribute="bottom" id="P3W-fw-Gsk"/>
+                                        <constraint firstItem="fBq-P3-cyj" firstAttribute="leading" secondItem="7fr-fX-zlc" secondAttribute="trailing" constant="5" id="Rdz-11-WAi"/>
+                                        <constraint firstItem="bRQ-lX-Onu" firstAttribute="centerY" secondItem="B2p-iV-YKW" secondAttribute="centerY" id="Ric-Sd-lzD"/>
+                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="trailing" secondItem="fBq-P3-cyj" secondAttribute="trailing" id="ehF-ti-GbD"/>
+                                        <constraint firstItem="7fr-fX-zlc" firstAttribute="leading" secondItem="B2p-iV-YKW" secondAttribute="leadingMargin" id="ihP-xM-YjQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="bRQ-lX-Onu" secondAttribute="trailing" id="yZI-nE-bCU"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="callerGlyph" destination="7fr-fX-zlc" id="BSp-X6-5GA"/>
+                                    <outlet property="callerNameLabel" destination="fBq-P3-cyj" id="JLS-us-TJ9"/>
+                                    <outlet property="callerSubtitleLabel" destination="i8v-3L-4Ue" id="hfP-bw-8os"/>
+                                    <outlet property="timeStampLabel" destination="bRQ-lX-Onu" id="Wu3-Kj-poo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -33,20 +80,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recents" id="CJk-Ea-CRR">
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="hod-f4-mWe">
-                            <rect key="frame" x="8" y="7" width="315.5" height="30"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="sOD-oS-JBJ">
+                            <rect key="frame" x="130" y="7" width="115" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
                                 <segment title="Missed"/>
                             </segments>
+                            <connections>
+                                <action selector="allOrMissedSelectorChanged:" destination="BQV-sU-wo9" eventType="valueChanged" id="jbO-ch-xes"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="sI8-X7-mCl"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86s-GA-arZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="-1325"/>
+            <point key="canvasLocation" x="1740" y="-1325.4872563718143"/>
         </scene>
         <!--Recents-->
         <scene sceneID="SO3-db-wWv">
@@ -428,7 +478,7 @@
         <scene sceneID="kMq-3Z-uLj">
             <objects>
                 <navigationController id="T7s-ZN-b3Q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Voicemail" image="voicemail" badgeValue="2" id="DIY-0e-yEi"/>
+                    <tabBarItem key="tabBarItem" title="Voicemail" image="voicemail" id="DIY-0e-yEi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="RNV-p3-saS">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -472,6 +522,29 @@
                                             <segue destination="MRb-pY-262" kind="show" id="PJR-0H-g1O">
                                                 <segue key="commit" inheritsFrom="parent" id="3ln-IQ-6Fq"/>
                                                 <segue key="preview" inheritsFrom="commit" id="i4F-qK-ReO"/>
+                                            </segue>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Q7E-c3-anP" style="IBUITableViewCellStyleDefault" id="k8p-da-u8K">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k8p-da-u8K" id="jlF-Dq-3OY">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="CallKit Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7E-c3-anP">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="I1s-9W-JlS" kind="show" id="qoN-03-Yfh">
+                                                <segue key="commit" inheritsFrom="parent" id="rRp-46-7uB"/>
+                                                <segue key="preview" inheritsFrom="commit" id="whz-9N-PVO"/>
                                             </segue>
                                         </connections>
                                     </tableViewCell>
@@ -603,6 +676,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0p-Vy-pUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2517.5999999999999" y="1421.7391304347827"/>
+        </scene>
+        <!--CallKit Test-->
+        <scene sceneID="8uH-zI-xPs">
+            <objects>
+                <viewController title="CallKit Test" id="I1s-9W-JlS" customClass="CallKitTestViewController" customModule="SIMplePhone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VJe-Vj-MzO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uCi-Tw-UPa"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4s-GW-1h8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518" y="2087"/>
         </scene>
         <!--Settings-->
         <scene sceneID="1Po-7w-31G">
@@ -752,12 +840,14 @@
         <image name="messages" width="30" height="30"/>
         <image name="number_pad" width="30" height="30"/>
         <image name="open_with" width="30" height="30"/>
+        <image name="phone-out" width="30" height="30"/>
         <image name="play" width="30" height="30"/>
         <image name="recent-calls" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
         <image name="voicemail" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="qoN-03-Yfh"/>
         <segue reference="PJR-0H-g1O"/>
     </inferredMetricsTieBreakers>
 </document>
