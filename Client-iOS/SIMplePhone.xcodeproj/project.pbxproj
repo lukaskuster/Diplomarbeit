@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
+		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
@@ -16,8 +18,6 @@
 		D635871A217F88B700B395F9 /* RTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6358719217F88B700B395F9 /* RTCClient.swift */; };
 		D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */; };
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
-		D65FD70021809C9300BBE679 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD6FF21809C9300BBE679 /* WebRTC.framework */; };
-		D65FD70121809C9300BBE679 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD6FF21809C9300BBE679 /* WebRTC.framework */; };
 		D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD702218884DF00BBE679 /* CallKitManager.swift */; };
 		D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD707218893C200BBE679 /* ContactsTableViewController.swift */; };
 		D65FD70A218913B200BBE679 /* CallKitTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD709218913B200BBE679 /* CallKitTestViewController.swift */; };
@@ -52,6 +52,9 @@
 		D67818B62179B6B800E650DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67818B52179B6B800E650DB /* Assets.xcassets */; };
 		D67818BA2179BB8600E650DB /* sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D67818B92179BB8600E650DB /* sample.m4a */; };
 		D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */; };
+		D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
+		D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,7 @@
 				D65FD70F2189C14E00BBE679 /* Realm.framework in Embed Frameworks */,
 				D67818AB2178929B00E650DB /* SIMplePhoneKit.framework in Embed Frameworks */,
 				D65FD7112189C14E00BBE679 /* RealmSwift.framework in Embed Frameworks */,
+				D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +85,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		D6328CAB219313DF00E48FD3 /* SPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPManager.swift; sourceTree = "<group>"; };
@@ -90,7 +96,6 @@
 		D6358719217F88B700B395F9 /* RTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCClient.swift; sourceTree = "<group>"; };
 		D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureState.swift; sourceTree = "<group>"; };
-		D65FD6FF21809C9300BBE679 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D65FD702218884DF00BBE679 /* CallKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitManager.swift; sourceTree = "<group>"; };
 		D65FD70421888FDF00BBE679 /* SIMplePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SIMplePhone.entitlements; sourceTree = "<group>"; };
 		D65FD707218893C200BBE679 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +137,8 @@
 		D67818B52179B6B800E650DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D67818B92179BB8600E650DB /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
 		D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTestViewController.swift; sourceTree = "<group>"; };
+		D6BE880B2194398900F87B35 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
+		D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireSwiftyJSON.framework; path = Carthage/Build/iOS/AlamofireSwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,9 +149,11 @@
 				D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */,
 				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
+				D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */,
 				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
+				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
+				D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */,
-				D65FD70021809C9300BBE679 /* WebRTC.framework in Frameworks */,
 				D65FD70E2189C14E00BBE679 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +162,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D65FD70121809C9300BBE679 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,10 +218,12 @@
 			isa = PBXGroup;
 			children = (
 				D65FD70B2189BB5600BBE679 /* Frameworks.md */,
+				D6BE880B2194398900F87B35 /* WebRTC.framework */,
+				D604917E219431DD00F46B18 /* Alamofire.framework */,
+				D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */,
 				D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */,
 				D65FD70C2189C14D00BBE679 /* Realm.framework */,
 				D65FD70D2189C14D00BBE679 /* RealmSwift.framework */,
-				D65FD6FF21809C9300BBE679 /* WebRTC.framework */,
 				D6358717217F544800B395F9 /* SwiftyJSON.framework */,
 				D6358714217F49E900B395F9 /* Starscream.framework */,
 			);
@@ -277,14 +287,15 @@
 			children = (
 				D6328CAB219313DF00E48FD3 /* SPManager.swift */,
 				D65FD7132189C53600BBE679 /* Models */,
-				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
-				D67818A62178929B00E650DB /* Info.plist */,
+				D604917C2194289F00F46B18 /* APIClient.swift */,
 				D6358719217F88B700B395F9 /* RTCClient.swift */,
 				D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */,
 				D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */,
 				D65FD702218884DF00BBE679 /* CallKitManager.swift */,
 				D6328CA721930FD200E48FD3 /* RealmManager.swift */,
 				D6328CA92193128600E48FD3 /* RealmExtensions.swift */,
+				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
+				D67818A62178929B00E650DB /* Info.plist */,
 			);
 			path = SIMplePhoneKit;
 			sourceTree = "<group>";
@@ -313,6 +324,7 @@
 				D678189C21788E8B00E650DB /* Embed Frameworks */,
 				D678189521788E2800E650DB /* Carthage */,
 				D65FD7122189C19900BBE679 /* Realm Dynamic Framework */,
+				D6BE88112194C7BB00F87B35 /* Warnings for TODOs */,
 			);
 			buildRules = (
 			);
@@ -438,6 +450,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PhoneNumberKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireSwiftyJSON.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -447,6 +461,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		D6BE88112194C7BB00F87B35 /* Warnings for TODOs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Warnings for TODOs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | \\\nxargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\nperl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -477,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D635871A217F88B700B395F9 /* RTCClient.swift in Sources */,
+				D604917D2194289F00F46B18 /* APIClient.swift in Sources */,
 				D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */,
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,
 				D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */,

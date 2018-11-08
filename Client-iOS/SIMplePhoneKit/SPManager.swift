@@ -66,7 +66,16 @@ import Foundation
     // MARK: Push notification related
     @objc public func receivedPushDeviceToken(_ data: Data) {
         let token = data.reduce("", {$0 + String(format: "%02X", $1)})
-        print("Received Push Token: \(token)")
+        let modelName = UIDevice().modelName
+        let deviceName = UIDevice().name
+        let systemVersion = UIDevice().systemVersion
+        let language = Locale.current.languageCode
+        
+        APIClient.shared.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language) { (success, error) in
+            if !success {
+                print(error!)
+            }
+        }
     }
     
     // MARK: Obj-C related
@@ -75,3 +84,15 @@ import Foundation
     }
 }
 
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
+    }
+}

@@ -14,7 +14,7 @@ class CallKitTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455")
+        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", signalStrength: 0.0)
         let number = SPNumber(withNumber: "00436641817909")
         let call = SPRecentCall(with: number, at: Date(), for: TimeInterval(exactly: 12.0)!, type: .outgoing, missed: false, gateway: gateway)
         

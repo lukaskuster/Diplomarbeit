@@ -15,11 +15,12 @@ public class SPGateway: Object {
     @objc public dynamic var phoneNumber = ""
     @objc public dynamic var signalStrength: Double = 0.0
     
-    public convenience init(withIMEI imei: String, name: String, phoneNumber: String) {
+    public convenience init(withIMEI imei: String, name: String, phoneNumber: String, signalStrength: Double) {
         self.init()
         self.imei = imei
         self.name = name
         self.phoneNumber = phoneNumber
+        self.signalStrength = signalStrength
     }
     
     override public static func primaryKey() -> String? {
