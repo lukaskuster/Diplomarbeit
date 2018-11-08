@@ -3,7 +3,7 @@ const sms = require('./_sms');
 
 
 let GatewaySchema = new mongoose.Schema({
-    _id: {type: String},
+    _id: String,
     signalStrength: Number,
     newSMS: [sms]
 },{ _id: false });

@@ -2,10 +2,13 @@ const basicAuth = require('basic-auth');
 const User = require('../model/user');
 const md5 = require('md5');
 
-module.exports = async function (request, response, next) {
-    let requestUser= basicAuth(request);
 
-    let user = await User.findById(requestUser.name);
+module.exports = async function (request, response, next) {
+    let requestUser = basicAuth(request);
+
+    if(requestUser){
+        var user = await User.findById(requestUser.name);
+    }
 
     if(!user || !requestUser || user.password !== md5(requestUser.pass)){
         response.set('WWW-Authenticate', 'Basic realm="simplephone"');

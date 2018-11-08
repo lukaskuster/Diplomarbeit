@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const gateway = require('./_gateway');
+const device = require('./_device');
 
 
 let UserSchema = new mongoose.Schema({
@@ -8,7 +9,8 @@ let UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     password: {type: String, required: true},
-    gateway: [gateway]
+    gateway: [gateway],
+    device: [device]
 },{ _id: false });
 
 UserSchema.method('toClient', function() {
@@ -18,6 +20,7 @@ UserSchema.method('toClient', function() {
     delete obj._id;
     delete obj.password;
     delete obj.gateway;
+    delete obj.device;
 
     return obj;
 });

@@ -4,6 +4,7 @@ const sse = require('../middleware/sse');
 const userController = require('./user-controller');
 const gatewayController = require('./gateway-controller');
 const streamController = require('./stream-controller');
+const deviceController = require('./device-controller');
 
 
 const router = express.Router();
@@ -20,6 +21,12 @@ router.put('/gateway/:id', basicAuth, gatewayController.putGateway);
 
 router.get('/stream', basicAuth, sse, streamController.stream);
 router.post('/event', basicAuth, streamController.event);
+
+router.post('/device', basicAuth, deviceController.postDevice);
+router.get('/devices', basicAuth, deviceController.getDevices);
+router.get('/device/:id', basicAuth, deviceController.getDevice);
+router.delete('/device/:id', basicAuth, deviceController.deleteDevice);
+router.put('/device/:id', basicAuth, deviceController.putDevice);
 
 
 module.exports = router;
