@@ -65,6 +65,12 @@ class RealmManager: NSObject {
         }
     }
     
+    public func addMessageToChat(message: SPMessage, chat: SPChat) {
+        try! self.realm.write {
+            chat.messages.append(message)
+        }
+    }
+    
     func realmAdd(_ object: Object) {
         try! self.realm.write {
             self.realm.add(object)
