@@ -6,14 +6,16 @@ const md5 = require('md5');
 module.exports = async function (request, response, next) {
     let requestUser = basicAuth(request);
 
-    if (requestUser) {
-        var user = await User.findById(requestUser.name);
+    if (!requestUser) {
+        response.set('WWW-Authenticate', 'Basic realm="simplephone"');
+        return response.status(401).json({errorMessage: `NotAuthenticated`, errorCode: 10010});
     }
 
-    if (!user || !requestUser || user.password !== md5(requestUser.pass)) {
+    let user = await User.findById(requestUser.name);
+
+    if (!user || user.password !== md5(requestUser.pass)) {
         response.set('WWW-Authenticate', 'Basic realm="simplephone"');
-        response.status(401);
-        return response.json({error: 'Not authorized!'});
+        return response.status(401).json({errorMessage: `WrongCredentials`, errorCode: 10011});
     }
 
     response.locals.user = user;

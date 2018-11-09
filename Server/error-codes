@@ -8,3 +8,5 @@ MailAlreadyExists(withMail: mail) 10006
 NoGatewayConnected(withIMEI: imei) 10007
 NoGatewaysForUser 10008
 NoDevicesForUser 10009
+NotAuthenticated 10010
+WrongCredentials 10011
