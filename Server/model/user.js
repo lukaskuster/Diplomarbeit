@@ -11,10 +11,10 @@ let UserSchema = new mongoose.Schema({
     password: {type: String, required: true},
     gateway: [gateway],
     device: [device]
-},{ _id: false });
+}, {_id: false});
 
-UserSchema.method('toClient', function() {
-    let obj = this.toObject({ versionKey: false });
+UserSchema.method('toClient', function () {
+    let obj = this.toObject({versionKey: false});
 
     obj.mail = obj._id;
     delete obj._id;

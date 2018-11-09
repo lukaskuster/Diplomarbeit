@@ -1,24 +1,27 @@
 const User = require('../model/user');
 const md5 = require('md5');
 
-module.exports.getUser = function(req, res){
+module.exports.getUser = function (req, res) {
     let user = res.locals.user;
     return res.json(user.toClient());
 };
 
-module.exports.postUser = function(req, res){
-    if(!('mail' in req.body) || !('password' in req.body)){
-        res.status(403);
-        return res.json({error: 'Parameter mail or password is not in the request!'});
+module.exports.postUser = function (req, res) {
+    if (!req.body.mail) {
+        return res.status(403).json({errorMessage: `NoParameter(mail)`, errorCode: 10000});
+    } else if (!req.body.password) {
+        return res.status(403).json({errorMessage: `NoParameter(password)`, errorCode: 10000});
     }
 
     let user = new User();
     user.password = md5(req.body.password);
     user._id = req.body.mail;
     user.save(function (err) {
-        if(err){
-            res.status(409);
-            res.json({error: 'Mail already in use!'});
+        if (err) {
+            return res.status(409).json({
+                errorMessage: `MailAlreadyExists(withMail: ${req.body.mail})`,
+                errorCode: 10006
+            });
         }
 
         res.json(user.toClient());
@@ -28,17 +31,19 @@ module.exports.postUser = function(req, res){
 module.exports.putUser = function (req, res) {
     let user = res.locals.user;
 
-    if ('firstName' in req.body) {
+    if (req.body.firstName) {
         user.firstName = req.body.firstName;
     }
-    if ('lastName' in req.body) {
+    if (req.body.lastName) {
         user.lastName = req.body.lastName;
     }
-    if ('password' in req.body) {
+    if (req.body.password) {
         user.password = md5(req.body.password);
     }
 
-    user.save();
-
-    return res.json(user.toClient());
+    user.save().then(function () {
+        res.json(user.toClient());
+    }).catch(function (e) {
+        res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+    });
 };

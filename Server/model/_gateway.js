@@ -4,15 +4,18 @@ const sms = require('./_sms');
 
 let GatewaySchema = new mongoose.Schema({
     _id: String,
+    name: String,
+    phoneNumber: String,
     signalStrength: Number,
     newSMS: [sms]
-},{ _id: false });
+}, {_id: false});
 
-GatewaySchema.method('toClient', function() {
-    let obj = this.toObject({ versionKey: false });
+GatewaySchema.method('toClient', function () {
+    let obj = this.toObject({versionKey: false});
 
-    obj.id = obj._id;
+    obj.imei = obj._id;
     delete obj._id;
+    delete obj.newSMS;
 
     return obj;
 });

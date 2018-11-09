@@ -1,44 +1,54 @@
 module.exports.postDevice = function (req, res) {
     let user = res.locals.user;
 
-    if(!('id' in req.body)){
-        return res.status(403).json({error: 'Parameter id not in request!'});
-    }else if(!('deviceName' in req.body)){
-        return res.status(403).json({error: 'Parameter deviceName not in request!'});
-    }else if(!('apnToken' in req.body)){
-        return res.status(403).json({error: 'Parameter apnToken not in request!'});
-    }else if(!('language' in req.body)){
-        return res.status(403).json({error: 'Parameter language not in request!'});
-    }else if(!('systemVersion' in req.body)){
-        return res.status(403).json({error: 'Parameter systemVersion not in request!'});
-    }else if(!('deviceModelName' in req.body)){
-        return res.status(403).json({error: 'Parameter deviceModelName not in request!'});
+    if (!req.body.id) {
+        return res.status(403).json({errorMessage: `NoParameter(id)`, errorCode: 10000});
+    } else if (!req.body.deviceName) {
+        return res.status(403).json({errorMessage: `NoParameter(deviceName)`, errorCode: 10000});
+    } else if (!req.body.apnToken) {
+        return res.status(403).json({errorMessage: `NoParameter(apnToken)`, errorCode: 10000});
+    } else if (!req.body.systemVersion) {
+        return res.status(403).json({errorMessage: `NoParameter(systemVersion)`, errorCode: 10000});
+    } else if (!req.body.deviceModelName) {
+        return res.status(403).json({errorMessage: `NoParameter(deviceModelName)`, errorCode: 10000});
     }
 
-    if(user.device.id(req.body.id)) {
-        return res.status(409).json({error: 'A Device with this id is already existing on this user!'});
+    if (user.device.id(req.body.id)) {
+        return res.status(409).json({errorMessage: `DeviceAlreadyExists(withID: ${req.body.id})`, errorCode: 10004});
     }
 
-    user.device.push(
-        {
-            _id: req.body.id,
-            deviceName: req.body.deviceName,
-            apnToken: req.body.apnToken,
-            language: req.body.language,
-            systemVersion: req.body.systemVersion,
-            deviceModelName: req.body.deviceModelName
-        });
-    user.save();
+    let deviceDocument = {
+        _id: req.body.id,
+        deviceName: req.body.deviceName,
+        apnToken: req.body.apnToken,
+        systemVersion: req.body.systemVersion,
+        deviceModelName: req.body.deviceModelName
+    };
 
-    let device = user.device.id(req.body.id);
+    if (req.body.language) {
+        deviceDocument.language = req.body.language;
+    } else {
+        deviceDocument.language = 'en';
+    }
 
-    return res.json(device.toClient());
+    user.device.push(deviceDocument);
+    user.save().then(function () {
+        let device = user.device.id(req.body.id);
+        res.json(device.toClient());
+    }).catch(function (e) {
+        res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+    });
 };
 
 module.exports.getDevices = function (req, res) {
     let user = res.locals.user;
 
     let devices = user.device.map(device => device.toClient());
+
+    if (devices.length === 0) {
+        return res.status(404).json({errorMessage: `NoDevicesForUser`, errorCode: 10009});
+    }
+
     return res.json(devices);
 };
 
@@ -47,8 +57,8 @@ module.exports.getDevice = function (req, res) {
 
     let device = user.device.id(req.params.id);
 
-    if(!device){
-        return res.status(404).json({error: 'No device found with id ' + req.params.id + "!"});
+    if (!device) {
+        return res.status(404).json({errorMessage: `NoDeviceFound(withID: ${req.params.id})`, errorCode: 10005});
     }
     return res.json(device.toClient());
 };
@@ -58,13 +68,16 @@ module.exports.deleteDevice = function (req, res) {
 
     let device = user.device.id(req.params.id);
 
-    if(!device){
-        return res.status(403).json({error: 'No device found with id ' + req.params.id + "!"});
+    if (!device) {
+        return res.status(403).json({errorMessage: `NoDeviceFound(withID: ${req.params.id})`, errorCode: 10005});
     }
 
     user.device = user.device.filter(element => element !== device);
-    user.save();
-    return res.json({});
+    user.save().then(function () {
+        res.json({});
+    }).catch(function (e) {
+        res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+    });
 };
 
 module.exports.putDevice = function (req, res) {
@@ -72,26 +85,28 @@ module.exports.putDevice = function (req, res) {
 
     let device = user.device.id(req.params.id);
 
-    if(!device){
-        return res.status(404).json({error: 'No device found with id ' + req.params.id + "!"});
+    if (!device) {
+        return res.status(404).json({errorMessage: `NoDeviceFound(withID: ${req.params.id})`, errorCode: 10005});
     }
 
     let index = user.device.indexOf(device);
 
-    if ('language' in req.body) {
+    if (req.body.language) {
         user.device[index].language = req.body.language;
     }
-    if ('deviceName' in req.body) {
+    if (req.body.deviceName) {
         user.device[index].deviceName = req.body.deviceName;
     }
-    if ('apnToken' in req.body) {
+    if (req.body.apnToken) {
         user.device[index].apnToken = req.body.apnToken;
     }
-    if ('systemVersion' in req.body) {
+    if (req.body.systemVersion) {
         user.device[index].systemVersion = req.body.systemVersion;
     }
 
-    user.save();
-
-    return res.json(user.device[index].toClient());
+    user.save().then(function () {
+        res.json(user.device[index].toClient());
+    }).catch(function (e) {
+        res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+    });
 };

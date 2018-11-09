@@ -14,10 +14,10 @@ router.post('/user', userController.postUser);
 router.put('/user', basicAuth, userController.putUser);
 
 router.post('/gateway', basicAuth, gatewayController.postGateway);
-router.get('/gateway/:id', basicAuth, gatewayController.getGateway);
+router.get('/gateway/:imei', basicAuth, gatewayController.getGateway);
 router.get('/gateways', basicAuth, gatewayController.getGateways);
-router.delete('/gateway/:id', basicAuth, gatewayController.deleteGateway);
-router.put('/gateway/:id', basicAuth, gatewayController.putGateway);
+router.delete('/gateway/:imei', basicAuth, gatewayController.deleteGateway);
+router.put('/gateway/:imei', basicAuth, gatewayController.putGateway);
 
 router.get('/stream', basicAuth, sse, streamController.stream);
 router.post('/event', basicAuth, streamController.event);

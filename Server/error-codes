@@ -1,0 +1,10 @@
+NoParameter(param) 10000
+GatewayAlreadyExists(withIMEI: imei) 10001
+NoGatewayFound(withIMEI: imei) 10002
+DBError(withName: name) 10003
+DeviceAlreadyExists(withID: id) 10004
+NoDeviceFound(withID: id) 10005
+MailAlreadyExists(withMail: mail) 10006
+NoGatewayConnected(withIMEI: imei) 10007
+NoGatewaysForUser 10008
+NoDevicesForUser 10009

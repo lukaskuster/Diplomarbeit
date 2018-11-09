@@ -10,8 +10,8 @@ DeviceSchema = new mongoose.Schema({
     deviceName: String
 }, {_id: false});
 
-DeviceSchema.method('toClient', function() {
-    let obj = this.toObject({ versionKey: false });
+DeviceSchema.method('toClient', function () {
+    let obj = this.toObject({versionKey: false});
 
     obj.id = obj._id;
     delete obj._id;

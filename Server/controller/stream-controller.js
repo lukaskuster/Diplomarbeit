@@ -1,45 +1,42 @@
 let connections = {};
 
-module.exports.stream = function(req, res){
-    if(!('id' in req.body)){
-        res.status(403);
-        return res.json({error: 'Parameter id not in request!'});
+module.exports.stream = function (req, res) {
+    if (!req.body.imei) {
+        return res.status(403).json({errorMessage: `NoParameter(imei)`, errorCode: 10000});
     }
 
-    let gateway = res.locals.user.gateway.id(req.body.id);
-    if(!gateway){
-        res.status(404);
-        return res.json({error: 'No Gateway with that id!'});
+    let gateway = res.locals.user.gateway.id(req.body.imei);
+    if (!gateway) {
+        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.body.imei})`, errorCode: 10002});
     }
 
     res.locals.sse.setup();
     res.on('close', function () {
         res.locals.sse.dispose();
-        delete connections[req.body.id];
+        delete connections[req.body.imei];
     });
-    connections[req.body.id] = res;
+    connections[req.body.imei] = res;
 };
 
 module.exports.event = function (req, res) {
-    if(!req.body.event || !req.body.gateway){
-        res.status(403);
-        return res.json({error: 'Parameter event or gateway is not in the request!'});
+    if (!req.body.event) {
+        return res.status(403).json({errorMessage: `NoParameter(event)`, errorCode: 10000});
+    } else if (!req.body.gateway) {
+        return res.status(403).json({errorMessage: `NoParameter(gateway)`, errorCode: 10000});
     }
 
     req.body.data = req.body.data || {};
 
     let gateway = res.locals.user.gateway.id(req.body.gateway);
-    if(!gateway){
-        res.status(404);
-        return res.json({error: 'No Gateway with that id!'});
+    if (!gateway) {
+        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.body.gateway})`, errorCode: 10002});
     }
 
-    if(req.body.gateway in connections){
+    if (req.body.gateway in connections) {
         connections[req.body.gateway].locals.sse.emit(req.body.event, req.body.data);
         return res.status(200).send();
     }
 
-    res.status(404);
-    return res.json({error: 'Gateway is not connected!'});
+    return res.status(404).json({errorMessage: `NoGatewayConnected(withIMEI: ${req.body.gateway})`, errorCode: 10007});
 };
 
