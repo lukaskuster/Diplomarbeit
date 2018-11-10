@@ -14,18 +14,55 @@ import KeychainSwift
     private var realmManager: RealmManager
     private var apiClient: APIClient
     private var keychain: KeychainSwift
+    private var keychainSync: Bool {
+        didSet {
+            self.keychain.synchronizable = keychainSync
+        }
+    }
     
     private override init() {
         self.realmManager = RealmManager.shared
         self.apiClient = APIClient.shared
         self.keychain = KeychainSwift()
-        self.keychain.synchronizable = true
+        self.keychainSync = true
     }
     
     // MARK: - User access control
+    public func disableiCloudSync(_ disable: Bool = true) {
+        if disable {
+            self.keychainSync = true
+            self.keychain.delete("username")
+            self.keychain.delete("password")
+        }
+        self.keychainSync = disable ? false : true
+    }
+    
+    public func loginWithiCloudAvailable() -> Bool {
+        self.keychainSync = true
+        if self.keychain.get("username") != nil && self.keychain.get("password") != nil {
+            self.keychainSync = false
+            return true
+        }else{
+            self.keychainSync = false
+            return false
+        }
+    }
+    
+    public func loginWithiCloud(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.keychainSync = true
+        if let username = self.keychain.get("username"),
+            let password = self.keychain.get("password") {
+            self.apiClient.loginUser(username: username, password: password) { (success, error) in
+                completion(success, error)
+            }
+        }
+    }
+    
     public func loginUser(username: String, password: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         self.apiClient.loginUser(username: username, password: password) { (success, error) in
             if success {
+                self.keychainSync = true
+                self.keychainSync = (self.keychain.get("username") != nil && self.keychain.get("password") != nil) ? false : true
                 self.keychain.set(username, forKey: "username")
                 self.keychain.set(password, forKey: "password")
                 completion(true, nil)
@@ -35,9 +72,16 @@ import KeychainSwift
         }
     }
     
-    public func logoutUser(reportToServer: Bool = true, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        self.keychain.delete("username")
-        self.keychain.delete("password")
+    public func logoutUser(reportToServer: Bool = true, onAllDevices: Bool = false, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        if onAllDevices {
+            self.keychain.delete("username")
+            self.keychain.delete("password")
+        }else{
+            self.keychainSync = false
+            self.keychain.delete("username")
+            self.keychain.delete("password")
+        }
+        
         if reportToServer {
             self.apiClient.revokeThisDevice { (success, error) in
                 completion(success, error)

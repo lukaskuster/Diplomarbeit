@@ -55,6 +55,14 @@
                                     <action selector="clickedRegisterAccount:" destination="mvn-L7-dgA" eventType="touchUpInside" id="9rC-pY-XUi"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raB-Z9-aCJ">
+                                <rect key="frame" x="25" y="435" width="325" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login via iCloud"/>
+                                <connections>
+                                    <action selector="clickedIcloudLoginBtn:" destination="mvn-L7-dgA" eventType="touchUpInside" id="R7z-ju-WHj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -75,11 +83,15 @@
                             <constraint firstItem="hal-5j-pQj" firstAttribute="trailing" secondItem="gPD-Q3-Mv6" secondAttribute="trailing" constant="25" id="gUE-hm-FYu"/>
                             <constraint firstItem="FpU-jd-Nfv" firstAttribute="leading" secondItem="hal-5j-pQj" secondAttribute="leading" constant="25" id="hUh-Ql-rGf"/>
                             <constraint firstItem="HVm-Ny-1pc" firstAttribute="top" secondItem="xSA-YZ-BHT" secondAttribute="bottom" constant="15" id="lj7-0g-BPD"/>
+                            <constraint firstItem="raB-Z9-aCJ" firstAttribute="top" secondItem="bvA-1b-cUf" secondAttribute="bottom" constant="10" id="pTw-VP-pZw"/>
+                            <constraint firstItem="raB-Z9-aCJ" firstAttribute="leading" secondItem="hal-5j-pQj" secondAttribute="leading" constant="25" id="sdv-Jl-atb"/>
                             <constraint firstItem="HVm-Ny-1pc" firstAttribute="leading" secondItem="hal-5j-pQj" secondAttribute="leading" constant="15" id="vVY-z1-OTX"/>
+                            <constraint firstItem="hal-5j-pQj" firstAttribute="trailing" secondItem="raB-Z9-aCJ" secondAttribute="trailing" constant="25" id="xnP-Yo-uvb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hal-5j-pQj"/>
                     </view>
                     <connections>
+                        <outlet property="icloudLoginBtn" destination="raB-Z9-aCJ" id="kme-HH-82X"/>
                         <outlet property="passwordField" destination="FpU-jd-Nfv" id="AAs-Cf-gIc"/>
                         <outlet property="subtitleLabel" destination="HVm-Ny-1pc" id="YTY-7K-0ki"/>
                         <outlet property="titleLabel" destination="xSA-YZ-BHT" id="jnK-t6-UI1"/>

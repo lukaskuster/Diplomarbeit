@@ -14,11 +14,15 @@ import SIMplePhoneKit
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var icloudLoginBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+        if SPManager.shared.loginWithiCloudAvailable() {
+            icloudLoginBtn.isHidden = false
+        }
     }
     
     @IBAction func clickedLoginBtn(_ sender: UIButton) {
@@ -44,9 +48,23 @@ import SIMplePhoneKit
         
     }
     
+    @IBAction func clickedIcloudLoginBtn(_ sender: UIButton) {
+        SPManager.shared.loginWithiCloud { (success, error) in
+            if success {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateInitialViewController()
+                    self.present(controller!, animated: false, completion: nil)
+                }
+            }else{
+                // TODO: Error handling
+                print(error!)
+            }
+        }
+    }
     
     
-
     /*
     // MARK: - Navigation
 
