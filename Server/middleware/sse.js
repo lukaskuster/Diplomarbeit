@@ -5,7 +5,8 @@ module.exports = function (req, res, next) {
         res.writeHead(200, {
             'Content-Type': 'text/event-stream',
             'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive'
+            'Connection': 'keep-alive',
+            'X-Accel-Buffering': 'no'
         });
 
         res.locals.sse.timeout = setInterval(() => res.write("\n\n"), 5000);
