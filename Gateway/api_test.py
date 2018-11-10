@@ -3,7 +3,7 @@ from utils import logger, AnsiEscapeSequence, Level
 
 
 def run():
-    api = API('quentin@wendegass.com', 'test123', 'wed', host='http://localhost:3000/v1')
+    api = API('quentin@wendegass.com', 'test123', 'wed')
 
     @api.on('test')
     def test_notification(data):
@@ -31,10 +31,10 @@ def run():
         logger.info('Connection', 'Connected with host!')
         logger.log('Tests[Put User]', 'Response = ' + str(api.put_user('Quentin', 'Wendegass')))
         logger.log('Tests[Get User]', 'Response = ' + str(api.get_user()))
-        logger.log('Tests[Post Gateway]', 'Response = ' + str(api.post_gateway('test1231231')))
-        logger.log('Tests[Put Gateway]', 'Response = ' + str(api.put_gateway('test1231231', 4423)))
-        logger.log('Tests[Get Gateway]', 'Response = ' + str(api.get_gateway('test1231231')))
-        logger.log('Tests[Delete Gateway]', 'Response = ' + str(api.delete_gateway('test1231231')))
+        logger.log('Tests[Post Gateway]', 'Response = ' + str(api.post_gateway()))
+        logger.log('Tests[Put Gateway]', 'Response = ' + str(api.put_gateway(4423)))
+        logger.log('Tests[Get Gateway]', 'Response = ' + str(api.get_gateway()))
+        logger.log('Tests[Delete Gateway]', 'Response = ' + str(api.delete_gateway()))
         logger.log('Tests[Get Gateways]', 'Response = ' + str(api.get_gateways()))
 
     api.start()

@@ -1,9 +1,10 @@
 from serial import Serial
 from queue import Queue
 from threading import Thread
-from utils import clear_str
+from utils import clear_str, logger, AnsiEscapeSequence
 from sim800.event import Event
-from sim800.sim800 import Sim800
+import threading
+import sim800
 
 
 class SerialLoop(Thread):
@@ -34,8 +35,10 @@ class SerialLoop(Thread):
             self.serial = Serial(serial_port, baudrate=115200, timeout=1)
 
         # Check type of sim
-        if not isinstance(sim, Sim800):
-            raise TypeError('sim must be of type Sim800!')
+        if not isinstance(sim, sim800.Sim800):
+            error = TypeError('sim must be of type Sim800!')
+            logger.error('Sim800', error.args[0])
+            raise error
 
         # Set the sim800 object to emit events
         self.sim = sim
@@ -43,8 +46,8 @@ class SerialLoop(Thread):
         # The Events that should be written and emitted, when a message returns from the serial interface
         self.event_queue = Queue(64)
 
-        # Set running to False to stop the loop
-        self.running = True
+        # Set running to stop the loop
+        self.running = threading.Event()
 
     def run(self):
         """
@@ -53,7 +56,9 @@ class SerialLoop(Thread):
         :return: returns nothing
         """
 
-        while self.running:
+        logger.info('Sim800', 'Started Service!')
+
+        while not self.running.is_set():
 
             # Write the event to the serial interface and emit the returning value
             if not self.event_queue.empty():
@@ -73,7 +78,7 @@ class SerialLoop(Thread):
                 # The sim800 module sends usually the same command back first
                 if response != command:
                     # Print an error and continue with the next command if not the same is send back
-                    print("Error: Wrong event returned on serial port! Got: {}, Command: {}".format(response, command))
+                    logger.error('Sim800', 'Wrong event returned on serial port! Got: {}, Command: {}'.format(response, command))
                     continue
 
                 # Create new event object
@@ -89,7 +94,6 @@ class SerialLoop(Thread):
 
                         # If the prompt char is send back, serial800 expects some kind of data
                         if ('>' in response) and ('data' in event):
-                            print(event)
                             self._write(event['data'])
                             continue
 
@@ -104,10 +108,13 @@ class SerialLoop(Thread):
                             # Save the transmitted data in the content property of the event
                             e.content.append(response)
                     except UnicodeDecodeError:
-                        print("Could not decode the message from the serial interface! Message: {}".format(res))
+                        logger.error('Sim800',
+                                     'Could not decode the message from the serial interface! Message: {}'.format(res))
 
                 # Emit an event to the last called command function
                 self.sim.emit(event['name'], e)
+                name = AnsiEscapeSequence.BOLD + event['name'] + AnsiEscapeSequence.DEFAULT
+                logger.info('Sim800', 'Emitted event {}!'.format(name))
 
             # If no events are in the queue, just listen on the serial port
             else:
@@ -119,8 +126,10 @@ class SerialLoop(Thread):
                     if response == 'RING':
                         # Emit the ring event
                         self.sim.emit('ring')
+                        logger.info('Sim800', 'Ring event!')
                 except UnicodeDecodeError:
-                    print("Could not decode the message from the serial interface! Message: {}".format(res))
+                    logger.error('Sim800',
+                                 'Could not decode the message from the serial interface! Message: {}'.format(res))
 
     def _read(self):
         """
@@ -135,7 +144,10 @@ class SerialLoop(Thread):
             return str.encode(input())
         else:
             # Read the data from the serial interface
-            return self.serial.readline()
+            data = self.serial.readline()
+
+            logger.debug('Sim800', 'Received data from serial interface: ' + str(data))
+            return data
 
     def _write(self, data):
         """
@@ -148,7 +160,9 @@ class SerialLoop(Thread):
 
         # When the data is not a string or bytes raise an value error
         if type(data) != bytes and type(data) != str:
-            raise ValueError('Data must be type string or bytes')
+            error = ValueError('Data must be type string or bytes')
+            logger.error('Sim800', error.args[0])
+            raise error
 
         # If the data is a string encode it to bytes
         elif type(data) == str:
@@ -156,8 +170,10 @@ class SerialLoop(Thread):
 
         # If debug is enabled print the data to the console
         if self.debug:
-            print(data)
+            logger.info('Sim800', 'Wrote data to interface (DEBUG): ' + str(data))
             return
 
         # Else write the data to the serial interface
         self.serial.write(data)
+        logger.debug('Sim800', 'Wrote data to serial interface: ' + str(data))
+

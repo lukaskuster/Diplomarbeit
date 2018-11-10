@@ -1,7 +1,7 @@
 import argparse
 import asyncio
 import websockets
-from backend import recv_answer, recv_offer, send_offer, send_answer, authenticate
+from backend import recv_answer, recv_offer, send_offer, send_answer, authenticate, AuthenticationError
 from aiortc import RTCPeerConnection, AudioStreamTrack, RTCConfiguration, RTCIceServer
 from aiortc.mediastreams import MediaStreamError
 import av
@@ -87,20 +87,19 @@ async def run(pc, role):
             # Ice description exchange with the signaling server
             async with websockets.connect('wss://signaling.da.digitalsubmarine.com:443') as socket:
                 logger.info('Signaling', 'Connected with signaling server!')
-                auth = await authenticate(socket, 'answer', 'quentin@wendegass.com', 'test123')
-                if not auth['authenticated']:
+                try:
+                    await authenticate(socket, 'answer', 'quentin@wendegass.com', 'test123')
+                except AuthenticationError:
                     logger.error('Signaling', 'Authentication failed!')
-                    raise RuntimeError(auth['error'])
+                    raise
                 logger.info('Signaling', 'Successfully authenticated!')
                 offer = await recv_offer(socket)
-                logger.debug('Signaling', 'Received offer with sdp:\n' + AnsiEscapeSequence.HEADER
-                             + offer.sdp + AnsiEscapeSequence.DEFAULT)
+
                 await pc.setRemoteDescription(offer)
 
                 await pc.setLocalDescription(await pc.createAnswer())
                 await send_answer(socket, pc.localDescription)
-                logger.debug('Signaling', 'Send answer with sdp:\n' + AnsiEscapeSequence.HEADER
-                             + pc.localDescription.sdp + AnsiEscapeSequence.DEFAULT)
+
                 logger.info('Signaling', 'Completed signaling process!')
 
         else:
@@ -108,17 +107,16 @@ async def run(pc, role):
             async with websockets.connect('wss://signaling.da.digitalsubmarine.com:443') as socket:
                 logger.info('Signaling', 'Connected with signaling server!')
                 await pc.setLocalDescription(await pc.createOffer())
-                auth = await authenticate(socket, 'offer', 'quentin@wendegass.com', 'test123')
-                if not auth['authenticated']:
+                try:
+                    await authenticate(socket, 'offer', 'quentin@wendegass.com', 'test123')
+                except AuthenticationError:
                     logger.error('Signaling', 'Authentication failed!')
-                    raise RuntimeError(auth['error'])
+                    raise
                 logger.info('Signaling', 'Successfully authenticated!')
                 await send_offer(socket, pc.localDescription)
-                logger.debug('Signaling', 'Send offer with sdp:\n' + AnsiEscapeSequence.HEADER
-                             + pc.localDescription.sdp + AnsiEscapeSequence.DEFAULT)
+
                 answer = await recv_answer(socket)
-                logger.debug('Signaling', 'Received answer with sdp:\n' + AnsiEscapeSequence.HEADER
-                             + answer.sdp + AnsiEscapeSequence.DEFAULT)
+
                 await pc.setRemoteDescription(answer)
     except Exception as e:
         logger.error('Signaling', e.args[0])
@@ -130,11 +128,12 @@ async def run(pc, role):
     # Receive and send the media tracks until the connection closes
     while True:
         done, pending = await asyncio.wait([remote_track.recv()])
+        print(done, pending)
         try:
             # Received frame
             frame = list(done)[0].result()
-            logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
-                       .format(frame.samples, frame.sample_rate))
+            #logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
+            #           .format(frame.samples, frame.sample_rate))
         except MediaStreamError:
             logger.info('Connection', 'Peer Connection closed!')
             break

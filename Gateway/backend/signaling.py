@@ -1,6 +1,12 @@
 import json
 from aiortc import RTCSessionDescription
 from websockets import WebSocketClientProtocol
+from utils import logger, AnsiEscapeSequence
+
+
+class AuthenticationError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
 
 
 async def authenticate(socket, rule, username, password):
@@ -20,7 +26,9 @@ async def authenticate(socket, rule, username, password):
 
     # Check parameter types
     if not isinstance(socket, WebSocketClientProtocol):
-        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+        error = TypeError('Socket must be of type WebSocketClientProtocol!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     # Authenticate request
     # Must contain username and password
@@ -40,12 +48,21 @@ async def authenticate(socket, rule, username, password):
 
     # Check if the right response arrived
     if 'event' not in response or 'authenticated' not in response:
-        raise KeyError('Event or authenticated is missing in response: ' + str(response))
+        error = KeyError('Event or authenticated is missing in response: ' + str(response))
+        logger.error('Signaling', error.args[0])
+        raise error
     if response['event'] != 'authenticate':
-        raise ValueError('Event should be authenticate! Event: ' + response['event'])
+        error = ValueError('Event should be authenticate! Event: ' + response['event'])
+        logger.error('Signaling', error.args[0])
+        raise error
 
-    # return the outcome of the authentication
-    return response
+    if not response['authenticated']:
+        if 'error' in response:
+            error = AuthenticationError('Authentication was not successful: ' + response['error'])
+        else:
+            error = AuthenticationError('Authentication was not successful: ' + response['error'])
+        logger.error('Signaling', error.args[0])
+        raise error
 
 
 async def recv_answer(socket):
@@ -67,9 +84,16 @@ async def recv_answer(socket):
 
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
-        raise KeyError('Event or sdp is missing in response: ' + str(response))
+        error = KeyError('Event or sdp is missing in response: ' + str(response))
+        logger.error('Signaling', error.args[0])
+        raise error
     if response['event'] != 'answer':
-        raise ValueError('Event should be answer! Event: ' + response['event'])
+        error = ValueError('Event should be answer! Event: ' + response['event'])
+        logger.error('Signaling', error.args[0])
+        raise error
+
+    logger.debug('Signaling', 'Received answer with sdp:\n' + AnsiEscapeSequence.HEADER
+                 + response['sdp'] + AnsiEscapeSequence.DEFAULT)
 
     # Create a RTCSessionDescription object an return it
     return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
@@ -86,7 +110,9 @@ async def recv_offer(socket):
 
     # Check parameter type
     if not isinstance(socket, WebSocketClientProtocol):
-        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+        error = TypeError('Socket must be of type WebSocketClientProtocol!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     # Get the offer event from the server
     data = await socket.recv()
@@ -94,9 +120,16 @@ async def recv_offer(socket):
 
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
-        raise KeyError('Event or sdp is missing in response: ' + str(response))
+        error = KeyError('Event or sdp is missing in response: ' + str(response))
+        logger.error('Signaling', error.args[0])
+        raise error
     if response['event'] != 'offer':
-        raise ValueError('Event should be offer! Event: ' + response['event'])
+        error = ValueError('Event should be offer! Event: ' + response['event'])
+        logger.error('Signaling', error.args[0])
+        raise error
+
+    logger.debug('Signaling', 'Received offer with sdp:\n' + AnsiEscapeSequence.HEADER
+                 + response['sdp'] + AnsiEscapeSequence.DEFAULT)
 
     # Create a RTCSessionDescription object an return it
     return RTCSessionDescription(type=response['event'], sdp=response['sdp'])
@@ -115,10 +148,14 @@ async def send_answer(socket, desc):
 
     # Check parameter types
     if not isinstance(desc, RTCSessionDescription):
-        raise TypeError('Description must be of type RTCSessionDescription!')
+        error = TypeError('Description must be of type RTCSessionDescription!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     if not isinstance(socket, WebSocketClientProtocol):
-        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+        error = TypeError('Socket must be of type WebSocketClientProtocol!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     # Answer event request
     request = {
@@ -126,8 +163,12 @@ async def send_answer(socket, desc):
         # message contains the description object as a json string
         'sdp': desc.sdp
     }
+
     # Send the request to the server
     await socket.send(json.dumps(request))
+
+    logger.debug('Signaling', 'Send answer with sdp:\n' + AnsiEscapeSequence.HEADER
+                 + desc.sdp + AnsiEscapeSequence.DEFAULT)
 
 
 async def send_offer(socket, desc):
@@ -143,10 +184,14 @@ async def send_offer(socket, desc):
 
     # Check parameter types
     if not isinstance(desc, RTCSessionDescription):
-        raise TypeError('Description must be of type RTCSessionDescription!')
+        error = TypeError('Description must be of type RTCSessionDescription!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     if not isinstance(socket, WebSocketClientProtocol):
-        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+        error = TypeError('Socket must be of type WebSocketClientProtocol!')
+        logger.error('Signaling', error.args[0])
+        raise error
 
     # Wait for the start event, that indicates the peer client connected to the server
     data = await socket.recv()
@@ -154,9 +199,14 @@ async def send_offer(socket, desc):
 
     # Check if the right response arrived
     if 'event' not in response:
-        raise KeyError('Event is missing in response: ' + str(response))
+        error = KeyError('Event is missing in response: ' + str(response))
+        logger.error('Signaling', error.args[0])
+        raise error
+
     if response['event'] != 'start':
-        raise ValueError('Event should be start! Event: ' + response['event'])
+        error = ValueError('Event should be start! Event: ' + response['event'])
+        logger.error('Signaling', error.args[0])
+        raise error
 
     # Offer event request
     request = {
@@ -167,3 +217,6 @@ async def send_offer(socket, desc):
 
     # Send the request to the server
     await socket.send(json.dumps(request))
+
+    logger.debug('Signaling', 'Send offer with sdp:\n' + AnsiEscapeSequence.HEADER
+                 + desc.sdp + AnsiEscapeSequence.DEFAULT)

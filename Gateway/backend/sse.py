@@ -1,8 +1,9 @@
-from threading import Thread
+from threading import Thread, Event
 import requests
 from requests.exceptions import ConnectionError, ChunkedEncodingError
 import json
 import time
+from utils import logger, AnsiEscapeSequence
 
 
 class SSE(Thread):
@@ -13,7 +14,7 @@ class SSE(Thread):
         super(SSE, self).__init__()
         self.emitter = emitter
         self.timeout = timeout
-        self._running = True
+        self._running = Event()
         self._connection_state = 'new'
 
     @property
@@ -33,6 +34,9 @@ class SSE(Thread):
             self._connection_state = value
             self.emitter.emit('connectionstatechange', value)
 
+            state = AnsiEscapeSequence.UNDERLINE + self._connection_state + AnsiEscapeSequence.DEFAULT
+            logger.info('SSE', 'Connection state changed to ' + state)
+
     def close(self):
         """
         Close the thread.
@@ -40,7 +44,8 @@ class SSE(Thread):
         :return: nothing
         """
 
-        self._running = False
+        self._running.set()
+        logger.debug('SSE', 'Closing initiated!')
 
     def run(self):
         """
@@ -49,15 +54,19 @@ class SSE(Thread):
 
         :return: noting
         """
-        while True:
+
+        logger.info('SSE', 'Started service!')
+
+        while not self._running.is_set():
             try:
                 self.connection_state = 'connecting'
 
-                response = requests.get(self.emitter.host + '/stream', stream=True, json={'id': self.emitter.id},
+                response = requests.get(self.emitter.host + '/stream', stream=True, json={'imei': self.emitter.id},
                                         auth=self.emitter.auth)
 
                 self.connection_state = 'connected'
                 self.emitter.emit('connect')
+                logger.info('SSE', 'Connected with host!')
 
                 if response.encoding is None:
                     response.encoding = 'utf-8'
@@ -65,7 +74,7 @@ class SSE(Thread):
                 for line in response.iter_lines(decode_unicode=True):
 
                     # Return the run function to end the thread
-                    if self._running is False:
+                    if self._running.is_set():
                         self.connection_state = 'end'
                         return
 
@@ -81,12 +90,16 @@ class SSE(Thread):
 
                 if response.status_code != 200 and notification:
                     self.emitter.emit('connectionfailed', notification)
+                    logger.error('SSE', 'An error occurred: ' + notification['errorMessage'])
                     time.sleep(self.timeout)
 
             except ConnectionError:           # Failed to connect
                 self.emitter.emit('connectionrefused')
+                logger.error('SSE', 'Can not connect to host!')
                 time.sleep(self.timeout)
             except ChunkedEncodingError:      # Connection was aborted
                 self.emitter.emit('connectionaborted')
+                logger.error('SSE', 'Connection was aborted!')
                 self.connection_state = 'connecting'
                 time.sleep(self.timeout)
+

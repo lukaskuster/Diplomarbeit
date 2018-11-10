@@ -69,7 +69,7 @@ class Sim800(EventEmitter):
         :rtype: str
         """
 
-        self.serial_loop.running = False
+        self.serial_loop.running.set()
 
     @_serial_return
     def custom_command(self, command):

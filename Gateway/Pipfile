@@ -9,6 +9,7 @@ pyee = "*"
 websockets = "*"
 aiortc = "*"
 av = "*"
+requests = "*"
 
 [dev-packages]
 
