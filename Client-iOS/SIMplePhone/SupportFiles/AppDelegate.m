@@ -17,6 +17,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    SPManager *manager = [SPManager sharedInstance];
+    [manager isAuthetificatedWithCompletion:^(BOOL loggedIn) {
+        if(loggedIn){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self registerForPushNotifications];
+                [self updateBadges];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIStoryboard *setupStoryboard = [UIStoryboard storyboardWithName:@"Setup" bundle:nil];
+                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"login"];
+                self.window.rootViewController = controller;
+            });
+        }
+    }];
+    
+    return YES;
+}
+
+- (void)registerForPushNotifications {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
     [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
@@ -31,14 +52,19 @@
             NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );
         }
     }];
-    
-    [self updateBadges];
-    return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     SPManager *manager = [SPManager sharedInstance];
-    [manager receivedPushDeviceToken:deviceToken];
+    [manager receivedPushDeviceToken:deviceToken completion:^(BOOL gotRevoked) {
+        if(gotRevoked) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIStoryboard *setupStoryboard = [UIStoryboard storyboardWithName:@"Setup" bundle:nil];
+                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"login"];
+                self.window.rootViewController = controller;
+            });
+        }
+    }];
 }
 
 - (void)updateBadges {

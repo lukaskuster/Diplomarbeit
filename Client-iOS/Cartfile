@@ -3,3 +3,4 @@ github "SwiftyJSON/SwiftyJSON" ~> 4.0
 github "Alamofire/Alamofire" ~> 4.7
 github "SwiftyJSON/Alamofire-SwiftyJSON" >= 3.0.0
 github "marmelroy/PhoneNumberKit"
+github "evgenyneu/keychain-swift" ~> 13.0

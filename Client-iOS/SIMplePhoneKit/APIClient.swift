@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireSwiftyJSON
 import SystemConfiguration
 
-enum APIError: Error {
+public enum APIError: Error {
     case notAuthenticated
     case wrongCredentials
     case missing(parameter: String)
@@ -32,14 +32,43 @@ enum APIError: Error {
 class APIClient: NSObject {
     public static let shared = APIClient()
     private var numberOfOngoingQueries: Int = 0
+    private var username: String?
+    private var password: String?
     
     private override init() {
         
     }
     
     /**
+     Authenticates user with server (needs to be done before other requests, otherwise .notAuthenticated error9
+     - Parameters:
+         - username: username of user
+         - password: password of user
+         - completion: Closure which is called after server response
+            - success: Bool indicating operation success
+            - error: Error, if operation unsuccessful
+     */
+    public func loginUser(username: String, password: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.username = username
+        self.password = password
+        self.request(API.authenticate, type: .get, parameters: nil) { (success, response, error) in
+            if success {
+                completion(true, nil)
+            }else{
+                self.username = nil
+                self.password = nil
+                completion(false, error!)
+            }
+        }
+    }
+    
+    /**
      Fetches all gateways associated with user
-     - Returns: Completion handler (success, gateways?, error?)
+     - Parameters:
+     - completion: Closure which is called after server response
+        - success: Bool indicating operation success
+        - gateways: all SPGateways associated with current user
+        - error: Error, if operation unsuccessful
     */
     public func getAllGateways(completion: @escaping (_ success: Bool, _ gateways: [SPGateway]?, _ error: APIError?) -> Void) {
         self.request(API.gateways, type: .get, parameters: nil) { (success, json, error) in
@@ -92,6 +121,7 @@ class APIClient: NSObject {
                 completion(true, nil)
                 return
             }else{
+                // TODO: Error handling
                 print(error!)
             }
         }
@@ -109,6 +139,8 @@ class APIClient: NSObject {
         - gateway: SPGateway that receives push notification
         - event: the push event
         - completion: Closure which is called after server response
+            - success: Bool indicating operation success
+            - error: Error, if operation unsuccessful
      */
     public func pushEventToGateway(_ gateway: SPGateway, event: GatewayPushEvent, completion: @escaping (_ success: Bool, _ response: JSON?, _ error: APIError?) -> Void) {
         var data: [String: Any] = ["gateway": gateway.imei]
@@ -144,6 +176,9 @@ class APIClient: NSObject {
         - modelName: the model name of the current device (e.g. "iPad7,5")
         - systemVersion: the iOS version running on the current device (e.g. "12.1")
         - language: the system language of the current device
+        - completion: Closure which is called after server response
+            - success: Bool indicating operation success
+            - error: Error, if operation unsuccessful
      */
     public func registerDeviceWithServer(apnToken: String, deviceName: String, modelName: String, systemVersion: String, language: String?, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         // Check if local data exists, otherwise register on server
@@ -204,8 +239,65 @@ class APIClient: NSObject {
             }
         }
     }
+    
+    /**
+     Revokes a device using its id
+     - Parameters:
+     - withId: the id of the device
+     - completion: Closure which is called after server response
+        - success: Bool indicating operation success
+        - error: Error, if operation unsuccessful
+     */
+    public func revokeDevice(withId id: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        request(API.device(id), type: .delete, parameters: nil) { (success, response, error) in
+            completion(success, error)
+        }
+    }
+    
+    /**
+     Rekoves current device
+     - Parameters:
+     - completion: Closure which is called after server response
+        - success: Bool indicating operation success
+        - error: Error, if operation unsuccessful
+     */
+    public func revokeThisDevice(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        let deviceId = (UserDefaults.standard.dictionary(forKey: "localDeviceInfo") as! [String:String])["id"]!
+        self.revokeDevice(withId: deviceId) { (success, error) in
+            UserDefaults.standard.removeObject(forKey: "localDeviceInfo")
+            completion(success, error)
+        }
+    }
 
-
+    // MARK: - API routing
+    private struct API {
+        static let base = "https://api.da.digitalsubmarine.com/v1"
+        static let authenticate = "/authenticate"
+        static let user = "/user"
+        static let device = "/device"
+        static let devices = "/devices"
+        static func device(_ id: String) -> String { return "/device/\(id)" }
+        static let gateway = "/gateway"
+        static let gateways = "/gateways"
+        static func gateway(_ id: String) -> String { return "/gateway/\(id)" }
+        static let event = "/event"
+        
+        public struct Headers {
+            static let Default = [
+                "Content-Type": "application/json",
+                ]
+            
+            static func Authorization(_ username: String, _ password: String) -> [String:String] {
+                var header = Default
+                let plainString = username+":"+password as NSString
+                let plainData = plainString.data(using: String.Encoding.utf8.rawValue)!
+                let base64String = plainData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+                header["Authorization"] = "Basic " + base64String
+                return header
+            }
+        }
+    }
+    
 }
 
 extension APIClient {
@@ -216,21 +308,26 @@ extension APIClient {
             return
         }
         
+        if self.username == nil || self.username == nil {
+            completion(false, nil, APIError.notAuthenticated)
+            return
+        }
+        
         self.visualizeOngoingQueries()
         let queue = DispatchQueue(label: "com.lukaskuster.diplomarbeit.SIMplePhone.apirequest", qos: .userInitiated, attributes: .concurrent)
-        Alamofire.request(API.base+endpoint, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: self.getAuthHeader())
+        Alamofire.request(API.base+endpoint, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: API.Headers.Authorization(self.username!, self.password!))
             .validate(contentType: ["application/json"])
             .responseSwiftyJSON(queue: queue, completionHandler: { (response) in
                 self.visualizeOngoingQueries(removeQuery: true)
                 
-                if let error = response.value!["errorCode"].int {
-                    let apiError = self.getError(withCode: error, response: response.value!)
-                    completion(false, nil, apiError)
+                if let error = response.error {
+                    completion(false, nil, APIError.other(desc: error.localizedDescription))
                     return
                 }
                 
-                if let error = response.error {
-                    completion(false, nil, APIError.other(desc: error.localizedDescription))
+                if let error = response.value!["errorCode"].int {
+                    let apiError = self.getError(withCode: error, response: response.value!)
+                    completion(false, nil, apiError)
                     return
                 }
                 
@@ -272,16 +369,6 @@ extension APIClient {
         }
     }
     
-    private func getAuthHeader() -> [String:String] {
-        let plainString = "quentin@wendegass.com:test123" as NSString
-        let plainData = plainString.data(using: String.Encoding.utf8.rawValue)!
-        let base64String = plainData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
-        
-        var header = [String:String]()
-        header["Authorization"] = "Basic " + base64String
-        return header
-    }
-    
     private func visualizeOngoingQueries(removeQuery: Bool = false) {
         if removeQuery {
             numberOfOngoingQueries -= 1
@@ -318,29 +405,5 @@ extension APIClient {
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection)
-    }
-}
-
-public struct API {
-    static let base = "https://api.da.digitalsubmarine.com/v1"
-    static let user = "/user"
-    static let device = "/device"
-    static let devices = "/devices"
-    static func device(_ id: String) -> String { return "/device/\(id)" }
-    static let gateway = "/gateway"
-    static let gateways = "/gateways"
-    static func gateway(_ id: String) -> String { return "/gateway/\(id)" }
-    static let event = "/event"
-    
-    public struct Headers {
-        static let Default = [
-            "Content-Type": "application/json",
-        ]
-        
-        static func Authorization() -> [String:String] {
-            var Authorization = Default
-            Authorization["Authorization"] = "Basic \(1+1)"
-            return Authorization
-        }
     }
 }

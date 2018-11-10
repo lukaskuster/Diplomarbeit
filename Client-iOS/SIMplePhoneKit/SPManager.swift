@@ -7,13 +7,59 @@
 //
 
 import Foundation
+import KeychainSwift
 
 @objc public class SPManager: NSObject {
     public static let shared = SPManager()
     private var realmManager: RealmManager
+    private var apiClient: APIClient
+    private var keychain: KeychainSwift
     
     private override init() {
         self.realmManager = RealmManager.shared
+        self.apiClient = APIClient.shared
+        self.keychain = KeychainSwift()
+        self.keychain.synchronizable = true
+    }
+    
+    // MARK: - User access control
+    public func loginUser(username: String, password: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.apiClient.loginUser(username: username, password: password) { (success, error) in
+            if success {
+                self.keychain.set(username, forKey: "username")
+                self.keychain.set(password, forKey: "password")
+                completion(true, nil)
+            }else{
+                completion(false, error!)
+            }
+        }
+    }
+    
+    public func logoutUser(reportToServer: Bool = true, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.keychain.delete("username")
+        self.keychain.delete("password")
+        if reportToServer {
+            self.apiClient.revokeThisDevice { (success, error) in
+                completion(success, error)
+            }
+        }else{
+            completion(true, nil)
+        }
+    }
+    
+    @objc public func isAuthetificated(completion: @escaping (_ loggedIn: Bool) -> Void) {
+        if let username = self.keychain.get("username"),
+            let password = self.keychain.get("password") {
+            self.apiClient.loginUser(username: username, password: password) { (success, error) in
+                if success {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
+            }
+        }else{
+            completion(false)
+        }
     }
 
     // MARK: - Recent Calls
@@ -31,7 +77,7 @@ import Foundation
     
     // MARK: - Chats
     public func sendSMS(_ message: SPMessage, in chat: SPChat, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        APIClient.shared.pushEventToGateway(chat.gateway!, event: APIClient.GatewayPushEvent.sendSMS(to: chat.secondParty.phoneNumber, message: message.text)) { (success, response, error) in
+        self.apiClient.pushEventToGateway(chat.gateway!, event: APIClient.GatewayPushEvent.sendSMS(to: chat.secondParty.phoneNumber, message: message.text)) { (success, response, error) in
             if success {
                 message.type = SPMessageState.sent
                 RealmManager.shared.addMessageToChat(message: message, chat: chat)
@@ -81,7 +127,7 @@ import Foundation
     }
     
     public func getAllGateways(completion: @escaping (_ success: Bool, _ gateways: [SPGateway]?, _ error: Error?) -> Void) {
-        APIClient.shared.getAllGateways { (success, gateways, error) in
+        self.apiClient.getAllGateways { (success, gateways, error) in
             completion(success, gateways, error)
         }
     }
@@ -96,20 +142,28 @@ import Foundation
     }
     
     // MARK: - Push notification related
-    @objc public func receivedPushDeviceToken(_ data: Data) {
+    @objc public func receivedPushDeviceToken(_ data: Data, completion: @escaping (_ gotRevoked: Bool) -> Void) {
         let token = data.reduce("", {$0 + String(format: "%02X", $1)})
         let modelName = UIDevice().modelName
         let deviceName = UIDevice().name
         let systemVersion = UIDevice().systemVersion
         let language = Locale.current.languageCode
         
-        APIClient.shared.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language) { (success, error) in
+        self.apiClient.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language) { (success, error) in
             if !success {
                 if case APIError.noDeviceFound = error! {
-                    // TODO: Shit just hit the fan!!! Device got revoked. Figure out what the fuck to do!
-                    print("device got revoked")
+                    self.logoutUser(reportToServer: false, completion: { (success, error) in
+                        if success {
+                            completion(true)
+                        }else{
+                            fatalError("Error while acting on device revocation (\(error!.localizedDescription))")
+                        }
+                    })
+                }else{
+                    completion(true)
                 }
-                print(error!.localizedDescription)
+            }else{
+                completion(false)
             }
         }
     }

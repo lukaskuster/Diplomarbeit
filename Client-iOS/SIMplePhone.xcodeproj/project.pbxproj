@@ -55,6 +55,9 @@
 		D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
 		D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */; };
+		D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE88122196C7E500F87B35 /* KeychainSwift.framework */; };
+		D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6BE8814219718AE00F87B35 /* Setup.storyboard */; };
+		D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881721971A8900F87B35 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +142,9 @@
 		D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTestViewController.swift; sourceTree = "<group>"; };
 		D6BE880B2194398900F87B35 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireSwiftyJSON.framework; path = Carthage/Build/iOS/AlamofireSwiftyJSON.framework; sourceTree = "<group>"; };
+		D6BE88122196C7E500F87B35 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		D6BE8815219718AE00F87B35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setup.storyboard; sourceTree = "<group>"; };
+		D6BE881721971A8900F87B35 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
 				D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */,
+				D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */,
 				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
 				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
 				D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */,
@@ -219,6 +226,7 @@
 			children = (
 				D65FD70B2189BB5600BBE679 /* Frameworks.md */,
 				D6BE880B2194398900F87B35 /* WebRTC.framework */,
+				D6BE88122196C7E500F87B35 /* KeychainSwift.framework */,
 				D604917E219431DD00F46B18 /* Alamofire.framework */,
 				D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */,
 				D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */,
@@ -240,6 +248,7 @@
 				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
 				D65FD709218913B200BBE679 /* CallKitTestViewController.swift */,
 				D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */,
+				D6BE881721971A8900F87B35 /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -278,6 +287,7 @@
 				D67818B92179BB8600E650DB /* sample.m4a */,
 				D6781856216CD16D00E650DB /* Main.storyboard */,
 				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
+				D6BE8814219718AE00F87B35 /* Setup.storyboard */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -405,6 +415,7 @@
 				D678189421788C8200E650DB /* Cartfile in Resources */,
 				D6781867216CD1B600E650DB /* .gitignore in Resources */,
 				D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */,
+				D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */,
 				D6781858216CD16D00E650DB /* Main.storyboard in Resources */,
 				D67818BA2179BB8600E650DB /* sample.m4a in Resources */,
 				D67818B62179B6B800E650DB /* Assets.xcassets in Resources */,
@@ -452,6 +463,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/PhoneNumberKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireSwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -490,6 +502,7 @@
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
+				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
@@ -550,6 +563,14 @@
 				D678185C216CD16F00E650DB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D6BE8814219718AE00F87B35 /* Setup.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D6BE8815219718AE00F87B35 /* Base */,
+			);
+			name = Setup.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
