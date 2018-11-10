@@ -28,5 +28,7 @@ router.get('/device/:id', basicAuth, deviceController.getDevice);
 router.delete('/device/:id', basicAuth, deviceController.deleteDevice);
 router.put('/device/:id', basicAuth, deviceController.putDevice);
 
+router.get('/authenticate', basicAuth, (req, res) => res.status(200).send());
+
 
 module.exports = router;
