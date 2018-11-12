@@ -3,6 +3,9 @@
 import argparse
 from sim800 import Sim800
 from functools import partial
+from utils import logger, Level
+
+logger.level = Level.DEBUG
 
 test_number = '06503333997'
 
@@ -35,7 +38,7 @@ if __name__ == '__main__':
     # Bind the sim object to the function
     on_serial_return = partial(on_serial_return, sim)
 
-    # Run the specified AT-Command
+    # Run the specified AT-at_command.py
     if args.answer:
         sim.answer_call(callback=on_serial_return)
     elif args.hangup:
@@ -60,4 +63,4 @@ if __name__ == '__main__':
                 sim.close()
                 break
             # Send the command
-            sim.custom_command(cmd, callback=on_serial_return)
+            sim.write(cmd, callback=on_serial_return)

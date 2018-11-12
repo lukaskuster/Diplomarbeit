@@ -50,7 +50,7 @@ def main():
             if e.error_message:
                 logger.error('Sim800', 'Failed to dial number: ' + e.error_message)
 
-        # sim.dial_number(data['number'], callback=dial_number_callback)
+        sim.dial_number(data['number'], callback=dial_number_callback)
 
     @api.on('requestSignal')
     def on_request_signal(data):
@@ -58,11 +58,9 @@ def main():
             if e.error:
                 logger.error('Sim800', 'Failed to get signal strength: ' + e.error_message)
                 return
-            # TODO: Get rssi from the sim800 response with regex
-            # rssi = e.content[0] Gets the whole line +CSQ: <rsi>,<ber>
-            # api.put_gateway(rssi)
+            api.put_gateway(e.data['rssi'])
 
-        sim.signal_quality(callback=signal_quality_callback)
+        sim.request_signal_quality(callback=signal_quality_callback)
 
     @api.on('sendSMS')
     def on_send_sms(data):
@@ -70,10 +68,10 @@ def main():
         # message: message
         pass
 
-    @webrtc.on('connectionclosed')
+    @webrtc.on('connectionClosed')
     def on_connection_closed():
         logger.log('WebRTC', 'Conncection Closed!')
-        # sim.hang_up_call()
+        sim.hang_up_call()
 
     api.start()
     webrtc.run_forever()

@@ -32,7 +32,7 @@ class SSE(Thread):
 
         if self._connection_state != value:
             self._connection_state = value
-            self.emitter.emit('connectionstatechange', value)
+            self.emitter.emit('connectionStateChange', value)
 
             state = AnsiEscapeSequence.UNDERLINE + self._connection_state + AnsiEscapeSequence.DEFAULT
             logger.info('SSE', 'Connection state changed to ' + state)
@@ -89,17 +89,16 @@ class SSE(Thread):
                             break
 
                 if response.status_code != 200 and notification:
-                    self.emitter.emit('connectionfailed', notification)
+                    self.emitter.emit('connectionFailed', notification)
                     logger.error('SSE', 'An error occurred: ' + notification['errorMessage'])
                     time.sleep(self.timeout)
 
             except ConnectionError:           # Failed to connect
-                self.emitter.emit('connectionrefused')
+                self.emitter.emit('connectionRefused')
                 logger.error('SSE', 'Can not connect to host!')
                 time.sleep(self.timeout)
             except ChunkedEncodingError:      # Connection was aborted
-                self.emitter.emit('connectionaborted')
+                self.emitter.emit('connectionAborted')
                 logger.error('SSE', 'Connection was aborted!')
                 self.connection_state = 'connecting'
                 time.sleep(self.timeout)
-

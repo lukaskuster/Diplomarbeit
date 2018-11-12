@@ -13,20 +13,40 @@ import time
 
 class WebRTC(EventEmitter):
     """
-    Class to establish a WebRTC connection and to stream the audio.
+    Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
     def __init__(self, username, password, host='signaling.da.digitalsubmarine.com:443'):
+        """
+        Construct a new 'SerialLoop' object.
+
+        :param username: username of the gateway
+        :param password: password of the gateway
+        :param host: signaling server
+        """
+
         super().__init__()
+
+        # Events for thread safety synchronisation
         self._call = Event()
         self._running = Event()
+
+        # Peer object and role of the connection
         self.role = None
         self.peer = None
+
         self.host = host
         self.username = username
         self.password = password
 
     def start_call(self, role):
+        """
+        Initializes a new webrtc connection.
+
+        :param role: role of the connection
+        :return: nothing
+        """
+
         # Use google's stun server
         stun = RTCIceServer('stun:stun.l.google.com:19302')
         conf = RTCConfiguration([stun])
@@ -35,24 +55,60 @@ class WebRTC(EventEmitter):
         self.peer = RTCPeerConnection(configuration=conf)
 
         self.role = role
+
+        # Activate the call
         self._call.set()
 
     def stop_call(self):
+        """
+        Closes the webrtc connection.
+
+        :return: nothing.
+        """
+
+        # Stop the call
         self._call.clear()
 
     def is_ongoing(self):
+        """
+        Check if the webrtc connection is ongoing.
+
+        :return: ongoing connection
+        :rtype: bool
+        """
+
         return self._call.is_set()
 
     def run_forever(self):
+        """
+        Check forever if the connection should be initialized.
+
+        :return: nothing
+        """
+
         while not self._running.is_set():
             if self._call.is_set():
                 asyncio.get_event_loop().run_until_complete(self._make_call(self.peer, self.role))
             time.sleep(0.5)
 
     def close(self):
+        """
+        Terminates run_forever().
+
+        :return: nothing
+        """
+
         self._running.set()
 
     async def _make_call(self, pc, role):
+        """
+        Creates a connection with the device that receives and sends the audio frames.
+
+        :param pc: peer connection
+        :param role: role of the connection
+        :return: nothing
+        """
+
         logger.debug('Connection State', 'Ice connection state set to '
                      + AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + AnsiEscapeSequence.DEFAULT)
         logger.debug('Gathering State', 'Ice gathering state set to '
@@ -100,7 +156,7 @@ class WebRTC(EventEmitter):
             def on_time_out(signum, frame):
                 if signaling_completed:
                     return
-                self.emit('signalingtimeout')
+                self.emit('signalingTimeout')
                 logger.error('Signaling', 'Signaling process took to long!')
                 exit(1)
 
@@ -169,5 +225,5 @@ class WebRTC(EventEmitter):
                 else:
                     logger.info('Connection', 'Peer connection closed from remote client!')
                     self._call.clear()
-                    self.emit('connectionclosed')
+                    self.emit('connectionClosed')
                 break

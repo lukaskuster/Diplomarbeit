@@ -132,8 +132,8 @@ async def run(pc, role):
         try:
             # Received frame
             frame = list(done)[0].result()
-            #logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
-            #           .format(frame.samples, frame.sample_rate))
+            logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
+                       .format(frame.samples, frame.sample_rate))
         except MediaStreamError:
             logger.info('Connection', 'Peer Connection closed!')
             break

@@ -9,20 +9,20 @@ def run():
     def test_notification(data):
         logger.info('Test', 'Received notification {}'.format(str(data)))
 
-    @api.on('connectionstatechange')
+    @api.on('connectionStateChange')
     def on_connection_state_change(state):
         state = AnsiEscapeSequence.UNDERLINE + state + AnsiEscapeSequence.DEFAULT
         logger.info('Connection State', 'Connection state changed to ' + state)
 
-    @api.on('connectionfailed')
+    @api.on('connectionFailed')
     def on_connection_failed(error):
         logger.error('Connection', 'An error occurred (' + error['error'] + ')')
 
-    @api.on('connectionaborted')
+    @api.on('connectionAborted')
     def on_connection_aborted():
         logger.error('Connection', 'Connection was aborted!')
 
-    @api.on('connectionrefused')
+    @api.on('connectionRefused')
     def on_connection_refused():
         logger.error('Connection', 'Can not connect to host!')
 
