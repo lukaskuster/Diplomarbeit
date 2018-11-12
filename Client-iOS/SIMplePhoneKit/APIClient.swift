@@ -129,6 +129,7 @@ class APIClient: NSObject {
     
     public enum GatewayPushEvent {
         case dial(number: String)
+        case hangUp
         case sendSMS(to: String, message: String)
         case updateSignalStrength
     }
@@ -149,6 +150,8 @@ class APIClient: NSObject {
         case .dial(let number):
             data["event"] = "dial"
             data["data"] = ["number": number]
+        case .hangUp:
+            data["event"] = "hangUp"
         case .updateSignalStrength:
             data["event"] = "requestSignal"
         case .sendSMS(let phoneNumber, let message):
