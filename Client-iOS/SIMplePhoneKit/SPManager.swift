@@ -53,6 +53,10 @@ import KeychainSwift
         if let username = self.keychain.get("username"),
             let password = self.keychain.get("password") {
             self.apiClient.loginUser(username: username, password: password) { (success, error) in
+                self.keychainSync = false
+                self.keychain.set(username, forKey: "username")
+                self.keychain.set(password, forKey: "password")
+                self.keychainSync = true
                 completion(success, error)
             }
         }
