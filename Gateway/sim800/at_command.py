@@ -12,7 +12,6 @@ class ATCommand:
 
         :param command: actual at-command
         :param name: name of the event that gets emitted
-        :param callback: callback that gets emitted with the response event
         :param data: additional data that gets send if prompted
         :type command: str
         :type name: str
