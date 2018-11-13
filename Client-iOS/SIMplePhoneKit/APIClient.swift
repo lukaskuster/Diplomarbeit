@@ -112,14 +112,13 @@ class APIClient: NSObject {
             - success: Bool indicating operation success
             - error: Error, if operation unsuccessful
      */
-    // TODO: Wait for proper server implementation
     public func registerAccount(_ account: SPAccount, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         let data = ["mail": account.username,
                     "password": account.password,
-                    "firstname": account.givenName,
-                    "lastname": account.familyName]
+                    "firstName": account.givenName,
+                    "lastName": account.familyName]
         
-        self.request(API.user, type: .post, parameters: data) { (success, response, error) in
+        self.request(API.user, type: .post, parameters: data, authRequired: false) { (success, response, error) in
             if success {
                 completion(true, nil)
             }else{
@@ -328,21 +327,21 @@ class APIClient: NSObject {
 }
 
 extension APIClient {
-    private func request(_ endpoint: String, type: HTTPMethod, parameters: [String:Any]?, completion: @escaping (_ success: Bool, _ result: JSON?, _ error: APIError?) -> Void) {
+    private func request(_ endpoint: String, type: HTTPMethod, parameters: [String:Any]?, authRequired: Bool = true, completion: @escaping (_ success: Bool, _ result: JSON?, _ error: APIError?) -> Void) {
         // Check whether internet connection is available
         if !self.isConnectedToNetwork() {
             completion(false, nil, APIError.noNetworkConnection)
             return
         }
         
-        if self.username == nil || self.username == nil {
+        if authRequired && (self.username == nil || self.username == nil) {
             completion(false, nil, APIError.notAuthenticated)
             return
         }
         
         self.visualizeOngoingQueries()
         let queue = DispatchQueue(label: "com.lukaskuster.diplomarbeit.SIMplePhone.apirequest", qos: .userInitiated, attributes: .concurrent)
-        Alamofire.request(API.base+endpoint, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: API.Headers.Authorization(self.username!, self.password!))
+        Alamofire.request(API.base+endpoint, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: (authRequired ? API.Headers.Authorization(self.username!, self.password!) : API.Headers.Default))
             .validate(contentType: ["application/json"])
             .responseSwiftyJSON(queue: queue, completionHandler: { (response) in
                 self.visualizeOngoingQueries(removeQuery: true)
