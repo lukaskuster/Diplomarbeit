@@ -90,10 +90,6 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
     }
-
-    @objc func dimissContactsVC(){
-        dismiss(animated: true, completion: nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
