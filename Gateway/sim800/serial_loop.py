@@ -62,64 +62,63 @@ class SerialLoop(Thread):
         logger.info('Sim800', 'Started Service!')
 
         while not self.running.is_set():
-
             # Write the event to the serial interface and emit the returning value
             if not self.command_queue.empty():
 
                 # Get the next event from the queue
-                command: atcmd.ATCommand = self.command_queue.get()
-
+                event: atevent.ATEvent = self.command_queue.get()
+                command: atcmd.ATCommand = event.command
                 # Write the command to the serial interface
                 self._write(command.command)
 
                 # Remove \r\n
-                command = clear_str(command.command)
+                command.command = clear_str(command.command)
 
                 # Verify the command if echo mode is on
                 if self.echo:
                     # Get the data from the serial interface, remove \r\n and convert it to a string
-                    response = clear_str(self._read().decode('utf-8'))
+                    response = self._read()
+                    response = clear_str(response.decode('utf-8'))
 
                     # The sim800 module sends usually the same command back first
-                    if response != command:
+                    if response != command.command:
                         # Print an error and continue with the next command if not the same is send back
                         logger.error('Sim800', 'Wrong event returned on serial port! Got: {}, at_command.py: {}'
                                      .format(response, command.command))
                         continue
 
-                # Create new event object
-                e = atevent.ATEvent(command.name)
-
                 # Listen on the serial interface until an error or success
                 while True:
-
                     res = self._read()
                     # Get the data from the serial interface, remove \r\n and convert it to a string
                     try:
                         response = clear_str(res.decode('utf-8'))
 
                         # If the prompt char is send back, serial800 expects some kind of data
-                        if ('>' in response) and ('data' in command):
+                        if '>' in response and command.data:
                             self._write(command.data)
                             continue
 
                         if 'OK' in response:
-                            e.error = False
+                            event.error = False
                             break
                         elif 'ERROR' in response:
-                            e.error_message = response
-                            e.error = True
+                            event.error_message = response
+                            event.error = True
                             break
                         elif len(response) > 0:
                             # Save the transmitted data in the content property of
                             # the event line by line until OK or ERROR is send
-                            e.content.append(response)
+                            event.content.append(response)
                     except UnicodeDecodeError:
                         logger.error('Sim800',
                                      'Could not decode the message from the serial interface! Message: {}'.format(res))
 
-                # Emit an event to the last called command function
-                command.callback(e)
+                # Parse the event content
+                event.data = command.parser.parse(event.content)
+                # Emit an event to the last called command function and set the event for tasks that are waiting for it
+
+                event.set()
 
             # If no events are in the queue, just listen on the serial port
             else:

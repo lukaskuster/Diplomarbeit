@@ -8,7 +8,10 @@ from threading import Event
 from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration
 from pyee import EventEmitter
 from call.track import CallStreamTrack
-import time
+
+
+class WebRTCError(Exception):
+    pass
 
 
 class WebRTC(EventEmitter):
@@ -31,10 +34,6 @@ class WebRTC(EventEmitter):
         self._call = Event()
         self._running = Event()
 
-        # Peer object and role of the connection
-        self.role = None
-        self.peer = None
-
         self.host = host
         self.username = username
         self.password = password
@@ -52,12 +51,15 @@ class WebRTC(EventEmitter):
         conf = RTCConfiguration([stun])
 
         # create peer connection
-        self.peer = RTCPeerConnection(configuration=conf)
+        peer = RTCPeerConnection(configuration=conf)
 
-        self.role = role
+        # Raise an exception if a call is ongoing
+        if self._call.is_set():
+            raise WebRTCError('Only one call can be active at a time!')
 
-        # Activate the call
+        # Start the call
         self._call.set()
+        asyncio.ensure_future(self._make_call(peer, role))
 
     def stop_call(self):
         """
@@ -78,27 +80,6 @@ class WebRTC(EventEmitter):
         """
 
         return self._call.is_set()
-
-    def run_forever(self):
-        """
-        Check forever if the connection should be initialized.
-
-        :return: nothing
-        """
-
-        while not self._running.is_set():
-            if self._call.is_set():
-                asyncio.get_event_loop().run_until_complete(self._make_call(self.peer, self.role))
-            time.sleep(0.5)
-
-    def close(self):
-        """
-        Terminates run_forever().
-
-        :return: nothing
-        """
-
-        self._running.set()
 
     async def _make_call(self, pc, role):
         """
@@ -208,9 +189,9 @@ class WebRTC(EventEmitter):
         signal.alarm(0)
 
         # Receive and send the media tracks until the connection closes
-        while True:
-            done, pending = await asyncio.wait([remote_track.recv()])
-            try:
+        try:
+            while True:
+                done, pending = await asyncio.wait([remote_track.recv()])
                 # Received frame
                 frame = list(done)[0].result()
                 logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
@@ -218,12 +199,11 @@ class WebRTC(EventEmitter):
 
                 if not self._call.is_set():
                     raise MediaStreamError('local')
-
-            except MediaStreamError as err:
-                if err.args == 'local':
-                    logger.info('Connection', 'Peer connection closed from local client!')
-                else:
-                    logger.info('Connection', 'Peer connection closed from remote client!')
-                    self._call.clear()
-                    self.emit('connectionClosed')
-                break
+        except MediaStreamError as err:
+            if err.args == 'local':
+                logger.info('Connection', 'Peer connection closed from local client!')
+            else:
+                logger.info('Connection', 'Peer connection closed from remote client!')
+                self._call.clear()
+            await pc.close()
+            self.emit('connectionClosed')

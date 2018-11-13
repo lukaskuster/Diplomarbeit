@@ -3,6 +3,7 @@ from pyee import EventEmitter
 from backend.sse import SSE
 from utils import logger, AnsiEscapeSequence
 import uuid
+import asyncio
 
 
 class API(EventEmitter):
@@ -10,8 +11,9 @@ class API(EventEmitter):
     Wrapper to send requests to the REST-API.
     """
 
-    def __init__(self, username, password, _id=None, host='https://api.da.digitalsubmarine.com/v1'):
-        super(API, self).__init__()
+    def __init__(self, username, password, _id=None, host='https://api.da.digitalsubmarine.com/v1',
+                 loop=asyncio.get_event_loop()):
+        super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
         self.auth = (username, password)
         self.host = host
 

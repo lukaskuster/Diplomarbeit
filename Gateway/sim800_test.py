@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # Bind the sim object to the function
     on_serial_return = partial(on_serial_return, sim)
 
-    # Run the specified AT-at_command.py
+    # Run the specified AT-Command
     if args.answer:
         sim.answer_call(callback=on_serial_return)
     elif args.hangup:

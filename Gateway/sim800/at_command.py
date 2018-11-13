@@ -1,9 +1,12 @@
+import sim800.parser
+
+
 class ATCommand:
     """
     Represents an AT-Command that gets send to the sim module.
     """
 
-    def __init__(self, command, name='', callback=None, data=None):
+    def __init__(self, command, name='', data=None, parser=sim800.parser.Parser()):
         """
         Construct a new 'Command' object.
 
@@ -19,8 +22,8 @@ class ATCommand:
 
         self.command = command
         self.name = name
-        self.callback = callback
         self.data = data
+        self.parser = parser
 
     def __str__(self):
         """
