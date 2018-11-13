@@ -105,6 +105,30 @@ class APIClient: NSObject {
     }
     
     /**
+     Creates account on server
+     - Parameters:
+        - account: SPAccount representing new account
+        - completion: Closure which is called after server response
+            - success: Bool indicating operation success
+            - error: Error, if operation unsuccessful
+     */
+    // TODO: Wait for proper server implementation
+    public func registerAccount(_ account: SPAccount, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        let data = ["mail": account.username,
+                    "password": account.password,
+                    "firstname": account.givenName,
+                    "lastname": account.familyName]
+        
+        self.request(API.user, type: .post, parameters: data) { (success, response, error) in
+            if success {
+                completion(true, nil)
+            }else{
+                completion(false, error!)
+            }
+        }
+    }
+    
+    /**
      Updates commited gateway on server (change in name or phoneNumber)
      - Parameters:
         - gateway: SPGateway to be updated

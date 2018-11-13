@@ -58,6 +58,11 @@
 		D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE88122196C7E500F87B35 /* KeychainSwift.framework */; };
 		D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6BE8814219718AE00F87B35 /* Setup.storyboard */; };
 		D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881721971A8900F87B35 /* LoginViewController.swift */; };
+		D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */; };
+		D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881B2199FF0800F87B35 /* SetupTextField.swift */; };
+		D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */; };
+		D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */; };
+		D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8821219AE7FA00F87B35 /* SPAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +150,11 @@
 		D6BE88122196C7E500F87B35 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
 		D6BE8815219718AE00F87B35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setup.storyboard; sourceTree = "<group>"; };
 		D6BE881721971A8900F87B35 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBoldButton.swift; sourceTree = "<group>"; };
+		D6BE881B2199FF0800F87B35 /* SetupTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTextField.swift; sourceTree = "<group>"; };
+		D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyBounceAnimationSegue.swift; sourceTree = "<group>"; };
+		D6BE8821219AE7FA00F87B35 /* SPAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +188,7 @@
 		D65FD7132189C53600BBE679 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D6BE8821219AE7FA00F87B35 /* SPAccount.swift */,
 				D65FD7142189C55200BBE679 /* SPRecentCall.swift */,
 				D65FD7162189C7F700BBE679 /* SPNumber.swift */,
 				D65FD7182189C88700BBE679 /* SPChat.swift */,
@@ -249,6 +260,7 @@
 				D65FD709218913B200BBE679 /* CallKitTestViewController.swift */,
 				D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */,
 				D6BE881721971A8900F87B35 /* LoginViewController.swift */,
+				D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +274,8 @@
 				D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */,
 				D67818B321799CD000E650DB /* VoicemailProgressSlider.swift */,
 				D65FD722218B2C1A00BBE679 /* RecentCallsTableViewCell.swift */,
+				D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */,
+				D6BE881B2199FF0800F87B35 /* SetupTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,6 +292,7 @@
 		D67818872176180700E650DB /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */,
 				D65FD70421888FDF00BBE679 /* SIMplePhone.entitlements */,
 				D678185E216CD16F00E650DB /* Info.plist */,
 				D678185F216CD16F00E650DB /* main.m */,
@@ -508,11 +523,15 @@
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
 				D65FD70A218913B200BBE679 /* CallKitTestViewController.swift in Sources */,
 				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
+				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
 				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
+				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
 				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
 				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
+				D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */,
+				D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */,
 				D67818832176097C00E650DB /* SMSChat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +543,7 @@
 				D635871A217F88B700B395F9 /* RTCClient.swift in Sources */,
 				D604917D2194289F00F46B18 /* APIClient.swift in Sources */,
 				D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */,
+				D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */,
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,
 				D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */,
 				D65FD71B2189C90200BBE679 /* SPMessage.swift in Sources */,

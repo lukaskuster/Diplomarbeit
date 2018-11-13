@@ -27,6 +27,19 @@ import KeychainSwift
         self.keychainSync = true
     }
     
+    // MARK: - Account
+    public func registerNewAccount(_ account: SPAccount, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.apiClient.registerAccount(account) { (success, error) in
+            if success {
+                self.loginUser(username: account.username, password: account.password, completion: { (success, error) in
+                    completion(success, error)
+                })
+            }else{
+                completion(false, error!)
+            }
+        }
+    }
+    
     // MARK: - User access control
     public func disableiCloudSync(_ disable: Bool = true) {
         if disable {
