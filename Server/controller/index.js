@@ -26,6 +26,7 @@ router.post('/device', basicAuth, deviceController.postDevice);
 router.get('/devices', basicAuth, deviceController.getDevices);
 router.get('/device/:id', basicAuth, deviceController.getDevice);
 router.delete('/device/:id', basicAuth, deviceController.deleteDevice);
+router.delete('/devices', basicAuth, deviceController.deleteDevices);
 router.put('/device/:id', basicAuth, deviceController.putDevice);
 
 router.get('/authenticate', basicAuth, (req, res) => res.status(200).json({}));

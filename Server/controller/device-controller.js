@@ -27,9 +27,12 @@ module.exports.postDevice = function (req, res) {
 
     if (req.body.language) {
         deviceDocument.language = req.body.language;
-    } else {
-        deviceDocument.language = 'en';
     }
+
+    if (req.body.sync) {
+        deviceDocument.isSync = req.body.sync;
+    }
+
 
     user.device.push(deviceDocument);
     user.save().then(function () {
@@ -61,6 +64,40 @@ module.exports.getDevice = function (req, res) {
         return res.status(404).json({errorMessage: `NoDeviceFound(withID: ${req.params.id})`, errorCode: 10005});
     }
     return res.json(device.toClient());
+};
+
+module.exports.deleteDevices = function (req, res) {
+    let user = res.locals.user;
+
+    if (!('sync' in req.body)) {
+        return res.status(403).json({errorMessage: `NoParameter(sync)`, errorCode: 10000});
+    }
+
+    // Sort the devices so isSync false is at the beginning of the array
+    user.device.sort((x, y) => x.isSync - y.isSync);
+    // Find the first occurrence of true
+    let i = user.device.findIndex(x => x.isSync);
+
+    if (req.body.sync) {
+
+        // Remove all devices that have sync true
+        if (user.device.length > 0) {
+            if (i > 0) user.device = user.device.slice(0, i);
+            else if (user.device[0]) user.device = [];
+        }
+    } else {
+        // Remove all devices that have sync false
+        if (user.device.length > 0) {
+            if (i > 0) user.device = user.device.slice(i);
+            else if (!user.device[0]) user.device = [];
+        }
+    }
+
+    user.save().then(function () {
+        res.json({});
+    }).catch(function (e) {
+        res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+    });
 };
 
 module.exports.deleteDevice = function (req, res) {
@@ -102,6 +139,9 @@ module.exports.putDevice = function (req, res) {
     }
     if (req.body.systemVersion) {
         user.device[index].systemVersion = req.body.systemVersion;
+    }
+    if ('sync' in req.body) {
+        user.device[index].isSync = req.body.sync;
     }
 
     user.save().then(function () {
