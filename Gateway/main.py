@@ -2,23 +2,43 @@ from backend import API
 from call.webrtc import WebRTC
 from utils import logger, Level
 import asyncio
+import configparser
 import sim800.sim800 as sim800
 Sim800 = sim800.Sim800
 
 
 logger.level = Level.DEBUG
 
-GATEWAY_ID = 'd5df5dfc-d374-4158-918e-2051a2f0793b'
-USER = 'quentin@wendegass.com'
-PASSWORD = 'test123'
-HOST = 'http://localhost:3000/v1'
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+auth_config = config['Auth']
+API_HOST = config['Server']['apihost']
+SIGNALING_HOST = config['Server']['signalinghost']
+SERIAL_DEBUG = config['DEFAULT'].getboolean('serialdebug')
+SERIAL_PORT = config['DEFAULT']['serialport']
 
 
-def main():
-    # Pass no gateway id on first start and save the id (imei) that gets set
-    api = API(USER, PASSWORD, GATEWAY_ID)
-    sim = Sim800(debug=True)
-    webrtc = WebRTC(USER, PASSWORD)
+async def check_imei(sim):
+    if 'imei' not in auth_config:
+        event = await sim.request_imei()
+
+        if event.error:
+            logger.info('Sim800', "Error at request imei at-command: {}".format(event))
+
+        auth_config['imei'] = event.data.imei
+
+        with open('config.ini', 'w') as configfile:
+            config.write(configfile)
+
+
+async def main():
+    sim = Sim800(debug=SERIAL_DEBUG, serial_port=SERIAL_PORT)
+
+    await check_imei(sim)
+
+    api = API(auth_config['user'], auth_config['password'], auth_config['imei'], host=API_HOST)
+    webrtc = WebRTC(auth_config['user'], auth_config['password'], host=SIGNALING_HOST)
 
     @sim.on('ring')
     async def on_outgoing_call():
@@ -91,8 +111,9 @@ def main():
             logger.info('Sim800', "Error at hang up at-command: {}".format(event))
 
     api.start()
-    asyncio.get_event_loop().run_forever()
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.ensure_future(main())
+    asyncio.get_event_loop().run_forever()
+

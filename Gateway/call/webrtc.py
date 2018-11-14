@@ -19,7 +19,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='signaling.da.digitalsubmarine.com:443'):
+    def __init__(self, username, password, host='localhost'):
         """
         Construct a new 'SerialLoop' object.
 

@@ -225,4 +225,4 @@ class Sim800(EventEmitter):
         AT+GSN: 12,3,iwas,iwas2
         """
 
-        return await self.write(cmd.ATCommand('AT+GSN', name='NetworkStatus', parser=atparser.NetworkStatusParser))
+        return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))

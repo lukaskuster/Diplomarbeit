@@ -2,7 +2,6 @@ import requests
 from pyee import EventEmitter
 from backend.sse import SSE
 from utils import logger, AnsiEscapeSequence
-import uuid
 import asyncio
 
 
@@ -11,21 +10,16 @@ class API(EventEmitter):
     Wrapper to send requests to the REST-API.
     """
 
-    def __init__(self, username, password, _id=None, host='https://api.da.digitalsubmarine.com/v1',
+    def __init__(self, username, password, _id, host='localhost',
                  loop=asyncio.get_event_loop()):
         super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
         self.auth = (username, password)
         self.host = host
-
+        self.id = _id
         # Create an new sse connection, that emits the incoming push notifications on the API object
         self.sse = SSE(self)
-
-        if _id is None:
-            # TODO: Get IMEI instead of setting a random uuid
-            self.id = str(uuid.uuid4())
-            self.post_gateway()
-        else:
-            self.id = _id
+        # Create the device if it is not created yet
+        self.post_gateway()
 
         logger.info('Gateway', 'IMEI({})'.format(self.id))
 

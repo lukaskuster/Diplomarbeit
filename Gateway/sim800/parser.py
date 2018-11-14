@@ -3,12 +3,28 @@ import sim800.response_objects as response_objects
 
 
 class Parser:
+    """
+    Parser with an basic implementation that does nothing.
+
+    All custom parser should extend this class.
+    """
+
     @staticmethod
     def parse(content):
+        """
+        Parses the received data.
+
+        :param content: array of received lines
+        :return: the parsed data
+        """
         return None
 
 
 class SMSListParser(Parser):
+    """
+    Parser that returns al list of SMS objects.
+    """
+
     @staticmethod
     def parse(content):
         sms = []
@@ -25,6 +41,10 @@ class SMSListParser(Parser):
 
 
 class NetworkStatusParser(Parser):
+    """
+    Parser that returns a NetworkStatus object.
+    """
+
     @staticmethod
     def parse(content):
         data = utils.split_str(content[0][content[0].index(': ') + 2:])
@@ -39,6 +59,10 @@ class NetworkStatusParser(Parser):
 
 
 class SignalQualityParser(Parser):
+    """
+    Parser that returns a SignalQuality object.
+    """
+
     @staticmethod
     def parse(content):
         data = utils.split_str(content[0][content[0].index(': ') + 2:])
@@ -46,12 +70,20 @@ class SignalQualityParser(Parser):
 
 
 class PinStatusParser(Parser):
+    """
+    Parser that returns a PinStatus object.
+    """
+
     @staticmethod
     def parse(content):
         return response_objects.PINStatus(content[0])
 
 
 class IMEIParser(Parser):
+    """
+    Parser that returns a IMEI object.
+    """
+
     @staticmethod
     def parse(content):
         return response_objects.IMEI(content[0])
