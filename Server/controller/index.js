@@ -29,7 +29,12 @@ router.delete('/device/:id', basicAuth, deviceController.deleteDevice);
 router.delete('/devices', basicAuth, deviceController.deleteDevices);
 router.put('/device/:id', basicAuth, deviceController.putDevice);
 
-router.get('/authenticate', basicAuth, (req, res) => res.status(200).json({}));
+router.get('/authenticate', basicAuth, (req, res) => {
+    if(res.locals.user.cloudUserId) {
+        return res.status(200).json({'cloudUserId': res.locals.user.cloudUserId})
+    }
+    res.status(200).json({})
+});
 
 
 module.exports = router;

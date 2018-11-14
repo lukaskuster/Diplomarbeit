@@ -22,6 +22,11 @@ module.exports.postUser = function (req, res) {
     user._id = req.body.mail;
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
+
+    if(req.body.cloudUserId){
+        user.cloudUserId = req.body.cloudUserId;
+    }
+
     user.save(function (err) {
         if (err) {
             return res.status(409).json({
@@ -45,6 +50,9 @@ module.exports.putUser = function (req, res) {
     }
     if (req.body.password) {
         user.password = md5(req.body.password);
+    }
+    if(req.body.cloudUserId){
+        user.cloudUserId = req.body.cloudUserId;
     }
 
     user.save().then(function () {
