@@ -68,7 +68,7 @@ class Sim800(EventEmitter):
         """
         Answer an incoming call.
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
@@ -77,7 +77,7 @@ class Sim800(EventEmitter):
         """
         Disconnect the current call.
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
@@ -88,7 +88,7 @@ class Sim800(EventEmitter):
 
         :param number: phone number of the participant
         :type number: str
-        :return: nothing
+        :return: event
         """
 
         # Remove all \n and \r from the number
@@ -103,7 +103,7 @@ class Sim800(EventEmitter):
         :param text: message of the sms
         :type number: str
         :type text: str
-        :return: nothing
+        :return: event
         """
 
         # Remove all \n\r from the strings and add <ctrl-Z/ESC> after the message of the sms
@@ -119,7 +119,7 @@ class Sim800(EventEmitter):
 
         Event Data: [SMS]
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
@@ -131,12 +131,12 @@ class Sim800(EventEmitter):
 
         Event Data: [SMS]
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
 
-    async def set_sms_mode(self, mode):
+    async def set_sms_mode(self, mode=None):
         """
         Set the sms mode.
 
@@ -145,9 +145,11 @@ class Sim800(EventEmitter):
         1: Text mode
 
         :param mode: sms mode
+        :type mode: int
+        :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SetSMSMode'))
+        return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
 
     async def power_off(self, mode):
         """
@@ -158,6 +160,7 @@ class Sim800(EventEmitter):
         1: Normal power off
 
         :param mode: mode for power off
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
@@ -168,7 +171,7 @@ class Sim800(EventEmitter):
 
         Event Data: SignalQuality
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
@@ -177,7 +180,7 @@ class Sim800(EventEmitter):
         """
         Reset sim-module to default configuration.
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
@@ -187,7 +190,7 @@ class Sim800(EventEmitter):
         Enter the sim card pin.
 
         :param pin: pin, puk or puk2
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
@@ -198,7 +201,7 @@ class Sim800(EventEmitter):
 
         Event Data: PinStatus
 
-        :return: nothing
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
@@ -209,10 +212,10 @@ class Sim800(EventEmitter):
 
         Event Data: IMEI
 
-        :return: nothing
+        :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+GSN', name='RequestIMEI', parser=atparser.IMEIParser))
+        return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
 
     async def request_network_status(self):
         """
@@ -220,9 +223,50 @@ class Sim800(EventEmitter):
 
         Event Data: NetworkStatus
 
-        :return: nothing
-        AT+GSN
-        AT+GSN: 12,3,iwas,iwas2
+        :return: event
         """
 
         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
+
+    async def set_echo_mode(self, mode):
+        """
+        Set the echo mode.
+
+        0: Echo mode off
+        1: Echo mode on
+
+        :param mode: echo mode
+        :type mode: int
+        :return: event
+        """
+
+        event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))
+
+        if not event.error:
+            self.serial_loop.echo = bool(mode)
+
+        return event
+
+    async def set_error_mode(self, mode):
+        """
+        Set the error mode.
+
+        0: Disable CME error
+        1: Enable CME error with error codes
+        2: Enable CME error with verbose message
+
+        :param mode: error mode
+        :type mode: int
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
+
+    async def request_subscriber_number(self):
+        """
+        Read the subscriber number and additional parameters.
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))

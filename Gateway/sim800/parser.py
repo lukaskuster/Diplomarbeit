@@ -87,3 +87,21 @@ class IMEIParser(Parser):
     @staticmethod
     def parse(content):
         return response_objects.IMEI(content[0])
+
+
+class SubscriberNumberParser(Parser):
+    """
+    Parser that returns a SubscriberNumber object.
+    """
+
+    @staticmethod
+    def parse(content):
+        data = utils.split_str(content[0][content[0].index(': ') + 2:])
+
+        number = response_objects.SubscriberNumber(data[0], data[1], data[2])
+
+        if len(data) == 5:
+            number.speed = data[3]
+            number.service = data[4]
+
+        return number

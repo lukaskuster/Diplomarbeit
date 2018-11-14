@@ -88,3 +88,16 @@ class SMS:
     time: attr.ib()
     message: attr.ib()
 
+
+@attr.s
+class SubscriberNumber:
+    """
+    Data class for subscriber number.
+    """
+
+    alpha: attr.ib()
+    number: attr.ib()
+    type: attr.ib()
+    speed: attr.ib(default=None)
+    service: attr.ib(default=None)
+
