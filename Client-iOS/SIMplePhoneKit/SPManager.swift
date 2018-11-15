@@ -8,31 +8,50 @@
 
 import Foundation
 import KeychainSwift
+import CloudKit
 
 @objc public class SPManager: NSObject {
     public static let shared = SPManager()
     private var realmManager: RealmManager
     private var apiClient: APIClient
-    private var keychain: KeychainSwift
-    private var keychainSync: Bool {
-        didSet {
-            self.keychain.synchronizable = keychainSync
-        }
+    private var keychainEnvironment: SPKeychainEnvironment {
+        get { return SPKeychainEnvironment(rawValue: UserDefaults.standard.integer(forKey: "keychainEnvironment")) ?? .local }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "keychainEnvironment") }
     }
+    private var cloudKeychain: KeychainSwift
+    private var localKeychain: KeychainSwift
+    private var cloudContainer: CKContainer
     
     private override init() {
         self.realmManager = RealmManager.shared
         self.apiClient = APIClient.shared
-        self.keychain = KeychainSwift()
-        self.keychainSync = true
+        self.cloudKeychain = KeychainSwift()
+        self.cloudKeychain.synchronizable = true
+        self.localKeychain = KeychainSwift()
+        self.localKeychain.synchronizable = false
+        self.cloudContainer = CKContainer.default()
     }
     
     // MARK: - Account
-    public func registerNewAccount(_ account: SPAccount, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+    public func registerNewAccount(_ account: SPAccount, keychainEnvironment: SPKeychainEnvironment, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         self.apiClient.registerAccount(account) { (success, error) in
             if success {
-                self.loginUser(username: account.username, password: account.password, completion: { (success, error) in
-                    completion(success, error)
+                self.loginUser(username: account.username, password: account.password, keychainEnvironment: keychainEnvironment, completion: { (success, error) in
+                    if success {
+                        switch keychainEnvironment {
+                        case .cloud:
+                            self.keychainEnvironment = .cloud
+                            self.cloudKeychain.set(account.username, forKey: "username")
+                            self.cloudKeychain.set(account.password, forKey: "password")
+                        case .local:
+                            self.keychainEnvironment = .local
+                            self.localKeychain.set(account.username, forKey: "username")
+                            self.localKeychain.set(account.password, forKey: "password")
+                        }
+                        completion(true, nil)
+                    }else{
+                        completion(false, error!)
+                    }
                 })
             }else{
                 completion(false, error!)
@@ -40,81 +59,121 @@ import KeychainSwift
         }
     }
     
-    // MARK: - User access control
-    public func disableiCloudSync(_ disable: Bool = true) {
-        if disable {
-            self.keychainSync = true
-            self.keychain.delete("username")
-            self.keychain.delete("password")
-        }
-        self.keychainSync = disable ? false : true
+    // MARK: - iCloud Related
+    public enum SPKeychainEnvironment: Int {
+        case cloud
+        case local
+    }
+    public enum SPCloudSharingError {
+        case cloudAlreadyAssociatedWithDifferentAccount
+        case accountAssociatedWithDifferentCloud
     }
     
-    public func loginWithiCloudAvailable() -> Bool {
-        self.keychainSync = true
-        if self.keychain.get("username") != nil && self.keychain.get("password") != nil {
-            self.keychainSync = false
-            return true
-        }else{
-            self.keychainSync = false
-            return false
+    public func checkUsernameWithCloud(_ username: String, completion: @escaping (_ error: SPCloudSharingError?) -> Void) {
+        if let usernameInKeychain = self.cloudKeychain.get("username") {
+            if usernameInKeychain != username {
+                completion(.cloudAlreadyAssociatedWithDifferentAccount)
+                return
+            }
         }
+        completion(nil)
     }
     
-    public func loginWithiCloud(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        self.keychainSync = true
-        if let username = self.keychain.get("username"),
-            let password = self.keychain.get("password") {
-            self.apiClient.loginUser(username: username, password: password) { (success, error) in
-                self.keychainSync = false
-                self.keychain.set(username, forKey: "username")
-                self.keychain.set(password, forKey: "password")
-                self.keychainSync = true
-                completion(success, error)
+    private func getCloudUserId(completion: @escaping (_ cloudUserId: String?, _ error: Error?) -> Void) {
+        self.cloudContainer.fetchUserRecordID { (recordId, error) in
+            if let cloudUserId = recordId?.recordName {
+                completion(cloudUserId, nil)
+            }else{
+                completion(nil, error)
             }
         }
     }
     
-    public func loginUser(username: String, password: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        self.apiClient.loginUser(username: username, password: password) { (success, error) in
-            if success {
-                self.keychainSync = true
-                self.keychainSync = (self.keychain.get("username") != nil && self.keychain.get("password") != nil) ? false : true
-                self.keychain.set(username, forKey: "username")
-                self.keychain.set(password, forKey: "password")
-                completion(true, nil)
+    public func loginUser(username: String, password: String, keychainEnvironment: SPKeychainEnvironment, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.getCloudUserId { (cloudUserId, error) in
+            if let cloudUserId = cloudUserId {
+                self.apiClient.loginUser(username: username, password: password, cloudUserId: cloudUserId, environment: keychainEnvironment, completion: { (success, error) in
+                    if success {
+                        switch keychainEnvironment {
+                        case .cloud:
+                            self.keychainEnvironment = .cloud
+                            self.cloudKeychain.set(username, forKey: "username")
+                            self.cloudKeychain.set(password, forKey: "password")
+                        case .local:
+                            self.keychainEnvironment = .local
+                            self.localKeychain.set(username, forKey: "username")
+                            self.localKeychain.set(password, forKey: "password")
+                        }
+                        completion(true, nil)
+                    }else{
+                        completion(false, error!)
+                    }
+                })
+                
             }else{
-                completion(false, error!)
+                completion(false, APIError.other(desc: error!.localizedDescription))
             }
         }
     }
     
     public func logoutUser(reportToServer: Bool = true, onAllDevices: Bool = false, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        if onAllDevices {
-            self.keychain.delete("username")
-            self.keychain.delete("password")
-        }else{
-            self.keychainSync = false
-            self.keychain.delete("username")
-            self.keychain.delete("password")
-        }
-        
-        if reportToServer {
-            self.apiClient.revokeThisDevice { (success, error) in
-                completion(success, error)
+        if self.keychainEnvironment == .cloud {
+            if onAllDevices {
+                if reportToServer {
+                    self.apiClient.revokeAllDevicesWithiCloudSyncEnabled { (success, error) in
+                        if success {
+                            self.cloudKeychain.delete("username")
+                            self.cloudKeychain.delete("password")
+                        }
+                        completion(success, error)
+                    }
+                }else{
+                    self.cloudKeychain.delete("username")
+                    self.cloudKeychain.delete("password")
+                    completion(true, nil)
+                }
+            }else{
+                if reportToServer {
+                    self.apiClient.revokeThisDevice { (success, error) in
+                        if success {
+                            self.keychainEnvironment = .local
+                        }
+                        completion(success, error)
+                    }
+                }else{
+                    self.keychainEnvironment = .local
+                    completion(true, nil)
+                }
             }
         }else{
-            completion(true, nil)
+            self.apiClient.revokeThisDevice { (success, error) in
+                if success {
+                    self.localKeychain.delete("username")
+                    self.localKeychain.delete("password")
+                }
+                completion(success, error)
+            }
         }
     }
     
+    // MARK: - User access control
+    
     @objc public func isAuthetificated(completion: @escaping (_ loggedIn: Bool) -> Void) {
-        if let username = self.keychain.get("username"),
-            let password = self.keychain.get("password") {
+        let keychain: KeychainSwift
+        switch self.keychainEnvironment {
+        case .cloud:
+            keychain = self.cloudKeychain
+        case .local:
+            keychain = self.localKeychain
+        }
+        
+        if let username = keychain.get("username"),
+            let password = keychain.get("password") {
             self.apiClient.loginUser(username: username, password: password) { (success, error) in
                 if success {
                     completion(true)
                 }else{
+                    print(error!)
                     completion(false)
                 }
             }
@@ -209,8 +268,9 @@ import KeychainSwift
         let deviceName = UIDevice().name
         let systemVersion = UIDevice().systemVersion
         let language = Locale.current.languageCode
+        let icloudSync = (self.keychainEnvironment == .cloud)
         
-        self.apiClient.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language) { (success, error) in
+        self.apiClient.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language, icloudSync: icloudSync) { (success, error) in
             if !success {
                 if case APIError.noDeviceFound = error! {
                     self.logoutUser(reportToServer: false, completion: { (success, error) in

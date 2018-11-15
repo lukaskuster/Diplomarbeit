@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3A9219C623D0011AFC9 /* CloudKit.framework */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D603A3A9219C623D0011AFC9 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */,
 				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
 				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
+				D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */,
 				D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */,
 				D65FD70E2189C14E00BBE679 /* Realm.framework in Frameworks */,
@@ -235,6 +238,7 @@
 		D6781871216CE7E600E650DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D603A3A9219C623D0011AFC9 /* CloudKit.framework */,
 				D65FD70B2189BB5600BBE679 /* Frameworks.md */,
 				D6BE880B2194398900F87B35 /* WebRTC.framework */,
 				D6BE88122196C7E500F87B35 /* KeychainSwift.framework */,
@@ -393,6 +397,9 @@
 						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};

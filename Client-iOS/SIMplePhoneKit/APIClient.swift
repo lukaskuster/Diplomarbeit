@@ -26,6 +26,7 @@ public enum APIError: Error {
     case noDevicesForUser
     case parsingError
     case noNetworkConnection
+    case differentCloudUserId
     case other(desc: String)
 }
 
@@ -48,11 +49,21 @@ class APIClient: NSObject {
             - success: Bool indicating operation success
             - error: Error, if operation unsuccessful
      */
-    public func loginUser(username: String, password: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+    public func loginUser(username: String, password: String, cloudUserId: String? = nil, environment: SPManager.SPKeychainEnvironment = .local, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         self.username = username
         self.password = password
         self.request(API.authenticate, type: .get, parameters: nil) { (success, response, error) in
             if success {
+                if let cloudUserId = cloudUserId {
+                    if let accountCloudUserId = response!["cloudUserId"].string {
+                        if accountCloudUserId != cloudUserId && environment == .cloud {
+                            self.username = nil
+                            self.password = nil
+                            completion(false, APIError.differentCloudUserId)
+                            return
+                        }
+                    }
+                }
                 completion(true, nil)
             }else{
                 self.username = nil
@@ -206,23 +217,24 @@ class APIClient: NSObject {
             - success: Bool indicating operation success
             - error: Error, if operation unsuccessful
      */
-    public func registerDeviceWithServer(apnToken: String, deviceName: String, modelName: String, systemVersion: String, language: String?, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+    public func registerDeviceWithServer(apnToken: String, deviceName: String, modelName: String, systemVersion: String, language: String?, icloudSync: Bool = true, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         // Check if local data exists, otherwise register on server
-        if let localDeviceInfo = UserDefaults.standard.dictionary(forKey: "localDeviceInfo") as! [String:String]? {
-            self.request(API.device(localDeviceInfo["id"]!), type: .get, parameters: nil) { success, response, error in
+        if let localDeviceInfo = UserDefaults.standard.dictionary(forKey: "localDeviceInfo") {
+            self.request(API.device(localDeviceInfo["id"] as! String), type: .get, parameters: nil) { success, response, error in
                 if success {
                     var dataToCompare = ["id": localDeviceInfo["id"]!,
                                 "apnToken": apnToken,
                                 "deviceModelName": modelName,
                                 "deviceName": deviceName,
-                                "systemVersion": systemVersion]
+                                "systemVersion": systemVersion,
+                                "sync": icloudSync] as [String : Any]
                     if let language = language {
                         dataToCompare["language"] = language
                     }
                     
                     // Check if change in local data (e.g. ios version update, language changed...)
-                    if dataToCompare != localDeviceInfo {
-                        self.request(API.device(localDeviceInfo["id"]!), type: .put, parameters: dataToCompare) { success, device, error in
+                    if !self.compareDeviceData(dataToCompare, localDeviceInfo) {
+                        self.request(API.device(localDeviceInfo["id"]! as! String), type: .put, parameters: dataToCompare) { success, device, error in
                             if success {
                                 UserDefaults.standard.set(dataToCompare, forKey: "localDeviceInfo")
                                 completion(true, nil)
@@ -248,7 +260,9 @@ class APIClient: NSObject {
                         "apnToken": apnToken,
                         "deviceModelName": modelName,
                         "deviceName": deviceName,
-                        "systemVersion": systemVersion]
+                        "systemVersion": systemVersion,
+                        "sync": icloudSync] as [String : Any]
+            print(data)
             if let language = language {
                 data["language"] = language
             }
@@ -281,6 +295,19 @@ class APIClient: NSObject {
     }
     
     /**
+     Revokes all devices of an account that have iCloud Sync enabled
+     - completion: Closure which is called after server response
+        - success: Bool indicating operation success
+        - error: Error, if operation unsuccessful
+     */
+    public func revokeAllDevicesWithiCloudSyncEnabled(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        let data: [String: Bool] = ["sync": true]
+        request(API.devices, type: .delete, parameters: data) { (success, response, error) in
+            completion(success, error)
+        }
+    }
+    
+    /**
      Rekoves current device
      - Parameters:
      - completion: Closure which is called after server response
@@ -288,10 +315,13 @@ class APIClient: NSObject {
         - error: Error, if operation unsuccessful
      */
     public func revokeThisDevice(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        let deviceId = (UserDefaults.standard.dictionary(forKey: "localDeviceInfo") as! [String:String])["id"]!
-        self.revokeDevice(withId: deviceId) { (success, error) in
-            UserDefaults.standard.removeObject(forKey: "localDeviceInfo")
-            completion(success, error)
+        if let deviceId = UserDefaults.standard.dictionary(forKey: "localDeviceInfo")?["id"] as? String {
+            self.revokeDevice(withId: deviceId ) { (success, error) in
+                UserDefaults.standard.removeObject(forKey: "localDeviceInfo")
+                completion(success, error)
+            }
+        }else{
+            fatalError("error while revoking device")
         }
     }
 
@@ -431,5 +461,14 @@ extension APIClient {
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection)
+    }
+    
+    private func compareDeviceData(_ a: [String: Any], _ b: [String: Any]) -> Bool {
+        for (i, key) in a.enumerated() {
+            if (key.value as! NSObject) != (Array(b)[i].value as! NSObject) {
+                return false
+            }
+        }
+        return true
     }
 }
