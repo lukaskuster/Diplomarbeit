@@ -18,7 +18,7 @@ module.exports.stream = function (req, res) {
     connections[req.body.imei] = res;
 };
 
-module.exports.event = function (req, res) {
+module.exports.pushEvent = function (req, res) {
     if (!req.body.event) {
         return res.status(403).json({errorMessage: `NoParameter(event)`, errorCode: 10000});
     } else if (!req.body.gateway) {

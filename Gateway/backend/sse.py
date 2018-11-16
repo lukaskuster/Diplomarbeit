@@ -61,7 +61,7 @@ class SSE(Thread):
             try:
                 self.connection_state = 'connecting'
 
-                response = requests.get(self.emitter.host + '/stream', stream=True, json={'imei': self.emitter.id},
+                response = requests.get(self.emitter.host + '/gateway/stream', stream=True, json={'imei': self.emitter.id},
                                         auth=self.emitter.auth)
 
                 self.connection_state = 'connected'

@@ -5,6 +5,7 @@ const userController = require('./user-controller');
 const gatewayController = require('./gateway-controller');
 const streamController = require('./stream-controller');
 const deviceController = require('./device-controller');
+const apnController = require('./apn-controller');
 
 
 const router = express.Router();
@@ -19,15 +20,18 @@ router.get('/gateways', basicAuth, gatewayController.getGateways);
 router.delete('/gateway/:imei', basicAuth, gatewayController.deleteGateway);
 router.put('/gateway/:imei', basicAuth, gatewayController.putGateway);
 
-router.get('/stream', basicAuth, sse, streamController.stream);
-router.post('/event', basicAuth, streamController.event);
-
 router.post('/device', basicAuth, deviceController.postDevice);
 router.get('/devices', basicAuth, deviceController.getDevices);
 router.get('/device/:id', basicAuth, deviceController.getDevice);
 router.delete('/device/:id', basicAuth, deviceController.deleteDevice);
 router.delete('/devices', basicAuth, deviceController.deleteDevices);
 router.put('/device/:id', basicAuth, deviceController.putDevice);
+
+router.get('/gateway/stream', basicAuth, sse, streamController.stream);
+router.post('/gateway/push', basicAuth, streamController.pushEvent);
+
+router.post('/device/push', basicAuth, apnController.pushEvent);
+router.post('/device/broadcast', basicAuth, apnController.broadcastEvent);
 
 router.get('/authenticate', basicAuth, (req, res) => {
     if(res.locals.user.cloudUserId) {
