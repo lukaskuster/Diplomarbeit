@@ -336,7 +336,7 @@ class APIClient: NSObject {
         static let gateway = "/gateway"
         static let gateways = "/gateways"
         static func gateway(_ id: String) -> String { return "/gateway/\(id)" }
-        static let event = "/event"
+        static let event = "/gateway/push"
         
         public struct Headers {
             static let Default = [
