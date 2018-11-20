@@ -30,7 +30,7 @@ module.exports.broadcastEvent = function(req, res){
         payload.data = req.body.data;
     }
 
-    pushToDevice(tokens, payload, req.body.alert, Boolean(req.body.silent))
+    pushToDevice(res, tokens, payload, req.body.alert, Boolean(req.body.silent))
 };
 
 module.exports.pushEvent = function(req, res) {
@@ -54,11 +54,11 @@ module.exports.pushEvent = function(req, res) {
         payload.data = req.body.data;
     }
 
-    pushToDevice(device.apnToken, payload, req.body.alert, Boolean(req.body.silent))
+    pushToDevice(res, device.apnToken, payload, req.body.alert, Boolean(req.body.silent))
 };
 
 
-function pushToDevice(deviceToken, data, alert, silent=false) {
+function pushToDevice(response, deviceToken, data, alert, silent=false) {
     const options = {
         token: {
             key: APN_KEY,
@@ -68,27 +68,30 @@ function pushToDevice(deviceToken, data, alert, silent=false) {
         production: false
     };
 
-    if(silent){
-        options.aps = {
-            'content-available' : 1
-        }
-    }
-
     let apnProvider = new apn.Provider(options);
 
-    let note = new apn.Notification();
+    let notificationOptions = {};
+    if(silent){
+        notificationOptions.contentAvailable = 1;
+    }
+
+    let note = new apn.Notification(notificationOptions);
 
     note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
     note.topic = APP_BUNDLE_ID;
+    if(!silent){
+        note.sound = "ping.aiff";
+        note.alert = alert || "You have a new message";
+    }
+    console.log(note.alert);
 
-    note.alert = alert | 'You have a new message';
 
     note.payload = {
         ...data
     };
 
     apnProvider.send(note, deviceToken).then((result) => {
-        console.log(result);
+        response.json(result);
     });
 
 
