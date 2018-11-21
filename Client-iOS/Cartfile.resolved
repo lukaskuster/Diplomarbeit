@@ -1,4 +1,5 @@
 github "Alamofire/Alamofire" "4.7.3"
+github "SwiftKickMobile/SwiftMessages" "6.0.1"
 github "SwiftyJSON/Alamofire-SwiftyJSON" "3.0.0"
 github "SwiftyJSON/SwiftyJSON" "4.2.0"
 github "daltoniam/Starscream" "3.0.6"

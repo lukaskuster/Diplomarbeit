@@ -8,6 +8,7 @@
 
 import UIKit
 import SIMplePhoneKit
+import SwiftMessages
 
 @objc class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleLabel: UILabel!
@@ -16,6 +17,7 @@ import SIMplePhoneKit
     @IBOutlet weak var passwordField: SetupTextField!
     @IBOutlet weak var loginBtn: SetupBoldButton!
     @IBOutlet weak var cloudEnvironmentSelectorBtn: UIButton!
+    private var keyboardShowing: Bool = false
     private var selectedCloudEnvironment: SPManager.SPKeychainEnvironment = .cloud
     private var environmentSelectorState: EnvironmentSelectorState = .enabled {
         didSet {
@@ -52,18 +54,42 @@ import SIMplePhoneKit
     
     @IBAction func clickedLoginBtn(_ sender: SetupBoldButton) {
         self.view.endEditing(true)
+        self.login()
+    }
+    
+    func login() {
         if let username = usernameField.text,
             let password = passwordField.text {
-            if !isValidEmail(username) {
-                print("invalid mail!")
-                return
-            }
-            if password == "" {
-                print("no password")
+            SwiftMessages.hideAll()
+            if username == "" && password == "" {
+                self.usernameField.becomeFirstResponder()
                 return
             }
             
+            if !isValidEmail(username) {
+                self.errorNotification(title: "Invalid mail", body: "The mail you provided is not valid.", type: .error)
+                self.usernameField.becomeFirstResponder()
+                return
+            }
+            if password == "" {
+                self.passwordField.becomeFirstResponder()
+                return
+            }
+            
+            let spinnerView = UIView.init(frame: self.view.bounds)
+            spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+            let ai = UIActivityIndicatorView.init(style: .whiteLarge)
+            ai.startAnimating()
+            ai.center = spinnerView.center
+            
+            spinnerView.addSubview(ai)
+            self.view.addSubview(spinnerView)
+            
+            
             SPManager.shared.loginUser(username: username, password: password, keychainEnvironment: self.selectedCloudEnvironment) { (success, error) in
+                DispatchQueue.main.async {
+                    spinnerView.removeFromSuperview()
+                }
                 if success {
                     DispatchQueue.main.async {
                         UIApplication.shared.registerForRemoteNotifications()
@@ -72,21 +98,40 @@ import SIMplePhoneKit
                         self.present(controller!, animated: false, completion: nil)
                     }
                 }else{
-                    switch error! {
-                    case .wrongCredentials:
-                        print("wrong credentials")
-                    case .noNetworkConnection:
-                        print("no network connection")
-                    case .differentCloudUserId:
-                        print("already using cloud stuff on other icloud user")
-                    default:
-                        print("fuck \(error!.localizedDescription)")
-                        break
-                    }
-                    
-                    // TODO: Error handling
-                    print(error!)
+                    self.showErrorUI(error!)
                 }
+            }
+        }
+    }
+    
+    func errorNotification(title: String, body: String, type: Theme) {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(type)
+        view.configureContent(title: title, body: body)
+        view.button?.isHidden = true
+        view.layoutMarginAdditions = UIEdgeInsets(top: 25, left: 20, bottom: 20, right: 20)
+        SwiftMessages.show(view: view)
+    }
+    
+    func showErrorUI(_ error: APIError) {
+        DispatchQueue.main.async {
+            switch error {
+            case .wrongCredentials:
+                self.errorNotification(title: "Wrong credentials", body: "The mail/password you provided is not correct. Check for typos.", type: .error)
+            case .noNetworkConnection:
+                self.errorNotification(title: "No network connection", body: "Seems like there is no connection to the internet.", type: .error)
+            case .differentCloudUserId:
+                let alert = UIAlertController(title: "iCloud Sharing unavailable", message: "Seems like your account is already associated with another iCloud user. To enable sharing with the account associated to this device first disable iCloud Sharing on a device associated with the other iCloud user (in Settings → Account). Or you can just sign in on this device without iCloud Sharing enabled.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Login without iCloud Sharing", style: .default, handler: { (action) in
+                    self.environmentSelectorState = .disabled
+                    self.login()
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+            default:
+                self.errorNotification(title: "Error", body: "\(error.localizedDescription)", type: .error)
+                break
             }
         }
     }

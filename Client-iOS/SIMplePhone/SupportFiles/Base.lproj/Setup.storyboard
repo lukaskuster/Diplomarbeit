@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gPD-Q3-Mv6" customClass="SetupTextField" customModule="SIMplePhone" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gPD-Q3-Mv6" customClass="SetupTextField" customModule="SIMplePhone" customModuleProvider="target">
                                 <rect key="frame" x="25" y="344.5" width="364" height="44"/>
                                 <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -159,13 +159,13 @@
                                 <exclude reference="HGL-jy-eEe"/>
                                 <exclude reference="Ujw-1A-bap"/>
                                 <exclude reference="hUh-Ql-rGf"/>
-                                <exclude reference="TEr-Qq-pn8"/>
-                                <exclude reference="bsr-Cg-TlP"/>
-                                <exclude reference="ezF-G9-cwT"/>
                                 <exclude reference="H7m-EJ-KnH"/>
                                 <exclude reference="ieW-wM-gWb"/>
                                 <exclude reference="mcQ-03-yfy"/>
                                 <exclude reference="sdv-Jl-atb"/>
+                                <exclude reference="TEr-Qq-pn8"/>
+                                <exclude reference="bsr-Cg-TlP"/>
+                                <exclude reference="ezF-G9-cwT"/>
                                 <exclude reference="8dv-J9-HBG"/>
                                 <exclude reference="XcO-na-8co"/>
                                 <exclude reference="vWk-fZ-cyL"/>
@@ -184,8 +184,8 @@
                                 <include reference="vVY-z1-OTX"/>
                                 <include reference="8Ej-0S-lBY"/>
                                 <include reference="hUh-Ql-rGf"/>
-                                <include reference="bsr-Cg-TlP"/>
                                 <include reference="sdv-Jl-atb"/>
+                                <include reference="bsr-Cg-TlP"/>
                                 <include reference="XcO-na-8co"/>
                             </mask>
                         </variation>
@@ -199,11 +199,11 @@
                                 <include reference="xTg-b2-cV2"/>
                                 <include reference="HGL-jy-eEe"/>
                                 <include reference="Ujw-1A-bap"/>
-                                <include reference="TEr-Qq-pn8"/>
-                                <include reference="ezF-G9-cwT"/>
                                 <include reference="H7m-EJ-KnH"/>
                                 <include reference="ieW-wM-gWb"/>
                                 <exclude reference="mcQ-03-yfy"/>
+                                <include reference="TEr-Qq-pn8"/>
+                                <include reference="ezF-G9-cwT"/>
                                 <include reference="8dv-J9-HBG"/>
                                 <include reference="vWk-fZ-cyL"/>
                             </mask>
@@ -243,7 +243,7 @@
                                     <outlet property="delegate" destination="u2C-Gy-a43" id="Afj-Rh-Olg"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hox-iO-G3U" customClass="SetupTextField" customModule="SIMplePhone" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hox-iO-G3U" customClass="SetupTextField" customModule="SIMplePhone" customModuleProvider="target">
                                 <rect key="frame" x="25" y="352.5" width="364" height="44"/>
                                 <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -430,19 +430,19 @@
                                 <exclude reference="EWS-dD-HUG"/>
                                 <exclude reference="RhF-6D-Sra"/>
                                 <exclude reference="l1f-9A-n1A"/>
+                                <exclude reference="kAO-9z-yoc"/>
                                 <exclude reference="RvE-CL-RpZ"/>
                                 <exclude reference="cav-5w-VkF"/>
                                 <exclude reference="r2B-dW-wgx"/>
                                 <exclude reference="DD7-PW-KE8"/>
                                 <exclude reference="Jlh-LM-iOh"/>
                                 <exclude reference="zcq-gx-sEo"/>
-                                <exclude reference="kAO-9z-yoc"/>
-                                <exclude reference="89n-Ju-Jbh"/>
-                                <exclude reference="iIw-Tm-ozq"/>
-                                <exclude reference="j9K-2y-yeb"/>
                                 <exclude reference="JH2-gO-0BM"/>
                                 <exclude reference="tr3-P8-mQs"/>
                                 <exclude reference="wK0-DD-fEq"/>
+                                <exclude reference="89n-Ju-Jbh"/>
+                                <exclude reference="iIw-Tm-ozq"/>
+                                <exclude reference="j9K-2y-yeb"/>
                                 <exclude reference="DQz-5V-wu8"/>
                                 <exclude reference="R4e-qV-eDc"/>
                                 <exclude reference="aJe-Me-rpN"/>
@@ -465,8 +465,8 @@
                                 <include reference="EWS-dD-HUG"/>
                                 <include reference="r2B-dW-wgx"/>
                                 <include reference="DD7-PW-KE8"/>
-                                <include reference="89n-Ju-Jbh"/>
                                 <include reference="tr3-P8-mQs"/>
+                                <include reference="89n-Ju-Jbh"/>
                                 <include reference="R4e-qV-eDc"/>
                             </mask>
                         </variation>
@@ -482,15 +482,15 @@
                                 <include reference="Eiz-aP-hpv"/>
                                 <include reference="RhF-6D-Sra"/>
                                 <include reference="l1f-9A-n1A"/>
+                                <exclude reference="kAO-9z-yoc"/>
                                 <include reference="RvE-CL-RpZ"/>
                                 <include reference="cav-5w-VkF"/>
                                 <include reference="Jlh-LM-iOh"/>
                                 <include reference="zcq-gx-sEo"/>
-                                <exclude reference="kAO-9z-yoc"/>
-                                <include reference="iIw-Tm-ozq"/>
-                                <include reference="j9K-2y-yeb"/>
                                 <include reference="JH2-gO-0BM"/>
                                 <include reference="wK0-DD-fEq"/>
+                                <include reference="iIw-Tm-ozq"/>
+                                <include reference="j9K-2y-yeb"/>
                                 <include reference="DQz-5V-wu8"/>
                                 <include reference="aJe-Me-rpN"/>
                             </mask>
@@ -514,6 +514,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dKb-dX-mdk"/>
+        <segue reference="tYF-3z-d1H"/>
     </inferredMetricsTieBreakers>
 </document>
