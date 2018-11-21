@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3A9219C623D0011AFC9 /* CloudKit.framework */; };
 		D603A3AC21A543BD0011AFC9 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3AB21A543BD0011AFC9 /* SwiftMessages.framework */; };
+		D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
@@ -97,6 +98,7 @@
 /* Begin PBXFileReference section */
 		D603A3A9219C623D0011AFC9 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D603A3AB21A543BD0011AFC9 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
+		D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudEnvironmentButton.swift; sourceTree = "<group>"; };
 		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				D65FD722218B2C1A00BBE679 /* RecentCallsTableViewCell.swift */,
 				D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */,
 				D6BE881B2199FF0800F87B35 /* SetupTextField.swift */,
+				D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
+				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,

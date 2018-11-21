@@ -10,28 +10,15 @@ import UIKit
 import SIMplePhoneKit
 import SwiftMessages
 
-@objc class LoginViewController: UIViewController, UITextFieldDelegate {
+@objc class LoginViewController: UIViewController, UITextFieldDelegate, CloudEnvironmentButtonDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var usernameField: SetupTextField!
     @IBOutlet weak var passwordField: SetupTextField!
     @IBOutlet weak var loginBtn: SetupBoldButton!
-    @IBOutlet weak var cloudEnvironmentSelectorBtn: UIButton!
+    @IBOutlet weak var cloudEnvironmentButton: CloudEnvironmentButton!
     private var keyboardShowing: Bool = false
     private var selectedCloudEnvironment: SPManager.SPKeychainEnvironment = .cloud
-    private var environmentSelectorState: EnvironmentSelectorState = .enabled {
-        didSet {
-            self.layoutEnvironmentSelector(environmentSelectorState)
-        }
-    }
-    
-    enum EnvironmentSelectorState{
-        case enabled
-        case disabled
-        case checking
-        case unavailableCloudAlreadyAssociatedWithDifferentAccount
-        case unavailableAccountAssociatedWithDifferentCloud
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +29,7 @@ import SwiftMessages
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+        self.cloudEnvironmentButton.delegate = self
     }
     
     @objc func handleSwipe() {
@@ -123,7 +111,7 @@ import SwiftMessages
             case .differentCloudUserId:
                 let alert = UIAlertController(title: "iCloud Sharing unavailable", message: "Seems like your account is already associated with another iCloud user. To enable sharing with the account associated to this device first disable iCloud Sharing on a device associated with the other iCloud user (in Settings → Account). Or you can just sign in on this device without iCloud Sharing enabled.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Login without iCloud Sharing", style: .default, handler: { (action) in
-                    self.environmentSelectorState = .disabled
+                    self.selectedCloudEnvironment = .local
                     self.login()
                 }))
                 
@@ -136,46 +124,18 @@ import SwiftMessages
         }
     }
     
-    @IBAction func didTapCloudEnvironmentSelector(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        switch self.environmentSelectorState {
-        case .unavailableAccountAssociatedWithDifferentCloud:
-            alert.title = "iCloud Sharing unavailable"
-            alert.message = "Seems like your iCloud devices are already associated with another account. Log in there and disable iCloud Sharing (in Settings → Account) to procede."
-        case .unavailableCloudAlreadyAssociatedWithDifferentAccount:
-            alert.title = "iCloud Sharing unavailable"
-            alert.message = "Seems like your account is already associated with another iCloud user. To enable sharing with the account associated to this device first disable iCloud Sharing on a device associated with the other iCloud user (in Settings → Account). Or you can just sign in on this device without iCloud Sharing enabled."
-            alert.addAction(UIAlertAction(title: "Login without iCloud Sharing", style: .default, handler: { (action) in
-                self.environmentSelectorState = .disabled
-            }))
-        case .disabled:
-            alert.title = "Share Login Data through iCloud"
-            alert.message = "iCloud Sharing automatically authentificates this account on all your other devices. It also syncs messages, the recent calls log and voicemails across the devices. By disabling it you are not able to use these features."
-            alert.addAction(UIAlertAction(title: "Enable iCloud Sharing", style: .default, handler: { (action) in
-                self.environmentSelectorState = .enabled
-            }))
-        case .enabled:
-            alert.title = "Share Login Data through iCloud"
-            alert.message = "iCloud Sharing automatically authentificates this account on all your other devices. It also syncs messages, the recent calls log and voicemails across the devices. By disabling it you are not able to use these features."
-            alert.addAction(UIAlertAction(title: "Disable iCloud Sharing", style: .destructive, handler: { (action) in
-                self.environmentSelectorState = .disabled
-            }))
-        case .checking:
-            break
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.popoverPresentationController?.sourceView = sender
-        alert.popoverPresentationController?.sourceRect = sender.bounds
-        alert.popoverPresentationController?.permittedArrowDirections = [.down, .up]
-        alert.popoverPresentationController?.canOverlapSourceViewRect = false
-        self.present(alert, animated: true)
+    func cloudEnvironmentDidChange(to newEnvironment: SPManager.SPKeychainEnvironment) {
+        self.selectedCloudEnvironment = newEnvironment
+    }
+    
+    func cloudEnvironmentRequestsAlert(_ alert: UIAlertController) {
+        self.present(alert, animated: true, completion: nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case usernameField:
-            checkUsernameInput()
+            self.cloudEnvironmentButton.updateForUsername(usernameField.text)
         default:
             break
         }
@@ -191,55 +151,6 @@ import SwiftMessages
             return false
         }
         return true
-    }
-    
-    func checkUsernameInput() {
-        let previousState = self.environmentSelectorState
-        self.environmentSelectorState = .checking
-        if let username = self.usernameField.text {
-            SPManager.shared.checkUsernameWithCloud(username, completion: { (error) in
-                if let error = error {
-                    if error == .cloudAlreadyAssociatedWithDifferentAccount {
-                        self.environmentSelectorState = .unavailableAccountAssociatedWithDifferentCloud
-                    }
-                }else{
-                    if previousState == .unavailableAccountAssociatedWithDifferentCloud {
-                        self.environmentSelectorState = .enabled
-                    }else{
-                        self.environmentSelectorState = previousState
-                    }
-                }
-            })
-        }else{
-            self.environmentSelectorState = previousState
-        }
-    }
-    
-    func layoutEnvironmentSelector(_ state: EnvironmentSelectorState) {
-        self.cloudEnvironmentSelectorBtn.isEnabled = true
-        self.loginBtn.isEnabled = true
-        self.loginBtn.backgroundColor = self.view.tintColor
-        switch state {
-        case .unavailableCloudAlreadyAssociatedWithDifferentAccount, .unavailableAccountAssociatedWithDifferentCloud:
-            self.selectedCloudEnvironment = .local
-            self.cloudEnvironmentSelectorBtn.setTitle("iCloud Sharing unavailable", for: .normal)
-            self.cloudEnvironmentSelectorBtn.setTitleColor(UIColor.lightGray, for: .normal)
-        case .disabled:
-            self.selectedCloudEnvironment = .local
-            self.cloudEnvironmentSelectorBtn.setTitle("iCloud Sharing disabled", for: .normal)
-            self.cloudEnvironmentSelectorBtn.setTitleColor(UIColor.darkGray, for: .normal)
-        case .enabled:
-            self.selectedCloudEnvironment = .cloud
-            self.cloudEnvironmentSelectorBtn.setTitle("Share with all my devices through iCloud", for: .normal)
-            self.cloudEnvironmentSelectorBtn.setTitleColor(self.view.tintColor, for: .normal)
-        case .checking:
-            self.selectedCloudEnvironment = .local
-            self.cloudEnvironmentSelectorBtn.setTitle("Checking...", for: .normal)
-            self.cloudEnvironmentSelectorBtn.setTitleColor(UIColor.lightGray, for: .normal)
-            self.cloudEnvironmentSelectorBtn.isEnabled = false
-            self.loginBtn.backgroundColor = UIColor.lightGray
-            self.loginBtn.isEnabled = false
-        }
     }
     
     func isValidEmail(_ testStr:String) -> Bool {
