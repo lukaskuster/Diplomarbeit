@@ -42,9 +42,7 @@ async def main():
 
     @sim.on('ring')
     async def on_outgoing_call():
-
-        # TODO: Push notification to device
-
+        api.broadcast_notification('ring', alert='Incoming call...')
         if webrtc.is_ongoing():
             logger.info('WebRTC', "Already one call is active!")
             return

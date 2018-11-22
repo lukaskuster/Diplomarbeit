@@ -83,8 +83,6 @@ function pushToDevice(response, deviceToken, data, alert, silent=false) {
         note.sound = "ping.aiff";
         note.alert = alert || "You have a new message";
     }
-    console.log(note.alert);
-
 
     note.payload = {
         ...data

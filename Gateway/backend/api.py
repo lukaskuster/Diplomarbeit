@@ -74,6 +74,31 @@ class API(EventEmitter):
 
         return self._request('/user', requests.put, body)
 
+    def push_notification(self, event, device_id, data=None, alert=None, silent=False):
+        body = {
+            'event': event,
+            'device': device_id,
+            'silent': silent
+        }
+        if data:
+            body['data'] = data
+        if alert:
+            body['alert'] = alert
+
+        return self._request('/device/push', requests.post, body)
+
+    def broadcast_notification(self, event, data=None, alert=None, silent=False):
+        body = {
+            'event': event,
+            'silent': silent
+        }
+        if data:
+            body['data'] = data
+        if alert:
+            body['alert'] = alert
+
+        return self._request('/device/broadcast', requests.post, body)
+
     def _request(self, path, method, body=None):
         """
         Sends a http request to the server with a given http method
