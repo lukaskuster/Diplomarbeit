@@ -11,6 +11,20 @@ class IMEI:
     imei = attr.ib()
 
 
+@attr.s
+class IMSI:
+    """
+    Data class for IMSI.
+    """
+
+    mcc = attr.ib()
+    mnc = attr.ib()
+    msin = attr.ib()
+    network = attr.ib()
+    country = attr.ib()
+    iso = attr.ib()
+
+
 class PINStatus(Enum):
     """
     Enum for the pin status.
@@ -71,8 +85,8 @@ class SignalQuality:
     (https://www.elecrow.com/download/SIM800%20Series_AT%20Command%20Manual_V1.09.pdf).
     """
 
-    rssi: attr.ib()
-    ber: attr.ib()
+    rssi = attr.ib()
+    ber = attr.ib()
 
 
 @attr.s
@@ -81,12 +95,12 @@ class SMS:
     Data class for a sms.
     """
 
-    index: attr.ib()
-    status: attr.ib()
-    recipient: attr.ib()
-    recipientText: attr.ib()
-    time: attr.ib()
-    message: attr.ib()
+    index = attr.ib()
+    status = attr.ib()
+    recipient = attr.ib()
+    recipientText = attr.ib()
+    time = attr.ib()
+    message = attr.ib()
 
 
 @attr.s
@@ -95,9 +109,8 @@ class SubscriberNumber:
     Data class for subscriber number.
     """
 
-    alpha: attr.ib()
-    number: attr.ib()
-    type: attr.ib()
-    speed: attr.ib(default=None)
-    service: attr.ib(default=None)
-
+    alpha = attr.ib()
+    number = attr.ib()
+    type = attr.ib()
+    speed = attr.ib(default=None)
+    service = attr.ib(default=None)

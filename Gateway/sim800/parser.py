@@ -1,5 +1,10 @@
+import json
 import utils
 import sim800.response_objects as response_objects
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 class Parser:
@@ -105,3 +110,31 @@ class SubscriberNumberParser(Parser):
             number.service = data[4]
 
         return number
+
+
+class IMSIParser(Parser):
+    """
+    Parser that returns an IMSI object.
+    """
+
+    @staticmethod
+    def parse(content):
+        mcc = content[0][:3]
+        mnc = content[0][3:5]
+        msin = content[0][5:]
+
+        with open(config['DEFAULT']['apnfile']) as f:
+            data = json.load(f)
+
+            country = None
+            iso = None
+            network = None
+
+            if mcc in data:
+                country = data[mcc]['country']
+                iso = data[mcc]['iso']
+
+                if mnc in data[mcc]:
+                    network = data[mcc][mnc]
+
+            return response_objects.IMSI(mcc, mnc, msin, network, country, iso)

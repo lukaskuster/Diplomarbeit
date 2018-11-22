@@ -1,6 +1,6 @@
 from pyee import EventEmitter
 from utils import clear_str
-from sim800.serial_loop import SerialLoop
+import sim800.serial_loop as serial_loop
 import sim800.at_command as cmd
 import sim800.at_event as atev
 import sim800.parser as atparser
@@ -26,7 +26,7 @@ class Sim800(EventEmitter):
         super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
 
         # Create serial loop
-        self.serial_loop = SerialLoop(self, serial_port, debug)
+        self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
 
         # Set the event loop
         self._event_loop = loop
@@ -270,3 +270,12 @@ class Sim800(EventEmitter):
         """
 
         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
+
+    async def request_imsi(self):
+        """
+        Read the operator imsi.
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
