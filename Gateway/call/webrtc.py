@@ -3,11 +3,20 @@ import websockets
 from backend import signaling, AuthenticationError
 from aiortc.mediastreams import MediaStreamError
 from utils import logger, AnsiEscapeSequence
-import signal
 from threading import Event
 from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration
 from pyee import EventEmitter
 from call.track import CallStreamTrack
+from enum import IntEnum
+
+
+class Role(IntEnum):
+    """
+    Enum for the role of the description.
+    """
+
+    OFFER = 0
+    ANSWER = 1
 
 
 class WebRTCError(Exception):
@@ -19,7 +28,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='localhost'):
+    def __init__(self, username, password, host='localhost', signaling_timeout=10):
         """
         Construct a new 'SerialLoop' object.
 
@@ -38,11 +47,16 @@ class WebRTC(EventEmitter):
         self.username = username
         self.password = password
 
+        self._peer_connection = None
+        self._role = None
+        self.signaling_timeout = signaling_timeout
+
     def start_call(self, role):
         """
         Initializes a new webrtc connection.
 
         :param role: role of the connection
+        :type role: Role
         :return: nothing
         """
 
@@ -51,7 +65,8 @@ class WebRTC(EventEmitter):
         conf = RTCConfiguration([stun])
 
         # create peer connection
-        peer = RTCPeerConnection(configuration=conf)
+        self._peer_connection = RTCPeerConnection(configuration=conf)
+        self._role = role
 
         # Raise an exception if a call is ongoing
         if self._call.is_set():
@@ -59,7 +74,8 @@ class WebRTC(EventEmitter):
 
         # Start the call
         self._call.set()
-        asyncio.ensure_future(self._make_call(peer, role))
+
+        asyncio.ensure_future(self._make_call())
 
     def stop_call(self):
         """
@@ -81,49 +97,122 @@ class WebRTC(EventEmitter):
 
         return self._call.is_set()
 
-    async def _make_call(self, pc, role):
+    async def _log_signaling_states(self):
         """
-        Creates a connection with the device that receives and sends the audio frames.
+        Logs the state of ice-, gathering-, and signal connection, when the state changes.
 
-        :param pc: peer connection
-        :param role: role of the connection
         :return: nothing
         """
 
-        logger.debug('Connection State', 'Ice connection state set to '
-                     + AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + AnsiEscapeSequence.DEFAULT)
-        logger.debug('Gathering State', 'Ice gathering state set to '
-                     + AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + AnsiEscapeSequence.DEFAULT)
+        logger.debug('Connection State', 'Ice connection state set to ' + AnsiEscapeSequence.UNDERLINE +
+                     self._peer_connection.iceConnectionState + AnsiEscapeSequence.DEFAULT)
+        logger.debug('Gathering State', 'Ice gathering state set to ' + AnsiEscapeSequence.UNDERLINE +
+                     self._peer_connection.iceGatheringState + AnsiEscapeSequence.DEFAULT)
         logger.debug('Signaling State', 'signaling state set to '
-                     + AnsiEscapeSequence.UNDERLINE + pc.signalingState + AnsiEscapeSequence.DEFAULT)
+                     + AnsiEscapeSequence.UNDERLINE + self._peer_connection.signalingState + AnsiEscapeSequence.DEFAULT)
 
-        @pc.on('iceconnectionstatechange')
+        @self._peer_connection.on('iceconnectionstatechange')
         def ice_connection_state_change():
-            if pc.iceConnectionState == 'completed':
+            if self._peer_connection.iceConnectionState == 'completed':
                 self.emit('connect')
 
-            logger.debug('Connection State', 'Ice connection state changed to '
-                         + AnsiEscapeSequence.UNDERLINE + pc.iceConnectionState + AnsiEscapeSequence.DEFAULT)
+            logger.debug('Connection State', 'Ice connection state changed to ' + AnsiEscapeSequence.UNDERLINE +
+                         self._peer_connection.iceConnectionState + AnsiEscapeSequence.DEFAULT)
 
-        @pc.on('icegatheringstatechange')
+        @self._peer_connection.on('icegatheringstatechange')
         def ice_gathering_state_change():
-            logger.debug('Gathering State', 'Ice gathering state changed to '
-                         + AnsiEscapeSequence.UNDERLINE + pc.iceGatheringState + AnsiEscapeSequence.DEFAULT)
+            logger.debug('Gathering State', 'Ice gathering state changed to ' + AnsiEscapeSequence.UNDERLINE +
+                         self._peer_connection.iceGatheringState + AnsiEscapeSequence.DEFAULT)
 
-        @pc.on('signalingstatechange')
+        @self._peer_connection.on('signalingstatechange')
         def signaling_state_change():
-            logger.debug('Signaling State', 'signaling state changed to '
-                         + AnsiEscapeSequence.UNDERLINE + pc.signalingState + AnsiEscapeSequence.DEFAULT)
+            logger.debug('Signaling State', 'signaling state changed to ' + AnsiEscapeSequence.UNDERLINE +
+                         self._peer_connection.signalingState + AnsiEscapeSequence.DEFAULT)
+
+    async def _signaling_authenticate(self, socket):
+        """
+        Authenticates with the signaling server.
+
+        :param socket: websocket
+        :return: nothing
+        """
+
+        logger.info('Signaling', 'Connected with signaling server!')
+        try:
+            await signaling.authenticate(socket, 'answer', self.username, self.password)
+        except AuthenticationError:
+            raise
+
+        logger.info('Signaling', 'Successfully authenticated!')
+
+    async def _signaling_offer(self, socket):
+        """
+        Sends the offer to the device and gets back the answer.
+
+        :param socket: websocket
+        :return: nothing
+        """
+
+        await self._peer_connection.setLocalDescription(await self._peer_connection.createOffer())
+        await signaling.send_offer(socket, self._peer_connection.localDescription)
+        answer = await signaling.recv_answer(socket)
+        await self._peer_connection.setRemoteDescription(answer)
+
+    async def _signaling_answer(self, socket):
+        """
+        Gets the offer sdp from the device and sends back the answer.
+
+        :param socket: websocket
+        :return: nothing
+        """
+
+        offer = await signaling.recv_offer(socket)
+        await self._peer_connection.setRemoteDescription(offer)
+
+        await self._peer_connection.setLocalDescription(await self._peer_connection.createAnswer())
+        await signaling.send_answer(socket, self._peer_connection.localDescription)
+
+    async def _exchange_sdp(self, socket):
+        """
+        Exchanges the sdp from device and gateway.
+
+        :param socket: websocket
+        :return: nothing
+        """
+
+        # Ice description exchange with the signaling server
+        try:
+            await self._signaling_authenticate(socket)
+        except AuthenticationError:
+            raise
+
+        if self._role == Role.ANSWER:
+            await self._signaling_answer(socket)
+        else:
+            await self._signaling_offer(socket)
+
+        logger.info('Signaling', 'Completed signaling process!')
+
+    async def _make_call(self):
+        """
+        Creates a connection with the device that receives and sends the audio frames.
+
+        :return: nothing
+        """
+
+        print(self._peer_connection.localDescription)
+
+        await self._log_signaling_states()
 
         # Add the track to the peer connection
-        local_track = CallStreamTrack(role)
-        pc.addTrack(local_track)
+        local_track = CallStreamTrack()
+        self._peer_connection.addTrack(local_track)
         logger.info('Mediatrack', 'Add local media track ({})'.format(local_track.id))
 
         # Set the remove track
         remote_track = None
 
-        @pc.on('track')
+        @self._peer_connection.on('track')
         def on_track(track):
             nonlocal remote_track
 
@@ -131,62 +220,20 @@ class WebRTC(EventEmitter):
             if track.kind == 'audio':
                 remote_track = track
 
-        signaling_completed = False
-        try:
-            # Close the program if after 20sec the signaling process isn't finished
-            def on_time_out(signum, frame):
-                if signaling_completed:
-                    return
-                self.emit('signalingTimeout')
-                logger.error('Signaling', 'Signaling process took to long!')
-                exit(1)
+        async with websockets.connect('wss://' + self.host) as socket:
+            try:
+                error = await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
+                print(error)
+            except asyncio.TimeoutError:
+                logger.error('Signaling', 'Signaling process timed out after {} seconds!'.format(self.signaling_timeout))
+                self._call.clear()
+                return
+            except AuthenticationError:
+                self._call.clear()
+                return
 
-            signal.signal(signal.SIGALRM, on_time_out)
-            signal.alarm(20)
-
-            logger.info('Connection', 'Connecting with role: ' + role + "!")
-
-            if role == 'answer':
-                # Ice description exchange with the signaling server
-                async with websockets.connect('wss://' + self.host) as socket:
-                    logger.info('Signaling', 'Connected with signaling server!')
-                    try:
-                        await signaling.authenticate(socket, 'answer', self.username, self.password)
-                    except AuthenticationError:
-                        logger.error('Signaling', 'Authentication failed!')
-                        raise
-                    logger.info('Signaling', 'Successfully authenticated!')
-                    offer = await signaling.recv_offer(socket)
-                    await pc.setRemoteDescription(offer)
-
-                    await pc.setLocalDescription(await pc.createAnswer())
-                    await signaling.send_answer(socket, pc.localDescription)
-                    logger.info('Signaling', 'Completed signaling process!')
-
-            else:
-                # Ice description exchange with the signaling server
-                async with websockets.connect('wss://' + self.host) as socket:
-                    logger.info('Signaling', 'Connected with signaling server!')
-                    await pc.setLocalDescription(await pc.createOffer())
-                    try:
-                        await signaling.authenticate(socket, 'offer', self.username, self.password)
-                    except AuthenticationError:
-                        logger.error('Signaling', 'Authentication failed!')
-                        raise
-                    logger.info('Signaling', 'Successfully authenticated!')
-                    await signaling.send_offer(socket, pc.localDescription)
-                    answer = await signaling.recv_answer(socket)
-                    await pc.setRemoteDescription(answer)
-                    logger.info('Signaling', 'Completed signaling process!')
-
-        except Exception as e:
-            logger.error('Signaling', e.args[0])
-            signal.alarm(0)
-            exit(1)
-
-        # Stop timeout error
-        signaling_completed = True
-        signal.alarm(0)
+            finally:
+                socket.close()
 
         # Receive and send the media tracks until the connection closes
         try:
@@ -205,5 +252,5 @@ class WebRTC(EventEmitter):
             else:
                 logger.info('Connection', 'Peer connection closed from remote client!')
                 self._call.clear()
-            await pc.close()
+            await self._peer_connection.close()
             self.emit('connectionClosed')

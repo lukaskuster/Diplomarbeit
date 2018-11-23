@@ -1,10 +1,7 @@
 import json
 import utils
 import sim800.response_objects as response_objects
-import configparser
-
-config = configparser.ConfigParser()
-config.read('config.ini')
+from utils.config import config
 
 
 class Parser:

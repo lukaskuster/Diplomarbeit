@@ -16,9 +16,9 @@ class TestAudioStreamTrack(AudioStreamTrack):
     def __init__(self, rule):
         super().__init__()
         if rule == 'answer':
-            container = av.open('test_files/music.wav')
+            container = av.open('tests/test_files/test.wav')
         else:
-            container = av.open('test_files/speech.wav')
+            container = av.open('tests/test_files/speech.wav')
 
         self.frames = container.decode()
 
@@ -77,7 +77,6 @@ async def run(pc, role):
             if signaling_completed:
                 return
             logger.error('Signaling', 'Signaling process took to long!')
-            exit(1)
         signal.signal(signal.SIGALRM, on_time_out)
         signal.alarm(20)
 
@@ -120,7 +119,7 @@ async def run(pc, role):
                 await pc.setRemoteDescription(answer)
     except Exception as e:
         logger.error('Signaling', e.args[0])
-        exit(1)
+        return
 
     # Stop timeout error
     signaling_completed = True
@@ -128,7 +127,6 @@ async def run(pc, role):
     # Receive and send the media tracks until the connection closes
     while True:
         done, pending = await asyncio.wait([remote_track.recv()])
-        print(done, pending)
         try:
             # Received frame
             frame = list(done)[0].result()

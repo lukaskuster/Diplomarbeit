@@ -34,7 +34,7 @@ module.exports.pushEvent = function (req, res) {
 
     if (req.body.gateway in connections) {
         connections[req.body.gateway].locals.sse.emit(req.body.event, req.body.data);
-        return res.status(200).send();
+        return res.status(200).json({});
     }
 
     return res.status(404).json({errorMessage: `NoGatewayConnected(withIMEI: ${req.body.gateway})`, errorCode: 10007});

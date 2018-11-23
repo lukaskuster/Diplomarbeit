@@ -1,16 +1,13 @@
 from backend import API
-from call.webrtc import WebRTC
+from call.webrtc import WebRTC, Role
 from utils import logger, Level
 import asyncio
-import configparser
+from utils.config import config
 import sim800.sim800 as sim800
 Sim800 = sim800.Sim800
 
 
 logger.level = Level.DEBUG
-
-config = configparser.ConfigParser()
-config.read('config.ini')
 
 auth_config = config['Auth']
 API_HOST = config['Server']['apihost']
@@ -46,7 +43,7 @@ async def main():
         if webrtc.is_ongoing():
             logger.info('WebRTC', "Already one call is active!")
             return
-        webrtc.start_call('offer')
+        webrtc.start_call(Role.OFFER)
 
     @api.on('hangUp')
     async def on_hang_up(data):
@@ -56,7 +53,7 @@ async def main():
 
     @api.on('dial')
     async def on_dial(data):
-        logger.log('SSE', 'Initialize Call!')
+        logger.log('GATEWAY', 'Initialize Call!')
 
         if not data:
             return logger.error('SSE', 'Dial Event - No data!')
@@ -69,7 +66,7 @@ async def main():
             if webrtc.is_ongoing():
                 logger.info('WebRTC', "Already one call is active!")
                 return
-            webrtc.start_call('answer')
+            webrtc.start_call(Role.OFFER)
         else:
             logger.info('Sim800', "Error at dial at-command: {}".format(event))
 

@@ -2,16 +2,13 @@ from aiortc import AudioStreamTrack
 import asyncio
 import av
 from utils import logger
+import utils.config
 
 
 class CallStreamTrack(AudioStreamTrack):
-    def __init__(self, rule):
+    def __init__(self):
         super().__init__()
-        if rule == 'answer':
-            container = av.open('test_files/music.wav')
-        else:
-            container = av.open('test_files/speech.wav')
-
+        container = av.open(utils.config.config['Test']['audiofile'])
         self.frames = container.decode()
 
     # Send a frame to the peer connection

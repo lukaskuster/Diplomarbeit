@@ -27,7 +27,8 @@ class Sim800(EventEmitter):
 
         # Create serial loop
         self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
-
+        if debug:
+            self.serial_loop.echo = False
         # Set the event loop
         self._event_loop = loop
 

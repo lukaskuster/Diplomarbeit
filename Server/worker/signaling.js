@@ -20,7 +20,7 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-const server = new WebSocket.Server({port: port});
+const server = new WebSocket.Server({port: port, keepAlive: true});
 
 let peers = new WeakMap();
 let pendingUser = {};
@@ -72,6 +72,9 @@ server.on('connection', function connection(socket) {
             response.authenticated = true;
             socket.send(JSON.stringify(response));
 
+            socket.on('close', function () {
+
+            });
             // Check if a socket with that user is already connected.
             if (user._id in pendingUser) {
 
@@ -82,18 +85,21 @@ server.on('connection', function connection(socket) {
                 peers.set(peerUser.socket, socket);
                 peers.set(socket, peerUser.socket);
 
+                // Check if the peer user is still connected
+                try {
+                    peerUser.socket.send('');
+                } catch (e) {
+                    // If the peer user is disconnected
+                    pendingUser[user._id] = {socket: socket, rule: rule};
+                    return;
+                }
+
                 // Check if the first user set answer as rule and start the interconnection accordingly
                 // The rule of the second connected client is ignored
                 if (peerUser.rule === "answer") {
                     socket.send(JSON.stringify({event: 'start'}))
                 } else {
-                    try {
-                        peerUser.socket.send(JSON.stringify({event: 'start'}));
-                    } catch (e) {
-                        // If the peer user is disconnected
-                        pendingUser[user._id] = {socket: socket, rule: rule};
-                        return;
-                    }
+                    peerUser.socket.send(JSON.stringify({event: 'start'}));
                 }
 
                 // Now the first user pending any more

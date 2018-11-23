@@ -116,6 +116,10 @@ async def recv_offer(socket):
 
     # Get the offer event from the server
     data = await socket.recv()
+
+    if data == '':
+        data = await socket.recv()
+
     response = json.loads(data)
 
     # Check if the right response arrived
@@ -195,6 +199,10 @@ async def send_offer(socket, desc):
 
     # Wait for the start event, that indicates the peer client connected to the server
     data = await socket.recv()
+
+    if data == '':
+        data = await socket.recv()
+
     response = json.loads(data)
 
     # Check if the right response arrived
@@ -211,7 +219,7 @@ async def send_offer(socket, desc):
     # Offer event request
     request = {
         'event': 'offer',
-        # message contains the description object as a json string
+        # sdp contains the description object as a json string
         'sdp': desc.sdp
     }
 
