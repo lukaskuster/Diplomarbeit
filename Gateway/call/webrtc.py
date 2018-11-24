@@ -139,7 +139,7 @@ class WebRTC(EventEmitter):
 
         logger.info('Signaling', 'Connected with signaling server!')
         try:
-            await signaling.authenticate(socket, 'answer', self.username, self.password)
+            await signaling.authenticate(socket, self._role, self.username, self.password)
         except AuthenticationError:
             raise
 

@@ -9,16 +9,16 @@ class AuthenticationError(Exception):
         super().__init__(message)
 
 
-async def authenticate(socket, rule, username, password):
+async def authenticate(socket, role, username, password):
     """
     Send the authentication event to the signaling server
 
     :param socket: websocket client
-    :param rule: rule of the connection (offer, answer)
+    :param role: rule of the connection (offer, answer)
     :param username: username of the client
     :param password: password of the client
     :type socket: object
-    :type rule: str
+    :type role: Role
     :type username: str
     :type password: str
     :return: boolean if the authentication is successful
@@ -36,7 +36,7 @@ async def authenticate(socket, rule, username, password):
         'event': 'authenticate',
         'username': username,
         'password': password,
-        'rule': rule
+        'role': int(role)
     }
 
     # Send the request to the signaling server

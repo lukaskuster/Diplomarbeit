@@ -7,6 +7,7 @@ from aiortc.mediastreams import MediaStreamError
 import av
 from utils import logger, AnsiEscapeSequence, Level
 import signal
+from call.webrtc import Role
 
 # Set log level to debug
 logger.level = Level.DEBUG
@@ -87,7 +88,7 @@ async def run(pc, role):
             async with websockets.connect('wss://signaling.da.digitalsubmarine.com:443') as socket:
                 logger.info('Signaling', 'Connected with signaling server!')
                 try:
-                    await authenticate(socket, 'answer', 'quentin@wendegass.com', 'test123')
+                    await authenticate(socket, Role.ANSWER, 'quentin@wendegass.com', 'test123')
                 except AuthenticationError:
                     logger.error('Signaling', 'Authentication failed!')
                     raise
@@ -107,7 +108,7 @@ async def run(pc, role):
                 logger.info('Signaling', 'Connected with signaling server!')
                 await pc.setLocalDescription(await pc.createOffer())
                 try:
-                    await authenticate(socket, 'offer', 'quentin@wendegass.com', 'test123')
+                    await authenticate(socket, Role.OFFER, 'quentin@wendegass.com', 'test123')
                 except AuthenticationError:
                     logger.error('Signaling', 'Authentication failed!')
                     raise

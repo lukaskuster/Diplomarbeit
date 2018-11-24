@@ -31,12 +31,13 @@ server.on('connection', function connection(socket) {
     let authenticated = false;
 
     // Authentication event that requires username and password
-    const authenticate = function ({username, password, rule}) {
+    const authenticate = function ({username, password, role}) {
 
-        // If the rule is not passed, set it to offer
-        if (!rule) {
-            rule = 'offer';
+        // If the role is not passed, set it to offer
+        if (!role) {
+            role = 0;
         }
+        console.log('Role: ' + role);
 
         let response = {
             event: 'authenticate',
@@ -90,13 +91,15 @@ server.on('connection', function connection(socket) {
                     peerUser.socket.send('');
                 } catch (e) {
                     // If the peer user is disconnected
-                    pendingUser[user._id] = {socket: socket, rule: rule};
+                    pendingUser[user._id] = {socket: socket, role: role};
                     return;
                 }
 
-                // Check if the first user set answer as rule and start the interconnection accordingly
-                // The rule of the second connected client is ignored
-                if (peerUser.rule === "answer") {
+                // Check if the first user set answer as role and start the interconnection accordingly
+                // The role of the second connected client is ignored
+                // Role: 1 = Answer
+                //       0 = Offer
+                if (peerUser.role === 1) {
                     socket.send(JSON.stringify({event: 'start'}))
                 } else {
                     peerUser.socket.send(JSON.stringify({event: 'start'}));
@@ -107,7 +110,7 @@ server.on('connection', function connection(socket) {
 
             } else {
                 // If no client with that user is connected, set the current client as pending
-                pendingUser[user._id] = {socket: socket, rule: rule};
+                pendingUser[user._id] = {socket: socket, role: role};
             }
         });
     };
