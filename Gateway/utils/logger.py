@@ -26,14 +26,15 @@ class Level(IntEnum):
     LOG = 1
 
 
+def _time_str():
+    return datetime.datetime.today().strftime(AnsiEscapeSequence.BOLD + '[%x %X]') + AnsiEscapeSequence.DEFAULT
+
+
 @Singleton
 class Logger:
     """
     Logger with log levels.
     """
-
-    # String template of the current time
-    _TIME_STRING = datetime.datetime.today().strftime(AnsiEscapeSequence.BOLD + '[%x %X]') + AnsiEscapeSequence.DEFAULT
 
     # The applied log level
     level = Level.LOG
@@ -49,7 +50,7 @@ class Logger:
         :return: nothing
         """
         if self.level >= Level.LOG:
-            print('{} {}: {}'.format(self._TIME_STRING, namespace.upper(), message))
+            print('{} {}: {}'.format(_time_str(), namespace.upper(), message))
 
     def info(self, namespace, message):
         """
@@ -63,7 +64,7 @@ class Logger:
         """
         if self.level >= Level.INFO:
             namespace = AnsiEscapeSequence.OK_BLUE + namespace.upper() + AnsiEscapeSequence.DEFAULT
-            print('{} {}: {}'.format(self._TIME_STRING, namespace, message))
+            print('{} {}: {}'.format(_time_str(), namespace, message))
 
     def debug(self, namespace, message):
         """
@@ -77,7 +78,7 @@ class Logger:
         """
         if self.level >= Level.DEBUG:
             namespace = AnsiEscapeSequence.OK_GREEN + namespace.upper() + AnsiEscapeSequence.DEFAULT
-            print('{} {}: {}'.format(self._TIME_STRING, namespace, message))
+            print('{} {}: {}'.format(_time_str(), namespace, message))
 
     def error(self, namespace, message):
         """
@@ -90,4 +91,5 @@ class Logger:
         :return: nothing
         """
         message = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
-        print('{} {}'.format(self._TIME_STRING, message))
+        print('{} {}'.format(_time_str(), message))
+

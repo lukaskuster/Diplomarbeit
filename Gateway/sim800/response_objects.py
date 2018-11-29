@@ -95,12 +95,27 @@ class SMS:
     Data class for a sms.
     """
 
+    class Status(Enum):
+        Unread = 'REC UNREAD'
+        Read = 'REC READ'
+        Unsent = 'STO UNSENT'
+        Sent = 'STO SENT'
+
     index = attr.ib()
     status = attr.ib()
-    recipient = attr.ib()
-    recipientText = attr.ib()
-    time = attr.ib()
+    address = attr.ib()
     message = attr.ib()
+    address_name = attr.ib(default=None)
+    time = attr.ib(default=None)
+
+    def __attrs_post_init__(self):
+        """
+        Sets status to a Status object after the initialization.
+
+        :return: nothing
+        """
+
+        self.status = self.Status(self.status)
 
 
 @attr.s
@@ -109,8 +124,8 @@ class SubscriberNumber:
     Data class for subscriber number.
     """
 
-    alpha = attr.ib()
     number = attr.ib()
     type = attr.ib()
+    alpha = attr.ib(default=None)
     speed = attr.ib(default=None)
     service = attr.ib(default=None)

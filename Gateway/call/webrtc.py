@@ -200,8 +200,6 @@ class WebRTC(EventEmitter):
         :return: nothing
         """
 
-        print(self._peer_connection.localDescription)
-
         await self._log_signaling_states()
 
         # Add the track to the peer connection
@@ -222,8 +220,7 @@ class WebRTC(EventEmitter):
 
         async with websockets.connect('wss://' + self.host) as socket:
             try:
-                error = await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
-                print(error)
+                await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
             except asyncio.TimeoutError:
                 logger.error('Signaling', 'Signaling process timed out after {} seconds!'.format(self.signaling_timeout))
                 self._call.clear()

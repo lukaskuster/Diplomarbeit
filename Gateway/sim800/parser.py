@@ -1,5 +1,6 @@
 import json
 import utils
+from datetime import datetime
 import sim800.response_objects as response_objects
 from utils.config import config
 
@@ -34,11 +35,29 @@ class SMSListParser(Parser):
         # Every second line represents the information of the sms. The other line is the message of the sms.
         for i, line in enumerate(content[::2]):
             # Remove the command name from the string and split the data
-            data = utils.split_str(line[line.index(': ') + 2:])
+            data = utils.split_str(line[line.index(':') + 1:])
+            data[0] = data[0].strip()
+
             # Add a new sms object to the list
-            sms.append(response_objects.SMS(
-                int(data[0]), data[1][1:-1], data[2][1:-1], data[3][1:-1], data[4][1:-1], content[i * 2 + 1]
-            ))
+            s = response_objects.SMS(int(data[0]), data[1][1:-1], data[2][1:-1], content[i * 2 + 1])
+            if data[3]:
+                s.address_name = data[3][1:-1]
+            if len(data) > 4 and data[4]:
+                time_str = data[4][1:-1]
+
+                # Get the index where the timezone starts
+                try:
+                    zone_index = time_str.index('-')
+                except ValueError:
+                    try:
+                        zone_index = time_str.index('+')
+                    except ValueError:
+                        zone_index = len(time_str) - 1
+
+                # Convert the timestamp to a datetime object without the timezone
+                s.time = datetime.strptime(time_str[0:zone_index], '%y/%m/%d,%H:%M:%S')
+
+            sms.append(s)
         return sms
 
 
@@ -49,13 +68,13 @@ class NetworkStatusParser(Parser):
 
     @staticmethod
     def parse(content):
-        data = utils.split_str(content[0][content[0].index(': ') + 2:])
+        data = utils.split_str(content[0][content[0].index(':') + 1:])
 
-        status = response_objects.NetworkStatus(data[0], int(data[1]))
+        status = response_objects.NetworkStatus(data[0].strip(), int(data[1]))
 
         if len(data) == 4:
-            status.lac = data[2]
-            status.ci = data[3]
+            status.lac = data[2][1:-1]
+            status.ci = data[3][1:-1]
 
         return status
 
@@ -67,8 +86,8 @@ class SignalQualityParser(Parser):
 
     @staticmethod
     def parse(content):
-        data = utils.split_str(content[0][content[0].index(': ') + 2:])
-        return response_objects.SignalQuality(data[0], data[1])
+        data = utils.split_str(content[0][content[0].index(':') + 1:])
+        return response_objects.SignalQuality(data[0].strip(), data[1])
 
 
 class PinStatusParser(Parser):
@@ -78,7 +97,7 @@ class PinStatusParser(Parser):
 
     @staticmethod
     def parse(content):
-        return response_objects.PINStatus(content[0])
+        return response_objects.PINStatus(utils.split_str(content[0][content[0].index(':') + 1:])[0].strip())
 
 
 class IMEIParser(Parser):
@@ -98,9 +117,12 @@ class SubscriberNumberParser(Parser):
 
     @staticmethod
     def parse(content):
-        data = utils.split_str(content[0][content[0].index(': ') + 2:])
+        data = utils.split_str(content[0][content[0].index(':') + 1:])
 
-        number = response_objects.SubscriberNumber(data[0], data[1], data[2])
+        number = response_objects.SubscriberNumber(data[1][1:-1], data[2])
+
+        if data[0].strip():
+            number.alpha = data[0].strip()
 
         if len(data) == 5:
             number.speed = data[3]

@@ -1,1 +1,1 @@
-from call.webrtc import WebRTC, WebRTCError
+from call.webrtc import WebRTC, WebRTCError, Role

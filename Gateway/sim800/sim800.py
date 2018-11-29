@@ -7,6 +7,15 @@ import sim800.parser as atparser
 import asyncio
 
 
+class Sim800Error(Exception):
+    pass
+
+
+def _raise_event_error(event):
+    if event.error:
+        raise Sim800Error(event.name, event.error_message)
+
+
 class Sim800(EventEmitter):
     """
     Sim800 processes AT-Commands over the serial interface
@@ -122,7 +131,6 @@ class Sim800(EventEmitter):
 
         :return: event
         """
-
         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
                                               parser=atparser.SMSListParser))
 
@@ -280,3 +288,16 @@ class Sim800(EventEmitter):
         """
 
         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
+
+    async def setup(self):
+        """
+        Setup the module to return error codes and set sms commands to text mode.
+
+        :return: nothing
+        """
+
+        try:
+            _raise_event_error(await self.set_sms_mode(1))
+            _raise_event_error(await self.set_error_mode(1))
+        except Sim800Error:
+            raise

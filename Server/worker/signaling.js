@@ -37,7 +37,6 @@ server.on('connection', function connection(socket) {
         if (!role) {
             role = 0;
         }
-        console.log('Role: ' + role);
 
         let response = {
             event: 'authenticate',

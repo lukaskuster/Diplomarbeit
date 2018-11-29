@@ -3,6 +3,7 @@ from call.webrtc import WebRTC, Role
 from utils import logger, Level
 import asyncio
 from utils.config import config
+import sys
 import sim800.sim800 as sim800
 Sim800 = sim800.Sim800
 
@@ -32,6 +33,14 @@ async def check_imei(sim):
 async def main():
     sim = Sim800(debug=SERIAL_DEBUG, serial_port=SERIAL_PORT)
 
+    if not SERIAL_DEBUG:
+        try:
+            await sim.setup()
+        except sim800.Sim800Error as e:
+            logger.error('Sim800', 'Name: {}, Message: {}'.format(*e.args))
+            logger.error('Gateway', 'Closing Program because Sim800 could not be initialized!')
+            sys.exit(-1)
+
     await check_imei(sim)
 
     api = API(auth_config['user'], auth_config['password'], auth_config['imei'], host=API_HOST)
@@ -60,15 +69,15 @@ async def main():
         if 'number' not in data:
             return logger.error('SSE', 'Dial Event - No "number" property in data!')
 
-        event = await sim.dial_number(data['number'])
+        # event = await sim.dial_number(data['number'])
 
-        if not event.error:
-            if webrtc.is_ongoing():
-                logger.info('WebRTC', "Already one call is active!")
-                return
-            webrtc.start_call(Role.OFFER)
-        else:
-            logger.info('Sim800', "Error at dial at-command: {}".format(event))
+        #if not event.error:
+        if webrtc.is_ongoing():
+            logger.info('WebRTC', "Already one call is active!")
+            return
+        webrtc.start_call(Role.ANSWER)
+        #else:
+        #    logger.info('Sim800', "Error at dial at-command: {}".format(event))
 
     @api.on('requestSignal')
     async def on_request_signal(data):
