@@ -47,8 +47,9 @@ class WebRTC(EventEmitter):
         self.username = username
         self.password = password
 
-        self._peer_connection = None
+        self._peer_connection: RTCPeerConnection = None
         self._role = None
+        self._recv_ice_candidates = True
         self.signaling_timeout = signaling_timeout
 
     def start_call(self, role):
@@ -193,6 +194,25 @@ class WebRTC(EventEmitter):
 
         logger.info('Signaling', 'Completed signaling process!')
 
+    def on_new_ice_candidate(self, task):
+        """
+        Add a new ice candidate if one is send from the peer connection.
+
+        :param done: finished task
+        :return: nothing
+        """
+
+        try:
+            error, candidate, socket = task.result()
+        except websockets.ConnectionClosed:
+            return
+
+        if not error:
+            self._peer_connection.addIceCandidate(candidate)
+
+        resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
+        resv_ice_task.add_done_callback(self.on_new_ice_candidate)
+
     async def _make_call(self):
         """
         Creates a connection with the device that receives and sends the audio frames.
@@ -218,36 +238,37 @@ class WebRTC(EventEmitter):
             if track.kind == 'audio':
                 remote_track = track
 
-        async with websockets.connect('wss://' + self.host) as socket:
+        async with websockets.connect(self.host) as socket:
             try:
                 await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
             except asyncio.TimeoutError:
-                logger.error('Signaling', 'Signaling process timed out after {} seconds!'.format(self.signaling_timeout))
+                logger.error('Signaling', 'Signaling process timed out after {} seconds!'
+                             .format(self.signaling_timeout))
                 self._call.clear()
                 return
             except AuthenticationError:
                 self._call.clear()
                 return
 
-            finally:
-                socket.close()
+            resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
+            resv_ice_task.add_done_callback(self.on_new_ice_candidate)
 
-        # Receive and send the media tracks until the connection closes
-        try:
-            while True:
-                done, pending = await asyncio.wait([remote_track.recv()])
-                # Received frame
-                frame = list(done)[0].result()
-                logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
-                           .format(frame.samples, frame.sample_rate))
+            # Receive and send the media tracks until the connection closes
+            try:
+                while True:
+                    done, pending = await asyncio.wait([remote_track.recv()])
+                    # Received frame
+                    frame = list(done)[0].result()
+                    logger.log('Mediatrack', 'Received frame (samples: {}, sample_rate: {})'
+                               .format(frame.samples, frame.sample_rate))
 
-                if not self._call.is_set():
-                    raise MediaStreamError('local')
-        except MediaStreamError as err:
-            if err.args == 'local':
-                logger.info('Connection', 'Peer connection closed from local client!')
-            else:
-                logger.info('Connection', 'Peer connection closed from remote client!')
-                self._call.clear()
-            await self._peer_connection.close()
-            self.emit('connectionClosed')
+                    if not self._call.is_set():
+                        raise MediaStreamError('local')
+            except MediaStreamError as err:
+                if err.args == 'local':
+                    logger.info('Connection', 'Peer connection closed from local client!')
+                else:
+                    logger.info('Connection', 'Peer connection closed from remote client!')
+                    self._call.clear()
+                await self._peer_connection.close()
+                self.emit('connectionClosed')

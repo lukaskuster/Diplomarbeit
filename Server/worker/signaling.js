@@ -121,7 +121,6 @@ server.on('connection', function connection(socket) {
         }
     };
 
-
     socket.on('message', function incoming(message) {
         try {
             // Get the data as object
@@ -138,7 +137,9 @@ server.on('connection', function connection(socket) {
                         break;
                     case 'answer':
                         forwardMessage(data);
-                        break
+                        break;
+                    case 'sendIce':
+                        forwardMessage(data);
                 }
             }
         } catch (e) {

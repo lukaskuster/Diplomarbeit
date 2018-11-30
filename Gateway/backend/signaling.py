@@ -2,11 +2,24 @@ import json
 from aiortc import RTCSessionDescription
 from websockets import WebSocketClientProtocol
 from utils import logger, AnsiEscapeSequence
+from aioice import Candidate
+from aiortc.rtcicetransport import candidate_from_aioice
+import attr
 
 
 class AuthenticationError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
+    pass
+
+
+def from_ice_candidate(candidate):
+    return attr.asdict(candidate)
+
+
+def to_ice_candidate(ice):
+    x = Candidate.from_sdp(ice)
+    candidate = candidate_from_aioice(x)
+    candidate.sdpMid = 'audio'
+    return candidate
 
 
 async def authenticate(socket, role, username, password):
@@ -63,6 +76,39 @@ async def authenticate(socket, role, username, password):
             error = AuthenticationError('Authentication was not successful: ' + response['error'])
         logger.error('Signaling', error.args[0])
         raise error
+
+
+async def resv_ice_candidate(socket):
+    """
+    Waits for the socket to send an ice candidate.
+
+    :param socket: websocket client
+    :return: tuple of error and ice candidate
+    """
+
+    # Check parameter types
+    if not isinstance(socket, WebSocketClientProtocol):
+        raise TypeError('Socket must be of type WebSocketClientProtocol!')
+
+    # Get the event from the server
+    data = await socket.recv()
+    response = json.loads(data)
+
+    # Check if the right response arrived
+    if 'event' not in response or 'ice' not in response:
+        error = KeyError('Event or ice is missing in response: ' + str(response))
+        logger.error('Signaling', error.args[0])
+        return error, None, socket
+    if response['event'] != 'sendIce':
+        error = ValueError('Event should be sendIce! Event: ' + response['event'])
+        logger.error('Signaling', error.args[0])
+        return error, None, socket
+
+    logger.debug('Signaling', 'Received ice candidate:\n' + AnsiEscapeSequence.HEADER
+                 + response['ice'] + AnsiEscapeSequence.DEFAULT)
+
+    # Create a RTCIceCandidate object an return it
+    return None, to_ice_candidate(response['ice']), socket
 
 
 async def recv_answer(socket):
