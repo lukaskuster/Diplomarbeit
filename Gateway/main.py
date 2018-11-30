@@ -69,15 +69,15 @@ async def main():
         if 'number' not in data:
             return logger.error('SSE', 'Dial Event - No "number" property in data!')
 
-        # event = await sim.dial_number(data['number'])
+        event = await sim.dial_number(data['number'])
 
-        #if not event.error:
-        if webrtc.is_ongoing():
-            logger.info('WebRTC', "Already one call is active!")
-            return
-        webrtc.start_call(Role.ANSWER)
-        #else:
-        #    logger.info('Sim800', "Error at dial at-command: {}".format(event))
+        if not event.error:
+            if webrtc.is_ongoing():
+                logger.info('WebRTC', "Already one call is active!")
+                return
+            webrtc.start_call(Role.ANSWER)
+        else:
+            logger.info('Sim800', "Error at dial at-command: {}".format(event))
 
     @api.on('requestSignal')
     async def on_request_signal(data):
