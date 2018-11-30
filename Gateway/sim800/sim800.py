@@ -1,38 +1,19 @@
 from pyee import EventEmitter
 from utils import clear_str
-from sim800.serial_loop import SerialLoop
+import sim800.serial_loop as serial_loop
+import sim800.at_command as cmd
+import sim800.at_event as atev
+import sim800.parser as atparser
+import asyncio
 
 
-def _serial_return(func):
-    """
-    Decorator to add a callback to a command function,
-    that gets called when the serial loop gets a return value from the serial interface
+class Sim800Error(Exception):
+    pass
 
-    :param func: function that returns the command as String
-    :return: new Function with an callback argument
-    """
 
-    def wrapper(self, *args, **kwargs):
-        if 'callback' in kwargs:
-            # Add a listener on the event with the callback arg
-            self.on(func.__name__, kwargs['callback'])
-            del kwargs['callback']
-        else:
-            self.on(func.__name__, lambda e: None)
-
-        command = func(self, *args, **kwargs)
-
-        # Create the event
-        event = {'name': func.__name__}
-        if isinstance(command, dict):
-            event['command'] = command['command']
-            event['data'] = command['data']
-        else:
-            event['command'] = command
-
-        # Add the event to the serial loop queue
-        self.serial_loop.event_queue.put(event)
-    return wrapper
+def _raise_event_error(event):
+    if event.error:
+        raise Sim800Error(event.name, event.error_message)
 
 
 class Sim800(EventEmitter):
@@ -40,7 +21,7 @@ class Sim800(EventEmitter):
     Sim800 processes AT-Commands over the serial interface
     """
 
-    def __init__(self, serial_port='/dev/serial0', debug=False):
+    def __init__(self, serial_port='/dev/serial0', debug=False, loop=asyncio.get_event_loop()):
         """
         Construct a new 'SerialLoop' object.
 
@@ -51,10 +32,14 @@ class Sim800(EventEmitter):
         :return: returns nothing
         """
 
-        super().__init__()
+        super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
 
         # Create serial loop
-        self.serial_loop = SerialLoop(self, serial_port, debug)
+        self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
+        if debug:
+            self.serial_loop.echo = False
+        # Set the event loop
+        self._event_loop = loop
 
         # Start the thread
         self.serial_loop.start()
@@ -69,149 +54,250 @@ class Sim800(EventEmitter):
         :rtype: str
         """
 
-        self.serial_loop.running = False
+        self.serial_loop.running.set()
 
-    @_serial_return
-    def custom_command(self, command):
+    async def write(self, command):
         """
+        Writes the command to the serial interface.
+
+        This method can be used synchronously as well as asynchronously,
+        by setting a callback in the command object. If the method runs synchronously it returns the response event.
+        When a callback is specified this method is non blocking and gets the event as argument to the callback.
+
         :param command: command that should be written to the serial interface
-        :type command: str
-        :return: returns the command with trailing \r\n
-        :rtype: str
+        :return: returns the response event if no callback is set on the command
         """
 
-        command = clear_str(command)
-        return command + '\r\n'
+        event = atev.ATEvent(command.name, command)
+        self.serial_loop.command_queue.put(event)
 
-    @_serial_return
-    def answer_call(self):
-        """
-        :return: returns the answer call AT-Command
-        :rtype: str
-        """
+        await event.wait()
+        return event
 
-        return 'ATA\r\n'
-
-    @_serial_return
-    def hang_up_call(self):
+    async def answer_call(self):
         """
-        :return: returns the hang up AT-Command
-        :rtype: str
+        Answer an incoming call.
+
+        :return: event
         """
 
-        return 'ATH\r\n'
+        return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
 
-    @_serial_return
-    def dial_number(self, number):
+    async def hang_up_call(self):
         """
-        :param number: number that should be dialed
+        Disconnect the current call.
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
+
+    async def dial_number(self, number):
+        """
+        Call a participant.
+
+        :param number: phone number of the participant
         :type number: str
-        :return: returns the dial AT-Command
-        :rtype: str
+        :return: event
         """
 
         # Remove all \n and \r from the number
         number = clear_str(number)
-        return 'ATD{};\r\n'.format(number)
+        return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
 
-    @_serial_return
-    def send_sms(self, number, text):
+    async def send_sms(self, number, text):
         """
-        :param number: number the sms should be send to
-        :param text: text of the sms
+        Send a sms to a participant.
+
+        :param number: phone number of the participant
+        :param text: message of the sms
         :type number: str
         :type text: str
-        :return: returns the send sms AT-Command
-        :rtype: str
+        :return: event
         """
 
+        # Remove all \n\r from the strings and add <ctrl-Z/ESC> after the message of the sms
         number = clear_str(number)
         text = clear_str(text)
         text += '\x1A'
 
-        return {'command': 'AT+CMGS="{}"\r'.format(number), 'data': text}
+        return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
 
-    @_serial_return
-    def list_unread_sms(self):
+    async def request_unread_sms(self):
         """
-        :return: returns the AT-Command for all unread sms'
-        :rtype: str
+        Read all unread sms.
+
+        Event Data: [SMS]
+
+        :return: event
+        """
+        return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
+                                              parser=atparser.SMSListParser))
+
+    async def request_all_sms(self):
+        """
+        Read all sms.
+
+        Event Data: [SMS]
+
+        :return: event
         """
 
-        return 'AT+CMGL="REC UNREAD"\r\n'
+        return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
 
-    @_serial_return
-    def list_all_sms(self):
+    async def set_sms_mode(self, mode=None):
         """
-        :return: returns the AT-Command for all sms'
-        :rtype: str
-        """
-
-        return 'AT+CMGL="ALL"\r\n'
-
-    @_serial_return
-    def set_sms_mode(self, mode):
-        """
-        :param mode: sms message format
-        :type mode: int
-        :return: returns the sms message format AT-Command
-        :rtype: str
+        Set the sms mode.
 
         Mode can be either 0 or 1
         0: PDU mode
         1: Text mode
-        """
 
-        return 'AT+CMGF={}\r\n'.format(mode)
-
-    @_serial_return
-    def power_off(self, mode):
-        """
-        :param mode: power off mode
+        :param mode: sms mode
         :type mode: int
-        :return: returns the power off AT-Command
-        :rtype: str
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
+
+    async def power_off(self, mode):
+        """
+        Shutdown the sim-module.
 
         Mode can be either 0 or 1
         0: Power off urgently
         1: Normal power off
+
+        :param mode: mode for power off
+        :return: event
         """
 
-        return 'AT+CPOWD={}\r\n'.format(mode)
+        return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
 
-    @_serial_return
-    def signal_quality(self):
+    async def request_signal_quality(self):
         """
-        :return: returns the signal quality report AT-Command'
-        :rtype: str
-        """
+        Read the signal quality.
 
-        return 'AT+CSQ\r\n'
+        Event Data: SignalQuality
 
-    @_serial_return
-    def reset_default_configuration(self):
-        """
-        :return: returns the reset default configuration AT-Command'
-        :rtype: str
+        :return: event
         """
 
-        return 'ATZ\r\n'
+        return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
 
-    @_serial_return
-    def enter_pin(self, pin):
+    async def reset_default_configuration(self):
         """
-        :param pin: can be pin, puk, etc...
-        :return: returns the enter pin write AT-Command'
-        :rtype: str
-        """
+        Reset sim-module to default configuration.
 
-        return 'AT+CPIN={}\r\n'.format(pin)
-
-    @_serial_return
-    def pin_required(self):
-        """
-        :return: returns the enter pin read AT-Command'
-        :rtype: str
+        :return: event
         """
 
-        return 'AT+CPIN?\r\n'
+        return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
+
+    async def enter_pin(self, pin):
+        """
+        Enter the sim card pin.
+
+        :param pin: pin, puk or puk2
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
+
+    async def request_pin_status(self):
+        """
+        Read the pin status of the sim card.
+
+        Event Data: PinStatus
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
+
+    async def request_imei(self):
+        """
+        Read the imei.
+
+        Event Data: IMEI
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
+
+    async def request_network_status(self):
+        """
+        Reads the current network status.
+
+        Event Data: NetworkStatus
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
+
+    async def set_echo_mode(self, mode):
+        """
+        Set the echo mode.
+
+        0: Echo mode off
+        1: Echo mode on
+
+        :param mode: echo mode
+        :type mode: int
+        :return: event
+        """
+
+        event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))
+
+        if not event.error:
+            self.serial_loop.echo = bool(mode)
+
+        return event
+
+    async def set_error_mode(self, mode):
+        """
+        Set the error mode.
+
+        0: Disable CME error
+        1: Enable CME error with error codes
+        2: Enable CME error with verbose message
+
+        :param mode: error mode
+        :type mode: int
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
+
+    async def request_subscriber_number(self):
+        """
+        Read the subscriber number and additional parameters.
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
+
+    async def request_imsi(self):
+        """
+        Read the operator imsi.
+
+        :return: event
+        """
+
+        return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
+
+    async def setup(self):
+        """
+        Setup the module to return error codes and set sms commands to text mode.
+
+        :return: nothing
+        """
+
+        try:
+            _raise_event_error(await self.set_sms_mode(1))
+            _raise_event_error(await self.set_error_mode(1))
+        except Sim800Error:
+            raise

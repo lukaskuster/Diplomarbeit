@@ -11,6 +11,7 @@
   "author": "Quentin Wendegass",
   "license": "ISC",
   "dependencies": {
+    "apn": "^2.2.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",

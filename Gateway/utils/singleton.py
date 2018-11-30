@@ -1,4 +1,8 @@
 class Singleton:
+    """
+    Singleton class decorator.
+    """
+
     def __init__(self, cls):
         self.cls = cls
         self.instance = None

@@ -1,6 +1,8 @@
 import requests
 from pyee import EventEmitter
 from backend.sse import SSE
+from utils import logger, AnsiEscapeSequence
+import asyncio
 
 
 class API(EventEmitter):
@@ -8,14 +10,18 @@ class API(EventEmitter):
     Wrapper to send requests to the REST-API.
     """
 
-    def __init__(self, username, password, _id, host='https://api.da.digitalsubmarine.com/v1'):
-        super(API, self).__init__()
+    def __init__(self, username, password, _id, host='localhost',
+                 loop=asyncio.get_event_loop()):
+        super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
         self.auth = (username, password)
         self.host = host
         self.id = _id
-
         # Create an new sse connection, that emits the incoming push notifications on the API object
         self.sse = SSE(self)
+        # Create the device if it is not created yet
+        self.post_gateway()
+
+        logger.info('Gateway', 'IMEI({})'.format(self.id))
 
     def start(self):
         """
@@ -33,26 +39,26 @@ class API(EventEmitter):
         :return: noting
         """
 
-        self.sse.running = False
+        self.sse.close()
 
-    def get_gateway(self, _id):
-        return self._request('/gateway/' + _id, requests.get)
+    def get_gateway(self):
+        return self._request('/gateway/' + self.id, requests.get)
 
     def get_gateways(self):
         return self._request('/gateways', requests.get)
 
-    def post_gateway(self, _id):
-        return self._request('/gateway', requests.post, {'id': _id})
+    def post_gateway(self):
+        return self._request('/gateway', requests.post, {'imei': self.id})
 
-    def delete_gateway(self, _id):
-        return self._request('/gateway/' + _id, requests.delete)
+    def delete_gateway(self):
+        return self._request('/gateway/' + self.id, requests.delete)
 
-    def put_gateway(self, _id, signal_strength=None):
+    def put_gateway(self, signal_strength=None):
         body = {}
         if signal_strength:
             body['signalStrength'] = signal_strength
 
-        return self._request('/gateway/' + _id, requests.put, body)
+        return self._request('/gateway/' + self.id, requests.put, body)
 
     def get_user(self):
         return self._request('/user', requests.get)
@@ -67,6 +73,31 @@ class API(EventEmitter):
             body['password'] = password
 
         return self._request('/user', requests.put, body)
+
+    def push_notification(self, event, device_id, data=None, alert=None, silent=False):
+        body = {
+            'event': event,
+            'device': device_id,
+            'silent': silent
+        }
+        if data:
+            body['data'] = data
+        if alert:
+            body['alert'] = alert
+
+        return self._request('/device/push', requests.post, body)
+
+    def broadcast_notification(self, event, data=None, alert=None, silent=False):
+        body = {
+            'event': event,
+            'silent': silent
+        }
+        if data:
+            body['data'] = data
+        if alert:
+            body['alert'] = alert
+
+        return self._request('/device/broadcast', requests.post, body)
 
     def _request(self, path, method, body=None):
         """
@@ -84,7 +115,9 @@ class API(EventEmitter):
         """
 
         if type(body) is not dict and body is not None:
-            raise ValueError('Body has to be of type dict!')
+            error = ValueError('Body has to be of type dict!')
+            logger.error('API', error.args[0])
+            raise error
 
         if body is None:
             response = method(self.host + path, auth=self.auth)
@@ -92,4 +125,7 @@ class API(EventEmitter):
             response = method(self.host + path, auth=self.auth, json=body)
 
         data = response.json()
+        status_code = AnsiEscapeSequence.BOLD + str(response.status_code) + AnsiEscapeSequence.DEFAULT
+        path = AnsiEscapeSequence.UNDERLINE + path + AnsiEscapeSequence.DEFAULT
+        logger.debug('API', 'Finished request ' + path + ' with status code ' + status_code)
         return data, response.status_code
