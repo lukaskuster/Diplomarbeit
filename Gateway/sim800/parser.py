@@ -157,3 +157,15 @@ class IMSIParser(Parser):
                     network = data[mcc][mnc]
 
             return response_objects.IMSI(mcc, mnc, msin, network, country, iso)
+
+
+class CallerIdentificationParser(Parser):
+    """
+    Parser that returns the caller number.
+    """
+
+    @staticmethod
+    def parse(content):
+        data = utils.split_str(content[0][content[0].index(':') + 1:])
+        return data[0]
+

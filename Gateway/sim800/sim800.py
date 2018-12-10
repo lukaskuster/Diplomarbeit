@@ -256,6 +256,25 @@ class Sim800(EventEmitter):
 
         return event
 
+    async def set_caller_identification_mode(self, mode):
+        """
+        Set the caller identification mode.
+
+        0: No caller identification
+        1: Get caller identification on ring
+
+        :param mode: caller identification mode
+        :type mode: int
+        :return: event
+        """
+
+        event = await self.write(cmd.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
+
+        if not event.error:
+            self.serial_loop.caller_identification = bool(mode)
+
+        return event
+
     async def set_error_mode(self, mode):
         """
         Set the error mode.
@@ -299,5 +318,6 @@ class Sim800(EventEmitter):
         try:
             _raise_event_error(await self.set_sms_mode(1))
             _raise_event_error(await self.set_error_mode(1))
+            _raise_event_error(await self.set_caller_identification_mode(1))
         except Sim800Error:
             raise

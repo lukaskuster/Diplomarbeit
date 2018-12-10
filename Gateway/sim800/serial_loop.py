@@ -4,6 +4,7 @@ from threading import Thread
 from utils import clear_str, logger
 import sim800.at_command as atcmd
 import sim800.at_event as atevent
+import sim800.parser as parser
 import threading
 import pyee
 
@@ -45,6 +46,7 @@ class SerialLoop(Thread):
 
         self.emitter = emitter
         self.echo = True
+        self.caller_identification = False
 
         # The Events that should be written and emitted, when a message returns from the serial interface
         self.command_queue = Queue(64)
@@ -128,8 +130,13 @@ class SerialLoop(Thread):
                     response = clear_str(res.decode('utf-8'))
 
                     if response == 'RING':
+                        number = None
+
+                        if self.caller_identification:
+                            number = parser.CallerIdentificationParser.parse([self._read()])
+
                         # Emit the ring event
-                        self.emitter.emit('ring')
+                        self.emitter.emit('ring', number)
                         logger.info('Sim800', 'Ring event!')
                 except UnicodeDecodeError:
                     logger.error('Sim800',
