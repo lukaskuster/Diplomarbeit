@@ -167,5 +167,4 @@ class CallerIdentificationParser(Parser):
     @staticmethod
     def parse(content):
         data = utils.split_str(content[0][content[0].index(':') + 1:])
-        return data[0]
-
+        return data[0].strip()
