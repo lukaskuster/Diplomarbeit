@@ -52,10 +52,16 @@ class API(EventEmitter):
     def delete_gateway(self):
         return self._request('/gateway/' + self.id, requests.delete)
 
-    def put_gateway(self, signal_strength=None):
+    def put_gateway(self, signal_strength=None, carrier=None, firmware_version=None, phone_number=None):
         body = {}
         if signal_strength:
             body['signalStrength'] = signal_strength
+        if carrier:
+            body['carrier'] = carrier
+        if firmware_version:
+            body['firmwareVersion'] = firmware_version
+        if phone_number:
+            body['phoneNumber'] = phone_number
 
         return self._request('/gateway/' + self.id, requests.put, body)
 
