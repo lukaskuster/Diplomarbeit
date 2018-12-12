@@ -3,6 +3,7 @@ import sys
 from gateway.networking import API, WebRTC, Role
 from gateway.utils import logger, Level, config
 from gateway.io import Sim800, Sim800Error
+import os
 
 logger.level = Level.DEBUG
 
@@ -22,7 +23,7 @@ async def check_imei(sim):
 
         auth_config['imei'] = event.data.imei
 
-        with open('config.ini', 'w') as configfile:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini'), 'w') as configfile:
             config.write(configfile)
 
 
