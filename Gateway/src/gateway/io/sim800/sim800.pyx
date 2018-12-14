@@ -4,6 +4,7 @@ import gateway.io.sim800.serial_loop as serial_loop
 import gateway.io.sim800.at_command as cmd
 import gateway.io.sim800.at_event as atev
 import gateway.io.sim800.parser as atparser
+import gateway.io.sim800.response_objects as response_objects
 import asyncio
 
 
@@ -14,6 +15,7 @@ class Sim800Error(Exception):
 def _raise_event_error(event):
     if event.error:
         raise Sim800Error(event.name, event.error_message)
+    return event
 
 
 class Sim800(EventEmitter):
@@ -308,7 +310,7 @@ class Sim800(EventEmitter):
 
         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
 
-    async def setup(self):
+    async def setup(self, pin=None):
         """
         Setup the module to return error codes and set sms commands to text mode.
 
@@ -316,6 +318,12 @@ class Sim800(EventEmitter):
         """
 
         try:
+
+            if pin:
+                event = _raise_event_error(await self.request_pin_status())
+                if event.data != response_objects.PINStatus.Ready:
+                    _raise_event_error(await self.enter_pin(pin))
+
             _raise_event_error(await self.set_sms_mode(1))
             _raise_event_error(await self.set_error_mode(1))
             _raise_event_error(await self.set_caller_identification_mode(1))

@@ -32,7 +32,7 @@ async def main():
 
     if not SERIAL_DEBUG:
         try:
-            await sim.setup()
+            await sim.setup(config['Test']['pin'])
         except Sim800Error as e:
             logger.error('Sim800', 'Name: {}, Message: {}'.format(*e.args))
             logger.error('Gateway', 'Closing Program because Sim800 could not be initialized!')
@@ -66,21 +66,21 @@ async def main():
         if 'number' not in data:
             return logger.error('SSE', 'Dial Event - No "number" property in data!')
 
-        # event = await sim.dial_number(data['number'])
+        event = await sim.dial_number(data['number'])
 
-        # if not event.error:
-        if webrtc.is_ongoing():
-            logger.info('WebRTC', "Already one call is active!")
-            return
-        webrtc.start_call(Role.ANSWER)
-        # else:
-        #    logger.info('Sim800', "Error at dial at-command: {}".format(event))
+        if not event.error:
+            if webrtc.is_ongoing():
+                logger.info('WebRTC', "Already one call is active!")
+                return
+            webrtc.start_call(Role.ANSWER)
+        else:
+            logger.info('Sim800', "Error at dial at-command: {}".format(event))
 
     @api.on('requestSignal')
     async def on_request_signal(data):
         event = await sim.request_signal_quality()
         if not event.error:
-            api.put_gateway(event.data.rssi)
+            api.put_gateway(signal_strength=event.data.rssi)
         else:
             logger.info('Sim800', "Error at signal quality at-command: {}".format(event))
 
@@ -92,11 +92,6 @@ async def main():
             return logger.error('SSE', 'SEND SMS EVENT - No "recipient" property in data!')
         if 'message' not in data:
             return logger.error('SSE', 'SEND SMS EVENT - No "message" property in data!')
-
-        event = await sim.set_sms_mode(1)
-        if event.error:
-            logger.info('Sim800', "Error at set sms mode at-command: {}".format(event))
-            return
 
         event = await sim.send_sms(data['recipient'], data['message'])
         if event.error:

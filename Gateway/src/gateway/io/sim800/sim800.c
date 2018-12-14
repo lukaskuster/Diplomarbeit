@@ -846,7 +846,7 @@ struct __pyx_defaults {
   PyObject *__pyx_arg_loop;
 };
 
-/* "gateway/io/sim800/sim800.pyx":59
+/* "gateway/io/sim800/sim800.pyx":61
  *         self.serial_loop.running.set()
  * 
  *     async def write(self, command):             # <<<<<<<<<<<<<<
@@ -861,7 +861,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":77
+/* "gateway/io/sim800/sim800.pyx":79
  *         return event
  * 
  *     async def answer_call(self):             # <<<<<<<<<<<<<<
@@ -874,7 +874,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":86
+/* "gateway/io/sim800/sim800.pyx":88
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
  * 
  *     async def hang_up_call(self):             # <<<<<<<<<<<<<<
@@ -887,7 +887,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call 
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":95
+/* "gateway/io/sim800/sim800.pyx":97
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
  * 
  *     async def dial_number(self, number):             # <<<<<<<<<<<<<<
@@ -901,7 +901,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":108
+/* "gateway/io/sim800/sim800.pyx":110
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  *     async def send_sms(self, number, text):             # <<<<<<<<<<<<<<
@@ -916,7 +916,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":126
+/* "gateway/io/sim800/sim800.pyx":128
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  * 
  *     async def request_unread_sms(self):             # <<<<<<<<<<<<<<
@@ -929,7 +929,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unrea
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":137
+/* "gateway/io/sim800/sim800.pyx":139
  *                                               parser=atparser.SMSListParser))
  * 
  *     async def request_all_sms(self):             # <<<<<<<<<<<<<<
@@ -942,7 +942,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_s
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":148
+/* "gateway/io/sim800/sim800.pyx":150
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
  * 
  *     async def set_sms_mode(self, mode=None):             # <<<<<<<<<<<<<<
@@ -956,7 +956,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode 
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":163
+/* "gateway/io/sim800/sim800.pyx":165
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
  * 
  *     async def power_off(self, mode):             # <<<<<<<<<<<<<<
@@ -970,7 +970,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":177
+/* "gateway/io/sim800/sim800.pyx":179
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
  * 
  *     async def request_signal_quality(self):             # <<<<<<<<<<<<<<
@@ -983,7 +983,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signa
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":188
+/* "gateway/io/sim800/sim800.pyx":190
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
  * 
  *     async def reset_default_configuration(self):             # <<<<<<<<<<<<<<
@@ -996,7 +996,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_defaul
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":197
+/* "gateway/io/sim800/sim800.pyx":199
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
  * 
  *     async def enter_pin(self, pin):             # <<<<<<<<<<<<<<
@@ -1010,7 +1010,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin {
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":207
+/* "gateway/io/sim800/sim800.pyx":209
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
  * 
  *     async def request_pin_status(self):             # <<<<<<<<<<<<<<
@@ -1023,7 +1023,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":218
+/* "gateway/io/sim800/sim800.pyx":220
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
  * 
  *     async def request_imei(self):             # <<<<<<<<<<<<<<
@@ -1036,7 +1036,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":229
+/* "gateway/io/sim800/sim800.pyx":231
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
  * 
  *     async def request_network_status(self):             # <<<<<<<<<<<<<<
@@ -1049,7 +1049,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_netw
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":240
+/* "gateway/io/sim800/sim800.pyx":242
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
  * 
  *     async def set_echo_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -1064,7 +1064,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mod
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":259
+/* "gateway/io/sim800/sim800.pyx":261
  *         return event
  * 
  *     async def set_caller_identification_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -1079,7 +1079,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_i
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":278
+/* "gateway/io/sim800/sim800.pyx":280
  *         return event
  * 
  *     async def set_error_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -1093,7 +1093,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mo
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":293
+/* "gateway/io/sim800/sim800.pyx":295
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
  * 
  *     async def request_subscriber_number(self):             # <<<<<<<<<<<<<<
@@ -1106,7 +1106,7 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subs
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":302
+/* "gateway/io/sim800/sim800.pyx":304
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
  * 
  *     async def request_imsi(self):             # <<<<<<<<<<<<<<
@@ -1119,15 +1119,17 @@ struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi
 };
 
 
-/* "gateway/io/sim800/sim800.pyx":311
+/* "gateway/io/sim800/sim800.pyx":313
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
  * 
- *     async def setup(self):             # <<<<<<<<<<<<<<
+ *     async def setup(self, pin=None):             # <<<<<<<<<<<<<<
  *         """
  *         Setup the module to return error codes and set sms commands to text mode.
  */
 struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup {
   PyObject_HEAD
+  PyObject *__pyx_v_event;
+  PyObject *__pyx_v_pin;
   PyObject *__pyx_v_self;
   PyObject *__pyx_t_0;
   PyObject *__pyx_t_1;
@@ -1695,6 +1697,7 @@ static const char __pyx_k_send[] = "send";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_text[] = "text";
 static const char __pyx_k_wait[] = "wait";
+static const char __pyx_k_Ready[] = "Ready";
 static const char __pyx_k_await[] = "__await__";
 static const char __pyx_k_close[] = "close";
 static const char __pyx_k_debug[] = "debug";
@@ -1786,6 +1789,7 @@ static const char __pyx_k_request_all_sms[] = "request_all_sms";
 static const char __pyx_k_Sim800_enter_pin[] = "Sim800.enter_pin";
 static const char __pyx_k_Sim800_power_off[] = "Sim800.power_off";
 static const char __pyx_k_SubscriberNumber[] = "SubscriberNumber";
+static const char __pyx_k_response_objects[] = "response_objects";
 static const char __pyx_k_raise_event_error[] = "_raise_event_error";
 static const char __pyx_k_AT_CMGL_REC_UNREAD[] = "AT+CMGL=\"REC UNREAD\"\r\n";
 static const char __pyx_k_Sim800_answer_call[] = "Sim800.answer_call";
@@ -1825,6 +1829,7 @@ static const char __pyx_k_Sim800_processes_AT_Commands_ov[] = "\n    Sim800 proc
 static const char __pyx_k_Sim800_request_subscriber_number[] = "Sim800.request_subscriber_number";
 static const char __pyx_k_Sim800_reset_default_configurati[] = "Sim800.reset_default_configuration";
 static const char __pyx_k_Sim800_set_caller_identification[] = "Sim800.set_caller_identification_mode";
+static const char __pyx_k_gateway_io_sim800_response_objec[] = "gateway.io.sim800.response_objects";
 static const char __pyx_k_src_gateway_io_sim800_sim800_pyx[] = "src/gateway/io/sim800/sim800.pyx";
 static PyObject *__pyx_kp_u_ATA;
 static PyObject *__pyx_n_s_ATCommand;
@@ -1862,9 +1867,11 @@ static PyObject *__pyx_n_u_ListAllSMS;
 static PyObject *__pyx_n_u_ListUnreadSMS;
 static PyObject *__pyx_n_u_NetworkStatus;
 static PyObject *__pyx_n_s_NetworkStatusParser;
+static PyObject *__pyx_n_s_PINStatus;
 static PyObject *__pyx_n_u_PINStatus;
 static PyObject *__pyx_n_s_PinStatusParser;
 static PyObject *__pyx_n_u_PowerOff;
+static PyObject *__pyx_n_s_Ready;
 static PyObject *__pyx_n_u_ResetDefaultConfiguration;
 static PyObject *__pyx_n_s_SMSListParser;
 static PyObject *__pyx_n_u_SMSMode;
@@ -1931,6 +1938,7 @@ static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_gateway_io_sim800_at_command;
 static PyObject *__pyx_n_s_gateway_io_sim800_at_event;
 static PyObject *__pyx_n_s_gateway_io_sim800_parser;
+static PyObject *__pyx_n_s_gateway_io_sim800_response_objec;
 static PyObject *__pyx_n_s_gateway_io_sim800_serial_loop;
 static PyObject *__pyx_n_s_gateway_io_sim800_sim800;
 static PyObject *__pyx_n_s_gateway_utils;
@@ -1964,6 +1972,7 @@ static PyObject *__pyx_n_s_request_signal_quality;
 static PyObject *__pyx_n_s_request_subscriber_number;
 static PyObject *__pyx_n_s_request_unread_sms;
 static PyObject *__pyx_n_s_reset_default_configuration;
+static PyObject *__pyx_n_s_response_objects;
 static PyObject *__pyx_n_s_run_coroutine_threadsafe;
 static PyObject *__pyx_n_s_running;
 static PyObject *__pyx_n_s_scheduler;
@@ -2010,7 +2019,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_52set_caller_iden
 static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_55set_error_mode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_mode); /* proto */
 static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_58request_subscriber_number(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_61request_imsi(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_pin); /* proto */
 static PyObject *__pyx_tp_new_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2070,6 +2079,7 @@ static PyObject *__pyx_tuple__59;
 static PyObject *__pyx_tuple__60;
 static PyObject *__pyx_tuple__61;
 static PyObject *__pyx_tuple__62;
+static PyObject *__pyx_tuple__63;
 static PyObject *__pyx_codeobj__2;
 static PyObject *__pyx_codeobj__4;
 static PyObject *__pyx_codeobj__6;
@@ -2095,7 +2105,7 @@ static PyObject *__pyx_codeobj__38;
 static PyObject *__pyx_codeobj__40;
 /* Late includes */
 
-/* "gateway/io/sim800/sim800.pyx":14
+/* "gateway/io/sim800/sim800.pyx":15
  * 
  * 
  * def _raise_event_error(event):             # <<<<<<<<<<<<<<
@@ -2130,31 +2140,31 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("_raise_event_error", 0);
 
-  /* "gateway/io/sim800/sim800.pyx":15
+  /* "gateway/io/sim800/sim800.pyx":16
  * 
  * def _raise_event_error(event):
  *     if event.error:             # <<<<<<<<<<<<<<
  *         raise Sim800Error(event.name, event.error_message)
- * 
+ *     return event
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_t_2)) {
 
-    /* "gateway/io/sim800/sim800.pyx":16
+    /* "gateway/io/sim800/sim800.pyx":17
  * def _raise_event_error(event):
  *     if event.error:
  *         raise Sim800Error(event.name, event.error_message)             # <<<<<<<<<<<<<<
- * 
+ *     return event
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Sim800Error); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_Sim800Error); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_name); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_name); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_error_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_error_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -2171,7 +2181,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_4, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2181,7 +2191,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_4, __pyx_t_5};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2189,7 +2199,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2200,25 +2210,37 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_5);
       __pyx_t_4 = 0;
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 16, __pyx_L1_error)
+    __PYX_ERR(0, 17, __pyx_L1_error)
 
-    /* "gateway/io/sim800/sim800.pyx":15
+    /* "gateway/io/sim800/sim800.pyx":16
  * 
  * def _raise_event_error(event):
  *     if event.error:             # <<<<<<<<<<<<<<
  *         raise Sim800Error(event.name, event.error_message)
- * 
+ *     return event
  */
   }
 
-  /* "gateway/io/sim800/sim800.pyx":14
+  /* "gateway/io/sim800/sim800.pyx":18
+ *     if event.error:
+ *         raise Sim800Error(event.name, event.error_message)
+ *     return event             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_event);
+  __pyx_r = __pyx_v_event;
+  goto __pyx_L0;
+
+  /* "gateway/io/sim800/sim800.pyx":15
  * 
  * 
  * def _raise_event_error(event):             # <<<<<<<<<<<<<<
@@ -2227,8 +2249,6 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
@@ -2244,7 +2264,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800__raise_event_error(CYTHON
   return __pyx_r;
 }
 
-/* "gateway/io/sim800/sim800.pyx":24
+/* "gateway/io/sim800/sim800.pyx":26
  *     """
  * 
  *     def __init__(self, serial_port='/dev/serial0', debug=False, loop=asyncio.get_event_loop()):             # <<<<<<<<<<<<<<
@@ -2259,7 +2279,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_2__defaults__(CYTHON_UNUS
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__defaults__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject*)__pyx_kp_u_dev_serial0));
   __Pyx_GIVEREF(((PyObject*)__pyx_kp_u_dev_serial0));
@@ -2270,7 +2290,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_2__defaults__(CYTHON_UNUS
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_loop);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_loop);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_self)->__pyx_arg_loop);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -2353,7 +2373,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_1__init__(PyObjec
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 24, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2375,7 +2395,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_1__init__(PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 24, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 26, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2399,7 +2419,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "gateway/io/sim800/sim800.pyx":35
+  /* "gateway/io/sim800/sim800.pyx":37
  *         """
  * 
  *         super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)             # <<<<<<<<<<<<<<
@@ -2407,9 +2427,9 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
  *         # Create serial loop
  */
   __pyx_t_1 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 35, __pyx_L1_error) }
+  if (!__pyx_t_1) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 37, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -2417,38 +2437,38 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_asyncio); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_asyncio); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_run_coroutine_threadsafe); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_run_coroutine_threadsafe); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_scheduler, __pyx_t_4) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_scheduler, __pyx_t_4) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_loop, __pyx_v_loop) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_loop, __pyx_v_loop) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":38
+  /* "gateway/io/sim800/sim800.pyx":40
  * 
  *         # Create serial loop
  *         self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)             # <<<<<<<<<<<<<<
  *         if debug:
  *             self.serial_loop.echo = False
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_SerialLoop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_SerialLoop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -2466,7 +2486,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_1, __pyx_v_self, __pyx_v_serial_port, __pyx_v_debug};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
@@ -2474,13 +2494,13 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[4] = {__pyx_t_1, __pyx_v_self, __pyx_v_serial_port, __pyx_v_debug};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_5, 3+__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
   #endif
   {
-    __pyx_t_3 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_1) {
       __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -2494,37 +2514,37 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
     __Pyx_INCREF(__pyx_v_debug);
     __Pyx_GIVEREF(__pyx_v_debug);
     PyTuple_SET_ITEM(__pyx_t_3, 2+__pyx_t_5, __pyx_v_debug);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop, __pyx_t_4) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop, __pyx_t_4) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":39
+  /* "gateway/io/sim800/sim800.pyx":41
  *         # Create serial loop
  *         self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
  *         if debug:             # <<<<<<<<<<<<<<
  *             self.serial_loop.echo = False
  *         # Set the event loop
  */
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_v_debug); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 41, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "gateway/io/sim800/sim800.pyx":40
+    /* "gateway/io/sim800/sim800.pyx":42
  *         self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
  *         if debug:
  *             self.serial_loop.echo = False             # <<<<<<<<<<<<<<
  *         # Set the event loop
  *         self._event_loop = loop
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_echo, Py_False) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_echo, Py_False) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "gateway/io/sim800/sim800.pyx":39
+    /* "gateway/io/sim800/sim800.pyx":41
  *         # Create serial loop
  *         self.serial_loop = serial_loop.SerialLoop(self, serial_port, debug)
  *         if debug:             # <<<<<<<<<<<<<<
@@ -2533,25 +2553,25 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
  */
   }
 
-  /* "gateway/io/sim800/sim800.pyx":42
+  /* "gateway/io/sim800/sim800.pyx":44
  *             self.serial_loop.echo = False
  *         # Set the event loop
  *         self._event_loop = loop             # <<<<<<<<<<<<<<
  * 
  *         # Start the thread
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_event_loop, __pyx_v_loop) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_event_loop, __pyx_v_loop) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":45
+  /* "gateway/io/sim800/sim800.pyx":47
  * 
  *         # Start the thread
  *         self.serial_loop.start()             # <<<<<<<<<<<<<<
  * 
  *         self.debug = debug
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_start); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2566,21 +2586,21 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   }
   __pyx_t_4 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":47
+  /* "gateway/io/sim800/sim800.pyx":49
  *         self.serial_loop.start()
  * 
  *         self.debug = debug             # <<<<<<<<<<<<<<
  * 
  *     def close(self):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_debug, __pyx_v_debug) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":24
+  /* "gateway/io/sim800/sim800.pyx":26
  *     """
  * 
  *     def __init__(self, serial_port='/dev/serial0', debug=False, loop=asyncio.get_event_loop()):             # <<<<<<<<<<<<<<
@@ -2604,7 +2624,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800___init__(CYTHON_U
   return __pyx_r;
 }
 
-/* "gateway/io/sim800/sim800.pyx":49
+/* "gateway/io/sim800/sim800.pyx":51
  *         self.debug = debug
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
@@ -2635,19 +2655,19 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_2close(CYTHON_UNU
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("close", 0);
 
-  /* "gateway/io/sim800/sim800.pyx":57
+  /* "gateway/io/sim800/sim800.pyx":59
  *         """
  * 
  *         self.serial_loop.running.set()             # <<<<<<<<<<<<<<
  * 
  *     async def write(self, command):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_running); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_running); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2662,12 +2682,12 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_2close(CYTHON_UNU
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":49
+  /* "gateway/io/sim800/sim800.pyx":51
  *         self.debug = debug
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
@@ -2691,7 +2711,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_2close(CYTHON_UNU
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":59
+/* "gateway/io/sim800/sim800.pyx":61
  *         self.serial_loop.running.set()
  * 
  *     async def write(self, command):             # <<<<<<<<<<<<<<
@@ -2732,11 +2752,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_5write(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_command)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("write", 1, 2, 2, 1); __PYX_ERR(0, 59, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("write", 1, 2, 2, 1); __PYX_ERR(0, 61, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "write") < 0)) __PYX_ERR(0, 59, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "write") < 0)) __PYX_ERR(0, 61, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2749,7 +2769,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_5write(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("write", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 59, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("write", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 61, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.write", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2771,7 +2791,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_4write(CYTHON_UNU
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 59, __pyx_L1_error)
+    __PYX_ERR(0, 61, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -2782,7 +2802,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_4write(CYTHON_UNU
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_command);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_command);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator, __pyx_codeobj_, (PyObject *) __pyx_cur_scope, __pyx_n_s_write, __pyx_n_s_Sim800_write, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator, __pyx_codeobj_, (PyObject *) __pyx_cur_scope, __pyx_n_s_write, __pyx_n_s_Sim800_write, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 61, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -2818,21 +2838,21 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":71
+  /* "gateway/io/sim800/sim800.pyx":73
  *         """
  * 
  *         event = atev.ATEvent(command.name, command)             # <<<<<<<<<<<<<<
  *         self.serial_loop.command_queue.put(event)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_atev); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_atev); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ATEvent); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ATEvent); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_command, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_command, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -2849,7 +2869,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_t_2, __pyx_cur_scope->__pyx_v_command};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2858,14 +2878,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_t_2, __pyx_cur_scope->__pyx_v_command};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else
   #endif
   {
-    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -2876,7 +2896,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
     __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_command);
     PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_cur_scope->__pyx_v_command);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
@@ -2885,19 +2905,19 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   __pyx_cur_scope->__pyx_v_event = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":72
+  /* "gateway/io/sim800/sim800.pyx":74
  * 
  *         event = atev.ATEvent(command.name, command)
  *         self.serial_loop.command_queue.put(event)             # <<<<<<<<<<<<<<
  * 
  *         await event.wait()
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_command_queue); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_command_queue); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_put); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_put); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
@@ -2912,19 +2932,19 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_cur_scope->__pyx_v_event) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_cur_scope->__pyx_v_event);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":74
+  /* "gateway/io/sim800/sim800.pyx":76
  *         self.serial_loop.command_queue.put(event)
  * 
  *         await event.wait()             # <<<<<<<<<<<<<<
  *         return event
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_wait); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_wait); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2938,7 +2958,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   }
   __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -2952,16 +2972,16 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 74, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 76, __pyx_L1_error)
   } else {
     PyObject* exc_type = __Pyx_PyErr_Occurred();
     if (exc_type) {
       if (likely(exc_type == PyExc_StopIteration || (exc_type != PyExc_GeneratorExit && __Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration)))) PyErr_Clear();
-      else __PYX_ERR(0, 74, __pyx_L1_error)
+      else __PYX_ERR(0, 76, __pyx_L1_error)
     }
   }
 
-  /* "gateway/io/sim800/sim800.pyx":75
+  /* "gateway/io/sim800/sim800.pyx":77
  * 
  *         await event.wait()
  *         return event             # <<<<<<<<<<<<<<
@@ -2973,7 +2993,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":59
+  /* "gateway/io/sim800/sim800.pyx":61
  *         self.serial_loop.running.set()
  * 
  *     async def write(self, command):             # <<<<<<<<<<<<<<
@@ -3001,7 +3021,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_6generator(__pyx_
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":77
+/* "gateway/io/sim800/sim800.pyx":79
  *         return event
  * 
  *     async def answer_call(self):             # <<<<<<<<<<<<<<
@@ -3033,7 +3053,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_7answer_call(CYTH
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 77, __pyx_L1_error)
+    __PYX_ERR(0, 79, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3041,7 +3061,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_7answer_call(CYTH
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1, __pyx_codeobj__2, (PyObject *) __pyx_cur_scope, __pyx_n_s_answer_call, __pyx_n_s_Sim800_answer_call, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1, __pyx_codeobj__2, (PyObject *) __pyx_cur_scope, __pyx_n_s_answer_call, __pyx_n_s_Sim800_answer_call, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3076,9 +3096,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 79, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":84
+  /* "gateway/io/sim800/sim800.pyx":86
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))             # <<<<<<<<<<<<<<
@@ -3086,17 +3106,17 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
  *     async def hang_up_call(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_AnswerCall) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__3, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_AnswerCall) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__3, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3113,7 +3133,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -3127,11 +3147,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 84, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 86, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -3140,7 +3160,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":77
+  /* "gateway/io/sim800/sim800.pyx":79
  *         return event
  * 
  *     async def answer_call(self):             # <<<<<<<<<<<<<<
@@ -3168,7 +3188,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_9generator1(__pyx
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":86
+/* "gateway/io/sim800/sim800.pyx":88
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
  * 
  *     async def hang_up_call(self):             # <<<<<<<<<<<<<<
@@ -3200,7 +3220,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_10hang_up_call(CY
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 86, __pyx_L1_error)
+    __PYX_ERR(0, 88, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3208,7 +3228,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_10hang_up_call(CY
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2, __pyx_codeobj__4, (PyObject *) __pyx_cur_scope, __pyx_n_s_hang_up_call, __pyx_n_s_Sim800_hang_up_call, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2, __pyx_codeobj__4, (PyObject *) __pyx_cur_scope, __pyx_n_s_hang_up_call, __pyx_n_s_Sim800_hang_up_call, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3243,9 +3263,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 88, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":93
+  /* "gateway/io/sim800/sim800.pyx":95
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))             # <<<<<<<<<<<<<<
@@ -3253,17 +3273,17 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
  *     async def dial_number(self, number):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_HangUpCall) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__5, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_HangUpCall) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__5, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3280,7 +3300,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -3294,11 +3314,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 93, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 95, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -3307,7 +3327,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":86
+  /* "gateway/io/sim800/sim800.pyx":88
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
  * 
  *     async def hang_up_call(self):             # <<<<<<<<<<<<<<
@@ -3335,7 +3355,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_12generator2(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":95
+/* "gateway/io/sim800/sim800.pyx":97
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
  * 
  *     async def dial_number(self, number):             # <<<<<<<<<<<<<<
@@ -3376,11 +3396,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_14dial_number(PyO
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_number)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("dial_number", 1, 2, 2, 1); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("dial_number", 1, 2, 2, 1); __PYX_ERR(0, 97, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "dial_number") < 0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "dial_number") < 0)) __PYX_ERR(0, 97, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3393,7 +3413,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_14dial_number(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("dial_number", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 95, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("dial_number", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 97, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.dial_number", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3415,7 +3435,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_13dial_number(CYT
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 95, __pyx_L1_error)
+    __PYX_ERR(0, 97, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3426,7 +3446,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_13dial_number(CYT
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_number);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_number);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3, __pyx_codeobj__6, (PyObject *) __pyx_cur_scope, __pyx_n_s_dial_number, __pyx_n_s_Sim800_dial_number, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3, __pyx_codeobj__6, (PyObject *) __pyx_cur_scope, __pyx_n_s_dial_number, __pyx_n_s_Sim800_dial_number, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3462,16 +3482,16 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 97, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":105
+  /* "gateway/io/sim800/sim800.pyx":107
  * 
  *         # Remove all \n and \r from the number
  *         number = clear_str(number)             # <<<<<<<<<<<<<<
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3485,7 +3505,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_cur_scope->__pyx_v_number) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_cur_scope->__pyx_v_number);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GOTREF(__pyx_cur_scope->__pyx_v_number);
@@ -3493,7 +3513,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":106
+  /* "gateway/io/sim800/sim800.pyx":108
  *         # Remove all \n and \r from the number
  *         number = clear_str(number)
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))             # <<<<<<<<<<<<<<
@@ -3501,14 +3521,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
  *     async def send_sms(self, number, text):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_ATD, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_ATD, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3522,18 +3542,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_number) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_number);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_DialNumber) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_DialNumber) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3551,7 +3571,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -3565,11 +3585,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 106, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 108, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -3578,7 +3598,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":95
+  /* "gateway/io/sim800/sim800.pyx":97
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
  * 
  *     async def dial_number(self, number):             # <<<<<<<<<<<<<<
@@ -3607,7 +3627,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_15generator3(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":108
+/* "gateway/io/sim800/sim800.pyx":110
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  *     async def send_sms(self, number, text):             # <<<<<<<<<<<<<<
@@ -3651,17 +3671,17 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_17send_sms(PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_number)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, 1); __PYX_ERR(0, 108, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, 1); __PYX_ERR(0, 110, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_text)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, 2); __PYX_ERR(0, 108, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, 2); __PYX_ERR(0, 110, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "send_sms") < 0)) __PYX_ERR(0, 108, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "send_sms") < 0)) __PYX_ERR(0, 110, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3676,7 +3696,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_17send_sms(PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 108, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("send_sms", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 110, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.send_sms", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3698,7 +3718,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_16send_sms(CYTHON
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 108, __pyx_L1_error)
+    __PYX_ERR(0, 110, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3712,7 +3732,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_16send_sms(CYTHON
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_text);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_text);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4, __pyx_codeobj__7, (PyObject *) __pyx_cur_scope, __pyx_n_s_send_sms, __pyx_n_s_Sim800_send_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4, __pyx_codeobj__7, (PyObject *) __pyx_cur_scope, __pyx_n_s_send_sms, __pyx_n_s_Sim800_send_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3748,16 +3768,16 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 110, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":120
+  /* "gateway/io/sim800/sim800.pyx":122
  * 
  *         # Remove all \n\r from the strings and add <ctrl-Z/ESC> after the message of the sms
  *         number = clear_str(number)             # <<<<<<<<<<<<<<
  *         text = clear_str(text)
  *         text += '\x1A'
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3771,7 +3791,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_cur_scope->__pyx_v_number) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_cur_scope->__pyx_v_number);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GOTREF(__pyx_cur_scope->__pyx_v_number);
@@ -3779,14 +3799,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":121
+  /* "gateway/io/sim800/sim800.pyx":123
  *         # Remove all \n\r from the strings and add <ctrl-Z/ESC> after the message of the sms
  *         number = clear_str(number)
  *         text = clear_str(text)             # <<<<<<<<<<<<<<
  *         text += '\x1A'
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_clear_str); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3800,7 +3820,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_cur_scope->__pyx_v_text) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_cur_scope->__pyx_v_text);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GOTREF(__pyx_cur_scope->__pyx_v_text);
@@ -3808,21 +3828,21 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":122
+  /* "gateway/io/sim800/sim800.pyx":124
  *         number = clear_str(number)
  *         text = clear_str(text)
  *         text += '\x1A'             # <<<<<<<<<<<<<<
  * 
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  */
-  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_cur_scope->__pyx_v_text, __pyx_kp_u__8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_cur_scope->__pyx_v_text, __pyx_kp_u__8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_cur_scope->__pyx_v_text);
   __Pyx_DECREF_SET(__pyx_cur_scope->__pyx_v_text, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":124
+  /* "gateway/io/sim800/sim800.pyx":126
  *         text += '\x1A'
  * 
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))             # <<<<<<<<<<<<<<
@@ -3830,14 +3850,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
  *     async def request_unread_sms(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMGS, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMGS, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3851,19 +3871,19 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_number) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_number);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SendSMS) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_data, __pyx_cur_scope->__pyx_v_text) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SendSMS) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_data, __pyx_cur_scope->__pyx_v_text) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3881,7 +3901,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -3895,11 +3915,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 124, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 126, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -3908,7 +3928,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":108
+  /* "gateway/io/sim800/sim800.pyx":110
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  *     async def send_sms(self, number, text):             # <<<<<<<<<<<<<<
@@ -3937,7 +3957,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_18generator4(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":126
+/* "gateway/io/sim800/sim800.pyx":128
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  * 
  *     async def request_unread_sms(self):             # <<<<<<<<<<<<<<
@@ -3969,7 +3989,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_19request_unread_
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 126, __pyx_L1_error)
+    __PYX_ERR(0, 128, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3977,7 +3997,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_19request_unread_
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5, __pyx_codeobj__9, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_unread_sms, __pyx_n_s_Sim800_request_unread_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5, __pyx_codeobj__9, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_unread_sms, __pyx_n_s_Sim800_request_unread_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4013,9 +4033,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 128, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":134
+  /* "gateway/io/sim800/sim800.pyx":136
  *         :return: event
  *         """
  *         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',             # <<<<<<<<<<<<<<
@@ -4023,40 +4043,40 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ListUnreadSMS) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ListUnreadSMS) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":135
+  /* "gateway/io/sim800/sim800.pyx":137
  *         """
  *         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
  *                                               parser=atparser.SMSListParser))             # <<<<<<<<<<<<<<
  * 
  *     async def request_all_sms(self):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SMSListParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SMSListParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":134
+  /* "gateway/io/sim800/sim800.pyx":136
  *         :return: event
  *         """
  *         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',             # <<<<<<<<<<<<<<
  *                                               parser=atparser.SMSListParser))
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__10, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__10, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4073,7 +4093,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -4087,11 +4107,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 134, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 136, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -4100,7 +4120,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":126
+  /* "gateway/io/sim800/sim800.pyx":128
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  * 
  *     async def request_unread_sms(self):             # <<<<<<<<<<<<<<
@@ -4129,7 +4149,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_21generator5(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":137
+/* "gateway/io/sim800/sim800.pyx":139
  *                                               parser=atparser.SMSListParser))
  * 
  *     async def request_all_sms(self):             # <<<<<<<<<<<<<<
@@ -4161,7 +4181,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_22request_all_sms
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 137, __pyx_L1_error)
+    __PYX_ERR(0, 139, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4169,7 +4189,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_22request_all_sms
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6, __pyx_codeobj__11, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_all_sms, __pyx_n_s_Sim800_request_all_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6, __pyx_codeobj__11, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_all_sms, __pyx_n_s_Sim800_request_all_sms, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4205,9 +4225,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 139, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":146
+  /* "gateway/io/sim800/sim800.pyx":148
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))             # <<<<<<<<<<<<<<
@@ -4215,24 +4235,24 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
  *     async def set_sms_mode(self, mode=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ListAllSMS) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ListAllSMS) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SMSListParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SMSListParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__12, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__12, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4249,7 +4269,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -4263,11 +4283,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 146, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 148, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -4276,7 +4296,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":137
+  /* "gateway/io/sim800/sim800.pyx":139
  *                                               parser=atparser.SMSListParser))
  * 
  *     async def request_all_sms(self):             # <<<<<<<<<<<<<<
@@ -4305,7 +4325,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_24generator6(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":148
+/* "gateway/io/sim800/sim800.pyx":150
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
  * 
  *     async def set_sms_mode(self, mode=None):             # <<<<<<<<<<<<<<
@@ -4351,7 +4371,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_26set_sms_mode(Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_sms_mode") < 0)) __PYX_ERR(0, 148, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_sms_mode") < 0)) __PYX_ERR(0, 150, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4367,7 +4387,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_26set_sms_mode(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_sms_mode", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 148, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_sms_mode", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 150, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.set_sms_mode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4389,7 +4409,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_25set_sms_mode(CY
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 148, __pyx_L1_error)
+    __PYX_ERR(0, 150, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4400,7 +4420,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_25set_sms_mode(CY
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_mode);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_mode);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7, __pyx_codeobj__13, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_sms_mode, __pyx_n_s_Sim800_set_sms_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7, __pyx_codeobj__13, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_sms_mode, __pyx_n_s_Sim800_set_sms_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4436,9 +4456,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 150, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":161
+  /* "gateway/io/sim800/sim800.pyx":163
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))             # <<<<<<<<<<<<<<
@@ -4446,14 +4466,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
  *     async def power_off(self, mode):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMGF, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMGF, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4467,18 +4487,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_mode) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_mode);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SMSMode) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SMSMode) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4496,7 +4516,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -4510,11 +4530,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 161, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 163, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -4523,7 +4543,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":148
+  /* "gateway/io/sim800/sim800.pyx":150
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
  * 
  *     async def set_sms_mode(self, mode=None):             # <<<<<<<<<<<<<<
@@ -4552,7 +4572,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_27generator7(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":163
+/* "gateway/io/sim800/sim800.pyx":165
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
  * 
  *     async def power_off(self, mode):             # <<<<<<<<<<<<<<
@@ -4593,11 +4613,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_29power_off(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("power_off", 1, 2, 2, 1); __PYX_ERR(0, 163, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("power_off", 1, 2, 2, 1); __PYX_ERR(0, 165, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "power_off") < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "power_off") < 0)) __PYX_ERR(0, 165, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4610,7 +4630,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_29power_off(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("power_off", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 163, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("power_off", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 165, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.power_off", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4632,7 +4652,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_28power_off(CYTHO
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 163, __pyx_L1_error)
+    __PYX_ERR(0, 165, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4643,7 +4663,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_28power_off(CYTHO
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_mode);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_mode);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8, __pyx_codeobj__14, (PyObject *) __pyx_cur_scope, __pyx_n_s_power_off, __pyx_n_s_Sim800_power_off, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8, __pyx_codeobj__14, (PyObject *) __pyx_cur_scope, __pyx_n_s_power_off, __pyx_n_s_Sim800_power_off, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4679,9 +4699,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 165, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":175
+  /* "gateway/io/sim800/sim800.pyx":177
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))             # <<<<<<<<<<<<<<
@@ -4689,14 +4709,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
  *     async def request_signal_quality(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CPOWD, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CPOWD, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4710,18 +4730,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_mode) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_mode);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_PowerOff) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 175, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_PowerOff) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4739,7 +4759,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -4753,11 +4773,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 175, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 177, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -4766,7 +4786,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":163
+  /* "gateway/io/sim800/sim800.pyx":165
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
  * 
  *     async def power_off(self, mode):             # <<<<<<<<<<<<<<
@@ -4795,7 +4815,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_30generator8(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":177
+/* "gateway/io/sim800/sim800.pyx":179
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
  * 
  *     async def request_signal_quality(self):             # <<<<<<<<<<<<<<
@@ -4827,7 +4847,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_31request_signal_
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 177, __pyx_L1_error)
+    __PYX_ERR(0, 179, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4835,7 +4855,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_31request_signal_
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9, __pyx_codeobj__15, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_signal_quality, __pyx_n_s_Sim800_request_signal_quality, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9, __pyx_codeobj__15, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_signal_quality, __pyx_n_s_Sim800_request_signal_quality, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 179, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4871,9 +4891,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 177, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 179, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":186
+  /* "gateway/io/sim800/sim800.pyx":188
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))             # <<<<<<<<<<<<<<
@@ -4881,24 +4901,24 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
  *     async def reset_default_configuration(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SignalQuality) < 0) __PYX_ERR(0, 186, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SignalQuality) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SignalQualityParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_SignalQualityParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__16, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__16, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4915,7 +4935,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -4929,11 +4949,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 186, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 188, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 186, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -4942,7 +4962,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":177
+  /* "gateway/io/sim800/sim800.pyx":179
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
  * 
  *     async def request_signal_quality(self):             # <<<<<<<<<<<<<<
@@ -4971,7 +4991,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_33generator9(__py
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":188
+/* "gateway/io/sim800/sim800.pyx":190
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
  * 
  *     async def reset_default_configuration(self):             # <<<<<<<<<<<<<<
@@ -5003,7 +5023,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_34reset_default_c
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 188, __pyx_L1_error)
+    __PYX_ERR(0, 190, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5011,7 +5031,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_34reset_default_c
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10, __pyx_codeobj__17, (PyObject *) __pyx_cur_scope, __pyx_n_s_reset_default_configuration, __pyx_n_s_Sim800_reset_default_configurati, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 188, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10, __pyx_codeobj__17, (PyObject *) __pyx_cur_scope, __pyx_n_s_reset_default_configuration, __pyx_n_s_Sim800_reset_default_configurati, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5046,9 +5066,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 190, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":195
+  /* "gateway/io/sim800/sim800.pyx":197
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))             # <<<<<<<<<<<<<<
@@ -5056,17 +5076,17 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
  *     async def enter_pin(self, pin):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ResetDefaultConfiguration) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__18, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ResetDefaultConfiguration) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__18, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5083,7 +5103,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -5097,11 +5117,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 195, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 197, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -5110,7 +5130,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":188
+  /* "gateway/io/sim800/sim800.pyx":190
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
  * 
  *     async def reset_default_configuration(self):             # <<<<<<<<<<<<<<
@@ -5138,7 +5158,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_36generator10(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":197
+/* "gateway/io/sim800/sim800.pyx":199
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
  * 
  *     async def enter_pin(self, pin):             # <<<<<<<<<<<<<<
@@ -5179,11 +5199,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_38enter_pin(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pin)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("enter_pin", 1, 2, 2, 1); __PYX_ERR(0, 197, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("enter_pin", 1, 2, 2, 1); __PYX_ERR(0, 199, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "enter_pin") < 0)) __PYX_ERR(0, 197, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "enter_pin") < 0)) __PYX_ERR(0, 199, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5196,7 +5216,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_38enter_pin(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("enter_pin", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 197, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("enter_pin", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 199, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.enter_pin", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5218,7 +5238,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_37enter_pin(CYTHO
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 197, __pyx_L1_error)
+    __PYX_ERR(0, 199, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5229,7 +5249,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_37enter_pin(CYTHO
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_pin);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_pin);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11, __pyx_codeobj__19, (PyObject *) __pyx_cur_scope, __pyx_n_s_enter_pin, __pyx_n_s_Sim800_enter_pin, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 197, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11, __pyx_codeobj__19, (PyObject *) __pyx_cur_scope, __pyx_n_s_enter_pin, __pyx_n_s_Sim800_enter_pin, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 199, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5265,9 +5285,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 197, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 199, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":205
+  /* "gateway/io/sim800/sim800.pyx":207
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))             # <<<<<<<<<<<<<<
@@ -5275,14 +5295,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
  *     async def request_pin_status(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CPIN, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CPIN, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -5296,18 +5316,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_pin) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_pin);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_EnterPIN) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_EnterPIN) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5325,7 +5345,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -5339,11 +5359,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 205, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 207, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -5352,7 +5372,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":197
+  /* "gateway/io/sim800/sim800.pyx":199
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
  * 
  *     async def enter_pin(self, pin):             # <<<<<<<<<<<<<<
@@ -5381,7 +5401,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_39generator11(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":207
+/* "gateway/io/sim800/sim800.pyx":209
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
  * 
  *     async def request_pin_status(self):             # <<<<<<<<<<<<<<
@@ -5413,7 +5433,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_40request_pin_sta
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 207, __pyx_L1_error)
+    __PYX_ERR(0, 209, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5421,7 +5441,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_40request_pin_sta
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12, __pyx_codeobj__20, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_pin_status, __pyx_n_s_Sim800_request_pin_status, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12, __pyx_codeobj__20, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_pin_status, __pyx_n_s_Sim800_request_pin_status, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5457,9 +5477,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 209, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":216
+  /* "gateway/io/sim800/sim800.pyx":218
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))             # <<<<<<<<<<<<<<
@@ -5467,24 +5487,24 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
  *     async def request_imei(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_PINStatus) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_PINStatus) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_PinStatusParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_PinStatusParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__21, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__21, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5501,7 +5521,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -5515,11 +5535,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 216, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 218, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -5528,7 +5548,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":207
+  /* "gateway/io/sim800/sim800.pyx":209
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
  * 
  *     async def request_pin_status(self):             # <<<<<<<<<<<<<<
@@ -5557,7 +5577,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_42generator12(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":218
+/* "gateway/io/sim800/sim800.pyx":220
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
  * 
  *     async def request_imei(self):             # <<<<<<<<<<<<<<
@@ -5589,7 +5609,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_43request_imei(CY
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 218, __pyx_L1_error)
+    __PYX_ERR(0, 220, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5597,7 +5617,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_43request_imei(CY
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13, __pyx_codeobj__22, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_imei, __pyx_n_s_Sim800_request_imei, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13, __pyx_codeobj__22, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_imei, __pyx_n_s_Sim800_request_imei, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5633,9 +5653,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 218, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 220, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":227
+  /* "gateway/io/sim800/sim800.pyx":229
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))             # <<<<<<<<<<<<<<
@@ -5643,24 +5663,24 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
  *     async def request_network_status(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_IMEI) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_IMEI) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_IMEIParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_IMEIParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__23, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__23, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5677,7 +5697,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -5691,11 +5711,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 227, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 229, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 227, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -5704,7 +5724,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":218
+  /* "gateway/io/sim800/sim800.pyx":220
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
  * 
  *     async def request_imei(self):             # <<<<<<<<<<<<<<
@@ -5733,7 +5753,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_45generator13(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":229
+/* "gateway/io/sim800/sim800.pyx":231
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
  * 
  *     async def request_network_status(self):             # <<<<<<<<<<<<<<
@@ -5765,7 +5785,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_46request_network
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 229, __pyx_L1_error)
+    __PYX_ERR(0, 231, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5773,7 +5793,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_46request_network
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14, __pyx_codeobj__24, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_network_status, __pyx_n_s_Sim800_request_network_status, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14, __pyx_codeobj__24, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_network_status, __pyx_n_s_Sim800_request_network_status, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 231, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5809,9 +5829,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 231, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":238
+  /* "gateway/io/sim800/sim800.pyx":240
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))             # <<<<<<<<<<<<<<
@@ -5819,24 +5839,24 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
  *     async def set_echo_mode(self, mode):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_NetworkStatus) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_NetworkStatus) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_NetworkStatusParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_NetworkStatusParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__25, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__25, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5853,7 +5873,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -5867,11 +5887,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 238, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 240, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 238, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -5880,7 +5900,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":229
+  /* "gateway/io/sim800/sim800.pyx":231
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
  * 
  *     async def request_network_status(self):             # <<<<<<<<<<<<<<
@@ -5909,7 +5929,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_48generator14(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":240
+/* "gateway/io/sim800/sim800.pyx":242
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
  * 
  *     async def set_echo_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -5950,11 +5970,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_50set_echo_mode(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_echo_mode", 1, 2, 2, 1); __PYX_ERR(0, 240, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_echo_mode", 1, 2, 2, 1); __PYX_ERR(0, 242, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_echo_mode") < 0)) __PYX_ERR(0, 240, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_echo_mode") < 0)) __PYX_ERR(0, 242, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5967,7 +5987,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_50set_echo_mode(P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_echo_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 240, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_echo_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 242, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.set_echo_mode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5989,7 +6009,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_49set_echo_mode(C
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 240, __pyx_L1_error)
+    __PYX_ERR(0, 242, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6000,7 +6020,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_49set_echo_mode(C
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_mode);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_mode);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15, __pyx_codeobj__26, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_echo_mode, __pyx_n_s_Sim800_set_echo_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 240, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15, __pyx_codeobj__26, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_echo_mode, __pyx_n_s_Sim800_set_echo_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 242, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6038,23 +6058,23 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 240, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 242, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":252
+  /* "gateway/io/sim800/sim800.pyx":254
  *         """
  * 
  *         event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))             # <<<<<<<<<<<<<<
  * 
  *         if not event.error:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_ATE, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_ATE, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -6068,18 +6088,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_mode) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_mode);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 252, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_EchoMode) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_EchoMode) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -6097,7 +6117,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -6111,48 +6131,48 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 252, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 254, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_event = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":254
+  /* "gateway/io/sim800/sim800.pyx":256
  *         event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))
  * 
  *         if not event.error:             # <<<<<<<<<<<<<<
  *             self.serial_loop.echo = bool(mode)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 254, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_8 = ((!__pyx_t_7) != 0);
   if (__pyx_t_8) {
 
-    /* "gateway/io/sim800/sim800.pyx":255
+    /* "gateway/io/sim800/sim800.pyx":257
  * 
  *         if not event.error:
  *             self.serial_loop.echo = bool(mode)             # <<<<<<<<<<<<<<
  * 
  *         return event
  */
-    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_mode); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 255, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_8))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_mode); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 257, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_8))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_echo, __pyx_t_1) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_echo, __pyx_t_1) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "gateway/io/sim800/sim800.pyx":254
+    /* "gateway/io/sim800/sim800.pyx":256
  *         event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))
  * 
  *         if not event.error:             # <<<<<<<<<<<<<<
@@ -6161,7 +6181,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
  */
   }
 
-  /* "gateway/io/sim800/sim800.pyx":257
+  /* "gateway/io/sim800/sim800.pyx":259
  *             self.serial_loop.echo = bool(mode)
  * 
  *         return event             # <<<<<<<<<<<<<<
@@ -6173,7 +6193,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":240
+  /* "gateway/io/sim800/sim800.pyx":242
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
  * 
  *     async def set_echo_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -6202,7 +6222,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_51generator15(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":259
+/* "gateway/io/sim800/sim800.pyx":261
  *         return event
  * 
  *     async def set_caller_identification_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -6243,11 +6263,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_53set_caller_iden
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_caller_identification_mode", 1, 2, 2, 1); __PYX_ERR(0, 259, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_caller_identification_mode", 1, 2, 2, 1); __PYX_ERR(0, 261, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_caller_identification_mode") < 0)) __PYX_ERR(0, 259, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_caller_identification_mode") < 0)) __PYX_ERR(0, 261, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6260,7 +6280,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_53set_caller_iden
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_caller_identification_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 259, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_caller_identification_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 261, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.set_caller_identification_mode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6282,7 +6302,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_52set_caller_iden
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 259, __pyx_L1_error)
+    __PYX_ERR(0, 261, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6293,7 +6313,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_52set_caller_iden
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_mode);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_mode);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16, __pyx_codeobj__27, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_caller_identification_mode, __pyx_n_s_Sim800_set_caller_identification, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 259, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16, __pyx_codeobj__27, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_caller_identification_mode, __pyx_n_s_Sim800_set_caller_identification, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 261, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6331,23 +6351,23 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 259, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 261, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":271
+  /* "gateway/io/sim800/sim800.pyx":273
  *         """
  * 
  *         event = await self.write(cmd.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))             # <<<<<<<<<<<<<<
  * 
  *         if not event.error:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CLIP, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CLIP, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -6361,18 +6381,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_mode) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_mode);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_CallerIdentificationMode) < 0) __PYX_ERR(0, 271, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 271, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_CallerIdentificationMode) < 0) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -6390,7 +6410,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -6404,48 +6424,48 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 271, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 273, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 271, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 273, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_event = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":273
+  /* "gateway/io/sim800/sim800.pyx":275
  *         event = await self.write(cmd.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
  * 
  *         if not event.error:             # <<<<<<<<<<<<<<
  *             self.serial_loop.caller_identification = bool(mode)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_error); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_8 = ((!__pyx_t_7) != 0);
   if (__pyx_t_8) {
 
-    /* "gateway/io/sim800/sim800.pyx":274
+    /* "gateway/io/sim800/sim800.pyx":276
  * 
  *         if not event.error:
  *             self.serial_loop.caller_identification = bool(mode)             # <<<<<<<<<<<<<<
  * 
  *         return event
  */
-    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_mode); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 274, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_8))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_mode); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 276, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong((!(!__pyx_t_8))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_serial_loop); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_caller_identification, __pyx_t_1) < 0) __PYX_ERR(0, 274, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_caller_identification, __pyx_t_1) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "gateway/io/sim800/sim800.pyx":273
+    /* "gateway/io/sim800/sim800.pyx":275
  *         event = await self.write(cmd.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
  * 
  *         if not event.error:             # <<<<<<<<<<<<<<
@@ -6454,7 +6474,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
  */
   }
 
-  /* "gateway/io/sim800/sim800.pyx":276
+  /* "gateway/io/sim800/sim800.pyx":278
  *             self.serial_loop.caller_identification = bool(mode)
  * 
  *         return event             # <<<<<<<<<<<<<<
@@ -6466,7 +6486,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":259
+  /* "gateway/io/sim800/sim800.pyx":261
  *         return event
  * 
  *     async def set_caller_identification_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -6495,7 +6515,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_54generator16(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":278
+/* "gateway/io/sim800/sim800.pyx":280
  *         return event
  * 
  *     async def set_error_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -6536,11 +6556,11 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_56set_error_mode(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mode)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_error_mode", 1, 2, 2, 1); __PYX_ERR(0, 278, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_error_mode", 1, 2, 2, 1); __PYX_ERR(0, 280, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_error_mode") < 0)) __PYX_ERR(0, 278, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_error_mode") < 0)) __PYX_ERR(0, 280, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6553,7 +6573,7 @@ static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_56set_error_mode(
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_error_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 278, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_error_mode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 280, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.set_error_mode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6575,7 +6595,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_55set_error_mode(
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 278, __pyx_L1_error)
+    __PYX_ERR(0, 280, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6586,7 +6606,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_55set_error_mode(
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_mode);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_mode);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17, __pyx_codeobj__28, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_error_mode, __pyx_n_s_Sim800_set_error_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 278, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17, __pyx_codeobj__28, (PyObject *) __pyx_cur_scope, __pyx_n_s_set_error_mode, __pyx_n_s_Sim800_set_error_mode, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 280, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6622,9 +6642,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 278, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 280, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":291
+  /* "gateway/io/sim800/sim800.pyx":293
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))             # <<<<<<<<<<<<<<
@@ -6632,14 +6652,14 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
  *     async def request_subscriber_number(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMEE, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_AT_CMEE, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -6653,18 +6673,18 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
   }
   __pyx_t_3 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_cur_scope->__pyx_v_mode) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_cur_scope->__pyx_v_mode);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ErrorMode) < 0) __PYX_ERR(0, 291, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_ErrorMode) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -6682,7 +6702,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -6696,11 +6716,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 291, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 293, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 291, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -6709,7 +6729,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":278
+  /* "gateway/io/sim800/sim800.pyx":280
  *         return event
  * 
  *     async def set_error_mode(self, mode):             # <<<<<<<<<<<<<<
@@ -6738,7 +6758,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_57generator17(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":293
+/* "gateway/io/sim800/sim800.pyx":295
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
  * 
  *     async def request_subscriber_number(self):             # <<<<<<<<<<<<<<
@@ -6770,7 +6790,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_58request_subscri
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 293, __pyx_L1_error)
+    __PYX_ERR(0, 295, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6778,7 +6798,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_58request_subscri
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18, __pyx_codeobj__29, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_subscriber_number, __pyx_n_s_Sim800_request_subscriber_number, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18, __pyx_codeobj__29, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_subscriber_number, __pyx_n_s_Sim800_request_subscriber_number, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 295, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6813,9 +6833,9 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 293, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 295, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":300
+  /* "gateway/io/sim800/sim800.pyx":302
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))             # <<<<<<<<<<<<<<
@@ -6823,17 +6843,17 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
  *     async def request_imsi(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SubscriberNumber) < 0) __PYX_ERR(0, 300, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__30, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 300, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_SubscriberNumber) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__30, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6850,7 +6870,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -6864,11 +6884,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 300, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 302, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 300, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -6877,7 +6897,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":293
+  /* "gateway/io/sim800/sim800.pyx":295
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
  * 
  *     async def request_subscriber_number(self):             # <<<<<<<<<<<<<<
@@ -6905,7 +6925,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_60generator18(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":302
+/* "gateway/io/sim800/sim800.pyx":304
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
  * 
  *     async def request_imsi(self):             # <<<<<<<<<<<<<<
@@ -6937,7 +6957,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_61request_imsi(CY
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 302, __pyx_L1_error)
+    __PYX_ERR(0, 304, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6945,7 +6965,7 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_61request_imsi(CY
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19, __pyx_codeobj__31, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_imsi, __pyx_n_s_Sim800_request_imsi, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 302, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19, __pyx_codeobj__31, (PyObject *) __pyx_cur_scope, __pyx_n_s_request_imsi, __pyx_n_s_Sim800_request_imsi, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6981,34 +7001,34 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__p
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 302, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 304, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":309
+  /* "gateway/io/sim800/sim800.pyx":311
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))             # <<<<<<<<<<<<<<
  * 
- *     async def setup(self):
+ *     async def setup(self, pin=None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_cmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_ATCommand); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_IMSI) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_name, __pyx_n_u_IMSI) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_atparser); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_IMEIParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_IMEIParser); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_parser, __pyx_t_6) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__32, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__32, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -7025,7 +7045,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__p
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_1);
@@ -7039,11 +7059,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__p
     __pyx_generator->resume_label = 1;
     return __pyx_r;
     __pyx_L4_resume_from_await:;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 309, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 311, __pyx_L1_error)
     __pyx_t_1 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_1);
   } else {
     __pyx_t_1 = NULL;
-    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 309, __pyx_L1_error)
+    if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_1) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = NULL; __Pyx_ReturnWithStopIteration(__pyx_t_1);
@@ -7052,7 +7072,7 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__p
   goto __pyx_L0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":302
+  /* "gateway/io/sim800/sim800.pyx":304
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
  * 
  *     async def request_imsi(self):             # <<<<<<<<<<<<<<
@@ -7081,30 +7101,82 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_63generator19(__p
 }
 static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "gateway/io/sim800/sim800.pyx":311
+/* "gateway/io/sim800/sim800.pyx":313
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
  * 
- *     async def setup(self):             # <<<<<<<<<<<<<<
+ *     async def setup(self, pin=None):             # <<<<<<<<<<<<<<
  *         """
  *         Setup the module to return error codes and set sms commands to text mode.
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static char __pyx_doc_7gateway_2io_6sim800_6sim800_6Sim800_64setup[] = "\n        Setup the module to return error codes and set sms commands to text mode.\n\n        :return: nothing\n        ";
-static PyMethodDef __pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_65setup = {"setup", (PyCFunction)__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup, METH_O, __pyx_doc_7gateway_2io_6sim800_6sim800_6Sim800_64setup};
-static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyMethodDef __pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_65setup = {"setup", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7gateway_2io_6sim800_6sim800_6Sim800_64setup};
+static PyObject *__pyx_pw_7gateway_2io_6sim800_6sim800_6Sim800_65setup(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_self = 0;
+  PyObject *__pyx_v_pin = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("setup (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(__pyx_self, ((PyObject *)__pyx_v_self));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_pin,0};
+    PyObject* values[2] = {0,0};
+    values[1] = ((PyObject *)((PyObject *)Py_None));
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_self)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pin);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "setup") < 0)) __PYX_ERR(0, 313, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_self = values[0];
+    __pyx_v_pin = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("setup", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 313, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.setup", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(__pyx_self, __pyx_v_self, __pyx_v_pin);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_pin) {
   struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -7113,15 +7185,18 @@ static PyObject *__pyx_pf_7gateway_2io_6sim800_6sim800_6Sim800_64setup(CYTHON_UN
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 311, __pyx_L1_error)
+    __PYX_ERR(0, 313, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
   __pyx_cur_scope->__pyx_v_self = __pyx_v_self;
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_self);
+  __pyx_cur_scope->__pyx_v_pin = __pyx_v_pin;
+  __Pyx_INCREF(__pyx_cur_scope->__pyx_v_pin);
+  __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_pin);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20, __pyx_codeobj__33, (PyObject *) __pyx_cur_scope, __pyx_n_s_setup, __pyx_n_s_Sim800_setup, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 311, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Coroutine_New((__pyx_coroutine_body_t) __pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20, __pyx_codeobj__33, (PyObject *) __pyx_cur_scope, __pyx_n_s_setup, __pyx_n_s_Sim800_setup, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!gen)) __PYX_ERR(0, 313, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -7144,32 +7219,35 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
-  int __pyx_t_9;
+  PyObject *__pyx_t_9 = NULL;
+  int __pyx_t_10;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("setup", 0);
   switch (__pyx_generator->resume_label) {
     case 0: goto __pyx_L3_first_run;
-    case 1: goto __pyx_L10_resume_from_await;
-    case 2: goto __pyx_L11_resume_from_await;
-    case 3: goto __pyx_L12_resume_from_await;
+    case 1: goto __pyx_L11_resume_from_await;
+    case 2: goto __pyx_L13_resume_from_await;
+    case 3: goto __pyx_L14_resume_from_await;
+    case 4: goto __pyx_L15_resume_from_await;
+    case 5: goto __pyx_L16_resume_from_await;
     default: /* CPython raises the right error here */
     __Pyx_RefNannyFinishContext();
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 313, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":318
+  /* "gateway/io/sim800/sim800.pyx":320
  *         """
  * 
  *         try:             # <<<<<<<<<<<<<<
- *             _raise_event_error(await self.set_sms_mode(1))
- *             _raise_event_error(await self.set_error_mode(1))
+ * 
+ *             if pin:
  */
   {
     __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
@@ -7178,121 +7256,262 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "gateway/io/sim800/sim800.pyx":319
- * 
+      /* "gateway/io/sim800/sim800.pyx":322
  *         try:
+ * 
+ *             if pin:             # <<<<<<<<<<<<<<
+ *                 event = _raise_event_error(await self.request_pin_status())
+ *                 if event.data != response_objects.PINStatus.Ready:
+ */
+      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_cur_scope->__pyx_v_pin); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 322, __pyx_L4_error)
+      if (__pyx_t_4) {
+
+        /* "gateway/io/sim800/sim800.pyx":323
+ * 
+ *             if pin:
+ *                 event = _raise_event_error(await self.request_pin_status())             # <<<<<<<<<<<<<<
+ *                 if event.data != response_objects.PINStatus.Ready:
+ *                     _raise_event_error(await self.enter_pin(pin))
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 323, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_request_pin_status); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 323, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_8);
+        __pyx_t_9 = NULL;
+        if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+          __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+          if (likely(__pyx_t_9)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+            __Pyx_INCREF(__pyx_t_9);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_8, function);
+          }
+        }
+        __pyx_t_7 = (__pyx_t_9) ? __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_9) : __Pyx_PyObject_CallNoArg(__pyx_t_8);
+        __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+        if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 323, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_7);
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __Pyx_XGOTREF(__pyx_r);
+        if (likely(__pyx_r)) {
+          __Pyx_XGIVEREF(__pyx_t_1);
+          __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+          __Pyx_XGIVEREF(__pyx_t_2);
+          __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+          __Pyx_XGIVEREF(__pyx_t_3);
+          __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+          __Pyx_XGIVEREF(__pyx_t_5);
+          __pyx_cur_scope->__pyx_t_3 = __pyx_t_5;
+          __Pyx_XGIVEREF(__pyx_t_6);
+          __pyx_cur_scope->__pyx_t_4 = __pyx_t_6;
+          __Pyx_XGIVEREF(__pyx_r);
+          __Pyx_RefNannyFinishContext();
+          __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+          /* return from generator, awaiting value */
+          __pyx_generator->resume_label = 1;
+          return __pyx_r;
+          __pyx_L11_resume_from_await:;
+          __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+          __pyx_cur_scope->__pyx_t_0 = 0;
+          __Pyx_XGOTREF(__pyx_t_1);
+          __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+          __pyx_cur_scope->__pyx_t_1 = 0;
+          __Pyx_XGOTREF(__pyx_t_2);
+          __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+          __pyx_cur_scope->__pyx_t_2 = 0;
+          __Pyx_XGOTREF(__pyx_t_3);
+          __pyx_t_5 = __pyx_cur_scope->__pyx_t_3;
+          __pyx_cur_scope->__pyx_t_3 = 0;
+          __Pyx_XGOTREF(__pyx_t_5);
+          __pyx_t_6 = __pyx_cur_scope->__pyx_t_4;
+          __pyx_cur_scope->__pyx_t_4 = 0;
+          __Pyx_XGOTREF(__pyx_t_6);
+          if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 323, __pyx_L4_error)
+          __pyx_t_7 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_7);
+        } else {
+          __pyx_t_7 = NULL;
+          if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_7) < 0) __PYX_ERR(0, 323, __pyx_L4_error)
+          __Pyx_GOTREF(__pyx_t_7);
+        }
+        __pyx_t_8 = NULL;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+          __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_8)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+            __Pyx_INCREF(__pyx_t_8);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_6, function);
+          }
+        }
+        __pyx_t_5 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7);
+        __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 323, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __Pyx_GIVEREF(__pyx_t_5);
+        __pyx_cur_scope->__pyx_v_event = __pyx_t_5;
+        __pyx_t_5 = 0;
+
+        /* "gateway/io/sim800/sim800.pyx":324
+ *             if pin:
+ *                 event = _raise_event_error(await self.request_pin_status())
+ *                 if event.data != response_objects.PINStatus.Ready:             # <<<<<<<<<<<<<<
+ *                     _raise_event_error(await self.enter_pin(pin))
+ * 
+ */
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_event, __pyx_n_s_data); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_response_objects); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_PINStatus); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_7);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_Ready); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_t_6, Py_NE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 324, __pyx_L4_error)
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+        if (__pyx_t_4) {
+
+          /* "gateway/io/sim800/sim800.pyx":325
+ *                 event = _raise_event_error(await self.request_pin_status())
+ *                 if event.data != response_objects.PINStatus.Ready:
+ *                     _raise_event_error(await self.enter_pin(pin))             # <<<<<<<<<<<<<<
+ * 
+ *             _raise_event_error(await self.set_sms_mode(1))
+ */
+          __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 325, __pyx_L4_error)
+          __Pyx_GOTREF(__pyx_t_6);
+          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_enter_pin); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 325, __pyx_L4_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __pyx_t_9 = NULL;
+          if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+            __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+            if (likely(__pyx_t_9)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+              __Pyx_INCREF(__pyx_t_9);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_8, function);
+            }
+          }
+          __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_9, __pyx_cur_scope->__pyx_v_pin) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_cur_scope->__pyx_v_pin);
+          __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 325, __pyx_L4_error)
+          __Pyx_GOTREF(__pyx_t_5);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_5);
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+          __Pyx_XGOTREF(__pyx_r);
+          if (likely(__pyx_r)) {
+            __Pyx_XGIVEREF(__pyx_t_1);
+            __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+            __Pyx_XGIVEREF(__pyx_t_2);
+            __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+            __Pyx_XGIVEREF(__pyx_t_3);
+            __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+            __Pyx_XGIVEREF(__pyx_t_6);
+            __pyx_cur_scope->__pyx_t_3 = __pyx_t_6;
+            __Pyx_XGIVEREF(__pyx_t_7);
+            __pyx_cur_scope->__pyx_t_4 = __pyx_t_7;
+            __Pyx_XGIVEREF(__pyx_r);
+            __Pyx_RefNannyFinishContext();
+            __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+            /* return from generator, awaiting value */
+            __pyx_generator->resume_label = 2;
+            return __pyx_r;
+            __pyx_L13_resume_from_await:;
+            __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+            __pyx_cur_scope->__pyx_t_0 = 0;
+            __Pyx_XGOTREF(__pyx_t_1);
+            __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+            __pyx_cur_scope->__pyx_t_1 = 0;
+            __Pyx_XGOTREF(__pyx_t_2);
+            __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+            __pyx_cur_scope->__pyx_t_2 = 0;
+            __Pyx_XGOTREF(__pyx_t_3);
+            __pyx_t_6 = __pyx_cur_scope->__pyx_t_3;
+            __pyx_cur_scope->__pyx_t_3 = 0;
+            __Pyx_XGOTREF(__pyx_t_6);
+            __pyx_t_7 = __pyx_cur_scope->__pyx_t_4;
+            __pyx_cur_scope->__pyx_t_4 = 0;
+            __Pyx_XGOTREF(__pyx_t_7);
+            if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 325, __pyx_L4_error)
+            __pyx_t_5 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_5);
+          } else {
+            __pyx_t_5 = NULL;
+            if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_5) < 0) __PYX_ERR(0, 325, __pyx_L4_error)
+            __Pyx_GOTREF(__pyx_t_5);
+          }
+          __pyx_t_8 = NULL;
+          if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+            __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_6);
+            if (likely(__pyx_t_8)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+              __Pyx_INCREF(__pyx_t_8);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_6, function);
+            }
+          }
+          __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5);
+          __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+          if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 325, __pyx_L4_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+          /* "gateway/io/sim800/sim800.pyx":324
+ *             if pin:
+ *                 event = _raise_event_error(await self.request_pin_status())
+ *                 if event.data != response_objects.PINStatus.Ready:             # <<<<<<<<<<<<<<
+ *                     _raise_event_error(await self.enter_pin(pin))
+ * 
+ */
+        }
+
+        /* "gateway/io/sim800/sim800.pyx":322
+ *         try:
+ * 
+ *             if pin:             # <<<<<<<<<<<<<<
+ *                 event = _raise_event_error(await self.request_pin_status())
+ *                 if event.data != response_objects.PINStatus.Ready:
+ */
+      }
+
+      /* "gateway/io/sim800/sim800.pyx":327
+ *                     _raise_event_error(await self.enter_pin(pin))
+ * 
  *             _raise_event_error(await self.set_sms_mode(1))             # <<<<<<<<<<<<<<
  *             _raise_event_error(await self.set_error_mode(1))
  *             _raise_event_error(await self.set_caller_identification_mode(1))
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 319, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_sms_mode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 319, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
-        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
-        if (likely(__pyx_t_8)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-          __Pyx_INCREF(__pyx_t_8);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_7, function);
-        }
-      }
-      __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_int_1);
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 319, __pyx_L4_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L4_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_6);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XGOTREF(__pyx_r);
-      if (likely(__pyx_r)) {
-        __Pyx_XGIVEREF(__pyx_t_1);
-        __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
-        __Pyx_XGIVEREF(__pyx_t_2);
-        __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
-        __Pyx_XGIVEREF(__pyx_t_3);
-        __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
-        __Pyx_XGIVEREF(__pyx_t_4);
-        __pyx_cur_scope->__pyx_t_3 = __pyx_t_4;
-        __Pyx_XGIVEREF(__pyx_t_5);
-        __pyx_cur_scope->__pyx_t_4 = __pyx_t_5;
-        __Pyx_XGIVEREF(__pyx_r);
-        __Pyx_RefNannyFinishContext();
-        __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
-        /* return from generator, awaiting value */
-        __pyx_generator->resume_label = 1;
-        return __pyx_r;
-        __pyx_L10_resume_from_await:;
-        __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
-        __pyx_cur_scope->__pyx_t_0 = 0;
-        __Pyx_XGOTREF(__pyx_t_1);
-        __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
-        __pyx_cur_scope->__pyx_t_1 = 0;
-        __Pyx_XGOTREF(__pyx_t_2);
-        __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
-        __pyx_cur_scope->__pyx_t_2 = 0;
-        __Pyx_XGOTREF(__pyx_t_3);
-        __pyx_t_4 = __pyx_cur_scope->__pyx_t_3;
-        __pyx_cur_scope->__pyx_t_3 = 0;
-        __Pyx_XGOTREF(__pyx_t_4);
-        __pyx_t_5 = __pyx_cur_scope->__pyx_t_4;
-        __pyx_cur_scope->__pyx_t_4 = 0;
-        __Pyx_XGOTREF(__pyx_t_5);
-        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 319, __pyx_L4_error)
-        __pyx_t_6 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_6);
-      } else {
-        __pyx_t_6 = NULL;
-        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_6) < 0) __PYX_ERR(0, 319, __pyx_L4_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      __pyx_t_7 = NULL;
-      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_5);
-        if (likely(__pyx_t_7)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-          __Pyx_INCREF(__pyx_t_7);
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_sms_mode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 327, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_9 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+        if (likely(__pyx_t_9)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+          __Pyx_INCREF(__pyx_t_9);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_5, function);
+          __Pyx_DECREF_SET(__pyx_t_8, function);
         }
       }
-      __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_9, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_int_1);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 327, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_5);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-      /* "gateway/io/sim800/sim800.pyx":320
- *         try:
- *             _raise_event_error(await self.set_sms_mode(1))
- *             _raise_event_error(await self.set_error_mode(1))             # <<<<<<<<<<<<<<
- *             _raise_event_error(await self.set_caller_identification_mode(1))
- *         except Sim800Error:
- */
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 320, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_error_mode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 320, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
-        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
-        if (likely(__pyx_t_8)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-          __Pyx_INCREF(__pyx_t_8);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_7, function);
-        }
-      }
-      __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_int_1);
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 320, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_6);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_XGOTREF(__pyx_r);
       if (likely(__pyx_r)) {
         __Pyx_XGIVEREF(__pyx_t_1);
@@ -7301,104 +7520,17 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
         __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
         __Pyx_XGIVEREF(__pyx_t_3);
         __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
-        __Pyx_XGIVEREF(__pyx_t_4);
-        __pyx_cur_scope->__pyx_t_3 = __pyx_t_4;
-        __Pyx_XGIVEREF(__pyx_t_5);
-        __pyx_cur_scope->__pyx_t_4 = __pyx_t_5;
-        __Pyx_XGIVEREF(__pyx_r);
-        __Pyx_RefNannyFinishContext();
-        __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
-        /* return from generator, awaiting value */
-        __pyx_generator->resume_label = 2;
-        return __pyx_r;
-        __pyx_L11_resume_from_await:;
-        __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
-        __pyx_cur_scope->__pyx_t_0 = 0;
-        __Pyx_XGOTREF(__pyx_t_1);
-        __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
-        __pyx_cur_scope->__pyx_t_1 = 0;
-        __Pyx_XGOTREF(__pyx_t_2);
-        __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
-        __pyx_cur_scope->__pyx_t_2 = 0;
-        __Pyx_XGOTREF(__pyx_t_3);
-        __pyx_t_4 = __pyx_cur_scope->__pyx_t_3;
-        __pyx_cur_scope->__pyx_t_3 = 0;
-        __Pyx_XGOTREF(__pyx_t_4);
-        __pyx_t_5 = __pyx_cur_scope->__pyx_t_4;
-        __pyx_cur_scope->__pyx_t_4 = 0;
-        __Pyx_XGOTREF(__pyx_t_5);
-        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 320, __pyx_L4_error)
-        __pyx_t_6 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_6);
-      } else {
-        __pyx_t_6 = NULL;
-        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_6) < 0) __PYX_ERR(0, 320, __pyx_L4_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      __pyx_t_7 = NULL;
-      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_5);
-        if (likely(__pyx_t_7)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-          __Pyx_INCREF(__pyx_t_7);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_5, function);
-        }
-      }
-      __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 320, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-      /* "gateway/io/sim800/sim800.pyx":321
- *             _raise_event_error(await self.set_sms_mode(1))
- *             _raise_event_error(await self.set_error_mode(1))
- *             _raise_event_error(await self.set_caller_identification_mode(1))             # <<<<<<<<<<<<<<
- *         except Sim800Error:
- *             raise
- */
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 321, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_caller_identification_mode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 321, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
-        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
-        if (likely(__pyx_t_8)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-          __Pyx_INCREF(__pyx_t_8);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_7, function);
-        }
-      }
-      __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_int_1);
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 321, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_6);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XGOTREF(__pyx_r);
-      if (likely(__pyx_r)) {
-        __Pyx_XGIVEREF(__pyx_t_1);
-        __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
-        __Pyx_XGIVEREF(__pyx_t_2);
-        __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
-        __Pyx_XGIVEREF(__pyx_t_3);
-        __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
-        __Pyx_XGIVEREF(__pyx_t_4);
-        __pyx_cur_scope->__pyx_t_3 = __pyx_t_4;
-        __Pyx_XGIVEREF(__pyx_t_5);
-        __pyx_cur_scope->__pyx_t_4 = __pyx_t_5;
+        __Pyx_XGIVEREF(__pyx_t_6);
+        __pyx_cur_scope->__pyx_t_3 = __pyx_t_6;
+        __Pyx_XGIVEREF(__pyx_t_7);
+        __pyx_cur_scope->__pyx_t_4 = __pyx_t_7;
         __Pyx_XGIVEREF(__pyx_r);
         __Pyx_RefNannyFinishContext();
         __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
         /* return from generator, awaiting value */
         __pyx_generator->resume_label = 3;
         return __pyx_r;
-        __pyx_L12_resume_from_await:;
+        __pyx_L14_resume_from_await:;
         __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
         __pyx_cur_scope->__pyx_t_0 = 0;
         __Pyx_XGOTREF(__pyx_t_1);
@@ -7408,43 +7540,217 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
         __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
         __pyx_cur_scope->__pyx_t_2 = 0;
         __Pyx_XGOTREF(__pyx_t_3);
-        __pyx_t_4 = __pyx_cur_scope->__pyx_t_3;
+        __pyx_t_6 = __pyx_cur_scope->__pyx_t_3;
         __pyx_cur_scope->__pyx_t_3 = 0;
-        __Pyx_XGOTREF(__pyx_t_4);
-        __pyx_t_5 = __pyx_cur_scope->__pyx_t_4;
+        __Pyx_XGOTREF(__pyx_t_6);
+        __pyx_t_7 = __pyx_cur_scope->__pyx_t_4;
         __pyx_cur_scope->__pyx_t_4 = 0;
-        __Pyx_XGOTREF(__pyx_t_5);
-        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 321, __pyx_L4_error)
-        __pyx_t_6 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_6);
+        __Pyx_XGOTREF(__pyx_t_7);
+        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 327, __pyx_L4_error)
+        __pyx_t_5 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_5);
       } else {
-        __pyx_t_6 = NULL;
-        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_6) < 0) __PYX_ERR(0, 321, __pyx_L4_error)
-        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_5 = NULL;
+        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_5) < 0) __PYX_ERR(0, 327, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_5);
       }
-      __pyx_t_7 = NULL;
-      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_5);
-        if (likely(__pyx_t_7)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-          __Pyx_INCREF(__pyx_t_7);
+      __pyx_t_8 = NULL;
+      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_8)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_8);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_5, function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
         }
       }
-      __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 321, __pyx_L4_error)
-      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5);
+      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 327, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "gateway/io/sim800/sim800.pyx":318
+      /* "gateway/io/sim800/sim800.pyx":328
+ * 
+ *             _raise_event_error(await self.set_sms_mode(1))
+ *             _raise_event_error(await self.set_error_mode(1))             # <<<<<<<<<<<<<<
+ *             _raise_event_error(await self.set_caller_identification_mode(1))
+ *         except Sim800Error:
+ */
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 328, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_error_mode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 328, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_9 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+        if (likely(__pyx_t_9)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+          __Pyx_INCREF(__pyx_t_9);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_8, function);
+        }
+      }
+      __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_9, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_int_1);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 328, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_5);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_XGOTREF(__pyx_r);
+      if (likely(__pyx_r)) {
+        __Pyx_XGIVEREF(__pyx_t_1);
+        __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+        __Pyx_XGIVEREF(__pyx_t_2);
+        __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+        __Pyx_XGIVEREF(__pyx_t_3);
+        __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+        __Pyx_XGIVEREF(__pyx_t_6);
+        __pyx_cur_scope->__pyx_t_3 = __pyx_t_6;
+        __Pyx_XGIVEREF(__pyx_t_7);
+        __pyx_cur_scope->__pyx_t_4 = __pyx_t_7;
+        __Pyx_XGIVEREF(__pyx_r);
+        __Pyx_RefNannyFinishContext();
+        __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+        /* return from generator, awaiting value */
+        __pyx_generator->resume_label = 4;
+        return __pyx_r;
+        __pyx_L15_resume_from_await:;
+        __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+        __pyx_cur_scope->__pyx_t_0 = 0;
+        __Pyx_XGOTREF(__pyx_t_1);
+        __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+        __pyx_cur_scope->__pyx_t_1 = 0;
+        __Pyx_XGOTREF(__pyx_t_2);
+        __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+        __pyx_cur_scope->__pyx_t_2 = 0;
+        __Pyx_XGOTREF(__pyx_t_3);
+        __pyx_t_6 = __pyx_cur_scope->__pyx_t_3;
+        __pyx_cur_scope->__pyx_t_3 = 0;
+        __Pyx_XGOTREF(__pyx_t_6);
+        __pyx_t_7 = __pyx_cur_scope->__pyx_t_4;
+        __pyx_cur_scope->__pyx_t_4 = 0;
+        __Pyx_XGOTREF(__pyx_t_7);
+        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 328, __pyx_L4_error)
+        __pyx_t_5 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_5);
+      } else {
+        __pyx_t_5 = NULL;
+        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_5) < 0) __PYX_ERR(0, 328, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_5);
+      }
+      __pyx_t_8 = NULL;
+      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_8)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_8);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+        }
+      }
+      __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5);
+      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 328, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+      /* "gateway/io/sim800/sim800.pyx":329
+ *             _raise_event_error(await self.set_sms_mode(1))
+ *             _raise_event_error(await self.set_error_mode(1))
+ *             _raise_event_error(await self.set_caller_identification_mode(1))             # <<<<<<<<<<<<<<
+ *         except Sim800Error:
+ *             raise
+ */
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_raise_event_error); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 329, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_self, __pyx_n_s_set_caller_identification_mode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 329, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_9 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+        if (likely(__pyx_t_9)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+          __Pyx_INCREF(__pyx_t_9);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_8, function);
+        }
+      }
+      __pyx_t_5 = (__pyx_t_9) ? __Pyx_PyObject_Call2Args(__pyx_t_8, __pyx_t_9, __pyx_int_1) : __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_int_1);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 329, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_r = __Pyx_Coroutine_Yield_From(__pyx_generator, __pyx_t_5);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_XGOTREF(__pyx_r);
+      if (likely(__pyx_r)) {
+        __Pyx_XGIVEREF(__pyx_t_1);
+        __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+        __Pyx_XGIVEREF(__pyx_t_2);
+        __pyx_cur_scope->__pyx_t_1 = __pyx_t_2;
+        __Pyx_XGIVEREF(__pyx_t_3);
+        __pyx_cur_scope->__pyx_t_2 = __pyx_t_3;
+        __Pyx_XGIVEREF(__pyx_t_6);
+        __pyx_cur_scope->__pyx_t_3 = __pyx_t_6;
+        __Pyx_XGIVEREF(__pyx_t_7);
+        __pyx_cur_scope->__pyx_t_4 = __pyx_t_7;
+        __Pyx_XGIVEREF(__pyx_r);
+        __Pyx_RefNannyFinishContext();
+        __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+        /* return from generator, awaiting value */
+        __pyx_generator->resume_label = 5;
+        return __pyx_r;
+        __pyx_L16_resume_from_await:;
+        __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+        __pyx_cur_scope->__pyx_t_0 = 0;
+        __Pyx_XGOTREF(__pyx_t_1);
+        __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
+        __pyx_cur_scope->__pyx_t_1 = 0;
+        __Pyx_XGOTREF(__pyx_t_2);
+        __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
+        __pyx_cur_scope->__pyx_t_2 = 0;
+        __Pyx_XGOTREF(__pyx_t_3);
+        __pyx_t_6 = __pyx_cur_scope->__pyx_t_3;
+        __pyx_cur_scope->__pyx_t_3 = 0;
+        __Pyx_XGOTREF(__pyx_t_6);
+        __pyx_t_7 = __pyx_cur_scope->__pyx_t_4;
+        __pyx_cur_scope->__pyx_t_4 = 0;
+        __Pyx_XGOTREF(__pyx_t_7);
+        if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 329, __pyx_L4_error)
+        __pyx_t_5 = __pyx_sent_value; __Pyx_INCREF(__pyx_t_5);
+      } else {
+        __pyx_t_5 = NULL;
+        if (__Pyx_PyGen_FetchStopIterationValue(&__pyx_t_5) < 0) __PYX_ERR(0, 329, __pyx_L4_error)
+        __Pyx_GOTREF(__pyx_t_5);
+      }
+      __pyx_t_8 = NULL;
+      if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_8)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_8);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+        }
+      }
+      __pyx_t_7 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_8, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5);
+      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 329, __pyx_L4_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+
+      /* "gateway/io/sim800/sim800.pyx":320
  *         """
  * 
  *         try:             # <<<<<<<<<<<<<<
- *             _raise_event_error(await self.set_sms_mode(1))
- *             _raise_event_error(await self.set_error_mode(1))
+ * 
+ *             if pin:
  */
     }
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7452,53 +7758,53 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     goto __pyx_L9_try_end;
     __pyx_L4_error:;
+    __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "gateway/io/sim800/sim800.pyx":322
+    /* "gateway/io/sim800/sim800.pyx":330
  *             _raise_event_error(await self.set_error_mode(1))
  *             _raise_event_error(await self.set_caller_identification_mode(1))
  *         except Sim800Error:             # <<<<<<<<<<<<<<
  *             raise
  */
-    __Pyx_ErrFetch(&__pyx_t_4, &__pyx_t_5, &__pyx_t_6);
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_Sim800Error); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 322, __pyx_L6_except_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_9 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_4, __pyx_t_7);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_ErrRestore(__pyx_t_4, __pyx_t_5, __pyx_t_6);
-    __pyx_t_4 = 0; __pyx_t_5 = 0; __pyx_t_6 = 0;
-    if (__pyx_t_9) {
+    __Pyx_ErrFetch(&__pyx_t_7, &__pyx_t_6, &__pyx_t_5);
+    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_Sim800Error); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 330, __pyx_L6_except_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __pyx_t_10 = __Pyx_PyErr_GivenExceptionMatches(__pyx_t_7, __pyx_t_8);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_ErrRestore(__pyx_t_7, __pyx_t_6, __pyx_t_5);
+    __pyx_t_7 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0;
+    if (__pyx_t_10) {
       __Pyx_AddTraceback("gateway.io.sim800.sim800.Sim800.setup", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_5, &__pyx_t_4) < 0) __PYX_ERR(0, 322, __pyx_L6_except_error)
-      __Pyx_GOTREF(__pyx_t_6);
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(0, 330, __pyx_L6_except_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GOTREF(__pyx_t_7);
 
-      /* "gateway/io/sim800/sim800.pyx":323
+      /* "gateway/io/sim800/sim800.pyx":331
  *             _raise_event_error(await self.set_caller_identification_mode(1))
  *         except Sim800Error:
  *             raise             # <<<<<<<<<<<<<<
  */
-      __Pyx_GIVEREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5);
-      __Pyx_XGIVEREF(__pyx_t_4);
-      __Pyx_ErrRestoreWithState(__pyx_t_6, __pyx_t_5, __pyx_t_4);
-      __pyx_t_6 = 0; __pyx_t_5 = 0; __pyx_t_4 = 0; 
-      __PYX_ERR(0, 323, __pyx_L6_except_error)
+      __Pyx_GIVEREF(__pyx_t_6);
+      __Pyx_XGIVEREF(__pyx_t_7);
+      __Pyx_ErrRestoreWithState(__pyx_t_5, __pyx_t_6, __pyx_t_7);
+      __pyx_t_5 = 0; __pyx_t_6 = 0; __pyx_t_7 = 0; 
+      __PYX_ERR(0, 331, __pyx_L6_except_error)
     }
     goto __pyx_L6_except_error;
     __pyx_L6_except_error:;
 
-    /* "gateway/io/sim800/sim800.pyx":318
+    /* "gateway/io/sim800/sim800.pyx":320
  *         """
  * 
  *         try:             # <<<<<<<<<<<<<<
- *             _raise_event_error(await self.set_sms_mode(1))
- *             _raise_event_error(await self.set_error_mode(1))
+ * 
+ *             if pin:
  */
     __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
@@ -7509,10 +7815,10 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "gateway/io/sim800/sim800.pyx":311
+  /* "gateway/io/sim800/sim800.pyx":313
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
  * 
- *     async def setup(self):             # <<<<<<<<<<<<<<
+ *     async def setup(self, pin=None):             # <<<<<<<<<<<<<<
  *         """
  *         Setup the module to return error codes and set sms commands to text mode.
  */
@@ -7521,11 +7827,11 @@ static PyObject *__pyx_gb_7gateway_2io_6sim800_6sim800_6Sim800_66generator20(__p
   PyErr_SetNone(PyExc_StopIteration);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_AddTraceback("setup", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
@@ -9510,6 +9816,8 @@ static PyObject *__pyx_tp_new_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20
 static void __pyx_tp_dealloc_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup(PyObject *o) {
   struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *p = (struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *)o;
   PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->__pyx_v_event);
+  Py_CLEAR(p->__pyx_v_pin);
   Py_CLEAR(p->__pyx_v_self);
   Py_CLEAR(p->__pyx_t_0);
   Py_CLEAR(p->__pyx_t_1);
@@ -9526,6 +9834,12 @@ static void __pyx_tp_dealloc_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_
 static int __pyx_tp_traverse_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup(PyObject *o, visitproc v, void *a) {
   int e;
   struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *p = (struct __pyx_obj_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup *)o;
+  if (p->__pyx_v_event) {
+    e = (*v)(p->__pyx_v_event, a); if (e) return e;
+  }
+  if (p->__pyx_v_pin) {
+    e = (*v)(p->__pyx_v_pin, a); if (e) return e;
+  }
   if (p->__pyx_v_self) {
     e = (*v)(p->__pyx_v_self, a); if (e) return e;
   }
@@ -9687,9 +10001,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_u_ListUnreadSMS, __pyx_k_ListUnreadSMS, sizeof(__pyx_k_ListUnreadSMS), 0, 1, 0, 1},
   {&__pyx_n_u_NetworkStatus, __pyx_k_NetworkStatus, sizeof(__pyx_k_NetworkStatus), 0, 1, 0, 1},
   {&__pyx_n_s_NetworkStatusParser, __pyx_k_NetworkStatusParser, sizeof(__pyx_k_NetworkStatusParser), 0, 0, 1, 1},
+  {&__pyx_n_s_PINStatus, __pyx_k_PINStatus, sizeof(__pyx_k_PINStatus), 0, 0, 1, 1},
   {&__pyx_n_u_PINStatus, __pyx_k_PINStatus, sizeof(__pyx_k_PINStatus), 0, 1, 0, 1},
   {&__pyx_n_s_PinStatusParser, __pyx_k_PinStatusParser, sizeof(__pyx_k_PinStatusParser), 0, 0, 1, 1},
   {&__pyx_n_u_PowerOff, __pyx_k_PowerOff, sizeof(__pyx_k_PowerOff), 0, 1, 0, 1},
+  {&__pyx_n_s_Ready, __pyx_k_Ready, sizeof(__pyx_k_Ready), 0, 0, 1, 1},
   {&__pyx_n_u_ResetDefaultConfiguration, __pyx_k_ResetDefaultConfiguration, sizeof(__pyx_k_ResetDefaultConfiguration), 0, 1, 0, 1},
   {&__pyx_n_s_SMSListParser, __pyx_k_SMSListParser, sizeof(__pyx_k_SMSListParser), 0, 0, 1, 1},
   {&__pyx_n_u_SMSMode, __pyx_k_SMSMode, sizeof(__pyx_k_SMSMode), 0, 1, 0, 1},
@@ -9756,6 +10072,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_gateway_io_sim800_at_command, __pyx_k_gateway_io_sim800_at_command, sizeof(__pyx_k_gateway_io_sim800_at_command), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_io_sim800_at_event, __pyx_k_gateway_io_sim800_at_event, sizeof(__pyx_k_gateway_io_sim800_at_event), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_io_sim800_parser, __pyx_k_gateway_io_sim800_parser, sizeof(__pyx_k_gateway_io_sim800_parser), 0, 0, 1, 1},
+  {&__pyx_n_s_gateway_io_sim800_response_objec, __pyx_k_gateway_io_sim800_response_objec, sizeof(__pyx_k_gateway_io_sim800_response_objec), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_io_sim800_serial_loop, __pyx_k_gateway_io_sim800_serial_loop, sizeof(__pyx_k_gateway_io_sim800_serial_loop), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_io_sim800_sim800, __pyx_k_gateway_io_sim800_sim800, sizeof(__pyx_k_gateway_io_sim800_sim800), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_utils, __pyx_k_gateway_utils, sizeof(__pyx_k_gateway_utils), 0, 0, 1, 1},
@@ -9789,6 +10106,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_request_subscriber_number, __pyx_k_request_subscriber_number, sizeof(__pyx_k_request_subscriber_number), 0, 0, 1, 1},
   {&__pyx_n_s_request_unread_sms, __pyx_k_request_unread_sms, sizeof(__pyx_k_request_unread_sms), 0, 0, 1, 1},
   {&__pyx_n_s_reset_default_configuration, __pyx_k_reset_default_configuration, sizeof(__pyx_k_reset_default_configuration), 0, 0, 1, 1},
+  {&__pyx_n_s_response_objects, __pyx_k_response_objects, sizeof(__pyx_k_response_objects), 0, 0, 1, 1},
   {&__pyx_n_s_run_coroutine_threadsafe, __pyx_k_run_coroutine_threadsafe, sizeof(__pyx_k_run_coroutine_threadsafe), 0, 0, 1, 1},
   {&__pyx_n_s_running, __pyx_k_running, sizeof(__pyx_k_running), 0, 0, 1, 1},
   {&__pyx_n_s_scheduler, __pyx_k_scheduler, sizeof(__pyx_k_scheduler), 0, 0, 1, 1},
@@ -9814,7 +10132,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 37, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -9824,417 +10142,420 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "gateway/io/sim800/sim800.pyx":84
+  /* "gateway/io/sim800/sim800.pyx":86
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))             # <<<<<<<<<<<<<<
  * 
  *     async def hang_up_call(self):
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_ATA); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_ATA); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "gateway/io/sim800/sim800.pyx":93
+  /* "gateway/io/sim800/sim800.pyx":95
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))             # <<<<<<<<<<<<<<
  * 
  *     async def dial_number(self, number):
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_ATH); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_ATH); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "gateway/io/sim800/sim800.pyx":134
+  /* "gateway/io/sim800/sim800.pyx":136
  *         :return: event
  *         """
  *         return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',             # <<<<<<<<<<<<<<
  *                                               parser=atparser.SMSListParser))
  * 
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_AT_CMGL_REC_UNREAD); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_AT_CMGL_REC_UNREAD); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "gateway/io/sim800/sim800.pyx":146
+  /* "gateway/io/sim800/sim800.pyx":148
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))             # <<<<<<<<<<<<<<
  * 
  *     async def set_sms_mode(self, mode=None):
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_AT_CMGL_ALL); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_AT_CMGL_ALL); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "gateway/io/sim800/sim800.pyx":186
+  /* "gateway/io/sim800/sim800.pyx":188
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))             # <<<<<<<<<<<<<<
  * 
  *     async def reset_default_configuration(self):
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_u_AT_CSQ); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_u_AT_CSQ); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "gateway/io/sim800/sim800.pyx":195
+  /* "gateway/io/sim800/sim800.pyx":197
  *         """
  * 
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))             # <<<<<<<<<<<<<<
  * 
  *     async def enter_pin(self, pin):
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_u_ATZ); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_u_ATZ); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "gateway/io/sim800/sim800.pyx":216
+  /* "gateway/io/sim800/sim800.pyx":218
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))             # <<<<<<<<<<<<<<
  * 
  *     async def request_imei(self):
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_u_AT_CPIN_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_u_AT_CPIN_2); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "gateway/io/sim800/sim800.pyx":227
+  /* "gateway/io/sim800/sim800.pyx":229
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))             # <<<<<<<<<<<<<<
  * 
  *     async def request_network_status(self):
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_u_AT_GSN); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_u_AT_GSN); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "gateway/io/sim800/sim800.pyx":238
+  /* "gateway/io/sim800/sim800.pyx":240
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))             # <<<<<<<<<<<<<<
  * 
  *     async def set_echo_mode(self, mode):
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_u_AT_CREG); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_u_AT_CREG); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "gateway/io/sim800/sim800.pyx":300
+  /* "gateway/io/sim800/sim800.pyx":302
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))             # <<<<<<<<<<<<<<
  * 
  *     async def request_imsi(self):
  */
-  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_u_AT_CNUM); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_u_AT_CNUM); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 302, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
 
-  /* "gateway/io/sim800/sim800.pyx":309
+  /* "gateway/io/sim800/sim800.pyx":311
  *         """
  * 
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))             # <<<<<<<<<<<<<<
  * 
- *     async def setup(self):
+ *     async def setup(self, pin=None):
  */
-  __pyx_tuple__32 = PyTuple_Pack(1, __pyx_kp_u_AT_CIMI); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 309, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(1, __pyx_kp_u_AT_CIMI); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
 
-  /* "gateway/io/sim800/sim800.pyx":14
+  /* "gateway/io/sim800/sim800.pyx":15
  * 
  * 
  * def _raise_event_error(event):             # <<<<<<<<<<<<<<
  *     if event.error:
  *         raise Sim800Error(event.name, event.error_message)
  */
-  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_n_s_event); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_n_s_event); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
-  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_raise_event_error, 14, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_codeobj__36 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__35, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_raise_event_error, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__36)) __PYX_ERR(0, 15, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":24
+  /* "gateway/io/sim800/sim800.pyx":26
  *     """
  * 
  *     def __init__(self, serial_port='/dev/serial0', debug=False, loop=asyncio.get_event_loop()):             # <<<<<<<<<<<<<<
  *         """
  *         Construct a new 'SerialLoop' object.
  */
-  __pyx_tuple__37 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_serial_port, __pyx_n_s_debug, __pyx_n_s_loop); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_serial_port, __pyx_n_s_debug, __pyx_n_s_loop); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
-  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_init, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_init, 26, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 26, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":49
+  /* "gateway/io/sim800/sim800.pyx":51
  *         self.debug = debug
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
  *         """
  *         Closes the SerialLoop thread
  */
-  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
-  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_close, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_codeobj__40 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__39, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_close, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__40)) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":59
+  /* "gateway/io/sim800/sim800.pyx":61
  *         self.serial_loop.running.set()
  * 
  *     async def write(self, command):             # <<<<<<<<<<<<<<
  *         """
  *         Writes the command to the serial interface.
  */
-  __pyx_tuple__41 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_command, __pyx_n_s_event); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_tuple__41 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_command, __pyx_n_s_event); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__41);
   __Pyx_GIVEREF(__pyx_tuple__41);
-  __pyx_codeobj_ = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_write, 59, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj_)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_codeobj_ = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_write, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj_)) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":77
+  /* "gateway/io/sim800/sim800.pyx":79
  *         return event
  * 
  *     async def answer_call(self):             # <<<<<<<<<<<<<<
  *         """
  *         Answer an incoming call.
  */
-  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_answer_call, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_answer_call, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 79, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":86
+  /* "gateway/io/sim800/sim800.pyx":88
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
  * 
  *     async def hang_up_call(self):             # <<<<<<<<<<<<<<
  *         """
  *         Disconnect the current call.
  */
-  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__43);
   __Pyx_GIVEREF(__pyx_tuple__43);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_hang_up_call, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_hang_up_call, 88, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 88, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":95
+  /* "gateway/io/sim800/sim800.pyx":97
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
  * 
  *     async def dial_number(self, number):             # <<<<<<<<<<<<<<
  *         """
  *         Call a participant.
  */
-  __pyx_tuple__44 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_number); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_tuple__44 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_number); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_dial_number, 95, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_dial_number, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 97, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":108
+  /* "gateway/io/sim800/sim800.pyx":110
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  *     async def send_sms(self, number, text):             # <<<<<<<<<<<<<<
  *         """
  *         Send a sms to a participant.
  */
-  __pyx_tuple__45 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_number, __pyx_n_s_text); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_number, __pyx_n_s_text); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_send_sms, 108, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_send_sms, 110, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 110, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":126
+  /* "gateway/io/sim800/sim800.pyx":128
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  * 
  *     async def request_unread_sms(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read all unread sms.
  */
-  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__46);
   __Pyx_GIVEREF(__pyx_tuple__46);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_unread_sms, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_unread_sms, 128, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 128, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":137
+  /* "gateway/io/sim800/sim800.pyx":139
  *                                               parser=atparser.SMSListParser))
  * 
  *     async def request_all_sms(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read all sms.
  */
-  __pyx_tuple__47 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_all_sms, 137, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_all_sms, 139, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 139, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":148
+  /* "gateway/io/sim800/sim800.pyx":150
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
  * 
  *     async def set_sms_mode(self, mode=None):             # <<<<<<<<<<<<<<
  *         """
  *         Set the sms mode.
  */
-  __pyx_tuple__48 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_tuple__48 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_sms_mode, 148, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 148, __pyx_L1_error)
-  __pyx_tuple__49 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_sms_mode, 150, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
 
-  /* "gateway/io/sim800/sim800.pyx":163
+  /* "gateway/io/sim800/sim800.pyx":165
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
  * 
  *     async def power_off(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Shutdown the sim-module.
  */
-  __pyx_tuple__50 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_tuple__50 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_power_off, 163, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_power_off, 165, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 165, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":177
+  /* "gateway/io/sim800/sim800.pyx":179
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
  * 
  *     async def request_signal_quality(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the signal quality.
  */
-  __pyx_tuple__51 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_signal_quality, 177, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_signal_quality, 179, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 179, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":188
+  /* "gateway/io/sim800/sim800.pyx":190
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
  * 
  *     async def reset_default_configuration(self):             # <<<<<<<<<<<<<<
  *         """
  *         Reset sim-module to default configuration.
  */
-  __pyx_tuple__52 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_tuple__52 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_reset_default_configuration, 188, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_reset_default_configuration, 190, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 190, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":197
+  /* "gateway/io/sim800/sim800.pyx":199
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
  * 
  *     async def enter_pin(self, pin):             # <<<<<<<<<<<<<<
  *         """
  *         Enter the sim card pin.
  */
-  __pyx_tuple__53 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pin); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pin); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__53);
   __Pyx_GIVEREF(__pyx_tuple__53);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_enter_pin, 197, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_enter_pin, 199, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 199, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":207
+  /* "gateway/io/sim800/sim800.pyx":209
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
  * 
  *     async def request_pin_status(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the pin status of the sim card.
  */
-  __pyx_tuple__54 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_tuple__54 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__54);
   __Pyx_GIVEREF(__pyx_tuple__54);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_pin_status, 207, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_pin_status, 209, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 209, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":218
+  /* "gateway/io/sim800/sim800.pyx":220
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
  * 
  *     async def request_imei(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the imei.
  */
-  __pyx_tuple__55 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_tuple__55 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__55);
   __Pyx_GIVEREF(__pyx_tuple__55);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_imei, 218, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_imei, 220, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 220, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":229
+  /* "gateway/io/sim800/sim800.pyx":231
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
  * 
  *     async def request_network_status(self):             # <<<<<<<<<<<<<<
  *         """
  *         Reads the current network status.
  */
-  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__56);
   __Pyx_GIVEREF(__pyx_tuple__56);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_network_status, 229, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_network_status, 231, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 231, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":240
+  /* "gateway/io/sim800/sim800.pyx":242
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
  * 
  *     async def set_echo_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the echo mode.
  */
-  __pyx_tuple__57 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_mode, __pyx_n_s_event); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_tuple__57 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_mode, __pyx_n_s_event); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__57);
   __Pyx_GIVEREF(__pyx_tuple__57);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__57, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_echo_mode, 240, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__57, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_echo_mode, 242, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 242, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":259
+  /* "gateway/io/sim800/sim800.pyx":261
  *         return event
  * 
  *     async def set_caller_identification_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the caller identification mode.
  */
-  __pyx_tuple__58 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_mode, __pyx_n_s_event); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_tuple__58 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_mode, __pyx_n_s_event); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_caller_identification_mode, 259, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_caller_identification_mode, 261, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 261, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":278
+  /* "gateway/io/sim800/sim800.pyx":280
  *         return event
  * 
  *     async def set_error_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the error mode.
  */
-  __pyx_tuple__59 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__59)) __PYX_ERR(0, 278, __pyx_L1_error)
+  __pyx_tuple__59 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__59)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__59);
   __Pyx_GIVEREF(__pyx_tuple__59);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__59, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_error_mode, 278, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 278, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__59, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_set_error_mode, 280, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 280, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":293
+  /* "gateway/io/sim800/sim800.pyx":295
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
  * 
  *     async def request_subscriber_number(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the subscriber number and additional parameters.
  */
-  __pyx_tuple__60 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_tuple__60 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__60);
   __Pyx_GIVEREF(__pyx_tuple__60);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_subscriber_number, 293, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_subscriber_number, 295, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 295, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":302
+  /* "gateway/io/sim800/sim800.pyx":304
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
  * 
  *     async def request_imsi(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the operator imsi.
  */
-  __pyx_tuple__61 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__61)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_tuple__61 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__61)) __PYX_ERR(0, 304, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__61);
   __Pyx_GIVEREF(__pyx_tuple__61);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__61, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_imsi, 302, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__61, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_request_imsi, 304, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 304, __pyx_L1_error)
 
-  /* "gateway/io/sim800/sim800.pyx":311
+  /* "gateway/io/sim800/sim800.pyx":313
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
  * 
- *     async def setup(self):             # <<<<<<<<<<<<<<
+ *     async def setup(self, pin=None):             # <<<<<<<<<<<<<<
  *         """
  *         Setup the module to return error codes and set sms commands to text mode.
  */
-  __pyx_tuple__62 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__62)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_tuple__62 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_pin, __pyx_n_s_event); if (unlikely(!__pyx_tuple__62)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__62);
   __Pyx_GIVEREF(__pyx_tuple__62);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_setup, 311, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_gateway_io_sim800_sim800_pyx, __pyx_n_s_setup, 313, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_tuple__63 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__63)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__63);
+  __Pyx_GIVEREF(__pyx_tuple__63);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -10286,127 +10607,127 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct__write;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_1_answer_call;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_2_hang_up_call;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_3_dial_number;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms) < 0) __PYX_ERR(0, 110, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_4_send_sms;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_5_request_unread_sms;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_6_request_all_sms;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_7_set_sms_mode;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_8_power_off;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_9_request_signal_quality;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration) < 0) __PYX_ERR(0, 190, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_10_reset_default_configuration;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_11_enter_pin;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status) < 0) __PYX_ERR(0, 209, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_12_request_pin_status;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_13_request_imei;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_14_request_network_status;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode) < 0) __PYX_ERR(0, 242, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_15_set_echo_mode;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode) < 0) __PYX_ERR(0, 259, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_16_set_caller_identification_mode;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode) < 0) __PYX_ERR(0, 280, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_17_set_error_mode;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_18_request_subscriber_number;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi = &__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_19_request_imsi;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
   __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup.tp_dictoffset && __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_6sim800_6sim800___pyx_scope_struct_20_setup.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
@@ -10727,7 +11048,7 @@ if (!__Pyx_RefNanny) {
  * import gateway.io.sim800.at_command as cmd
  * import gateway.io.sim800.at_event as atev             # <<<<<<<<<<<<<<
  * import gateway.io.sim800.parser as atparser
- * import asyncio
+ * import gateway.io.sim800.response_objects as response_objects
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -10744,8 +11065,8 @@ if (!__Pyx_RefNanny) {
  * import gateway.io.sim800.at_command as cmd
  * import gateway.io.sim800.at_event as atev
  * import gateway.io.sim800.parser as atparser             # <<<<<<<<<<<<<<
+ * import gateway.io.sim800.response_objects as response_objects
  * import asyncio
- * 
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -10761,391 +11082,410 @@ if (!__Pyx_RefNanny) {
   /* "gateway/io/sim800/sim800.pyx":7
  * import gateway.io.sim800.at_event as atev
  * import gateway.io.sim800.parser as atparser
+ * import gateway.io.sim800.response_objects as response_objects             # <<<<<<<<<<<<<<
+ * import asyncio
+ * 
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s__34);
+  __Pyx_GIVEREF(__pyx_n_s__34);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s__34);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_gateway_io_sim800_response_objec, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_response_objects, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "gateway/io/sim800/sim800.pyx":8
+ * import gateway.io.sim800.parser as atparser
+ * import gateway.io.sim800.response_objects as response_objects
  * import asyncio             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_patch_asyncio(__Pyx_Import(__pyx_n_s_asyncio, 0, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_asyncio, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_patch_asyncio(__Pyx_Import(__pyx_n_s_asyncio, 0, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_asyncio, __pyx_t_2) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":10
+  /* "gateway/io/sim800/sim800.pyx":11
  * 
  * 
  * class Sim800Error(Exception):             # <<<<<<<<<<<<<<
  *     pass
  * 
  */
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_1, __pyx_n_s_Sim800Error, __pyx_n_s_Sim800Error, (PyObject *) NULL, __pyx_n_s_gateway_io_sim800_sim800, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
+  PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_Sim800Error, __pyx_n_s_Sim800Error, (PyObject *) NULL, __pyx_n_s_gateway_io_sim800_sim800, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_Sim800Error, __pyx_t_1, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Sim800Error, __pyx_t_2, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Sim800Error, __pyx_t_4) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Sim800Error, __pyx_t_4) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":14
+  /* "gateway/io/sim800/sim800.pyx":15
  * 
  * 
  * def _raise_event_error(event):             # <<<<<<<<<<<<<<
  *     if event.error:
  *         raise Sim800Error(event.name, event.error_message)
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_1_raise_event_error, NULL, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_raise_event_error, __pyx_t_1) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_1_raise_event_error, NULL, __pyx_n_s_gateway_io_sim800_sim800); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_raise_event_error, __pyx_t_2) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":19
+  /* "gateway/io/sim800/sim800.pyx":21
  * 
  * 
  * class Sim800(EventEmitter):             # <<<<<<<<<<<<<<
  *     """
  *     Sim800 processes AT-Commands over the serial interface
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_EventEmitter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_EventEmitter); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_Sim800, __pyx_n_s_Sim800, (PyObject *) NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_kp_s_Sim800_processes_AT_Commands_ov); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_1, __pyx_n_s_Sim800, __pyx_n_s_Sim800, (PyObject *) NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_kp_s_Sim800_processes_AT_Commands_ov); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "gateway/io/sim800/sim800.pyx":24
+  /* "gateway/io/sim800/sim800.pyx":26
  *     """
  * 
  *     def __init__(self, serial_port='/dev/serial0', debug=False, loop=asyncio.get_event_loop()):             # <<<<<<<<<<<<<<
  *         """
  *         Construct a new 'SerialLoop' object.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_1__init__, 0, __pyx_n_s_Sim800___init, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_1__init__, 0, __pyx_n_s_Sim800___init, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_t_5);
   PyList_Append(__pyx_t_4, __pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 24, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_asyncio); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults), 1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_asyncio); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_get_event_loop); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_get_event_loop); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_CyFunction_Defaults(__pyx_defaults, __pyx_t_5)->__pyx_arg_loop = __pyx_t_6;
   __Pyx_GIVEREF(__pyx_t_6);
   __pyx_t_6 = 0;
   __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_5, __pyx_pf_7gateway_2io_6sim800_6sim800_2__defaults__);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_5) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_init, __pyx_t_5) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":49
+  /* "gateway/io/sim800/sim800.pyx":51
  *         self.debug = debug
  * 
  *     def close(self):             # <<<<<<<<<<<<<<
  *         """
  *         Closes the SerialLoop thread
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_3close, 0, __pyx_n_s_Sim800_close, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_3close, 0, __pyx_n_s_Sim800_close, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_close, __pyx_t_5) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_close, __pyx_t_5) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":59
+  /* "gateway/io/sim800/sim800.pyx":61
  *         self.serial_loop.running.set()
  * 
  *     async def write(self, command):             # <<<<<<<<<<<<<<
  *         """
  *         Writes the command to the serial interface.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_5write, 0, __pyx_n_s_Sim800_write, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj_)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_5write, 0, __pyx_n_s_Sim800_write, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj_)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_write, __pyx_t_5) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_write, __pyx_t_5) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":77
+  /* "gateway/io/sim800/sim800.pyx":79
  *         return event
  * 
  *     async def answer_call(self):             # <<<<<<<<<<<<<<
  *         """
  *         Answer an incoming call.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_8answer_call, 0, __pyx_n_s_Sim800_answer_call, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_8answer_call, 0, __pyx_n_s_Sim800_answer_call, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_answer_call, __pyx_t_5) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_answer_call, __pyx_t_5) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":86
+  /* "gateway/io/sim800/sim800.pyx":88
  *         return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
  * 
  *     async def hang_up_call(self):             # <<<<<<<<<<<<<<
  *         """
  *         Disconnect the current call.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_11hang_up_call, 0, __pyx_n_s_Sim800_hang_up_call, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_11hang_up_call, 0, __pyx_n_s_Sim800_hang_up_call, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_hang_up_call, __pyx_t_5) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_hang_up_call, __pyx_t_5) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":95
+  /* "gateway/io/sim800/sim800.pyx":97
  *         return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
  * 
  *     async def dial_number(self, number):             # <<<<<<<<<<<<<<
  *         """
  *         Call a participant.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_14dial_number, 0, __pyx_n_s_Sim800_dial_number, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_14dial_number, 0, __pyx_n_s_Sim800_dial_number, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_dial_number, __pyx_t_5) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_dial_number, __pyx_t_5) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":108
+  /* "gateway/io/sim800/sim800.pyx":110
  *         return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
  * 
  *     async def send_sms(self, number, text):             # <<<<<<<<<<<<<<
  *         """
  *         Send a sms to a participant.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_17send_sms, 0, __pyx_n_s_Sim800_send_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_17send_sms, 0, __pyx_n_s_Sim800_send_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_send_sms, __pyx_t_5) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_send_sms, __pyx_t_5) < 0) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":126
+  /* "gateway/io/sim800/sim800.pyx":128
  *         return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
  * 
  *     async def request_unread_sms(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read all unread sms.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_20request_unread_sms, 0, __pyx_n_s_Sim800_request_unread_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_20request_unread_sms, 0, __pyx_n_s_Sim800_request_unread_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_unread_sms, __pyx_t_5) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_unread_sms, __pyx_t_5) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":137
+  /* "gateway/io/sim800/sim800.pyx":139
  *                                               parser=atparser.SMSListParser))
  * 
  *     async def request_all_sms(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read all sms.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_23request_all_sms, 0, __pyx_n_s_Sim800_request_all_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_23request_all_sms, 0, __pyx_n_s_Sim800_request_all_sms, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_all_sms, __pyx_t_5) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_all_sms, __pyx_t_5) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":148
+  /* "gateway/io/sim800/sim800.pyx":150
  *         return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
  * 
  *     async def set_sms_mode(self, mode=None):             # <<<<<<<<<<<<<<
  *         """
  *         Set the sms mode.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_26set_sms_mode, 0, __pyx_n_s_Sim800_set_sms_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_26set_sms_mode, 0, __pyx_n_s_Sim800_set_sms_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__49);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_sms_mode, __pyx_t_5) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_sms_mode, __pyx_t_5) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":163
+  /* "gateway/io/sim800/sim800.pyx":165
  *         return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
  * 
  *     async def power_off(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Shutdown the sim-module.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_29power_off, 0, __pyx_n_s_Sim800_power_off, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_29power_off, 0, __pyx_n_s_Sim800_power_off, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_power_off, __pyx_t_5) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_power_off, __pyx_t_5) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":177
+  /* "gateway/io/sim800/sim800.pyx":179
  *         return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
  * 
  *     async def request_signal_quality(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the signal quality.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_32request_signal_quality, 0, __pyx_n_s_Sim800_request_signal_quality, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_32request_signal_quality, 0, __pyx_n_s_Sim800_request_signal_quality, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_signal_quality, __pyx_t_5) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_signal_quality, __pyx_t_5) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":188
+  /* "gateway/io/sim800/sim800.pyx":190
  *         return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
  * 
  *     async def reset_default_configuration(self):             # <<<<<<<<<<<<<<
  *         """
  *         Reset sim-module to default configuration.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_35reset_default_configuration, 0, __pyx_n_s_Sim800_reset_default_configurati, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_35reset_default_configuration, 0, __pyx_n_s_Sim800_reset_default_configurati, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_reset_default_configuration, __pyx_t_5) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_reset_default_configuration, __pyx_t_5) < 0) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":197
+  /* "gateway/io/sim800/sim800.pyx":199
  *         return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
  * 
  *     async def enter_pin(self, pin):             # <<<<<<<<<<<<<<
  *         """
  *         Enter the sim card pin.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_38enter_pin, 0, __pyx_n_s_Sim800_enter_pin, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_38enter_pin, 0, __pyx_n_s_Sim800_enter_pin, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_enter_pin, __pyx_t_5) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_enter_pin, __pyx_t_5) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":207
+  /* "gateway/io/sim800/sim800.pyx":209
  *         return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
  * 
  *     async def request_pin_status(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the pin status of the sim card.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_41request_pin_status, 0, __pyx_n_s_Sim800_request_pin_status, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_41request_pin_status, 0, __pyx_n_s_Sim800_request_pin_status, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_pin_status, __pyx_t_5) < 0) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_pin_status, __pyx_t_5) < 0) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":218
+  /* "gateway/io/sim800/sim800.pyx":220
  *         return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
  * 
  *     async def request_imei(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the imei.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_44request_imei, 0, __pyx_n_s_Sim800_request_imei, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_44request_imei, 0, __pyx_n_s_Sim800_request_imei, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_imei, __pyx_t_5) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_imei, __pyx_t_5) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":229
+  /* "gateway/io/sim800/sim800.pyx":231
  *         return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
  * 
  *     async def request_network_status(self):             # <<<<<<<<<<<<<<
  *         """
  *         Reads the current network status.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_47request_network_status, 0, __pyx_n_s_Sim800_request_network_status, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_47request_network_status, 0, __pyx_n_s_Sim800_request_network_status, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_network_status, __pyx_t_5) < 0) __PYX_ERR(0, 229, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_network_status, __pyx_t_5) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":240
+  /* "gateway/io/sim800/sim800.pyx":242
  *         return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
  * 
  *     async def set_echo_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the echo mode.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_50set_echo_mode, 0, __pyx_n_s_Sim800_set_echo_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_50set_echo_mode, 0, __pyx_n_s_Sim800_set_echo_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_echo_mode, __pyx_t_5) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_echo_mode, __pyx_t_5) < 0) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":259
+  /* "gateway/io/sim800/sim800.pyx":261
  *         return event
  * 
  *     async def set_caller_identification_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the caller identification mode.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_53set_caller_identification_mode, 0, __pyx_n_s_Sim800_set_caller_identification, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_53set_caller_identification_mode, 0, __pyx_n_s_Sim800_set_caller_identification, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_caller_identification_mode, __pyx_t_5) < 0) __PYX_ERR(0, 259, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_caller_identification_mode, __pyx_t_5) < 0) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":278
+  /* "gateway/io/sim800/sim800.pyx":280
  *         return event
  * 
  *     async def set_error_mode(self, mode):             # <<<<<<<<<<<<<<
  *         """
  *         Set the error mode.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_56set_error_mode, 0, __pyx_n_s_Sim800_set_error_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 278, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_56set_error_mode, 0, __pyx_n_s_Sim800_set_error_mode, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_error_mode, __pyx_t_5) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_set_error_mode, __pyx_t_5) < 0) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":293
+  /* "gateway/io/sim800/sim800.pyx":295
  *         return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
  * 
  *     async def request_subscriber_number(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the subscriber number and additional parameters.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_59request_subscriber_number, 0, __pyx_n_s_Sim800_request_subscriber_number, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 293, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_59request_subscriber_number, 0, __pyx_n_s_Sim800_request_subscriber_number, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_subscriber_number, __pyx_t_5) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_subscriber_number, __pyx_t_5) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":302
+  /* "gateway/io/sim800/sim800.pyx":304
  *         return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
  * 
  *     async def request_imsi(self):             # <<<<<<<<<<<<<<
  *         """
  *         Read the operator imsi.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_62request_imsi, 0, __pyx_n_s_Sim800_request_imsi, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_62request_imsi, 0, __pyx_n_s_Sim800_request_imsi, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_imsi, __pyx_t_5) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_request_imsi, __pyx_t_5) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":311
+  /* "gateway/io/sim800/sim800.pyx":313
  *         return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
  * 
- *     async def setup(self):             # <<<<<<<<<<<<<<
+ *     async def setup(self, pin=None):             # <<<<<<<<<<<<<<
  *         """
  *         Setup the module to return error codes and set sms commands to text mode.
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_65setup, 0, __pyx_n_s_Sim800_setup, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 311, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7gateway_2io_6sim800_6sim800_6Sim800_65setup, 0, __pyx_n_s_Sim800_setup, NULL, __pyx_n_s_gateway_io_sim800_sim800, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_setup, __pyx_t_5) < 0) __PYX_ERR(0, 311, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__63);
+  if (__Pyx_SetNameInClass(__pyx_t_3, __pyx_n_s_setup, __pyx_t_5) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "gateway/io/sim800/sim800.pyx":19
+  /* "gateway/io/sim800/sim800.pyx":21
  * 
  * 
  * class Sim800(EventEmitter):             # <<<<<<<<<<<<<<
  *     """
  *     Sim800 processes AT-Commands over the serial interface
  */
-  __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Sim800, __pyx_t_2, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_Sim800, __pyx_t_1, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_CyFunction_InitClassCell(__pyx_t_4, __pyx_t_5) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (__Pyx_CyFunction_InitClassCell(__pyx_t_4, __pyx_t_5) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Sim800, __pyx_t_5) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Sim800, __pyx_t_5) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "gateway/io/sim800/sim800.pyx":1
  * from pyee import EventEmitter             # <<<<<<<<<<<<<<
  * from gateway.utils import clear_str
  * import gateway.io.sim800.serial_loop as serial_loop
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
 
