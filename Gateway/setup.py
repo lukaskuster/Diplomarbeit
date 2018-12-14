@@ -42,6 +42,7 @@ utils_extensions = [
     Extension('gateway.utils.logger', ['src/gateway/utils/logger.c']),
     Extension('gateway.utils.singleton', ['src/gateway/utils/singleton.c']),
     Extension('gateway.utils.string_utils', ['src/gateway/utils/string_utils.c']),
+    Extension('gateway.utils.scheduler', ['src/gateway/utils/scheduler.c'])
 ]
 
 setup(
