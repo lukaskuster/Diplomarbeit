@@ -34,6 +34,7 @@
         }
     }];
     
+    application.applicationIconBadgeNumber = 0;
     return YES;
 }
 
@@ -65,6 +66,16 @@
             });
         }
     }];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    NSLog(@"%@", userInfo);
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
 }
 
 - (void)updateBadges {

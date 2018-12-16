@@ -13,7 +13,7 @@ import PhoneNumberKit
 
 public class SPNumber: NSObject {
     @objc public dynamic var phoneNumber = ""
-    public var contact: CNContact? {
+    @objc public var contact: CNContact? {
         return self.hasContact()
     }
     
@@ -24,7 +24,7 @@ public class SPNumber: NSObject {
 }
 
 extension SPNumber {
-    public func prettyPhoneNumber() -> String {
+    @objc public func prettyPhoneNumber() -> String {
         do {
             let phonenumberkit = PhoneNumberKit()
             let number = try phonenumberkit.parse(self.phoneNumber)

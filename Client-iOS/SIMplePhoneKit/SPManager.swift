@@ -15,8 +15,8 @@ import CloudKit
     private var realmManager: RealmManager
     private var apiClient: APIClient
     private var keychainEnvironment: SPKeychainEnvironment {
-        get { return SPKeychainEnvironment(rawValue: UserDefaults.standard.integer(forKey: "keychainEnvironment")) ?? .local }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "keychainEnvironment") }
+        get { return (SPDevice.local?.sync ?? true) ? .cloud : .local }
+        set { SPDevice.local?.sync = (newValue == .cloud) }
     }
     private var cloudKeychain: KeychainSwift
     private var localKeychain: KeychainSwift
@@ -89,6 +89,15 @@ import CloudKit
         }
     }
     
+    public func getUsername() -> String? {
+        switch keychainEnvironment {
+        case .cloud:
+            return self.cloudKeychain.get("username")
+        case .local:
+            return self.localKeychain.get("username")
+        }
+    }
+    
     public func loginUser(username: String, password: String, keychainEnvironment: SPKeychainEnvironment, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         self.getCloudUserId { (cloudUserId, error) in
             if let cloudUserId = cloudUserId {
@@ -111,7 +120,7 @@ import CloudKit
                 })
                 
             }else{
-                completion(false, APIError.other(desc: error!.localizedDescription))
+                completion(false, APIError.other(desc: "\(error!)"))
             }
         }
     }
@@ -146,12 +155,18 @@ import CloudKit
                 }
             }
         }else{
-            self.apiClient.revokeThisDevice { (success, error) in
-                if success {
-                    self.localKeychain.delete("username")
-                    self.localKeychain.delete("password")
+            if reportToServer {
+                self.apiClient.revokeThisDevice { (success, error) in
+                    if success {
+                        self.localKeychain.delete("username")
+                        self.localKeychain.delete("password")
+                    }
+                    completion(success, error)
                 }
-                completion(success, error)
+            }else{
+                self.localKeychain.delete("username")
+                self.localKeychain.delete("password")
+                completion(true, nil)
             }
         }
     }
@@ -196,17 +211,42 @@ import CloudKit
     }
     
     // MARK: - Chats
+    @objc public func getAllChats(completion: @escaping (_ success: Bool, _ chats: [SPChat]?, _ error: Error?) -> Void) {
+        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
+        let secondParty1 = SPNumber(withNumber: "00436643038891")
+        let secondParty2 = SPNumber(withNumber: "00436644523954")
+        let msgs = [SPMessage("test msg", state: .sent), SPMessage("test msg 2", state: .sent)]
+        let chat1 = SPChat(with: secondParty1, on: gateway, messages: msgs)
+        let chat2 = SPChat(with: secondParty2, on: gateway, messages: msgs)
+        
+        let chats = [chat1, chat2]
+        
+        completion(true, chats, nil)
+    }
+    
     public func sendSMS(_ message: SPMessage, in chat: SPChat, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         self.apiClient.pushEventToGateway(chat.gateway!, event: APIClient.GatewayPushEvent.sendSMS(to: chat.secondParty.phoneNumber, message: message.text)) { (success, response, error) in
             if success {
-                message.type = SPMessageState.sent
+                message.state = SPMessageState.sent
                 RealmManager.shared.addMessageToChat(message: message, chat: chat)
                 completion(true, nil)
             }else{
-                message.type = SPMessageState.failed
+                message.state = SPMessageState.failed
                 RealmManager.shared.addMessageToChat(message: message, chat: chat)
                 completion(false, error!)
             }
+        }
+    }
+    
+    public func dial(number: SPNumber, with gateway: SPGateway, completion: @escaping (_ success: Bool, _ response: String?, _ error: Error?) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .dial(number: number.phoneNumber)) { (success, response, error) in
+            completion(success, String(describing: response?.array), error)
+        }
+    }
+    
+    public func hangUpCurrentCall(on gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
+            completion(success, error)
         }
     }
     
@@ -252,6 +292,12 @@ import CloudKit
         }
     }
     
+    public func updateGatewayName(_ name: String, of gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+        self.apiClient.updateGateway(name: name, of: gateway) { (success, error) in
+            completion(success, error)
+        }
+    }
+    
     // MARK: - Just for testing purposes (Will be deleted)
     public func addRecentCall(_ call: SPRecentCall) {
         self.realmManager.addNewRecentCall(call)
@@ -261,30 +307,67 @@ import CloudKit
         self.realmManager.addNewVoicemail(voicemail)
     }
     
+    public func getiCloudSyncState() -> Bool? {
+        if let localDevice = SPDevice.local {
+            return localDevice.sync
+        }else{
+            return nil
+        }
+    }
+    
+    public func setiCloudSyncState(_ newState: Bool, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.apiClient.setiCloudSyncState(newState) { (success, error) in
+            if success {
+                SPDevice.local?.sync = newState
+                completion(true, nil)
+            }else{
+                completion(false, error!)
+            }
+        }
+    }
+    
+    public func getAllDevices(completion: @escaping (_ success: Bool, _ devices: [SPDevice]?, _ error: APIError?) -> Void) {
+        self.apiClient.getAllDevices { (success, devices, error) in
+            completion(success, devices, error)
+        }
+        
+    }
+    
+    public func revoke(device: SPDevice, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        self.apiClient.revokeDevice(withId: device.id) { (success, error) in
+            completion(success, error)
+        }
+    }
+    
+    
+    
     // MARK: - Push notification related
     @objc public func receivedPushDeviceToken(_ data: Data, completion: @escaping (_ gotRevoked: Bool) -> Void) {
         let token = data.reduce("", {$0 + String(format: "%02X", $1)})
         let modelName = UIDevice().modelName
         let deviceName = UIDevice().name
         let systemVersion = UIDevice().systemVersion
-        let language = Locale.current.languageCode
+        let language = Locale.current.languageCode ?? "en"
         let icloudSync = (self.keychainEnvironment == .cloud)
         
-        self.apiClient.registerDeviceWithServer(apnToken: token, deviceName: deviceName, modelName: modelName, systemVersion: systemVersion, language: language, icloudSync: icloudSync) { (success, error) in
-            if !success {
+        let device = SPDevice(name: deviceName, systemVersion: systemVersion, deviceModelName: modelName, language: language, sync: icloudSync, apnKey: token)
+        
+        self.apiClient.register(deviceWithServer: device) { (success, error) in
+            if success {
+                completion(false)
+            }else{
                 if case APIError.noDeviceFound = error! {
                     self.logoutUser(reportToServer: false, completion: { (success, error) in
                         if success {
                             completion(true)
                         }else{
-                            fatalError("Error while acting on device revocation (\(error!.localizedDescription))")
+                            fatalError("Error while acting on device revocation (\(error!))")
                         }
                     })
                 }else{
-                    completion(true)
+                    print("receivedPushDeviceToken \(error!)")
+                    completion(false)
                 }
-            }else{
-                completion(false)
             }
         }
     }

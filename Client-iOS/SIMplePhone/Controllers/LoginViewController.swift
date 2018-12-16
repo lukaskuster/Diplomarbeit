@@ -86,7 +86,9 @@ import SwiftMessages
                         self.present(controller!, animated: false, completion: nil)
                     }
                 }else{
-                    self.showErrorUI(error!)
+                    DispatchQueue.main.async {
+                        self.showErrorUI(error!)
+                    }
                 }
             }
         }
@@ -102,25 +104,25 @@ import SwiftMessages
     }
     
     func showErrorUI(_ error: APIError) {
-        DispatchQueue.main.async {
-            switch error {
-            case .wrongCredentials:
-                self.errorNotification(title: "Wrong credentials", body: "The mail/password you provided is not correct. Check for typos.", type: .error)
-            case .noNetworkConnection:
-                self.errorNotification(title: "No network connection", body: "Seems like there is no connection to the internet.", type: .error)
-            case .differentCloudUserId:
-                let alert = UIAlertController(title: "iCloud Sharing unavailable", message: "Seems like your account is already associated with another iCloud user. To enable sharing with the account associated to this device first disable iCloud Sharing on a device associated with the other iCloud user (in Settings → Account). Or you can just sign in on this device without iCloud Sharing enabled.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Login without iCloud Sharing", style: .default, handler: { (action) in
-                    self.selectedCloudEnvironment = .local
-                    self.login()
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                self.present(alert, animated: true)
-            default:
-                self.errorNotification(title: "Error", body: "\(error.localizedDescription)", type: .error)
-                break
-            }
+        switch error {
+        case .wrongCredentials:
+            self.errorNotification(title: "Wrong credentials", body: "The mail/password you provided is not correct. Check for typos.", type: .error)
+        case .noNetworkConnection:
+            self.errorNotification(title: "No network connection", body: "Seems like there is no connection to the internet.", type: .error)
+        case .differentCloudUserId:
+            let alert = UIAlertController(title: "iCloud Sharing unavailable", message: "Seems like your account is already associated with another iCloud user. To enable sharing with the account associated to this device first disable iCloud Sharing on a device associated with the other iCloud user (in Settings → Account). Or you can just sign in on this device without iCloud Sharing enabled.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Login without iCloud Sharing", style: .default, handler: { (action) in
+                self.selectedCloudEnvironment = .local
+                self.login()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        case .other(let desc):
+            self.errorNotification(title: "Error", body: "\(desc)", type: .error)
+        default:
+            self.errorNotification(title: "Error", body: "\(error.localizedDescription)", type: .error)
+            break
         }
     }
     
@@ -130,6 +132,17 @@ import SwiftMessages
     
     func cloudEnvironmentRequestsAlert(_ alert: UIAlertController) {
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func cloudEnvironmentChecking(_ finished: Bool) {
+        print("checking: \(finished.description)")
+        if finished {
+            self.loginBtn.backgroundColor = self.view.tintColor
+            self.loginBtn.isEnabled = true
+        }else{
+            self.loginBtn.backgroundColor = UIColor.lightGray
+            self.loginBtn.isEnabled = false
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

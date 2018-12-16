@@ -10,14 +10,23 @@ import Foundation
 import RealmSwift
 
 public class SPChat: Object {
-    @objc dynamic var id: String = NSUUID().uuidString
+    @objc public dynamic var id: String = NSUUID().uuidString
     @objc public dynamic var gateway: SPGateway?
-    public var secondParty: SPNumber {
+    @objc public var secondParty: SPNumber {
         get { return SPNumber(withNumber: _secondParty) }
         set { _secondParty = newValue.phoneNumber }
     }
     @objc private dynamic var _secondParty = ""
-    public let messages = List<SPMessage>()
+    private let messages = List<SPMessage>()
+    
+    public convenience init(with secondParty: SPNumber, on gateway: SPGateway, messages: [SPMessage]) {
+        self.init()
+        self.secondParty = secondParty
+        self.gateway = gateway
+        for message in messages {
+            self.messages.append(message)
+        }
+    }
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -25,5 +34,11 @@ public class SPChat: Object {
     
     override public static func ignoredProperties() -> [String] {
         return ["secondParty"]
+    }
+}
+
+extension SPChat {
+    @objc public func latestMessage() -> SPMessage? {
+        return realm?.objects(SPMessage.self).filter("chats.id = '\(self.id)'").sorted(byKeyPath: "time", ascending: false).first
     }
 }

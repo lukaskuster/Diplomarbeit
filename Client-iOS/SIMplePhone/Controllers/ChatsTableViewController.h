@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SIMplePhoneKit/SIMplePhoneKit.h>
+#import "ChatPreviewTableViewCell.h"
+#import <Contacts/Contacts.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

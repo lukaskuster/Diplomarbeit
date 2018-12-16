@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SMSChat.h"
+#import <SIMplePhoneKit/SIMplePhoneKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatPreviewTableViewCell : UITableViewCell
-    @property (strong) SMSChat *chat;
+    @property (nonatomic) SPChat *chat;
     @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
     @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
     @property (weak, nonatomic) IBOutlet UILabel *latestChatLabel;

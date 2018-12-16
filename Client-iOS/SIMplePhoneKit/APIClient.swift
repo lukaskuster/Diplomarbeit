@@ -64,6 +64,7 @@ class APIClient: NSObject {
                         }
                     }
                 }
+                SignalingClient.shared.setCredentials(username: username, password: password)
                 completion(true, nil)
             }else{
                 self.username = nil
@@ -98,11 +99,13 @@ class APIClient: NSObject {
                 if let gateways = json!.array {
                     var returnGateways = [SPGateway]()
                     for gateway in gateways {
-                        if let imei = gateway["imei"].string,
-                            let name = gateway["name"].string,
-                            let phoneNumber = gateway["phoneNumber"].string,
-                            let signalStrength = gateway["signalStrength"].double {
-                            returnGateways.append(SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, signalStrength: signalStrength))
+                        if let imei = gateway["imei"].string {
+                            let name = gateway["name"].string
+                            let phoneNumber = gateway["phoneNumber"].string
+                            let signalStrength = gateway["signalStrength"].double
+                            let firmwareVersion = gateway["firmwareVersion"].string
+                            let carrier = gateway["carrier"].string
+                            returnGateways.append(SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier))
                         }else{
                             completion(false, nil, APIError.parsingError)
                             return
@@ -111,6 +114,24 @@ class APIClient: NSObject {
                     completion(true, returnGateways, nil)
                     return
                 }
+            }
+        }
+    }
+    
+    /**
+     Update name of gateway
+     - Parameters:
+     - completion: Closure which is called after server response
+     - success: Bool indicating operation success
+     - error: Error, if operation unsuccessful
+     */
+    public func updateGateway(name newName: String, of gateway: SPGateway, completion: @escaping (_ success: Bool,  _ error: APIError?) -> Void) {
+        let data = ["name": newName]
+        self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
+            if success {
+                completion(true, nil)
+            }else{
+                completion(false, error!)
             }
         }
     }
@@ -196,7 +217,8 @@ class APIClient: NSObject {
         
         self.request(API.event, type: .post, parameters: data) { (success, response, error) in
             if let error = error {
-                completion(false, nil, APIError.other(desc: error.localizedDescription))
+                print(error)
+                completion(false, nil, APIError.other(desc: "\(error)"))
                 return
             }
             completion(success, response, nil)
@@ -205,71 +227,98 @@ class APIClient: NSObject {
     }
     
     
+    public func getAllDevices(completion: @escaping (_ success: Bool, _ devices: [SPDevice]?, _ error: APIError?) -> Void) {
+        self.request(API.devices, type: .get, parameters: nil) { (success, json, error) in
+            if success {
+                if let error = error {
+                    completion(false, nil, error)
+                    return
+                }
+                
+                if let error = json!["error"].string {
+                    let cerror = APIError.other(desc: error)
+                    completion(false, nil, cerror)
+                    return
+                }
+                
+                if let devices = json!.array {
+                    var returnDevices = [SPDevice]()
+                    for device in devices {
+                        if let id = device["id"].string,
+                            let deviceName = device["deviceName"].string,
+                            let systemVersion = device["systemVersion"].string,
+                            let deviceModelName = device["deviceModelName"].string,
+                            let language = device["language"].string,
+                            let sync = device["sync"].bool {
+                            
+                            returnDevices.append(SPDevice(withid: id, name: deviceName, systemVersion: systemVersion, deviceModelName: deviceModelName, language: language, sync: sync))
+                        }else{
+                            completion(false, nil, APIError.parsingError)
+                            return
+                        }
+                    }
+                    completion(true, returnDevices, nil)
+                    return
+                }
+            }else{
+                completion(false, nil, error!)
+            }
+        }
+    }
+    
     /**
      Cross-checks local device info and registers/updates info on server (Error if revoked by server)
      - Parameters:
-        - apnToken: APN token of the current device
-        - deviceName: device name of the current device, as specified in settings (e.g. "Joe's iPhone")
-        - modelName: the model name of the current device (e.g. "iPad7,5")
-        - systemVersion: the iOS version running on the current device (e.g. "12.1")
-        - language: the system language of the current device
-        - completion: Closure which is called after server response
-            - success: Bool indicating operation success
-            - error: Error, if operation unsuccessful
+     - device: SPDevice object of current device
+     - completion: Closure which is called after server response
+     - success: Bool indicating operation success
+     - error: Error, if operation unsuccessful
      */
-    public func registerDeviceWithServer(apnToken: String, deviceName: String, modelName: String, systemVersion: String, language: String?, icloudSync: Bool = true, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        // Check if local data exists, otherwise register on server
-        if let localDeviceInfo = UserDefaults.standard.dictionary(forKey: "localDeviceInfo") {
-            self.request(API.device(localDeviceInfo["id"] as! String), type: .get, parameters: nil) { success, response, error in
-                if success {
-                    var dataToCompare = ["id": localDeviceInfo["id"]!,
-                                "apnToken": apnToken,
-                                "deviceModelName": modelName,
-                                "deviceName": deviceName,
-                                "systemVersion": systemVersion,
-                                "sync": icloudSync] as [String : Any]
-                    if let language = language {
-                        dataToCompare["language"] = language
+    public func register(deviceWithServer device: SPDevice, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        // Check if local data exists, otherwise register in server
+        if let localDevice = SPDevice.local {
+            self.request(API.device(localDevice.id), type: .get, parameters: nil) { (success, response, error) in
+                if success, let response = response {
+                    
+                    // Compare local with remote data
+                    
+                    
+                    if let id = response["id"].string,
+                        let name = response["deviceName"].string,
+                        let systemVersion = response["systemVersion"].string,
+                        let deviceModelName = response["deviceModelName"].string,
+                        let language = response["language"].string,
+                        let sync = response["language"].bool {
+                        
+                        let apnKey = response["apnToken"].string
+                        
+                        let remote = SPDevice(withid: id, name: name, systemVersion: systemVersion, deviceModelName: deviceModelName, language: language, sync: sync, apnKey: apnKey)
+                        
+                        if device != remote {
+                            self.request(API.device(id), type: .put, parameters: device.toData(), completion: { (success, response, error) in
+                                SPDevice.local = device
+                                completion(success, error)
+                            })
+                        }
+                        
                     }
                     
-                    // Check if change in local data (e.g. ios version update, language changed...)
-                    if !self.compareDeviceData(dataToCompare, localDeviceInfo) {
-                        self.request(API.device(localDeviceInfo["id"]! as! String), type: .put, parameters: dataToCompare) { success, device, error in
-                            if success {
-                                UserDefaults.standard.set(dataToCompare, forKey: "localDeviceInfo")
-                                completion(true, nil)
-                                return
-                            }else{
-                                completion(false, error!)
-                                return
-                            }
-                        }
-                    }
+                    
                 }else{
                     // Check whether device got revoked
                     if case APIError.noDeviceFound = error! {
-                        UserDefaults.standard.removeObject(forKey: "localDeviceInfo")
+                        SPDevice.local = nil
                     }
-                    
                     completion(false, error!)
                     return
                 }
             }
-        }else{
-            var data = ["id": UUID().uuidString,
-                        "apnToken": apnToken,
-                        "deviceModelName": modelName,
-                        "deviceName": deviceName,
-                        "systemVersion": systemVersion,
-                        "sync": icloudSync] as [String : Any]
-            print(data)
-            if let language = language {
-                data["language"] = language
-            }
             
-            self.request(API.device, type: .post, parameters: data) { success, response, error in
+        }else{
+            // Device does not exist locally
+            self.request(API.device, type: .post, parameters: device.toData()) { (success, response, error) in
                 if success {
-                    UserDefaults.standard.set(data, forKey: "localDeviceInfo")
+                    SPDevice.local = device
                     completion(true, nil)
                     return
                 }else{
@@ -277,6 +326,20 @@ class APIClient: NSObject {
                     return
                 }
             }
+            
+        }
+    }
+    
+    public func setiCloudSyncState(_ newState: Bool, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        if let localDevice = SPDevice.local {
+            localDevice.sync = newState
+            self.request(API.device(localDevice.id), type: .put, parameters: localDevice.toData()) { (success, response, error) in
+                if success {
+                    SPDevice.local = localDevice
+                }
+                completion(success, error)
+            }
+            
         }
     }
     
@@ -315,9 +378,8 @@ class APIClient: NSObject {
         - error: Error, if operation unsuccessful
      */
     public func revokeThisDevice(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        if let deviceId = UserDefaults.standard.dictionary(forKey: "localDeviceInfo")?["id"] as? String {
-            self.revokeDevice(withId: deviceId ) { (success, error) in
-                UserDefaults.standard.removeObject(forKey: "localDeviceInfo")
+        if let localDevice = SPDevice.local {
+            self.revokeDevice(withId: localDevice.id) { (success, error) in
                 completion(success, error)
             }
         }else{
@@ -358,6 +420,8 @@ class APIClient: NSObject {
 
 extension APIClient {
     private func request(_ endpoint: String, type: HTTPMethod, parameters: [String:Any]?, authRequired: Bool = true, completion: @escaping (_ success: Bool, _ result: JSON?, _ error: APIError?) -> Void) {
+        print("\(type) \(endpoint): \(parameters?.debugDescription)")
+        
         // Check whether internet connection is available
         if !self.isConnectedToNetwork() {
             completion(false, nil, APIError.noNetworkConnection)
@@ -377,7 +441,7 @@ extension APIClient {
                 self.visualizeOngoingQueries(removeQuery: true)
                 
                 if let error = response.error {
-                    completion(false, nil, APIError.other(desc: error.localizedDescription))
+                    completion(false, nil, APIError.other(desc: "\(error)"))
                     return
                 }
                 

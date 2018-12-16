@@ -12,13 +12,21 @@
 		D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
+		D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */; };
+		D62731CF21B9A2FB00CFCE28 /* SPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */; };
+		D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */; };
+		D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */; };
+		D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
 		D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */; };
 		D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358714217F49E900B395F9 /* Starscream.framework */; };
 		D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358717217F544800B395F9 /* SwiftyJSON.framework */; };
-		D635871A217F88B700B395F9 /* RTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6358719217F88B700B395F9 /* RTCClient.swift */; };
+		D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5DE21A806EB005736FE /* WebRTCClient.swift */; };
+		D653F5E121AD853E005736FE /* SPPeerConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */; };
+		D653F5E321B0179E005736FE /* Static.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D653F5E221B0179D005736FE /* Static.framework */; };
+		D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E421B01928005736FE /* SettingsViewController.swift */; };
 		D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */; };
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
 		D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD702218884DF00BBE679 /* CallKitManager.swift */; };
@@ -43,7 +51,6 @@
 		D6781867216CD1B600E650DB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D6781866216CD1B600E650DB /* .gitignore */; };
 		D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781875216F432900E650DB /* ChatsTableViewController.m */; };
 		D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */; };
-		D67818832176097C00E650DB /* SMSChat.m in Sources */ = {isa = PBXBuildFile; fileRef = D67818822176097C00E650DB /* SMSChat.m */; };
 		D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188D2178549200E650DB /* VoicemailTableViewController.swift */; };
 		D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188F2178572500E650DB /* VoicemailTableViewCell.swift */; };
 		D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */; };
@@ -66,6 +73,8 @@
 		D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */; };
 		D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */; };
 		D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8821219AE7FA00F87B35 /* SPAccount.swift */; };
+		D6E0B80721B8797800D560D7 /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0B80621B8797800D560D7 /* SwiftyAcknowledgements.framework */; };
+		D6E0B80921B87AF400D560D7 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6E0B80821B87AF400D560D7 /* Acknowledgements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,13 +110,21 @@
 		D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudEnvironmentButton.swift; sourceTree = "<group>"; };
 		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAccountViewController.swift; sourceTree = "<group>"; };
+		D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDevice.swift; sourceTree = "<group>"; };
+		D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCollectionView.swift; sourceTree = "<group>"; };
+		D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayViewController.swift; sourceTree = "<group>"; };
+		D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalStrengthIndicatorView.swift; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		D6328CAB219313DF00E48FD3 /* SPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPManager.swift; sourceTree = "<group>"; };
 		D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhoneNumberKit.framework; path = Carthage/Build/iOS/PhoneNumberKit.framework; sourceTree = "<group>"; };
 		D6358714217F49E900B395F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		D6358717217F544800B395F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		D6358719217F88B700B395F9 /* RTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCClient.swift; sourceTree = "<group>"; };
+		D653F5DE21A806EB005736FE /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPeerConnectionManager.swift; sourceTree = "<group>"; };
+		D653F5E221B0179D005736FE /* Static.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Static.framework; path = Carthage/Build/iOS/Static.framework; sourceTree = "<group>"; };
+		D653F5E421B01928005736FE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureState.swift; sourceTree = "<group>"; };
 		D65FD702218884DF00BBE679 /* CallKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitManager.swift; sourceTree = "<group>"; };
@@ -137,8 +154,6 @@
 		D6781875216F432900E650DB /* ChatsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPreviewTableViewCell.h; sourceTree = "<group>"; };
 		D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatPreviewTableViewCell.m; sourceTree = "<group>"; };
-		D67818812176097C00E650DB /* SMSChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMSChat.h; sourceTree = "<group>"; };
-		D67818822176097C00E650DB /* SMSChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMSChat.m; sourceTree = "<group>"; };
 		D678188821777B4800E650DB /* SIMplePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SIMplePhone-Bridging-Header.h"; sourceTree = "<group>"; };
 		D678188D2178549200E650DB /* VoicemailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewController.swift; sourceTree = "<group>"; };
 		D678188F2178572500E650DB /* VoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewCell.swift; sourceTree = "<group>"; };
@@ -161,6 +176,8 @@
 		D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyBounceAnimationSegue.swift; sourceTree = "<group>"; };
 		D6BE8821219AE7FA00F87B35 /* SPAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAccount.swift; sourceTree = "<group>"; };
+		D6E0B80621B8797800D560D7 /* SwiftyAcknowledgements.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyAcknowledgements.framework; path = Carthage/Build/iOS/SwiftyAcknowledgements.framework; sourceTree = "<group>"; };
+		D6E0B80821B87AF400D560D7 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,11 +185,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D653F5E321B0179E005736FE /* Static.framework in Frameworks */,
 				D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */,
 				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
 				D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */,
 				D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */,
+				D6E0B80721B8797800D560D7 /* SwiftyAcknowledgements.framework in Frameworks */,
 				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
 				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
 				D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */,
@@ -203,6 +222,7 @@
 				D65FD71A2189C90200BBE679 /* SPMessage.swift */,
 				D65FD71C2189CA2100BBE679 /* SPVoicemail.swift */,
 				D65FD71E2189CAE800BBE679 /* SPGateway.swift */,
+				D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -244,6 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				D65FD70B2189BB5600BBE679 /* Frameworks.md */,
+				D6E0B80621B8797800D560D7 /* SwiftyAcknowledgements.framework */,
+				D653F5E221B0179D005736FE /* Static.framework */,
 				D603A3AB21A543BD0011AFC9 /* SwiftMessages.framework */,
 				D603A3A9219C623D0011AFC9 /* CloudKit.framework */,
 				D6BE880B2194398900F87B35 /* WebRTC.framework */,
@@ -271,6 +293,9 @@
 				D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */,
 				D6BE881721971A8900F87B35 /* LoginViewController.swift */,
 				D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */,
+				D653F5E421B01928005736FE /* SettingsViewController.swift */,
+				D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */,
+				D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -287,6 +312,8 @@
 				D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */,
 				D6BE881B2199FF0800F87B35 /* SetupTextField.swift */,
 				D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */,
+				D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */,
+				D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,8 +321,6 @@
 		D67818862176180100E650DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D67818812176097C00E650DB /* SMSChat.h */,
-				D67818822176097C00E650DB /* SMSChat.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +328,7 @@
 		D67818872176180700E650DB /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				D6E0B80821B87AF400D560D7 /* Acknowledgements.plist */,
 				D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */,
 				D65FD70421888FDF00BBE679 /* SIMplePhone.entitlements */,
 				D678185E216CD16F00E650DB /* Info.plist */,
@@ -322,14 +348,15 @@
 			isa = PBXGroup;
 			children = (
 				D6328CAB219313DF00E48FD3 /* SPManager.swift */,
+				D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */,
 				D65FD7132189C53600BBE679 /* Models */,
 				D604917C2194289F00F46B18 /* APIClient.swift */,
-				D6358719217F88B700B395F9 /* RTCClient.swift */,
-				D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */,
+				D653F5DE21A806EB005736FE /* WebRTCClient.swift */,
 				D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */,
 				D65FD702218884DF00BBE679 /* CallKitManager.swift */,
 				D6328CA721930FD200E48FD3 /* RealmManager.swift */,
 				D6328CA92193128600E48FD3 /* RealmExtensions.swift */,
+				D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */,
 				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
 				D67818A62178929B00E650DB /* Info.plist */,
 			);
@@ -446,6 +473,7 @@
 				D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */,
 				D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */,
 				D6781858216CD16D00E650DB /* Main.storyboard in Resources */,
+				D6E0B80921B87AF400D560D7 /* Acknowledgements.plist in Resources */,
 				D67818BA2179BB8600E650DB /* sample.m4a in Resources */,
 				D67818B62179B6B800E650DB /* Assets.xcassets in Resources */,
 			);
@@ -494,6 +522,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireSwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Static.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -531,9 +561,14 @@
 			files = (
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
+				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
+				D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
+				D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */,
 				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
+				D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */,
+				D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */,
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
@@ -548,7 +583,6 @@
 				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
 				D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */,
 				D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */,
-				D67818832176097C00E650DB /* SMSChat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,19 +590,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D635871A217F88B700B395F9 /* RTCClient.swift in Sources */,
 				D604917D2194289F00F46B18 /* APIClient.swift in Sources */,
 				D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */,
+				D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */,
 				D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */,
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,
 				D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */,
 				D65FD71B2189C90200BBE679 /* SPMessage.swift in Sources */,
 				D65FD71D2189CA2100BBE679 /* SPVoicemail.swift in Sources */,
+				D653F5E121AD853E005736FE /* SPPeerConnectionManager.swift in Sources */,
 				D65FD7152189C55200BBE679 /* SPRecentCall.swift in Sources */,
 				D65FD71F2189CAE800BBE679 /* SPGateway.swift in Sources */,
 				D65FD7192189C88700BBE679 /* SPChat.swift in Sources */,
 				D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */,
 				D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */,
+				D62731CF21B9A2FB00CFCE28 /* SPDevice.swift in Sources */,
 				D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */,
 				D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */,
 			);

@@ -11,19 +11,31 @@ import RealmSwift
 
 public class SPGateway: Object {
     @objc public dynamic var imei = ""
-    @objc public dynamic var name = ""
-    @objc public dynamic var phoneNumber = ""
-    @objc public dynamic var signalStrength: Double = 0.0
+    @objc public dynamic var name: String?
+    @objc public dynamic var phoneNumber: String?
+    private var _signalStrength = RealmOptional<Double>()
+    public var signalStrength: Double? {
+        get { return _signalStrength.value }
+        set { _signalStrength.value = newValue }
+    }
+    @objc public dynamic var firmwareVersion: String?
+    @objc public dynamic var carrier: String?
     
-    public convenience init(withIMEI imei: String, name: String, phoneNumber: String, signalStrength: Double) {
+    public convenience init(withIMEI imei: String, name: String?, phoneNumber: String?, signalStrength: Double?, firmwareVersion: String?, carrier: String?) {
         self.init()
         self.imei = imei
         self.name = name
         self.phoneNumber = phoneNumber
-        self.signalStrength = signalStrength
+        self._signalStrength.value = signalStrength
+        self.firmwareVersion = firmwareVersion
+        self.carrier = carrier
     }
     
     override public static func primaryKey() -> String? {
         return "imei"
+    }
+    
+    override public static func ignoredProperties() -> [String] {
+        return ["signalStrength"]
     }
 }

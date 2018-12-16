@@ -14,6 +14,10 @@ protocol CloudEnvironmentButtonDelegate {
     func cloudEnvironmentRequestsAlert(_ alert: UIAlertController)
 }
 
+extension CloudEnvironmentButtonDelegate {
+    func cloudEnvironmentChecking(_ finished: Bool = false) {   }
+}
+
 class CloudEnvironmentButton: UIButton {
     public var delegate: CloudEnvironmentButtonDelegate?
     
@@ -44,6 +48,7 @@ class CloudEnvironmentButton: UIButton {
     
     private func layout(_ state: BtnState) {
         self.isEnabled = true
+        self.delegate?.cloudEnvironmentChecking()
         
         switch state {
         case .unavailableCloudAlreadyAssociatedWithDifferentAccount, .unavailableAccountAssociatedWithDifferentCloud:
@@ -63,15 +68,17 @@ class CloudEnvironmentButton: UIButton {
             self.setTitle("Checking...", for: .normal)
             self.setTitleColor(UIColor.lightGray, for: .normal)
             self.isEnabled = false
-            // Disable Login Btn here
+            self.delegate?.cloudEnvironmentChecking(true)
         }
     }
     
     public func updateForUsername(_ username: String?) {
+        print("checking un: \(username)")
         let stateCache = self.selectorState
         self.selectorState = .checking
         if let username = username {
             SPManager.shared.checkUsernameWithCloud(username) { (error) in
+                print("response \(error)")
                 if let error = error {
                     if error == .cloudAlreadyAssociatedWithDifferentAccount {
                         self.selectorState = .unavailableAccountAssociatedWithDifferentCloud
