@@ -1,15 +1,19 @@
-from serial import Serial
+# cython: language_level=3
+
+import threading
 from queue import Queue
 from threading import Thread
-from gateway.utils import clear_str, logger
-import gateway.io.sim800.parser as parser
-import threading
+
 import pyee
+from serial import Serial
+
+from gateway.io.sim800 import parser
+from gateway.utils import clear_str, logger
 
 
 class SerialLoop(Thread):
     """
-    SerialLoop is a thread there for communicate with the sim800 module over the serial interface
+    SerialLoop is a thread for communication with the sim800 module over the serial interface.
     """
 
     def __init__(self, emitter, serial_port, debug):
@@ -52,7 +56,7 @@ class SerialLoop(Thread):
         # Set running to stop the loop
         self.running = threading.Event()
 
-    def run(self):
+    def run(self):  # TODO: Clean up run()
         """
         Is there for writing commands to the serial interface and reading the response
 

@@ -1,8 +1,12 @@
+# cython: language_level=3
+
+import asyncio
+
 import requests
 from pyee import EventEmitter
+
 import gateway.networking.sse
 from gateway.utils import logger, AnsiEscapeSequence
-import asyncio
 
 
 class API(EventEmitter):
@@ -11,6 +15,16 @@ class API(EventEmitter):
     """
 
     def __init__(self, username, password, _id, host='localhost', loop=asyncio.get_event_loop()):
+        """
+        Construct a new 'API' object.
+
+        :param username: username for the backend
+        :param password: password for the backend
+        :param _id: gateway id (imei)
+        :param host: host address
+        :param loop: asyncio event loop
+        """
+
         super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
         self.auth = (username, password)
         self.host = host

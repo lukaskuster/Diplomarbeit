@@ -1,10 +1,14 @@
+# cython: language_level=3
+
 import json
-from aiortc import RTCSessionDescription
-from websockets import WebSocketClientProtocol
-from gateway.utils import logger, AnsiEscapeSequence
-from aioice import Candidate
-from aiortc.rtcicetransport import candidate_from_aioice
+
 import attr
+from aioice import Candidate
+from aiortc import RTCSessionDescription
+from aiortc.rtcicetransport import candidate_from_aioice
+from websockets import WebSocketClientProtocol
+
+from gateway.utils import logger, AnsiEscapeSequence
 
 
 class AuthenticationError(Exception):
@@ -34,7 +38,7 @@ async def authenticate(socket, role, username, password):
     :type role: Role
     :type username: str
     :type password: str
-    :return: boolean if the authentication is successful
+    :return: nothing
     """
 
     # Check parameter types

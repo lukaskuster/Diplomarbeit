@@ -1,9 +1,12 @@
+# cython: language_level=3
+
 import json
-import gateway.utils as utils
 from datetime import datetime
-import gateway.io.sim800.response_objects as response_objects
-from gateway.utils.config import config
-import os
+
+import gateway.utils as utils
+from gateway.core.config import get_config
+from gateway.io.sim800 import response_objects
+
 
 class Parser:
     """
@@ -142,7 +145,7 @@ class IMSIParser(Parser):
         mnc = content[0][3:5]
         msin = content[0][5:]
 
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), config['DEFAULT']['apnfile'])) as f:
+        with open(get_config()['DEFAULT']['apnfile']) as f:
             data = json.load(f)
 
             country = None

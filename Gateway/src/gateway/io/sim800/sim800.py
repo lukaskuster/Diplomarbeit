@@ -1,11 +1,11 @@
-from pyee import EventEmitter
-from gateway.utils import clear_str
-import gateway.io.sim800.serial_loop as serial_loop
-import gateway.io.sim800.at_command as cmd
-import gateway.io.sim800.at_event as atev
-import gateway.io.sim800.parser as atparser
-import gateway.io.sim800.response_objects as response_objects
+# cython: language_level=3
+
 import asyncio
+
+from pyee import EventEmitter
+
+from gateway.io.sim800 import serial_loop, at_command, at_event, parser as at_parser, response_objects
+from gateway.utils import clear_str
 
 
 class Sim800Error(Exception):
@@ -62,15 +62,11 @@ class Sim800(EventEmitter):
         """
         Writes the command to the serial interface.
 
-        This method can be used synchronously as well as asynchronously,
-        by setting a callback in the command object. If the method runs synchronously it returns the response event.
-        When a callback is specified this method is non blocking and gets the event as argument to the callback.
-
         :param command: command that should be written to the serial interface
         :return: returns the response event if no callback is set on the command
         """
 
-        event = atev.ATEvent(command.name, command)
+        event = at_event.ATEvent(command.name, command)
         self.serial_loop.command_queue.put(event)
 
         await event.wait()
@@ -83,7 +79,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('ATA\r\n', name='AnswerCall'))
+        return await self.write(at_command.ATCommand('ATA\r\n', name='AnswerCall'))
 
     async def hang_up_call(self):
         """
@@ -92,7 +88,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('ATH\r\n', name='HangUpCall'))
+        return await self.write(at_command.ATCommand('ATH\r\n', name='HangUpCall'))
 
     async def dial_number(self, number):
         """
@@ -105,7 +101,7 @@ class Sim800(EventEmitter):
 
         # Remove all \n and \r from the number
         number = clear_str(number)
-        return await self.write(cmd.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
+        return await self.write(at_command.ATCommand('ATD{};\r\n'.format(number), name='DialNumber'))
 
     async def send_sms(self, number, text):
         """
@@ -123,7 +119,7 @@ class Sim800(EventEmitter):
         text = clear_str(text)
         text += '\x1A'
 
-        return await self.write(cmd.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
+        return await self.write(at_command.ATCommand('AT+CMGS="{}"\r'.format(number), name='SendSMS', data=text))
 
     async def request_unread_sms(self):
         """
@@ -133,8 +129,8 @@ class Sim800(EventEmitter):
 
         :return: event
         """
-        return await self.write(cmd.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
-                                              parser=atparser.SMSListParser))
+        return await self.write(at_command.ATCommand('AT+CMGL="REC UNREAD"\r\n', name='ListUnreadSMS',
+                                                     parser=at_parser.SMSListParser))
 
     async def request_all_sms(self):
         """
@@ -145,7 +141,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=atparser.SMSListParser))
+        return await self.write(at_command.ATCommand('AT+CMGL="ALL"\r\n', name='ListAllSMS', parser=at_parser.SMSListParser))
 
     async def set_sms_mode(self, mode=None):
         """
@@ -160,7 +156,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
+        return await self.write(at_command.ATCommand('AT+CMGF={}\r\n'.format(mode), name='SMSMode'))
 
     async def power_off(self, mode):
         """
@@ -174,7 +170,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
+        return await self.write(at_command.ATCommand('AT+CPOWD={}\r\n'.format(mode), name='PowerOff'))
 
     async def request_signal_quality(self):
         """
@@ -185,7 +181,8 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CSQ\r\n', name='SignalQuality', parser=atparser.SignalQualityParser))
+        return await self.write(at_command.ATCommand('AT+CSQ\r\n', name='SignalQuality',
+                                                     parser=at_parser.SignalQualityParser))
 
     async def reset_default_configuration(self):
         """
@@ -194,7 +191,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
+        return await self.write(at_command.ATCommand('ATZ\r\n', name='ResetDefaultConfiguration'))
 
     async def enter_pin(self, pin):
         """
@@ -204,7 +201,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
+        return await self.write(at_command.ATCommand('AT+CPIN={}\r\n'.format(pin), name='EnterPIN'))
 
     async def request_pin_status(self):
         """
@@ -215,7 +212,8 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CPIN?\r\n', name='PINStatus', parser=atparser.PinStatusParser))
+        return await self.write(at_command.ATCommand('AT+CPIN?\r\n', name='PINStatus',
+                                                     parser=at_parser.PinStatusParser))
 
     async def request_imei(self):
         """
@@ -226,7 +224,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+GSN', name='IMEI', parser=atparser.IMEIParser))
+        return await self.write(at_command.ATCommand('AT+GSN', name='IMEI', parser=at_parser.IMEIParser))
 
     async def request_network_status(self):
         """
@@ -237,7 +235,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CREG?', name='NetworkStatus', parser=atparser.NetworkStatusParser))
+        return await self.write(at_command.ATCommand('AT+CREG?', name='NetworkStatus', parser=at_parser.NetworkStatusParser))
 
     async def set_echo_mode(self, mode):
         """
@@ -251,7 +249,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        event = await self.write(cmd.ATCommand('ATE{}'.format(mode), name='EchoMode'))
+        event = await self.write(at_command.ATCommand('ATE{}'.format(mode), name='EchoMode'))
 
         if not event.error:
             self.serial_loop.echo = bool(mode)
@@ -270,7 +268,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        event = await self.write(cmd.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
+        event = await self.write(at_command.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
 
         if not event.error:
             self.serial_loop.caller_identification = bool(mode)
@@ -290,7 +288,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
+        return await self.write(at_command.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
 
     async def request_subscriber_number(self):
         """
@@ -299,7 +297,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CNUM', name='SubscriberNumber'))
+        return await self.write(at_command.ATCommand('AT+CNUM', name='SubscriberNumber'))
 
     async def request_imsi(self):
         """
@@ -308,7 +306,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(cmd.ATCommand('AT+CIMI', name='IMSI', parser=atparser.IMEIParser))
+        return await self.write(at_command.ATCommand('AT+CIMI', name='IMSI', parser=at_parser.IMEIParser))
 
     async def setup(self, pin=None):
         """

@@ -1,4 +1,6 @@
-import gateway.io.sim800.parser as sim_parser
+# cython: language_level=3
+
+from gateway.io.sim800 import parser as sim_parser
 
 
 class ATCommand:

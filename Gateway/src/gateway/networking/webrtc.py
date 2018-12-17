@@ -1,13 +1,17 @@
+# cython: language_level=3
+
 import asyncio
-import websockets
-from gateway.networking import signaling, AuthenticationError
-from aiortc.mediastreams import MediaStreamError
-from gateway.utils import logger, AnsiEscapeSequence
-from threading import Event
-from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration
-from pyee import EventEmitter
-from gateway.networking.track import CallStreamTrack
 from enum import IntEnum
+from threading import Event
+
+import websockets
+from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration
+from aiortc.mediastreams import MediaStreamError
+from pyee import EventEmitter
+
+from gateway.networking import signaling, AuthenticationError
+from gateway.networking.track import CallStreamTrack
+from gateway.utils import logger, AnsiEscapeSequence
 
 
 class Role(IntEnum):
@@ -78,8 +82,7 @@ class WebRTC(EventEmitter):
 
         asyncio.ensure_future(self._make_call())
 
-
-    def stop_call(self):
+    def stop_call(self):  # TODO: Fix to stop up call (currently not working)
         """
         Closes the webrtc connection.
 
@@ -195,7 +198,7 @@ class WebRTC(EventEmitter):
 
         logger.info('Signaling', 'Completed signaling process!')
 
-    def on_new_ice_candidate(self, task):
+    def _on_new_ice_candidate(self, task):
         """
         Add a new ice candidate if one is send from the peer connection.
 
@@ -212,9 +215,9 @@ class WebRTC(EventEmitter):
             self._peer_connection.addIceCandidate(candidate)
 
         resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
-        resv_ice_task.add_done_callback(self.on_new_ice_candidate)
+        resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
-    async def _make_call(self):
+    async def _make_call(self):  # TODO: Clean up method
         """
         Creates a connection with the device that receives and sends the audio frames.
 
@@ -253,16 +256,18 @@ class WebRTC(EventEmitter):
                 return
 
             resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
-            resv_ice_task.add_done_callback(self.on_new_ice_candidate)
+            resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
-            # Receive and send the media tracks until the connection closes
+            # Receive and send the audio frames until the connection closes
             try:
                 while True:
                     done, pending = await asyncio.wait([remote_track.recv()])
                     # Received frame
                     frame = list(done)[0].result()
-                    logger.log('Mediatrack', 'Receiving frame (samples: {}, sample_rate: {}, format: {}, pts: {}, rate: {}, time: {}. planes: {}, index: {}, layout: {}, dts: {})'
-                               .format(frame.samples, frame.sample_rate, frame.format.name, frame.pts, frame.rate, frame.time, frame.planes, frame.index, frame.layout, frame.dts))
+                    logger.log('Mediatrack', 'Receiving frame (samples: {}, sample_rate: {}, format: {}, pts: {}, '
+                                             'rate: {}, time: {}. planes: {}, index: {}, layout: {}, dts: {})'
+                               .format(frame.samples, frame.sample_rate, frame.format.name, frame.pts,
+                                       frame.rate, frame.time, frame.planes, frame.index, frame.layout, frame.dts))
 
                     if not self._call.is_set():
                         raise MediaStreamError('local')

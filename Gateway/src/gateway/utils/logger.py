@@ -1,6 +1,9 @@
-from gateway.utils.singleton import Singleton
-from enum import IntEnum
+# cython: language_level=3
+
 import datetime
+from enum import IntEnum
+
+from gateway.utils.singleton import Singleton
 
 
 class AnsiEscapeSequence:
@@ -92,4 +95,3 @@ class Logger:
         """
         message = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
         print('{} {}'.format(_time_str(), message))
-

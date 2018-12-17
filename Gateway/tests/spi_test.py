@@ -39,7 +39,7 @@ import time
 import pigpio
 
 CHANNEL = 0     # For CE0
-BAUD_RATE = 1000000
+BAUD_RATE = 5000000
 
 
 def address(addr):
@@ -106,13 +106,9 @@ if __name__ == '__main__':
         raise ConnectionError('Could not connect to pigpio!')
 
     h = pi.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
-    pi.spi_write(0, b'\xA0')
-    pi.spi_write(0, b'\xA0')
-    pi.spi_write(0, b'\xA0')
-    pi.spi_write(0, b'\xA0')
-
-
-
+    pi.spi_write(h, b'\xB0\x08')
+    time.sleep(0.01)
+    pi.spi_write(h, b'\xA0')
 
     #m = ModeControlRegister()
     #m.read(pi, h)

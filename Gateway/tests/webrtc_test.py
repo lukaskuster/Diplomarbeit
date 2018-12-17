@@ -1,5 +1,6 @@
 from gateway.networking import WebRTC, Role
 from gateway.utils import logger, Level
+from gateway.core import set_config
 import asyncio
 import sys
 
@@ -31,4 +32,5 @@ if __name__ == '__main__':
     else:
         test_offer()
 
+    set_config('config.ini')
     asyncio.get_event_loop().run_forever()

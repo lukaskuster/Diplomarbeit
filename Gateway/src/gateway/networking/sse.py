@@ -1,8 +1,12 @@
-from threading import Thread, Event
-import requests
-from requests.exceptions import ConnectionError, ChunkedEncodingError
+# cython: language_level=3
+
 import json
 import time
+from threading import Thread, Event
+
+import requests
+from requests.exceptions import ConnectionError, ChunkedEncodingError
+
 from gateway.utils import logger, AnsiEscapeSequence
 
 
@@ -10,7 +14,15 @@ class SSE(Thread):
     """
     Thread that tries to open a sse connection until it is closed
     """
+
     def __init__(self, emitter, timeout=5):
+        """
+        Construct a new 'SSE' object.
+
+        :param emitter: pyee emitter that can emit events
+        :param timeout: time to wait before trying to reconnect in seconds
+        """
+
         super(SSE, self).__init__()
         self.emitter = emitter
         self.timeout = timeout
@@ -19,6 +31,11 @@ class SSE(Thread):
 
     @property
     def connection_state(self):
+        """
+        Getter for connection state.
+
+        :return: connection state
+        """
         return self._connection_state
 
     @connection_state.setter
@@ -47,7 +64,7 @@ class SSE(Thread):
         self._running.set()
         logger.debug('SSE', 'Closing initiated!')
 
-    def run(self):
+    def run(self):  # TODO: Clean up method
         """
         Try to establish a connection until the thread is closed.
         Emits the parsed events on the API.
@@ -61,7 +78,8 @@ class SSE(Thread):
             try:
                 self.connection_state = 'connecting'
 
-                response = requests.get(self.emitter.host + '/gateway/stream', stream=True, json={'imei': self.emitter.id},
+                response = requests.get(self.emitter.host + '/gateway/stream', stream=True,
+                                        json={'imei': self.emitter.id},
                                         auth=self.emitter.auth)
 
                 self.connection_state = 'connected'
@@ -83,9 +101,9 @@ class SSE(Thread):
                         try:
                             notification = json.loads(line)
                             self.emitter.emit(notification['event'], notification['data'])
-                        except ValueError:    # Json failed to load
-                            pass              # For now ignore when a wrong message arrived
-                        except KeyError:      # An error occurred if event and data is not available
+                        except ValueError:  # Json failed to load
+                            pass  # For now ignore when a wrong message arrived
+                        except KeyError:  # An error occurred if event and data is not available
                             break
 
                 if response.status_code != 200 and notification:
@@ -93,11 +111,11 @@ class SSE(Thread):
                     logger.error('SSE', 'An error occurred: ' + notification['errorMessage'])
                     time.sleep(self.timeout)
 
-            except ConnectionError:           # Failed to connect
+            except ConnectionError:  # Failed to connect
                 self.emitter.emit('connectionRefused')
                 logger.error('SSE', 'Can not connect to host!')
                 time.sleep(self.timeout)
-            except ChunkedEncodingError:      # Connection was aborted
+            except ChunkedEncodingError:  # Connection was aborted
                 self.emitter.emit('connectionAborted')
                 logger.error('SSE', 'Connection was aborted!')
                 self.connection_state = 'connecting'

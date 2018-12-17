@@ -1,9 +1,42 @@
 from setuptools import setup, Extension, find_packages, Command
+
 from subprocess import call
 import configparser
+from os import path, walk
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+try:
+    from Cython.Build import cythonize
+except ImportError:
+    use_cython = False
+else:
+    use_cython = True
+
+
+def after(value, a):
+    pos_a = value.rfind(a)
+    if pos_a == -1:
+        return ""
+    adjusted_pos_a = pos_a + len(a)
+    if adjusted_pos_a >= len(value):
+        return ""
+    return value[adjusted_pos_a:]
+
+
+if use_cython:
+    extensions = cythonize('src/**/*.py', exclude='src/**/__init__.py')
+else:
+    extensions = []
+
+    dir_path = path.dirname(path.realpath(__file__))
+    for subdir, dirs, files in walk(path.join(dir_path, 'src', 'gateway')):
+        for file in files:
+            file_path = path.join(subdir, file)
+            filename, file_extension = path.splitext(file_path)
+            if file_extension == '.c':
+                extensions.append(Extension(after(filename.replace(path.sep, '.'), 'src.'), [file_path]))
 
 
 class CythonizeCommand(Command):
@@ -19,47 +52,17 @@ class CythonizeCommand(Command):
         call(['./compile_cython.sh'], shell=True)
 
 
-# TODO: Don't hardcode this
-networking_extensions = [
-    Extension('gateway.networking.signaling', ['src/gateway/networking/signaling.c']),
-    Extension('gateway.networking.webrtc', ['src/gateway/networking/webrtc.c']),
-    Extension('gateway.networking.track', ['src/gateway/networking/track.c']),
-    Extension('gateway.networking.api', ['src/gateway/networking/api.c']),
-    Extension('gateway.networking.sse', ['src/gateway/networking/sse.c'])
-]
-
-io_extensions = [
-    Extension('gateway.io.sim800.at_command', ['src/gateway/io/sim800/at_command.c']),
-    Extension('gateway.io.sim800.at_event', ['src/gateway/io/sim800/at_event.c']),
-    Extension('gateway.io.sim800.parser', ['src/gateway/io/sim800/parser.c']),
-    Extension('gateway.io.sim800.response_objects', ['src/gateway/io/sim800/response_objects.c']),
-    Extension('gateway.io.sim800.serial_loop', ['src/gateway/io/sim800/serial_loop.c']),
-    Extension('gateway.io.sim800.sim800', ['src/gateway/io/sim800/sim800.c'])
-]
-
-utils_extensions = [
-    Extension('gateway.utils.config', ['src/gateway/utils/config.c']),
-    Extension('gateway.utils.logger', ['src/gateway/utils/logger.c']),
-    Extension('gateway.utils.singleton', ['src/gateway/utils/singleton.c']),
-    Extension('gateway.utils.string_utils', ['src/gateway/utils/string_utils.c']),
-    Extension('gateway.utils.scheduler', ['src/gateway/utils/scheduler.c'])
-]
-
 setup(
     cmdclass={
         'cythonize': CythonizeCommand
     },
     name='gateway',
-    version="0.0.2",
-    ext_modules=[*io_extensions, *networking_extensions, *utils_extensions],
+    version=config['DEFAULT']['version'],
+    ext_modules=extensions,
     package_dir={'': 'src'},
+    packages=find_packages('src'),
     install_requires=['aiortc', 'websockets', 'av', 'pyee', 'attr', 'asyncio',
                       'pyserial', 'requests', 'aioice'],
-    packages=find_packages('src'),
-    data_files=[('/gateway/utils', ['config.ini']),
-                ('/gateway/io/sim800', [config['DEFAULT']['apnfile']]),
-                # DEVELOPMENT ONLY
-                ('/gateway/networking', ['test_files/' + config['Test']['audiofile']])],
     entry_points={
         'console_scripts': ['gatewayw=gateway.core.main:start'],
     },

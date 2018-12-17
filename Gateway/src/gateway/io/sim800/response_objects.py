@@ -1,4 +1,7 @@
+# cython: language_level=3
+
 from enum import IntEnum, Enum
+
 import attr
 
 
