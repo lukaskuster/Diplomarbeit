@@ -1,13 +1,15 @@
 # Gateway
 
+## Build sources
 
-## Run virtual-environment
-
-* `cd /src`
-* `sudo -E pipenv shell`
+To compile the .pyx to .c files:
+`python setup.py cythonize`
 
 
-## To run tests
+To build a source distribution:
+`python setup.py sdist`
 
-* `export PYTHONPATH={Path to src folder}`
 
+## Install and build binaries
+
+With pip: pip install src_distribution.tar.gz

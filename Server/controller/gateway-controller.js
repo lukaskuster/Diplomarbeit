@@ -82,6 +82,12 @@ module.exports.putGateway = function (req, res) {
     if (req.body.phoneNumber) {
         user.gateway[index].phoneNumber = req.body.phoneNumber;
     }
+    if (req.body.carrier) {
+        user.gateway[index].carrier = req.body.carrier;
+    }
+    if (req.body.firmwareVersion) {
+        user.gateway[index].firmwareVersion = req.body.firmwareVersion;
+    }
 
     user.save().then(function () {
         res.json(user.gateway[index].toClient());
