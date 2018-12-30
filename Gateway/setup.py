@@ -59,7 +59,7 @@ setup(
     name='gateway',
     # TODO: Not working with pip install, because config.ini is not present
     # version=config['DEFAULT']['version'],
-    version='0.0.2',
+    version='0.0.3',
     ext_modules=extensions,
     package_dir={'': 'src'},
     packages=find_packages('src'),
