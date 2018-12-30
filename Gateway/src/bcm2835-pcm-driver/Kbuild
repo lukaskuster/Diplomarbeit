@@ -1,0 +1,4 @@
+
+obj-m := bcm2835_pcm_driver.o
+
+ccflags-y := -I$(src)/inc
