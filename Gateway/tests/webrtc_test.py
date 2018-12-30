@@ -22,6 +22,9 @@ def test_offer():
 
 
 if __name__ == '__main__':
+
+    set_config('config.ini')
+
     if len(sys.argv) >= 2:
         if sys.argv[1] == 'offer':
             test_offer()
@@ -32,5 +35,4 @@ if __name__ == '__main__':
     else:
         test_offer()
 
-    set_config('config.ini')
     asyncio.get_event_loop().run_forever()
