@@ -447,7 +447,7 @@ static ssize_t device_write(struct file *file, const char *buffer, size_t length
 
         if (buffer_write(&tx_buf, tx_temp) < 0)
         {
-            printk(KERN_INFO "TX buffer overflow.");
+            //printk(KERN_INFO "TX buffer overflow.");
         }
 
         index += BYTES_PER_SAMPLE;
