@@ -1,0 +1,6 @@
+global-include *.pyx
+global-include *.pxd
+global-include *.h
+purge dist/
+purge res/
+purge helper/
