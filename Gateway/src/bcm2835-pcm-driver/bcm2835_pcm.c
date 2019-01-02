@@ -87,7 +87,7 @@ static int pcm_init_default(void)
 #ifdef MASTER
     printk(KERN_INFO "Configuring Raspberry Pi as PCM master...");
     // Set frame length and frame sync length
-    pcm_map->MODE_A = I2S_MODE_A_FLEN(300) | I2S_MODE_A_FSLEN(1);
+    pcm_map->MODE_A = I2S_MODE_A_FLEN(383) | I2S_MODE_A_FSLEN(1);
 #endif
 
 #ifdef SLAVE
