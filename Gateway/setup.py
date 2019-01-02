@@ -6,7 +6,7 @@ from Cython.Build import cythonize
 
 setup(
     name='gateway',
-    version='0.0.3',
+    version='0.1.0',
     ext_modules=cythonize([Extension("gateway.io.pcm.pcm", ["src/gateway/io/pcm/pcm.pyx"])]),
     package_dir={'': 'src'},
     packages=find_packages('src'),
