@@ -28,7 +28,7 @@ int main()
         exit(-1);
     }
     // Start the clock with 3.072MHz
-    start_clk();
+    enable_clk();
 #endif
 
     /* Enable SIGINT callback */
@@ -36,7 +36,7 @@ int main()
     signal(SIGINT, SIGINT_handler);
 
     /* Enable pcm hw */
-    if ((e = start_call()) < 0)
+    if ((e = enable_pcm()) < 0)
     {
         printf("Error starting call: %d\n", e);
         exit(-1);
@@ -64,7 +64,7 @@ int main()
         req.tv_nsec = milisec * 1000000L;
         nanosleep(&req, (struct timespec *)NULL);
 
-        /* Don't get higher than 8bit can hold */
+        /* Don't use a higher value than 8bit can hold */
         if (count > 255)
         {
             count = 0;
@@ -75,7 +75,7 @@ int main()
 
         // Send the frame via the pcm bus
         int e;
-        if ((e = write_samples(&frame)) > 0)
+        if ((e = write_frame(&frame)) > 0)
         {
             // Only increment count if the frame was actually send
             count++;
@@ -86,19 +86,19 @@ int main()
         }
 
         /* Try to read a frame from the pcm bus */
-        char *read_frame;
-        if ((read_frame = read_samples()) == NULL)
+        char *samples;
+        if ((samples = read_frame()) == NULL)
         {
             printf("Could not read frame!\n");
         }
         else
         {
-            printf("Got frame! First sample: %d\n", read_frame[0]);
+            printf("Got frame! First sample: %d\n", samples[0]);
         }
     }
 
     /* Disable pcm hw */
-    if ((e = stop_call()) < 0)
+    if ((e = disable_pcm()) < 0)
     {
         printf("Error stoping call: %d\n", e);
         exit(-1);
@@ -106,7 +106,7 @@ int main()
 
 #ifdef MASTER
     // Stop the clock by clearing all registers
-    stop_clk();
+    disable_clk();
 
     /* Unmap the clk memory*/
     if ((e = dealloc_clk()) < 0)

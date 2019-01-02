@@ -26,16 +26,16 @@
 #define PCM_CLR_TX_FIFO _IOW('i', 15, char)
 #define PCM_CLR_RX_FIFO _IOW('i', 16, char)
 
-int start_call(void);
-int stop_call();
+int enable_pcm(void);
+int disable_pcm(void);
 
-size_t write_samples(char *);
-char *read_samples();
+size_t write_frame(char *);
+char *read_frame(void);
 
 int alloc_clk(void);
 int dealloc_clk(void);
 
-void start_clk(void);
-void stop_clk(void);
+void enable_clk(void);
+void disable_clk(void);
 
 #endif

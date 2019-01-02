@@ -29,8 +29,10 @@ char *clk_mem, *clk_map;
 // clk access
 volatile unsigned *clk;
 
-int start_call()
+int enable_pcm()
 {
+    printf("Enable PCM...\n");
+
     /* Open pcm dev file */
     pcm_fd = open("/dev/pcm", O_RDWR);
 
@@ -44,15 +46,13 @@ int start_call()
     ioctl(pcm_fd, PCM_CLEAR_RX_BUFF, 0);
     ioctl(pcm_fd, PCM_CLEAR_TX_BUFF, 0);
 
+
     /* Clear hardware FIFOs */
     ioctl(pcm_fd, PCM_CLR_TX_FIFO, 0);
     ioctl(pcm_fd, PCM_CLR_RX_FIFO, 0);
 
     // Wait for two clock signals
     usleep(5);
-
-    // Enable Rx
-    ioctl(pcm_fd, PCM_SET_RXON, 1);
 
     /* Fill Tx buffer */
     while (ioctl(pcm_fd, PCM_TX_BUFF_SPACE) > 0)
@@ -61,14 +61,17 @@ int start_call()
         write(pcm_fd, &buf, 4);
     }
 
-    // Enable Tx after the buffer is filled
+    // Enable Tx and Rx after the buffer is filled
     ioctl(pcm_fd, PCM_SET_TXON, 1);
+    ioctl(pcm_fd, PCM_SET_RXON, 1);
 
     return pcm_fd;
 }
 
-int stop_call()
+int disable_pcm()
 {
+    printf("Disable PCM...\n");
+
     /* Disable Tx and Rx */
     ioctl(pcm_fd, PCM_SET_RXON, 0);
     ioctl(pcm_fd, PCM_SET_TXON, 0);
@@ -80,7 +83,7 @@ int stop_call()
     return ret;
 }
 
-size_t write_samples(char *samples)
+size_t write_frame(char *samples)
 {
     /* Check if enough space is availabe */
     if (ioctl(pcm_fd, PCM_TX_BUFF_SPACE) > FRAME_SAMPLES)
@@ -92,7 +95,7 @@ size_t write_samples(char *samples)
     return -EAGAIN;
 }
 
-char *read_samples()
+char *read_frame()
 {
     // Samples from the device driver
     static char buffer[FRAME_SAMPLES];
@@ -117,9 +120,9 @@ char *read_samples()
     return NULL;
 }
 
-void start_clk()
+void enable_clk()
 {
-    printf("Start PCM clock!\n");
+    printf("Enable PCM CLK...\n");
 
     /* Setup the clock to output 3.072Mhz */
     *(clk + 0x26) = 0x5A000000 | (1 << 9);
@@ -131,9 +134,9 @@ void start_clk()
     *(clk + 0x26) = 0x5A000011 | (1 << 9);
 }
 
-void stop_clk()
+void disable_clk()
 {
-    printf("Stop PCM clock!\n");
+    printf("Disable PCM CLK!\n");
 
     /* Clear all register to disable the clocks */
     *(clk + 0x26) = 0x5A000000;
