@@ -1,10 +1,6 @@
 # Gateway
 
-## Build sources
-
-To compile the .pyx to .c files:
-`python setup.py cythonize`
-
+## Build source
 
 To build a source distribution:
 `python setup.py sdist`
@@ -12,4 +8,4 @@ To build a source distribution:
 
 ## Install and build binaries
 
-With pip: pip install src_distribution.tar.gz
+With pip: `pip install gateway.tar.gz`
