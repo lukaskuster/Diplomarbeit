@@ -1,17 +1,16 @@
-# cython: language_level=3
-
 import asyncio
 from enum import IntEnum
 from threading import Event
 
 import websockets
-from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration
+from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration, RTCRtpSender
 from aiortc.mediastreams import MediaStreamError
 from pyee import EventEmitter
 
 from gateway.networking import signaling, AuthenticationError
 from gateway.networking.track import CallStreamTrack
 from gateway.utils import logger, AnsiEscapeSequence
+from gateway.io import PCM
 
 
 class Role(IntEnum):
@@ -32,7 +31,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='localhost', signaling_timeout=10):
+    def __init__(self, username, password, host='localhost', signaling_timeout=10, debug=False):
         """
         Construct a new 'SerialLoop' object.
 
@@ -56,6 +55,13 @@ class WebRTC(EventEmitter):
         self._recv_ice_candidates = True
         self.signaling_timeout = signaling_timeout
 
+        # Don't include the pcm module in debug mode
+        if not debug:
+            self.pcm = PCM()
+        else:
+            self.pcm = None
+        self.debug = debug
+
     def start_call(self, role):
         """
         Initializes a new webrtc connection.
@@ -73,6 +79,13 @@ class WebRTC(EventEmitter):
         self._peer_connection = RTCPeerConnection(configuration=conf)
         self._role = role
 
+        # Set local audio track
+        local_track = CallStreamTrack(self.pcm)
+        self._peer_connection.addTrack(local_track)
+        logger.info('Mediatrack', 'Add local media track ({})'.format(local_track.id))
+
+        self._set_audio_codec()
+
         # Raise an exception if a call is ongoing
         if self._call.is_set():
             raise WebRTCError('Only one call can be active at a time!')
@@ -82,7 +95,19 @@ class WebRTC(EventEmitter):
 
         asyncio.ensure_future(self._make_call())
 
-    def stop_call(self):  # TODO: Fix to stop up call (currently not working)
+    def _set_audio_codec(self):
+        """
+        Sets PCMU/PCMA audio encoding/decoding to the PeerConnection.
+
+        :return: nothing
+        """
+
+        capabilities = RTCRtpSender.getCapabilities('audio')
+        preferences = list(filter(lambda x: x.name == 'PCMU', capabilities.codecs))
+        transceiver = self._peer_connection.getTransceivers()[0]
+        transceiver.setCodecPreferences(preferences)
+
+    def stop_call(self):  # TODO: Fix to hang up call (currently not working)
         """
         Closes the webrtc connection.
 
@@ -226,13 +251,7 @@ class WebRTC(EventEmitter):
 
         await self._log_signaling_states()
 
-        # Add the track to the peer connection
-        local_track = CallStreamTrack()
-
-        self._peer_connection.addTrack(local_track)
-        logger.info('Mediatrack', 'Add local media track ({})'.format(local_track.id))
-
-        # Set the remove track
+        # Set the remote track
         remote_track = None
 
         @self._peer_connection.on('track')
@@ -243,6 +262,7 @@ class WebRTC(EventEmitter):
             if track.kind == 'audio':
                 remote_track = track
 
+        # Do Signaling
         async with websockets.connect(self.host) as socket:
             try:
                 await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
@@ -255,6 +275,7 @@ class WebRTC(EventEmitter):
                 self._call.clear()
                 return
 
+            # Create new task to add new received ice candidates
             resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
             resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
@@ -262,16 +283,24 @@ class WebRTC(EventEmitter):
             try:
                 while True:
                     done, pending = await asyncio.wait([remote_track.recv()])
+
                     # Received frame
+                    # This is actually a JitterFrame, because decoding is removed in custom aiortc build
                     frame = list(done)[0].result()
-                    logger.log('Mediatrack', 'Receiving frame (samples: {}, sample_rate: {}, format: {}, pts: {}, '
-                                             'rate: {}, time: {}. planes: {}, index: {}, layout: {}, dts: {})'
-                               .format(frame.samples, frame.sample_rate, frame.format.name, frame.pts,
-                                       frame.rate, frame.time, frame.planes, frame.index, frame.layout, frame.dts))
+
+                    logger.log('Mediatrack', 'Receiving frame (samples: {}, timestamp (pts): {})'
+                               .format(len(frame.data), frame.timestamp))
+
+                    # Write the samples of the frame to the pcm interface
+                    if not self.debug:
+                        self.pcm.write_frame(frame.data)
 
                     if not self._call.is_set():
                         raise MediaStreamError('local')
             except MediaStreamError as err:
+                if not self.debug:
+                    self.pcm.disable()
+
                 if err.args == 'local':
                     logger.info('Connection', 'Peer connection closed from local client!')
                 else:

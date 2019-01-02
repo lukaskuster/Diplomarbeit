@@ -12,12 +12,12 @@ HOST = 'wss://signaling.da.digitalsubmarine.com:443'
 
 
 def test_answer():
-    con = WebRTC(USERNAME, PASSWORD, HOST)
+    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True)
     con.start_call(Role.ANSWER)
 
 
 def test_offer():
-    con = WebRTC(USERNAME, PASSWORD, HOST)
+    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True)
     con.start_call(Role.OFFER)
 
 
