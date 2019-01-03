@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 from gateway.io.sim800 import parser as sim_parser
 
 

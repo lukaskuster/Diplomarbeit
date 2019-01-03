@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import json
 import time
 from threading import Thread, Event

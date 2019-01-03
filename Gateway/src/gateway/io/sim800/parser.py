@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import json
 from datetime import datetime
 

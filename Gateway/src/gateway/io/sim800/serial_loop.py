@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import threading
 from queue import Queue
 from threading import Thread
