@@ -107,7 +107,7 @@ class WebRTC(EventEmitter):
         transceiver = self._peer_connection.getTransceivers()[0]
         transceiver.setCodecPreferences(preferences)
 
-    def stop_call(self):  # TODO: Fix to hang up call (currently not working)
+    def stop_call(self):
         """
         Closes the webrtc connection.
 
@@ -242,7 +242,7 @@ class WebRTC(EventEmitter):
         resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
         resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
-    async def _make_call(self):  # TODO: Clean up method
+    async def _make_call(self):
         """
         Creates a connection with the device that receives and sends the audio frames.
 
@@ -301,7 +301,7 @@ class WebRTC(EventEmitter):
                 if not self.debug:
                     self.pcm.disable()
 
-                if err.args == 'local':
+                if err.args == ('local', ):
                     logger.info('Connection', 'Peer connection closed from local client!')
                 else:
                     logger.info('Connection', 'Peer connection closed from remote client!')
