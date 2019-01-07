@@ -22,7 +22,7 @@ cdef extern from "../../stringlib/stringlib.h":
 
 cpdef split_str(s):
     """
-    Splits the passed str after semicolon and ignores it in double quotes.
+    Splits the passed str after the colon by comma character.
 
     :param s: string that should be split
     :return: array of strings
