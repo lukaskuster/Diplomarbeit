@@ -17,6 +17,9 @@
 		D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */; };
 		D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */; };
 		D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */; };
+		D62731D721E53C0200CFCE28 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */; };
+		D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */; };
+		D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
@@ -115,6 +118,9 @@
 		D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCollectionView.swift; sourceTree = "<group>"; };
 		D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayViewController.swift; sourceTree = "<group>"; };
 		D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalStrengthIndicatorView.swift; sourceTree = "<group>"; };
+		D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayColorViewController.swift; sourceTree = "<group>"; };
+		D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChromaColorPicker.framework; path = Carthage/Build/iOS/ChromaColorPicker.framework; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		D6328CAB219313DF00E48FD3 /* SPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPManager.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
 				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
 				D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */,
+				D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */,
 				D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				D603A3AC21A543BD0011AFC9 /* SwiftMessages.framework in Frameworks */,
 				D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */,
@@ -273,6 +280,7 @@
 				D604917E219431DD00F46B18 /* Alamofire.framework */,
 				D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */,
 				D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */,
+				D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */,
 				D65FD70C2189C14D00BBE679 /* Realm.framework */,
 				D65FD70D2189C14D00BBE679 /* RealmSwift.framework */,
 				D6358717217F544800B395F9 /* SwiftyJSON.framework */,
@@ -296,6 +304,7 @@
 				D653F5E421B01928005736FE /* SettingsViewController.swift */,
 				D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */,
 				D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */,
+				D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 				D6328CA721930FD200E48FD3 /* RealmManager.swift */,
 				D6328CA92193128600E48FD3 /* RealmExtensions.swift */,
 				D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */,
+				D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */,
 				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
 				D67818A62178929B00E650DB /* Info.plist */,
 			);
@@ -523,6 +533,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Static.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ChromaColorPicker.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework",
 			);
 			name = Carthage;
@@ -576,6 +587,7 @@
 				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
 				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
+				D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */,
 				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
 				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
@@ -593,6 +605,7 @@
 				D604917D2194289F00F46B18 /* APIClient.swift in Sources */,
 				D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */,
 				D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */,
+				D62731D721E53C0200CFCE28 /* UIColor+Hex.swift in Sources */,
 				D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */,
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,
 				D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */,

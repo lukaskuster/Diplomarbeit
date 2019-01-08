@@ -36,7 +36,7 @@ class VoicemailTableViewController: UITableViewController {
     func addVoicemailsToDB() {
         let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
         
-        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
+        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", colorString: "#000000", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
         
         SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436641817908"), audio: sampleAudio))
         SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338456"), audio: sampleAudio))

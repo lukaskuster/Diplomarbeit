@@ -18,14 +18,20 @@ public class SPGateway: Object {
         get { return _signalStrength.value }
         set { _signalStrength.value = newValue }
     }
+    private var _color: String?
+    public var color: UIColor? {
+        get { return _color != nil ? UIColor(hexString: _color!) : nil }
+        set { _color = newValue?.toHexString() }
+    }
     @objc public dynamic var firmwareVersion: String?
     @objc public dynamic var carrier: String?
     
-    public convenience init(withIMEI imei: String, name: String?, phoneNumber: String?, signalStrength: Double?, firmwareVersion: String?, carrier: String?) {
+    public convenience init(withIMEI imei: String, name: String?, phoneNumber: String?, colorString: String?, signalStrength: Double?, firmwareVersion: String?, carrier: String?) {
         self.init()
         self.imei = imei
         self.name = name
         self.phoneNumber = phoneNumber
+        self._color = colorString
         self._signalStrength.value = signalStrength
         self.firmwareVersion = firmwareVersion
         self.carrier = carrier
@@ -36,6 +42,6 @@ public class SPGateway: Object {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["signalStrength"]
+        return ["signalStrength", "color"]
     }
 }

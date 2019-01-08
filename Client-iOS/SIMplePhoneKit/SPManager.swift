@@ -212,7 +212,7 @@ import CloudKit
     
     // MARK: - Chats
     @objc public func getAllChats(completion: @escaping (_ success: Bool, _ chats: [SPChat]?, _ error: Error?) -> Void) {
-        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
+        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", colorString: "#AAABBB", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
         let secondParty1 = SPNumber(withNumber: "00436643038891")
         let secondParty2 = SPNumber(withNumber: "00436644523954")
         let msgs = [SPMessage("test msg", state: .sent), SPMessage("test msg 2", state: .sent)]
@@ -294,6 +294,12 @@ import CloudKit
     
     public func updateGatewayName(_ name: String, of gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         self.apiClient.updateGateway(name: name, of: gateway) { (success, error) in
+            completion(success, error)
+        }
+    }
+    
+    public func updateGatewayColor(_ color: UIColor, of gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+        self.apiClient.updateGateway(color: color, of: gateway) { (success, error) in
             completion(success, error)
         }
     }

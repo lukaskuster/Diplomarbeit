@@ -7,3 +7,4 @@ github "evgenyneu/keychain-swift" ~> 13.0
 github "SwiftKickMobile/SwiftMessages"
 github "venmo/Static"
 github "mathiasnagler/SwiftyAcknowledgements"
+github "joncardasis/ChromaColorPicker"

@@ -146,11 +146,45 @@ class GatewayCollectionCell: UICollectionViewCell {
         }
     }
     
-    lazy var label: UILabel = {
+    lazy var gatewayNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
+    }()
+    
+    lazy var carrierNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    lazy var phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    lazy var gatewayIconView: UIImageView = {
+        let image = UIImageView(image: #imageLiteral(resourceName: "gateway-icon"))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    lazy var gatewayIconBackgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.lightGray
+        view.layer.cornerRadius = 10.0
+        return view
+    }()
+    
+    lazy var signalStrengthView: SignalStrengthIndicatorView = {
+        let view = SignalStrengthIndicatorView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -165,27 +199,55 @@ class GatewayCollectionCell: UICollectionViewCell {
     func prepareCell() {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10.0
-        self.addSubview(label)
+        self.addSubview(gatewayIconBackgroundView)
+        self.addSubview(gatewayIconView)
+        self.addSubview(gatewayNameLabel)
+        self.addSubview(phoneNumberLabel)
+        self.addSubview(carrierNameLabel)
+        self.addSubview(signalStrengthView)
+        self.layoutCell()
+    }
+    
+    func layoutCell() {
+        gatewayIconBackgroundView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 10).isActive = true
+        gatewayIconBackgroundView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor).isActive = true
+        gatewayIconBackgroundView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        gatewayIconBackgroundView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        gatewayIconView.centerXAnchor.constraint(equalTo: gatewayIconBackgroundView.centerXAnchor).isActive = true
+        gatewayIconView.centerYAnchor.constraint(equalTo: gatewayIconBackgroundView.centerYAnchor).isActive = true
+        gatewayIconView.widthAnchor.constraint(equalTo: gatewayIconBackgroundView.widthAnchor, multiplier: 0.72).isActive = true
+        gatewayIconView.heightAnchor.constraint(equalTo: gatewayIconView.widthAnchor, multiplier: 0.68).isActive = true
         
-        label.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+        gatewayNameLabel.leadingAnchor.constraint(equalTo: gatewayIconBackgroundView.trailingAnchor, constant: 10).isActive = true
+        gatewayNameLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 10).isActive = true
+        gatewayNameLabel.topAnchor.constraint(equalTo: gatewayIconBackgroundView.topAnchor, constant: 5).isActive = true
+        
+        phoneNumberLabel.leadingAnchor.constraint(equalTo: gatewayIconBackgroundView.trailingAnchor, constant: 10).isActive = true
+        phoneNumberLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 10).isActive = true
+        phoneNumberLabel.topAnchor.constraint(equalTo: gatewayNameLabel.bottomAnchor).isActive = true
+        
+        signalStrengthView.leadingAnchor.constraint(equalTo: gatewayIconBackgroundView.trailingAnchor, constant: 10).isActive = true
+        signalStrengthView.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor).isActive = true
+        signalStrengthView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        signalStrengthView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        carrierNameLabel.leadingAnchor.constraint(equalTo: signalStrengthView.trailingAnchor, constant: 2.5).isActive = true
+        carrierNameLabel.bottomAnchor.constraint(equalTo: signalStrengthView.bottomAnchor, constant: -3.75).isActive = true
+        carrierNameLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 10).isActive = true
     }
     
     func fillData() {
-        let number = SPNumber(withNumber: gateway?.phoneNumber ?? "00436641817908")
-        label.text = "\(gateway?.name ?? "Name: N/A")\n\(number.prettyPhoneNumber())"
-        
-        if let signalStrength = gateway?.signalStrength {
-            let signalStrengthView = SignalStrengthIndicatorView()
-            self.addSubview(signalStrengthView)
-            signalStrengthView.translatesAutoresizingMaskIntoConstraints = false
-            signalStrengthView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-            signalStrengthView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            signalStrengthView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            signalStrengthView.widthAnchor.constraint(equalToConstant: 25).isActive = true
-            signalStrengthView.strength = signalStrength
+        if let gateway = gateway {
+            gatewayNameLabel.text = gateway.name ?? "Gateway"
+            gatewayNameLabel.font = .boldSystemFont(ofSize: 18.0)
+            phoneNumberLabel.text = gateway.phoneNumber != nil ? SPNumber(withNumber: gateway.phoneNumber!).prettyPhoneNumber() : "number unavailable"
+            phoneNumberLabel.textColor = .lightGray
+            phoneNumberLabel.font = .systemFont(ofSize: 16, weight: .medium)
+            carrierNameLabel.text = gateway.carrier ?? "Carrier"
+            carrierNameLabel.textColor = .lightGray
+            carrierNameLabel.font = .systemFont(ofSize: 15, weight: .medium)
+            signalStrengthView.strength = gateway.signalStrength ?? 0.0
+            gatewayIconBackgroundView.backgroundColor = gateway.color ?? .lightGray
         }
     }
     

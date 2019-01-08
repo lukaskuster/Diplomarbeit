@@ -21,7 +21,7 @@ class WebRTCTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
+        self.gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", colorString: "#000000", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
     }
     
     @IBAction func clickAnswer(_ sender: Any) {

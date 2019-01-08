@@ -39,7 +39,7 @@ class SettingsViewController: TableViewController {
         
         self.gatewayCollectionView = GatewayCollectionView()
         self.gatewayCollectionView?.delegate = self
-        let gatewaySection = Section(header: Section.Extremity.autoLayoutView(self.gatewayCollectionView!))
+        let gatewaySection = Section(header: Section.Extremity.autoLayoutView(self.gatewayCollectionView!), footer: Section.Extremity.init(stringLiteral: "Tap a gateway to change its configuration."))
 
         self.dataSource.sections = [
             gatewaySection,
@@ -47,20 +47,14 @@ class SettingsViewController: TableViewController {
                 Row(text: "Account", selection: {
                     let vc = SettingsAccountViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
-                }, image: nil, accessory: .disclosureIndicator),
+                }, image: #imageLiteral(resourceName: "settings-account"), accessory: .disclosureIndicator),
                 Row(text: "Messages", selection: {
                     
-                }, image: nil, accessory: .disclosureIndicator),
+                }, image: #imageLiteral(resourceName: "settings-messages"), accessory: .disclosureIndicator),
                 Row(text: "Notifications", selection: {
                     
-                }, image: nil, accessory: .disclosureIndicator)
+                }, image: #imageLiteral(resourceName: "settings-notifications"), accessory: .disclosureIndicator)
                 ]),
-            Section(header: "Testing", rows: [
-                Row(text: "WebRTC Test", selection: {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "WebRTCTest")
-                    self.navigationController?.pushViewController(controller, animated: true)
-                }, accessory: .disclosureIndicator)]),
             Section(rows: [
                 Row(text: "Contact", selection: {
                     if MFMailComposeViewController.canSendMail() {
@@ -77,14 +71,20 @@ class SettingsViewController: TableViewController {
                         let url = URL(string: "mailto:\(email)?subject=SIMple%20Phone%20Contact")
                         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
                     }
-                }, accessory: .disclosureIndicator),
+                }, image: #imageLiteral(resourceName: "settings-contact"), accessory: .disclosureIndicator),
                 Row(text: "Licenses", selection: {
                     let vc = AcknowledgementsTableViewController(acknowledgementsPlistPath: Bundle.main.path(forResource: "Acknowledgements", ofType: "plist"))
                     vc.title = "Licenses"
                     vc.headerText = "This app uses several third-party software frameworks, which we would like to acknowledge."
                     self.navigationController?.pushViewController(vc, animated: true)
-                }, accessory: .disclosureIndicator)],
-                footer: Section.Extremity.init(stringLiteral: "© \(year) Lukas Kuster. All rights reserved."))
+                }, image: #imageLiteral(resourceName: "settings-licenses"), accessory: .disclosureIndicator)],
+                footer: Section.Extremity.init(stringLiteral: "© \(year) Lukas Kuster. All rights reserved.")),
+            Section(header: "Testing", rows: [
+                Row(text: "WebRTC Test", selection: {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WebRTCTest")
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }, accessory: .disclosureIndicator)])
             ]
         
     }

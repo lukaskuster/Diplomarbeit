@@ -30,6 +30,12 @@ class SettingsGatewayViewController: TableViewController {
         
         let phoneNumber = gateway.phoneNumber == nil ? "N/A" : SPNumber(withNumber: gateway.phoneNumber!).prettyPhoneNumber()
         let signal = gateway.signalStrength == nil ? "N/A" : "\(String(format: "%.0f", gateway.signalStrength!*100))%"
+        let colorView: UIView = {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
+            view.backgroundColor = gateway.color ?? .lightGray
+            view.layer.cornerRadius = view.frame.width/2
+            return view
+        }()
         
         self.dataSource.sections = [
             Section(header: "Gateway",
@@ -57,6 +63,11 @@ class SettingsGatewayViewController: TableViewController {
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }, accessory: .disclosureIndicator, cellClass: Value1Cell.self),
+                Row(text: "Color", selection: {
+                    let vc = SettingsGatewayColorViewController(color: self.gateway.color)
+                    vc.delegate = self
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }, accessory: .view(colorView)),
                 Row(text: "Number", detailText: phoneNumber, cellClass: Value1Cell.self),
                 Row(text: "Carrier", detailText: gateway.carrier ?? "N/A", cellClass: Value1Cell.self),
                 Row(text: "Signal", detailText: signal, cellClass: Value1Cell.self),
@@ -98,4 +109,23 @@ class SettingsGatewayViewController: TableViewController {
 
 extension SettingsGatewayViewController: UITableViewDelegate {
     
+}
+
+extension SettingsGatewayViewController: SettingsGatewayColorViewControllerDelegate {
+    func gatewayColorDidChange(to newColor: UIColor) {
+        SPManager.shared.updateGatewayColor(newColor, of: self.gateway) { (success, error) in
+            if success {
+                self.gateway.color = newColor
+                DispatchQueue.main.async {
+                    let colorView: UIView = {
+                        let view = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
+                        view.backgroundColor = newColor
+                        view.layer.cornerRadius = view.frame.width/2
+                        return view
+                    }()
+                    self.dataSource.sections[0].rows[1].accessory = .view(colorView)
+                }
+            }
+        }
+    }
 }

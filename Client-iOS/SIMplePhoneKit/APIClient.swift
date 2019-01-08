@@ -102,10 +102,11 @@ class APIClient: NSObject {
                         if let imei = gateway["imei"].string {
                             let name = gateway["name"].string
                             let phoneNumber = gateway["phoneNumber"].string
+                            let colorString = "#B8E986"//gateway["color"].string
                             let signalStrength = gateway["signalStrength"].double
                             let firmwareVersion = gateway["firmwareVersion"].string
                             let carrier = gateway["carrier"].string
-                            returnGateways.append(SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier))
+                            returnGateways.append(SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, colorString: colorString, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier))
                         }else{
                             completion(false, nil, APIError.parsingError)
                             return
@@ -127,6 +128,24 @@ class APIClient: NSObject {
      */
     public func updateGateway(name newName: String, of gateway: SPGateway, completion: @escaping (_ success: Bool,  _ error: APIError?) -> Void) {
         let data = ["name": newName]
+        self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
+            if success {
+                completion(true, nil)
+            }else{
+                completion(false, error!)
+            }
+        }
+    }
+    
+    /**
+     Update color of gateway
+     - Parameters:
+     - completion: Closure which is called after server response
+     - success: Bool indicating operation success
+     - error: Error, if operation unsuccessful
+     */
+    public func updateGateway(color newColor: UIColor, of gateway: SPGateway, completion: @escaping (_ success: Bool,  _ error: APIError?) -> Void) {
+        let data = ["color": newColor.toHexString()]
         self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
             if success {
                 completion(true, nil)
