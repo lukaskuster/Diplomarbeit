@@ -12,6 +12,7 @@ import Static
 import SwiftyAcknowledgements
 import SIMplePhoneKit
 import SwiftMessages
+import SafariServices
 
 class SettingsViewController: TableViewController {
     let refreshControl = UIRefreshControl()
@@ -39,7 +40,7 @@ class SettingsViewController: TableViewController {
         
         self.gatewayCollectionView = GatewayCollectionView()
         self.gatewayCollectionView?.delegate = self
-        let gatewaySection = Section(header: Section.Extremity.autoLayoutView(self.gatewayCollectionView!), footer: Section.Extremity.init(stringLiteral: "Tap a gateway to change its configuration."))
+        let gatewaySection = Section(header: Section.Extremity.autoLayoutView(self.gatewayCollectionView!))
 
         self.dataSource.sections = [
             gatewaySection,
@@ -77,7 +78,14 @@ class SettingsViewController: TableViewController {
                     vc.title = "Licenses"
                     vc.headerText = "This app uses several third-party software frameworks, which we would like to acknowledge."
                     self.navigationController?.pushViewController(vc, animated: true)
-                }, image: #imageLiteral(resourceName: "settings-licenses"), accessory: .disclosureIndicator)],
+                }, image: #imageLiteral(resourceName: "settings-licenses"), accessory: .disclosureIndicator)]),
+            Section(rows: [
+                Row(text: "Order a gateway", selection: {
+                    if let url = URL(string: "https://lukaskuster.com/order-gateway/") {
+                        let vc = SFSafariViewController(url: url)
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }, image: #imageLiteral(resourceName: "settings-order"), accessory: .disclosureIndicator)],
                 footer: Section.Extremity.init(stringLiteral: "© \(year) Lukas Kuster. All rights reserved.")),
             Section(header: "Testing", rows: [
                 Row(text: "WebRTC Test", selection: {

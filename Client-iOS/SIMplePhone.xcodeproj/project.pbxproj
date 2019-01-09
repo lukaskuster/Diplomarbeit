@@ -20,6 +20,8 @@
 		D62731D721E53C0200CFCE28 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */; };
 		D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */; };
 		D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */; };
+		D62731DD21E611CC00CFCE28 /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */; };
+		D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
@@ -121,6 +123,8 @@
 		D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayColorViewController.swift; sourceTree = "<group>"; };
 		D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChromaColorPicker.framework; path = Carthage/Build/iOS/ChromaColorPicker.framework; sourceTree = "<group>"; };
+		D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
+		D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayNameViewController.swift; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		D6328CAB219313DF00E48FD3 /* SPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPManager.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 				D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */,
 				D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */,
 				D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */,
+				D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				D6781856216CD16D00E650DB /* Main.storyboard */,
 				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
 				D6BE8814219718AE00F87B35 /* Setup.storyboard */,
+				D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D62731DD21E611CC00CFCE28 /* UIView+Borders.swift in Sources */,
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
 				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
@@ -589,6 +596,7 @@
 				D6781860216CD16F00E650DB /* main.m in Sources */,
 				D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */,
 				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
+				D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
 				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
 				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,

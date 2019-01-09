@@ -45,12 +45,15 @@ class SettingsGatewayColorViewController: TableViewController {
         
         let colorSelectorView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 325.0))
         colorSelectorView.backgroundColor = .white
+        let iosGray = UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)
+        colorSelectorView.addBorder(side: .top, thickness: 0.25, color: iosGray)
+        colorSelectorView.addBorder(side: .bottom, thickness: 0.25, color: iosGray)
         
         self.colorPicker = ChromaColorPicker(frame: CGRect(x: (screenWidth-300)/2, y: 12.5, width: 300, height: 300))
         if let colorPicker = self.colorPicker {
             colorPicker.adjustToColor(color)
             colorPicker.padding = 5
-            colorPicker.stroke = 5
+            colorPicker.stroke = 10
             colorPicker.hexLabel.textColor = .darkGray
             colorPicker.delegate = self
             colorSelectorView.addSubview(colorPicker)

@@ -102,7 +102,7 @@ class APIClient: NSObject {
                         if let imei = gateway["imei"].string {
                             let name = gateway["name"].string
                             let phoneNumber = gateway["phoneNumber"].string
-                            let colorString = "#B8E986"//gateway["color"].string
+                            let colorString = gateway["color"].string
                             let signalStrength = gateway["signalStrength"].double
                             let firmwareVersion = gateway["firmwareVersion"].string
                             let carrier = gateway["carrier"].string
