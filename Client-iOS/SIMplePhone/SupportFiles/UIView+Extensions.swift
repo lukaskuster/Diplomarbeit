@@ -9,6 +9,16 @@
 import UIKit
 
 public extension UIView {
+    public func findViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
+    
     public enum ViewSide {
         case top
         case right

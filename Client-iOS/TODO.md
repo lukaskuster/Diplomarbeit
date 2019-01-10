@@ -1,7 +1,6 @@
 # To-Do List
 
 ## Settings
-- Gateway/Check for firmware update
 - Gateway/Factory reset gateway
 - Account/Change account mail
 - Account/Chnage account password

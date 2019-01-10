@@ -60,9 +60,8 @@ class SettingsGatewayViewController: TableViewController {
                     let vc = SettingsGatewayChangeSIMPinViewController(gateway: self.gateway)
                     self.navigationController?.pushViewController(vc, animated: false)
                 }, cellClass: ButtonCell.self),
-                Row(text: "Check for firmware update", selection: {
-                    
-                }, cellClass: ButtonCell.self)
+                Row(text: "Check for firmware update", cellClass: FirmwareUpdateCheckerCell.self,
+                    context: ["gateway": self.gateway])
                 ]),
             Section(rows: [
                 Row(text: "Factory reset gateway", selection: {

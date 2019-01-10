@@ -15,6 +15,8 @@
 		D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */; };
 		D6195A3621E790E5002D724E /* KAPinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3521E790E5002D724E /* KAPinField.swift */; };
 		D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */; };
+		D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */; };
+		D6195A3D21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */; };
 		D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */; };
 		D62731CF21B9A2FB00CFCE28 /* SPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */; };
 		D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */; };
@@ -23,7 +25,7 @@
 		D62731D721E53C0200CFCE28 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */; };
 		D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */; };
 		D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */; };
-		D62731DD21E611CC00CFCE28 /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */; };
+		D62731DD21E611CC00CFCE28 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */; };
 		D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
@@ -122,6 +124,8 @@
 		D6195A3521E790E5002D724E /* KAPinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAPinField.swift; sourceTree = "<group>"; };
 		D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayChangeSIMPinViewController.swift; sourceTree = "<group>"; };
 		D6195A3921E79F1A002D724E /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUpdateCheckerCell.swift; sourceTree = "<group>"; };
+		D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayFirmwareUpdateStatusViewController.swift; sourceTree = "<group>"; };
 		D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAccountViewController.swift; sourceTree = "<group>"; };
 		D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDevice.swift; sourceTree = "<group>"; };
 		D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCollectionView.swift; sourceTree = "<group>"; };
@@ -130,7 +134,7 @@
 		D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayColorViewController.swift; sourceTree = "<group>"; };
 		D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChromaColorPicker.framework; path = Carthage/Build/iOS/ChromaColorPicker.framework; sourceTree = "<group>"; };
-		D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
+		D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayNameViewController.swift; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */,
 				D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */,
 				D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */,
+				D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */,
 				D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */,
 				D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */,
+				D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,7 +369,7 @@
 				D6781856216CD16D00E650DB /* Main.storyboard */,
 				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
 				D6BE8814219718AE00F87B35 /* Setup.storyboard */,
-				D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */,
+				D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */,
 				D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */,
 				D6195A3521E790E5002D724E /* KAPinField.swift */,
 			);
@@ -587,9 +593,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D62731DD21E611CC00CFCE28 /* UIView+Borders.swift in Sources */,
+				D62731DD21E611CC00CFCE28 /* UIView+Extensions.swift in Sources */,
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */,
+				D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
 				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
 				D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */,
@@ -610,6 +617,7 @@
 				D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */,
 				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
 				D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */,
+				D6195A3D21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
 				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
 				D6195A3621E790E5002D724E /* KAPinField.swift in Sources */,
