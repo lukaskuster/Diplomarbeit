@@ -57,7 +57,8 @@ class SettingsGatewayViewController: TableViewController {
                 ]),
             Section(rows: [
                 Row(text: "Change SIM Pin", selection: {
-                    
+                    let vc = SettingsGatewayChangeSIMPinViewController(gateway: self.gateway)
+                    self.navigationController?.pushViewController(vc, animated: false)
                 }, cellClass: ButtonCell.self),
                 Row(text: "Check for firmware update", selection: {
                     
