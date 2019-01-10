@@ -22,14 +22,12 @@ class SettingsGatewayNameViewController: TableViewController {
         
         self.title = "Name"
         self.tableView.rowHeight = 50
+        self.tableView.alwaysBounceVertical = false
         
         self.dataSource = DataSource(tableViewDelegate: self)
         
-        let textField = TextFieldView(name: self.name)
-        textField.parent = self
-        
         self.dataSource.sections = [
-            Section(footer: Section.Extremity.autoLayoutView(textField))
+            Section(footer: Section.Extremity.autoLayoutView(TextFieldView(name: self.name, parent: self)))
         ]
     }
     
@@ -55,10 +53,9 @@ class SettingsGatewayNameViewController: TableViewController {
 }
 
 class TextFieldView: UIView {
-    public var parent: SettingsGatewayNameViewController?
+    private var parent: SettingsGatewayNameViewController?
     lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.text = "Test"
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.keyboardType = .default
         textField.returnKeyType = .done
@@ -77,7 +74,8 @@ class TextFieldView: UIView {
         }
     }
     
-    init(name: String?) {
+    init(name: String?, parent: SettingsGatewayNameViewController?) {
+        self.parent = parent
         super.init(frame: .zero)
         self.backgroundColor = .white
         
@@ -94,6 +92,11 @@ class TextFieldView: UIView {
             textField.placeholder = "Gateway"
         }
         textField.becomeFirstResponder()
+    }
+    
+    override func layoutSubviews() {
+        self.addBorder(side: .top, thickness: 0.25, color: .cellSeperatorGray)
+        self.addBorder(side: .bottom, thickness: 0.25, color: .cellSeperatorGray)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -16,19 +16,12 @@ protocol SettingsGatewayColorViewControllerDelegate {
 
 class SettingsGatewayColorViewController: TableViewController {
     public var delegate: SettingsGatewayColorViewControllerDelegate?
-    private var colorPicker: ChromaColorPicker?
+    private var colorSelector: ColorSelectorView?
     private var didChangeColor = false
-    private var color: UIColor {
+    public var color: UIColor {
         didSet {
             self.didChangeColor = true
-            let colorView: UIView = {
-                let view = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
-                view.backgroundColor = color
-                view.layer.cornerRadius = view.frame.width/2
-                return view
-            }()
-            self.dataSource.sections[0].rows[0].accessory = .view(colorView)
-            self.colorPicker?.adjustToColor(color)
+            self.dataSource.sections[0].rows[0].accessory = .view(smallColorView())
         }
     }
     
@@ -38,43 +31,19 @@ class SettingsGatewayColorViewController: TableViewController {
         self.title = "Color Selector"
         
         self.tableView.rowHeight = 50
+        self.tableView.alwaysBounceVertical = false
         
         self.dataSource = DataSource(tableViewDelegate: self)
-        
-        let screenWidth = UIScreen.main.bounds.width
-        
-        let colorSelectorView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 325.0))
-        colorSelectorView.backgroundColor = .white
-        let iosGray = UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.0)
-        colorSelectorView.addBorder(side: .top, thickness: 0.25, color: iosGray)
-        colorSelectorView.addBorder(side: .bottom, thickness: 0.25, color: iosGray)
-        
-        self.colorPicker = ChromaColorPicker(frame: CGRect(x: (screenWidth-300)/2, y: 12.5, width: 300, height: 300))
-        if let colorPicker = self.colorPicker {
-            colorPicker.adjustToColor(color)
-            colorPicker.padding = 5
-            colorPicker.stroke = 10
-            colorPicker.hexLabel.textColor = .darkGray
-            colorPicker.delegate = self
-            colorSelectorView.addSubview(colorPicker)
-            colorPicker.layout()
-        }
-        
-        let colorView: UIView = {
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
-            view.backgroundColor = color
-            view.layer.cornerRadius = view.frame.width/2
-            return view
-        }()
+        self.colorSelector = ColorSelectorView(color: self.color, parent: self)
         
         self.dataSource.sections = [
             Section(rows: [
-                Row(text: "Current color", accessory: .view(colorView))
+                Row(text: "Current color", accessory: .view(smallColorView()))
                 ]),
-            Section(header: "Select a color", footer: Section.Extremity.view(colorSelectorView)),
+            Section(header: "Select a color", footer: Section.Extremity.autoLayoutView(self.colorSelector!)),
             Section(rows: [
                 Row(text: "Random color", selection: {
-                    self.color = .random
+                    self.colorSelector?.setRandomColor()
                 }, cellClass: ButtonCell.self)
                 ])
         ]
@@ -91,9 +60,65 @@ class SettingsGatewayColorViewController: TableViewController {
         }
     }
     
+    func smallColorView() -> UIView {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
+        view.backgroundColor = self.color
+        view.layer.cornerRadius = view.frame.width/2
+        return view
+    }
+    
     init(color: UIColor?) {
         self.color = color ?? .lightGray
         super.init(style: .grouped)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class ColorSelectorView: UIView {
+    private var parent: SettingsGatewayColorViewController?
+    private var colorPicker: ChromaColorPicker?
+    private var color: UIColor {
+        didSet {
+            self.parent?.color = color
+            self.colorPicker?.adjustToColor(color)
+        }
+    }
+    
+    init(color: UIColor?, parent: SettingsGatewayColorViewController?) {
+        self.color = color ?? .lightGray
+        self.parent = parent
+        super.init(frame: .zero)
+        self.backgroundColor = .white
+        
+        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
+        self.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 325).isActive = true
+    }
+    
+    override func layoutSubviews() {
+        self.addBorder(side: .top, thickness: 0.25, color: .cellSeperatorGray)
+        self.addBorder(side: .bottom, thickness: 0.25, color: .cellSeperatorGray)
+        
+        self.colorPicker?.removeFromSuperview()
+        self.colorPicker = ChromaColorPicker(frame: CGRect(x: (self.frame.width-300)/2, y: 12.5, width: 300, height: 300))
+        if let colorPicker = self.colorPicker {
+            colorPicker.adjustToColor(self.color)
+            colorPicker.padding = 5
+            colorPicker.stroke = 10
+            colorPicker.hexLabel.textColor = .darkGray
+            colorPicker.delegate = self
+            colorPicker.layout()
+            addSubview(colorPicker)
+        }
+    }
+    
+    public func setRandomColor() {
+        self.color = .random
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -105,17 +130,8 @@ extension SettingsGatewayColorViewController: UITableViewDelegate {
     
 }
 
-extension SettingsGatewayColorViewController: ChromaColorPickerDelegate {
+extension ColorSelectorView: ChromaColorPickerDelegate {
     func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
         self.color = color
-    }
-}
-
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(red: .random(in: 0...1),
-                       green: .random(in: 0...1),
-                       blue: .random(in: 0...1),
-                       alpha: 1.0)
     }
 }

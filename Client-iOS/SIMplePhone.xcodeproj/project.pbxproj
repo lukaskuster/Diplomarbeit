@@ -12,6 +12,7 @@
 		D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
+		D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */; };
 		D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */; };
 		D62731CF21B9A2FB00CFCE28 /* SPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */; };
 		D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */; };
@@ -115,6 +116,7 @@
 		D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudEnvironmentButton.swift; sourceTree = "<group>"; };
 		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAccountViewController.swift; sourceTree = "<group>"; };
 		D62731CE21B9A2FB00CFCE28 /* SPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDevice.swift; sourceTree = "<group>"; };
 		D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayCollectionView.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
 				D6BE8814219718AE00F87B35 /* Setup.storyboard */,
 				D62731DC21E611CC00CFCE28 /* UIView+Borders.swift */,
+				D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */,
+				D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */,
 				D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */,
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
