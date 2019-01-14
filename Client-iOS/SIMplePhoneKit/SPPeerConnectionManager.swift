@@ -25,7 +25,6 @@ public class SPPeerConnectionManager: NSObject {
     
     public func makeCall(_ phoneNumber: SPNumber, with gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         // Step 1: Push Notification to Gateway (via Server/SSE)
-        print("self.spManager.dial(number: \(phoneNumber), with: \(gateway)")
         self.spManager.dial(number: phoneNumber, with: gateway) { (success, response, error) in
             if success {
                 // Step 2: Generate local WebRTC offer sdp

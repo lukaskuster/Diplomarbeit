@@ -67,7 +67,14 @@ class SettingsGatewayViewController: TableViewController {
                 Row(text: "Factory reset gateway", selection: {
                     
                 }, cellClass: DestructiveButtonCell.self)
-                ])
+                ]),
+            Section(header: "Testing", rows: [
+                Row(text: "WebRTC Test", selection: {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WebRTCTest") as! WebRTCTestViewController
+                    controller.gateway = self.gateway
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }, accessory: .disclosureIndicator)])
         ]
     }
     

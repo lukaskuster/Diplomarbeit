@@ -58,8 +58,6 @@ public class WebRTCClient: NSObject {
     func addMicrophone() -> RTCMediaStream {
         let stream = self.connectionFactory.mediaStream(withStreamId: "RTCmS")
         if !AVCaptureState.isAudioDisabled {
-//            let track = self.connectionFactory.audioTrack(with: <#T##RTCAudioSource#>, trackId: "RTCaS0")
-            
             let track = self.connectionFactory.audioTrack(withTrackId: "RTCaS0")
             stream.addAudioTrack(track)
         }else{
@@ -78,7 +76,7 @@ public class WebRTCClient: NSObject {
             if let error = error {
                 self.delegate?.webRTCClient(client: self, didReceiveError: error)
             }else{
-                self.peerConnection.setLocalDescription(sdp!, completionHandler: { (error) in
+                self.peerConnection.setLocalDescription(self.pcmaOnlySdp(sdp!), completionHandler: { (error) in
                     print("gathering now?")
                     print("current gathering state: \(self.peerConnection.iceGatheringState.rawValue)")
                     
@@ -141,6 +139,18 @@ public class WebRTCClient: NSObject {
         self.peerConnection.close()
     }
     
+}
+
+extension WebRTCClient {
+    /*
+     Workaround for missing RTCRtpTransceiver.setCodecPreferences() in WebRTC.framework
+     */
+    private func pcmaOnlySdp(_ sdp: RTCSessionDescription) -> RTCSessionDescription {
+        let regex = try! NSRegularExpression(pattern: "a=rtpmap:(?!8 PCMA)(.*)\n", options: NSRegularExpression.Options.caseInsensitive)
+        let range = NSMakeRange(0, sdp.sdp.count)
+        let modSdp = regex.stringByReplacingMatches(in: sdp.sdp, options: [], range: range, withTemplate: "")
+        return RTCSessionDescription(type: sdp.type, sdp: modSdp)
+    }
 }
 
 extension WebRTCClient: RTCPeerConnectionDelegate {

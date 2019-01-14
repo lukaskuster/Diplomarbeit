@@ -86,13 +86,7 @@ class SettingsViewController: TableViewController {
                         self.present(vc, animated: true, completion: nil)
                     }
                 }, image: #imageLiteral(resourceName: "settings-order"), accessory: .disclosureIndicator)],
-                footer: Section.Extremity.init(stringLiteral: "© \(year) Lukas Kuster. All rights reserved.")),
-            Section(header: "Testing", rows: [
-                Row(text: "WebRTC Test", selection: {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "WebRTCTest")
-                    self.navigationController?.pushViewController(controller, animated: true)
-                }, accessory: .disclosureIndicator)])
+                footer: Section.Extremity.init(stringLiteral: "© \(year) Lukas Kuster. All rights reserved."))
             ]
         
     }
