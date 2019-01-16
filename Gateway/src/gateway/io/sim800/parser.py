@@ -98,7 +98,8 @@ class PinStatusParser(Parser):
 
     @staticmethod
     def parse(content):
-        return response_objects.PINStatus(utils.split_str(content[0][content[0].index(':') + 1:])[0].strip())
+        print(content)
+        return response_objects.PINStatus(content[0][content[0].index(':') + 1:].strip())
 
 
 class IMEIParser(Parser):

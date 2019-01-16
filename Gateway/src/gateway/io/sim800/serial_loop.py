@@ -37,7 +37,7 @@ class SerialLoop(Thread):
 
         if not debug:
             # Initialize a new serial connection
-            self.serial = Serial(serial_port, baudrate=115200, timeout=1)
+            self.serial = Serial(serial_port, baudrate=9600, timeout=1)
 
         # Set the event emitter
 
@@ -156,8 +156,8 @@ class SerialLoop(Thread):
         else:
             # Read the data from the serial interface
             data = self.serial.readline()
-
-            logger.debug('Sim800', 'Received data from serial interface: ' + str(data))
+            if data:
+                logger.debug('Sim800', 'Received data from serial interface: ' + str(data))
             return data
 
     def _write(self, data):
