@@ -6,7 +6,7 @@ import sys
 
 logger.level = Level.DEBUG
 
-CALL_TIMER = 10
+CALL_TIMER = 60
 
 set_config('config.ini')
 config = get_config()
@@ -16,8 +16,10 @@ HOST = config['Server']['signalinghost']
 
 
 async def test(role):
-    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True)
+    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True, signaling_timeout=100)
     con.on('connectionClosed', asyncio.get_event_loop().stop)
+    con.on('timeoutError', asyncio.get_event_loop().stop)
+
     con.start_call(role)
     if CALL_TIMER > 0:
         await asyncio.sleep(CALL_TIMER)

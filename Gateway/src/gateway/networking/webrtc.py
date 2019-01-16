@@ -269,9 +269,11 @@ class WebRTC(EventEmitter):
             except asyncio.TimeoutError:
                 logger.error('Signaling', 'Signaling process timed out after {} seconds!'
                              .format(self.signaling_timeout))
+                self.emit("timeoutError")
                 self._call.clear()
                 return
             except AuthenticationError:
+                self.emit("authenticationError")
                 self._call.clear()
                 return
 
