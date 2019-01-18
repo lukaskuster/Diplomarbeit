@@ -91,11 +91,12 @@ class API(EventEmitter):
 
         return self._request('/user', requests.put, body)
 
-    def push_notification(self, event, device_id, data=None, alert=None, silent=False):
+    def push_notification(self, event, device_id, data=None, alert=None, silent=False, voip=False):
         body = {
             'event': event,
             'device': device_id,
-            'silent': silent
+            'silent': silent,
+            'voip': voip
         }
         if data:
             body['data'] = data
@@ -104,10 +105,11 @@ class API(EventEmitter):
 
         return self._request('/device/push', requests.post, body)
 
-    def broadcast_notification(self, event, data=None, alert=None, silent=False):
+    def broadcast_notification(self, event, data=None, alert=None, silent=False, voip=False):
         body = {
             'event': event,
-            'silent': silent
+            'silent': silent,
+            'voip': voip
         }
         if data:
             body['data'] = data
@@ -115,6 +117,20 @@ class API(EventEmitter):
             body['alert'] = alert
 
         return self._request('/device/broadcast', requests.post, body)
+
+    def push_incoming_call(self, number):
+        data, status = self.broadcast_notification('incomingCall',
+                                    data={
+                                        'number': number,
+                                        'gateway': self.id
+                                    },
+                                    silent=True,
+                                    voip=True)
+        if status != 200:
+            logger.error('API', 'Error while broadcasting incoming call: {}'.format(data))
+
+    def push_error(self, code, message):
+        pass
 
     def _request(self, path, method, body=None):
         """

@@ -64,6 +64,7 @@ async def main():
     api.on('sendSMS', partial(on_send_sms, sim))
 
     webrtc.on('connectionClosed', partial(on_connection_closed, sim))
+    webrtc.on('signalingTimeout', on_signaling_timeout)
 
     api.start()
 
@@ -73,7 +74,7 @@ async def main():
 # Sim Callbacks
 
 async def on_outgoing_call(api, webrtc):
-    api.broadcast_notification('ring', alert='Incoming call...')
+    api.push_incoming_call("+43111111111")
     if webrtc.is_ongoing():
         logger.info('WebRTC', "Already one call is active!")
         return
@@ -136,6 +137,10 @@ async def on_connection_closed(sim):
 
     if event.error:
         logger.info('Sim800', "Error at hang up at-command: {}".format(event))
+
+
+async def on_signaling_timeout():
+    pass
 
 
 def start():
