@@ -137,6 +137,9 @@ module.exports.putDevice = function (req, res) {
     if (req.body.apnToken) {
         user.device[index].apnToken = req.body.apnToken;
     }
+    if (req.body.voipToken) {
+        user.device[index].voipToken = req.body.voipToken;
+    }
     if (req.body.systemVersion) {
         user.device[index].systemVersion = req.body.systemVersion;
     }

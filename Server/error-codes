@@ -10,3 +10,4 @@ NoGatewaysForUser 10008
 NoDevicesForUser 10009
 NotAuthenticated 10010
 WrongCredentials 10011
+NoVoipToken 10012
