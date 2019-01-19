@@ -73,6 +73,7 @@
 		D67818B62179B6B800E650DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67818B52179B6B800E650DB /* Assets.xcassets */; };
 		D67818BA2179BB8600E650DB /* sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D67818B92179BB8600E650DB /* sample.m4a */; };
 		D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */; };
+		D688F0C021EDEA8F00C465AA /* SelectGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */; };
 		D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
 		D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */; };
@@ -189,6 +190,7 @@
 		D67818B52179B6B800E650DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D67818B92179BB8600E650DB /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
 		D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTestViewController.swift; sourceTree = "<group>"; };
+		D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGatewayViewController.swift; sourceTree = "<group>"; };
 		D6BE880B2194398900F87B35 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireSwiftyJSON.framework; path = Carthage/Build/iOS/AlamofireSwiftyJSON.framework; sourceTree = "<group>"; };
 		D6BE88122196C7E500F87B35 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */,
 				D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */,
 				D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */,
+				D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
 				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
 				D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */,
+				D688F0C021EDEA8F00C465AA /* SelectGatewayViewController.swift in Sources */,
 				D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
