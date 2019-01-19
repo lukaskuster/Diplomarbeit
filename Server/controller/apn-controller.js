@@ -9,6 +9,34 @@ const APN_TEAM_ID = 'UBFF39V752';
 const APP_BUNDLE_ID = 'com.lukaskuster.diplomarbeit.SIMplePhone';
 
 
+module.exports.broadcastEventExcept = function(response, {device}, event, data){
+    if(!device){
+        return response.status(403).json({errorMessage: `NoParameter(device)`, errorCode: 10000});
+    }
+
+    let user = response.locals.user;
+
+    if(user.device.length === 0){
+        return response.status(404).json({errorMessage: `NoDevicesForUser`, errorCode: 10009});
+    }
+
+    let tokens = [];
+
+    for(let i = 0; i < user.device.length; i++){
+        if(user.device[i]._id !== device){
+            tokens.push(user.device[i].apnToken)
+        }
+    }
+
+    let payload = { event: event };
+
+    if(data) {
+        payload.data = data;
+    }
+
+    pushToDevices(response, tokens, payload, null, true, true)
+};
+
 module.exports.broadcastEvent = function(req, res){
 
     if (!req.body.event) {
@@ -42,7 +70,7 @@ module.exports.broadcastEvent = function(req, res){
         payload.data = req.body.data;
     }
 
-    pushToDevice(res, tokens, payload, req.body.alert, Boolean(req.body.silent), Boolean(req.body.voip));
+    pushToDevices(res, tokens, payload, req.body.alert, Boolean(req.body.silent), Boolean(req.body.voip));
 };
 
 module.exports.pushEvent = function(req, res) {
@@ -70,14 +98,15 @@ module.exports.pushEvent = function(req, res) {
         if(!device.voipToken){
             return res.status(404).json({errorMessage: `NoVoipToken(forDevice: ${device._id})`, errorCode: 10012});
         }
-        pushToDevice(res, device.voipToken, payload, req.body.alert, Boolean(req.body.silent), true);
+        pushToDevices(res, device.voipToken, payload, req.body.alert, Boolean(req.body.silent), true);
     }else{
-        pushToDevice(res, device.apnToken, payload, req.body.alert, Boolean(req.body.silent), false);
+        pushToDevices(res, device.apnToken, payload, req.body.alert, Boolean(req.body.silent), false);
     }
 };
 
 
-function pushToDevice(response, token, data, alert, silent=false, voip=false) {
+function pushToDevices(response, token, data, alert, silent=false, voip=false) {
+
     const options = {
         production: false
     };

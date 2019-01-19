@@ -1,3 +1,5 @@
+const apnController = require("./apn-controller");
+
 let connections = {};
 
 module.exports.stream = function (req, res) {
@@ -21,7 +23,8 @@ module.exports.stream = function (req, res) {
 module.exports.pushEvent = function (req, res) {
     if (!req.body.event) {
         return res.status(403).json({errorMessage: `NoParameter(event)`, errorCode: 10000});
-    } else if (!req.body.gateway) {
+    }
+    else if (!req.body.gateway) {
         return res.status(403).json({errorMessage: `NoParameter(gateway)`, errorCode: 10000});
     }
 
@@ -34,6 +37,13 @@ module.exports.pushEvent = function (req, res) {
 
     if (req.body.gateway in connections) {
         connections[req.body.gateway].locals.sse.emit(req.body.event, req.body.data);
+
+        if(req.body.event === "deviceDidAnswerCall"){
+            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidAnswer', {gateway: gateway});
+        }else if(req.body.event === "deviceDidDeclineCall"){
+            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidDecline', {gateway: gateway});
+        }
+
         return res.status(200).json({});
     }
 
