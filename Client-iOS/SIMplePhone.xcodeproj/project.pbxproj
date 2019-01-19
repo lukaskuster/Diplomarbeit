@@ -27,6 +27,7 @@
 		D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */; };
 		D62731DD21E611CC00CFCE28 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */; };
 		D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */; };
+		D6286D2B21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6286D2A21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift */; };
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
@@ -136,6 +137,7 @@
 		D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChromaColorPicker.framework; path = Carthage/Build/iOS/ChromaColorPicker.framework; sourceTree = "<group>"; };
 		D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayNameViewController.swift; sourceTree = "<group>"; };
+		D6286D2A21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RTCSessionDescription+PCMAonly.swift"; sourceTree = "<group>"; };
 		D6328CA721930FD200E48FD3 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D6328CA92193128600E48FD3 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		D6328CAB219313DF00E48FD3 /* SPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPManager.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				D62731D621E53C0100CFCE28 /* UIColor+Hex.swift */,
 				D67818A52178929B00E650DB /* SIMplePhoneKit.h */,
 				D67818A62178929B00E650DB /* Info.plist */,
+				D6286D2A21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift */,
 			);
 			path = SIMplePhoneKit;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,
 				D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */,
 				D65FD71B2189C90200BBE679 /* SPMessage.swift in Sources */,
+				D6286D2B21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift in Sources */,
 				D65FD71D2189CA2100BBE679 /* SPVoicemail.swift in Sources */,
 				D653F5E121AD853E005736FE /* SPPeerConnectionManager.swift in Sources */,
 				D65FD7152189C55200BBE679 /* SPRecentCall.swift in Sources */,
