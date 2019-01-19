@@ -15,7 +15,8 @@ public class SPDevice: NSObject, Codable {
     @objc public var deviceModelName: String
     @objc public var language: String
     @objc public var sync: Bool
-    @objc public var apnKey: String?
+    @objc public var apnToken: String?
+    @objc public var voipToken: String?
     
     public var deviceModel: String {
         switch deviceModelName {
@@ -43,7 +44,7 @@ public class SPDevice: NSObject, Codable {
         self.deviceModelName = deviceModelName
         self.language = language
         self.sync = sync
-        self.apnKey = apnKey
+        self.apnToken = apnKey
     }
     
     
@@ -87,8 +88,11 @@ public class SPDevice: NSObject, Codable {
                     "systemVersion": self.systemVersion,
                     "language": self.language,
                     "sync": self.sync] as [String : Any]
-        if let apnToken = self.apnKey {
+        if let apnToken = self.apnToken {
             data["apnToken"] = apnToken
+        }
+        if let voipToken = self.voipToken {
+            data["voipToken"] = voipToken
         }
         return data
     }
@@ -107,7 +111,8 @@ extension SPDevice: Comparable {
             (lhs.systemVersion == rhs.systemVersion) &&
             (lhs.language == rhs.language) &&
             (lhs.sync == rhs.sync) &&
-            (lhs.apnKey == rhs.apnKey) {
+            (lhs.apnToken == rhs.apnToken) &&
+            (lhs.voipToken == rhs.voipToken) {
             return true
         }
         return false

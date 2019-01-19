@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <PKPushRegistryDelegate>
 
 @end
 
@@ -23,6 +23,7 @@
         if(loggedIn){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self registerForPushNotifications];
+                [self voipRegistration];
                 [self updateBadges];
             });
         }else{
@@ -36,6 +37,25 @@
     
     application.applicationIconBadgeNumber = 0;
     return YES;
+}
+
+- (void)voipRegistration {
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    PKPushRegistry* voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
+    voipRegistry.delegate = self;
+    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+}
+
+- (void)pushRegistry:(nonnull PKPushRegistry *)registry didUpdatePushCredentials:(nonnull PKPushCredentials *)pushCredentials forType:(nonnull PKPushType)type {
+    if(type == PKPushTypeVoIP) {
+        [[SPManager sharedInstance] handleVoIPToken:pushCredentials.token];
+    }
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion {
+    if(type == PKPushTypeVoIP) {
+        [[SPManager sharedInstance] handleVoIPNotification:payload.dictionaryPayload];
+    }
 }
 
 - (void)registerForPushNotifications {
@@ -116,6 +136,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 
 @end

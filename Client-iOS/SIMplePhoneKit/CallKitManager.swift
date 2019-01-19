@@ -7,47 +7,174 @@
 //
 
 import Foundation
-import PushKit
 import CallKit
-import Contacts
 
-public class CallKitManager: NSObject, PKPushRegistryDelegate, CXProviderDelegate {
+public protocol CallKitManagerDelegate {
+    func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didChangeHeldState isOnHold: Bool, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didEnterDTMF digits: String, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+}
+
+public class CallKitManager: NSObject {
+    public static let shared = CallKitManager()
+    public var delegate: CallKitManagerDelegate?
+    private let provider: CXProvider
+    private let callManager = CallManager()
     
-    public func receiveCall() {
-        let provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "SIMplePhone"))
-        provider.setDelegate(self, queue: nil)
-        let update = CXCallUpdate()
-        update.remoteHandle = CXHandle(type: .generic, value: "Pete Za")
-        provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
+    public override init() {
+        let configuration = CXProviderConfiguration(localizedName: "SIMplePhone")
+        configuration.ringtoneSound = "ringtone.caf"
+        configuration.supportsVideo = false
+        configuration.supportedHandleTypes = [.phoneNumber]
+        configuration.includesCallsInRecents = true
+        configuration.maximumCallsPerCallGroup = 1
+        self.provider = CXProvider(configuration: configuration)
+        super.init()
+        self.provider.setDelegate(self, queue: nil)
     }
     
-    public func initiateCall(with contact: CNContact) {
-        let provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "SIMplePhone"))
-        provider.setDelegate(self, queue: nil)
-        let controller = CXCallController()
-        
-        let transaction = CXTransaction(action: CXStartCallAction(call: UUID(), handle: CXHandle(type: .generic, value: contact.givenName+" "+contact.familyName)))
-        controller.request(transaction, completion: { error in })
+    public func reportIncomingCall(from number: SPNumber, on gateway: SPGateway) {
+        let callUpdate = CXCallUpdate()
+        callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: number.phoneNumber)
+        callUpdate.supportsGrouping = false
+        callUpdate.supportsUngrouping = false
+        let call = Call(gateway: gateway)
+        self.provider.reportNewIncomingCall(with: call.uuid, update: callUpdate) { (error) in
+            if let error = error {
+                print("Error while initializing call \(error.localizedDescription)")
+                return
+            }
+            self.callManager.add(call: call)
+        }
     }
     
-    public func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-        print(pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined())
+    public enum CallEndReason {
+        case otherDeviceDidAnswer
+        case otherDeviceDidDecline
+        case endedByRemote
+        case unanswered
     }
-    
-    private func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        
+    public func reportCallEnded(because reason: CallEndReason, on gateway: SPGateway) {
+        guard let call = self.callManager.callOnGateway(gateway) else {
+            return
+        }
+        let cxreason: CXCallEndedReason
+        switch reason {
+        case .otherDeviceDidAnswer:
+            cxreason = .answeredElsewhere
+        case .otherDeviceDidDecline:
+            cxreason = .declinedElsewhere
+        case .endedByRemote:
+            cxreason = .remoteEnded
+        case .unanswered:
+            cxreason = .unanswered
+        }
+        self.provider.reportCall(with: call.uuid, endedAt: Date(), reason: cxreason)
+    }
+}
+
+extension CallKitManager: CXProviderDelegate {
+    public func providerDidBegin(_ provider: CXProvider) {
+        print("provider did begin")
     }
     
     public func providerDidReset(_ provider: CXProvider) {
+        self.callManager.removeAllCalls()
     }
     
-    private func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-        action.fulfill()
+    public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        delegate?.callKitManager(didAcceptIncomingCallFromGateway: call.gateway, completion: { success in
+            if success {
+                call.isConnected = true
+                action.fulfill()
+            }else{
+                action.fail()
+            }
+        })
     }
     
-    private func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
-        action.fulfill()
+    public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        if call.isConnected {
+            delegate?.callKitManager(didEndCallFromGateway: call.gateway, completion: { success in
+                success ? action.fulfill() : action.fail()
+            })
+        }else{
+            delegate?.callKitManager(didDeclineIncomingCallFromGateway: call.gateway, completion: { success in
+                success ? action.fulfill() : action.fail()
+            })
+        }
+        self.callManager.remove(call: call)
     }
     
+    public func provider(_ provider: CXProvider, perform action: CXSetHeldCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        delegate?.callKitManager(didChangeHeldState: action.isOnHold, onCallFrom: call.gateway, completion: { success in
+            success ? action.fulfill() : action.fail()
+        })
+    }
     
+    public func provider(_ provider: CXProvider, perform action: CXPlayDTMFCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        delegate?.callKitManager(didEnterDTMF: action.digits, onCallFrom: call.gateway, completion: { success in
+            success ? action.fulfill() : action.fail()
+        })
+    }
+}
+
+fileprivate class CallManager {
+    private var calls = [Call]()
+    
+    func callWithUUID(_ uuid: UUID) -> Call? {
+        guard let index = calls.index(where: { $0.uuid == uuid }) else {
+            return nil
+        }
+        return calls[index]
+    }
+    
+    func callOnGateway(_ gateway: SPGateway) -> Call? {
+        guard let index = calls.index(where: { $0.gateway == gateway }) else {
+            return nil
+        }
+        return calls[index]
+    }
+    
+    func add(call: Call) {
+        calls.append(call)
+    }
+    
+    func remove(call: Call) {
+        guard let index = calls.index(where: { $0 === call }) else { return }
+        calls.remove(at: index)
+    }
+    
+    func removeAllCalls() {
+        calls.removeAll()
+    }
+}
+
+fileprivate class Call {
+    let uuid: UUID
+    let gateway: SPGateway
+    var isConnected = false
+    
+    init(gateway: SPGateway) {
+        self.uuid = UUID()
+        self.gateway = gateway
+    }
 }

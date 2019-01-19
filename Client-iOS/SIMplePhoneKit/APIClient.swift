@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireSwiftyJSON
 import SystemConfiguration
 
-public enum APIError: Error {
+public enum APIError: LocalizedError {
     case notAuthenticated
     case wrongCredentials
     case missing(parameter: String)
@@ -28,6 +28,10 @@ public enum APIError: Error {
     case noNetworkConnection
     case differentCloudUserId
     case other(desc: String)
+    
+    public var errorDescription: String? {
+        return "The operation couldn't be completed. (SIMplePhoneKit.APIError.\(self))"
+    }
 }
 
 class APIClient: NSObject {
@@ -120,6 +124,38 @@ class APIClient: NSObject {
     }
     
     /**
+     Fetches a gateway by its IMEI
+     - Parameters:
+     - imei: IMEI of the gateway
+     - completion: Closure which is called after server response
+     - success: Bool indicating operation success
+     - gateways: all SPGateways associated with current user
+     - error: Error, if operation unsuccessful
+     */
+    public func getGateway(imei: String, completion: @escaping (_ success: Bool, _ gateway: SPGateway?, _ error: APIError?) -> Void) {
+        self.request(API.gateway(imei), type: .get, parameters: nil) { (success, response, error) in
+            if success {
+                if let gateway = response {
+                    if let imei = gateway["imei"].string {
+                        let name = gateway["name"].string
+                        let phoneNumber = gateway["phoneNumber"].string
+                        let colorString = gateway["color"].string
+                        let signalStrength = gateway["signalStrength"].double
+                        let firmwareVersion = gateway["firmwareVersion"].string
+                        let carrier = gateway["carrier"].string
+                        let gateway = SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, colorString: colorString, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier)
+                        completion(true, gateway, nil)
+                    }else{
+                        completion(false, nil, APIError.parsingError)
+                    }
+                }
+            }else{
+                completion(false, nil, error!)
+            }
+        }
+    }
+    
+    /**
      Update name of gateway
      - Parameters:
      - completion: Closure which is called after server response
@@ -204,6 +240,11 @@ class APIClient: NSObject {
     public enum GatewayPushEvent {
         case dial(number: String)
         case hangUp
+        case deviceDidAnswerCall(client: SPDevice)
+        case deviceDidDeclineCall(client: SPDevice)
+        case holdCall
+        case continueCall
+        case playDTMF(digits: String)
         case sendSMS(to: String, message: String)
         case updateSignalStrength
     }
@@ -232,12 +273,25 @@ class APIClient: NSObject {
             data["event"] = "sendSMS"
             data["data"] = ["recipient": phoneNumber,
                             "message": message]
+        case .deviceDidAnswerCall(let client):
+            data["event"] = "deviceDidAnswerCall"
+            data["data"] = ["device": client.id]
+        case .deviceDidDeclineCall(let client):
+            data["event"] = "deviceDidDeclineCall"
+            data["data"] = ["device": client.id]
+        case .holdCall:
+            data["event"] = "holdCall"
+        case .continueCall:
+            data["event"] = "continueCall"
+        case .playDTMF(let digits):
+            data["event"] = "playDTMF"
+            data["data"] = ["digits": digits]
         }
         
         self.request(API.event, type: .post, parameters: data) { (success, response, error) in
             if let error = error {
                 print(error)
-                completion(false, nil, APIError.other(desc: "\(error)"))
+                completion(false, nil, error)
                 return
             }
             completion(success, response, nil)
@@ -346,6 +400,28 @@ class APIClient: NSObject {
                 }
             }
             
+        }
+    }
+    
+    /**
+     Cross-checks local device info and registers/updates VoIP APN Token of device
+     - Parameters:
+     - token: VoIP APN Token provided by PushKit
+     - completion: Closure which is called after server response
+     - success: Bool indicating operation success
+     - error: Error, if operation unsuccessful
+     */
+    public func register(voipToken token: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
+        if let localDevice = SPDevice.local {
+            let tokenDevice = localDevice
+            tokenDevice.voipToken = token
+            if localDevice != tokenDevice {
+                SPDevice.local = tokenDevice
+            }
+            let data = ["voipToken": token]
+            self.request(API.device(localDevice.id), type: .put, parameters: data) { (success, response, error) in
+                completion(success, error)
+            }
         }
     }
     

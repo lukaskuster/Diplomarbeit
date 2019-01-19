@@ -9,11 +9,14 @@
 import Foundation
 import KeychainSwift
 import CloudKit
+import SwiftyJSON
+import UserNotifications
 
-@objc public class SPManager: NSObject {
+@objc public class SPManager: NSObject, CallKitManagerDelegate {
     public static let shared = SPManager()
     private var realmManager: RealmManager
     private var apiClient: APIClient
+    private var callKitManager: CallKitManager
     private var keychainEnvironment: SPKeychainEnvironment {
         get { return (SPDevice.local?.sync ?? true) ? .cloud : .local }
         set { SPDevice.local?.sync = (newValue == .cloud) }
@@ -25,11 +28,14 @@ import CloudKit
     private override init() {
         self.realmManager = RealmManager.shared
         self.apiClient = APIClient.shared
+        self.callKitManager = CallKitManager.shared
         self.cloudKeychain = KeychainSwift()
         self.cloudKeychain.synchronizable = true
         self.localKeychain = KeychainSwift()
         self.localKeychain.synchronizable = false
         self.cloudContainer = CKContainer.default()
+        super.init()
+        self.callKitManager.delegate = self
     }
     
     // MARK: - Account
@@ -171,6 +177,113 @@ import CloudKit
         }
     }
     
+    // MARK: - Call handling
+    @objc public func handleVoIPToken(_ data: Data) {
+        let token = data.reduce("", {$0 + String(format: "%02X", $1)})
+        self.apiClient.register(voipToken: token) { (success, error) in
+            if !success {
+                print("\(error!)")
+            }
+        }
+    }
+    
+    @objc public func handleVoIPNotification(_ pushPayload: NSDictionary) {
+        let payload = JSON(pushPayload)
+        if let event = payload["event"].string,
+            let gatewayString = payload["data"]["gateway"].string {
+            self.getGateway(withImei: gatewayString) { (success, gateway, error) in
+                if success, let gateway = gateway {
+                    switch event {
+                    case "incomingCall":
+                        if let numberString = payload["data"]["number"].string {
+                            let caller = SPNumber(withNumber: numberString)
+                            self.callKitManager.reportIncomingCall(from: caller, on: gateway)
+                        }
+                    case "otherDeviceDidAnswer":
+                        self.callKitManager.reportCallEnded(because: .otherDeviceDidAnswer, on: gateway)
+                    case "otherDeviceDidDecline":
+                        self.callKitManager.reportCallEnded(because: .otherDeviceDidDecline, on: gateway)
+                    case "callEndedByRemote":
+                        self.callKitManager.reportCallEnded(because: .endedByRemote, on: gateway)
+                    case "callUnanswered":
+                        self.callKitManager.reportCallEnded(because: .unanswered, on: gateway)
+                    default:
+                        return
+                    }
+                }else{
+                    print("\(error!)")
+                }
+            }
+        }
+    }
+    
+    public func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        if let localDevice = SPDevice.local {
+            self.apiClient.pushEventToGateway(gateway, event: .deviceDidAnswerCall(client: localDevice)) { (success, response, error) in
+                if let error = error {
+                    self.sendErrorNotification(for: error)
+                }else{
+                    completion(success)
+                }
+            }
+        }
+    }
+    
+    public func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        if let localDevice = SPDevice.local {
+            self.apiClient.pushEventToGateway(gateway, event: .deviceDidAnswerCall(client: localDevice)) { (success, response, error) in
+                if let error = error {
+                    self.sendErrorNotification(for: error)
+                }else{
+                    completion(success)
+                }
+            }
+        }
+    }
+    
+    public func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
+            if let error = error {
+                self.sendErrorNotification(for: error)
+            }else{
+                completion(success)
+            }
+        }
+    }
+    
+    public func callKitManager(didChangeHeldState isOnHold: Bool, onCallFrom gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        let event: APIClient.GatewayPushEvent = isOnHold ? .holdCall : .continueCall
+        self.apiClient.pushEventToGateway(gateway, event: event) { (success, response, error) in
+            if let error = error {
+                self.sendErrorNotification(for: error)
+            }else{
+                completion(success)
+            }
+        }
+    }
+    
+    public func callKitManager(didEnterDTMF digits: String, onCallFrom gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .playDTMF(digits: digits)) { (success, response, error) in
+            if let error = error {
+                self.sendErrorNotification(for: error)
+            }else{
+                completion(success)
+            }
+        }
+    }
+    
+    // MARK: - Display Error as Local Notification
+    public func sendErrorNotification(for error: Error) {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "An error occured in the background"
+        content.body = error.localizedDescription
+        content.sound = UNNotificationSound.default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
     // MARK: - User access control
     
     @objc public func isAuthetificated(completion: @escaping (_ loggedIn: Bool) -> Void) {
@@ -289,6 +402,12 @@ import CloudKit
     public func getAllGateways(completion: @escaping (_ success: Bool, _ gateways: [SPGateway]?, _ error: Error?) -> Void) {
         self.apiClient.getAllGateways { (success, gateways, error) in
             completion(success, gateways, error)
+        }
+    }
+    
+    public func getGateway(withImei imei: String, completion: @escaping (_ success: Bool, _ gateway: SPGateway?, _ error: Error?) -> Void) {
+        self.apiClient.getGateway(imei: imei) { (success, gateway, error) in
+            completion(success, gateway, error)
         }
     }
     
