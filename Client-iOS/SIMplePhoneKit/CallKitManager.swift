@@ -148,7 +148,7 @@ fileprivate class CallManager {
     }
     
     func callOnGateway(_ gateway: SPGateway) -> Call? {
-        guard let index = calls.index(where: { $0.gateway == gateway }) else {
+        guard let index = calls.index(where: { $0.gateway.imei == gateway.imei }) else {
             return nil
         }
         return calls[index]
