@@ -1,4 +1,5 @@
 const apn = require('apn');
+const util = require('util');
 
 
 const APN_KEY = 'AuthKey_93W56D4882.p8';
@@ -24,7 +25,7 @@ module.exports.broadcastEventExcept = function(response, {device}, event, data){
 
     for(let i = 0; i < user.device.length; i++){
         if(user.device[i]._id !== device){
-            tokens.push(user.device[i].apnToken)
+            tokens.push(user.device[i].voipToken)
         }
     }
 
@@ -34,7 +35,7 @@ module.exports.broadcastEventExcept = function(response, {device}, event, data){
         payload.data = data;
     }
 
-    pushToDevices(response, tokens, payload, null, true, true)
+    pushToDevices(response, tokens, payload, null, true, true);
 };
 
 module.exports.broadcastEvent = function(req, res){
@@ -146,6 +147,7 @@ function pushToDevices(response, token, data, alert, silent=false, voip=false) {
     note.payload = {
         ...data
     };
+
 
     apnProvider.send(note, token).then((result) => {
         response.json(result);

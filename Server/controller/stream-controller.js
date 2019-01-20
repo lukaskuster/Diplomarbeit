@@ -39,9 +39,9 @@ module.exports.pushEvent = function (req, res) {
         connections[req.body.gateway].locals.sse.emit(req.body.event, req.body.data);
 
         if(req.body.event === "deviceDidAnswerCall"){
-            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidAnswer', {gateway: gateway});
+            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidAnswer', {gateway: req.body.gateway});
         }else if(req.body.event === "deviceDidDeclineCall"){
-            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidDecline', {gateway: gateway});
+            return apnController.broadcastEventExcept(res, req.body.data, 'otherDeviceDidDecline', {gateway: req.body.gateway});
         }
 
         return res.status(200).json({});
