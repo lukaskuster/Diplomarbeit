@@ -25,6 +25,7 @@ API_HOST = config['Server']['apihost']
 SIGNALING_HOST = config['Server']['signalinghost']
 SERIAL_DEBUG = config['DEFAULT'].getboolean('serialdebug')
 SERIAL_PORT = config['DEFAULT']['serialport']
+PCM_DEBUG = config['DEFAULT'].getboolean('pcmdebug')
 
 
 async def check_imei(sim):
@@ -54,12 +55,14 @@ async def main():
     await check_imei(sim)
 
     api = API(auth_config['user'], auth_config['password'], auth_config['imei'], host=API_HOST)
-    webrtc = WebRTC(auth_config['user'], auth_config['password'], host=SIGNALING_HOST)
+    webrtc = WebRTC(auth_config['user'], auth_config['password'], host=SIGNALING_HOST, debug=PCM_DEBUG)
 
     sim.on('ring', partial(on_outgoing_call, api, webrtc))
 
-    api.on('hangUp', partial(on_hang_up, webrtc))
+    api.on('hangUp', partial(on_hang_up, webrtc))  # Eventually not needed
     api.on('dial', partial(on_dial, sim, webrtc))
+    api.on('clientDidDeclineCall', partial(on_hang_up, webrtc))
+    api.on('clientDidAnswerCall', partial(on_answer_call, sim))
     api.on('requestSignal', partial(on_request_signal, sim, api))
     api.on('sendSMS', partial(on_send_sms, sim))
 
@@ -84,9 +87,16 @@ async def on_outgoing_call(api, webrtc):
 # API Callbacks
 
 async def on_hang_up(webrtc, data):
-    logger.log('SSE', 'Hang up call!')
+    logger.log('GATEWAY', 'Hang up call!')
     if webrtc.is_ongoing():
         webrtc.stop_call()
+
+
+async def on_answer_call(sim, data):
+    logger.log('GATEWAY', 'Answer call!')
+    event = await sim.answer_call()
+    if event.error:
+        logger.info('Sim800', "Could not answer call!")
 
 
 async def on_dial(sim, webrtc, data):

@@ -50,7 +50,7 @@ class SSE(Thread):
             self.emitter.emit('connectionStateChange', value)
 
             state = AnsiEscapeSequence.UNDERLINE + self._connection_state + AnsiEscapeSequence.DEFAULT
-            logger.info('SSE', 'Connection state changed to ' + state)
+            logger.debug('SSE', 'Connection state changed to ' + state)
 
     def close(self):
         """
@@ -98,6 +98,13 @@ class SSE(Thread):
                     if line:
                         try:
                             notification = json.loads(line)
+                            logger.debug('SSE', 'Received {}{}{} event with data: {}{}{}'.format(
+                                AnsiEscapeSequence.UNDERLINE,
+                                notification['event'],
+                                AnsiEscapeSequence.DEFAULT,
+                                AnsiEscapeSequence.HEADER,
+                                notification['data'],
+                                AnsiEscapeSequence.DEFAULT))
                             self.emitter.emit(notification['event'], notification['data'])
                         except ValueError:  # Json failed to load
                             pass  # For now ignore when a wrong message arrived
