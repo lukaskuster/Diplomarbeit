@@ -34,15 +34,16 @@
 		D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */; };
 		D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358714217F49E900B395F9 /* Starscream.framework */; };
 		D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358717217F544800B395F9 /* SwiftyJSON.framework */; };
+		D649976521F3C19E00EF72DE /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649976421F3C19E00EF72DE /* CallViewController.swift */; };
+		D649976721F3C28000EF72DE /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D649976621F3C28000EF72DE /* Call.storyboard */; };
 		D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5DE21A806EB005736FE /* WebRTCClient.swift */; };
-		D653F5E121AD853E005736FE /* SPPeerConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */; };
+		D653F5E121AD853E005736FE /* PeerConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E021AD853E005736FE /* PeerConnectionManager.swift */; };
 		D653F5E321B0179E005736FE /* Static.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D653F5E221B0179D005736FE /* Static.framework */; };
 		D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E421B01928005736FE /* SettingsViewController.swift */; };
 		D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */; };
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
 		D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD702218884DF00BBE679 /* CallKitManager.swift */; };
 		D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD707218893C200BBE679 /* ContactsTableViewController.swift */; };
-		D65FD70A218913B200BBE679 /* CallKitTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD709218913B200BBE679 /* CallKitTestViewController.swift */; };
 		D65FD70E2189C14E00BBE679 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70C2189C14D00BBE679 /* Realm.framework */; };
 		D65FD70F2189C14E00BBE679 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70C2189C14D00BBE679 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70D2189C14D00BBE679 /* RealmSwift.framework */; };
@@ -145,8 +146,10 @@
 		D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhoneNumberKit.framework; path = Carthage/Build/iOS/PhoneNumberKit.framework; sourceTree = "<group>"; };
 		D6358714217F49E900B395F9 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		D6358717217F544800B395F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D649976421F3C19E00EF72DE /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		D649976621F3C28000EF72DE /* Call.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Call.storyboard; sourceTree = "<group>"; };
 		D653F5DE21A806EB005736FE /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
-		D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPeerConnectionManager.swift; sourceTree = "<group>"; };
+		D653F5E021AD853E005736FE /* PeerConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionManager.swift; sourceTree = "<group>"; };
 		D653F5E221B0179D005736FE /* Static.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Static.framework; path = Carthage/Build/iOS/Static.framework; sourceTree = "<group>"; };
 		D653F5E421B01928005736FE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
@@ -154,7 +157,6 @@
 		D65FD702218884DF00BBE679 /* CallKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitManager.swift; sourceTree = "<group>"; };
 		D65FD70421888FDF00BBE679 /* SIMplePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SIMplePhone.entitlements; sourceTree = "<group>"; };
 		D65FD707218893C200BBE679 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
-		D65FD709218913B200BBE679 /* CallKitTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitTestViewController.swift; sourceTree = "<group>"; };
 		D65FD70B2189BB5600BBE679 /* Frameworks.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Frameworks.md; sourceTree = "<group>"; };
 		D65FD70C2189C14D00BBE679 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		D65FD70D2189C14D00BBE679 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -316,8 +318,6 @@
 				D6781875216F432900E650DB /* ChatsTableViewController.m */,
 				D65FD707218893C200BBE679 /* ContactsTableViewController.swift */,
 				D678188D2178549200E650DB /* VoicemailTableViewController.swift */,
-				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
-				D65FD709218913B200BBE679 /* CallKitTestViewController.swift */,
 				D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */,
 				D6BE881721971A8900F87B35 /* LoginViewController.swift */,
 				D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */,
@@ -329,6 +329,8 @@
 				D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */,
 				D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */,
 				D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */,
+				D649976421F3C19E00EF72DE /* CallViewController.swift */,
+				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -373,6 +375,7 @@
 				D67818B92179BB8600E650DB /* sample.m4a */,
 				D6781856216CD16D00E650DB /* Main.storyboard */,
 				D678185B216CD16F00E650DB /* LaunchScreen.storyboard */,
+				D649976621F3C28000EF72DE /* Call.storyboard */,
 				D6BE8814219718AE00F87B35 /* Setup.storyboard */,
 				D62731DC21E611CC00CFCE28 /* UIView+Extensions.swift */,
 				D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */,
@@ -385,8 +388,8 @@
 			isa = PBXGroup;
 			children = (
 				D6328CAB219313DF00E48FD3 /* SPManager.swift */,
-				D653F5E021AD853E005736FE /* SPPeerConnectionManager.swift */,
 				D65FD7132189C53600BBE679 /* Models */,
+				D653F5E021AD853E005736FE /* PeerConnectionManager.swift */,
 				D604917C2194289F00F46B18 /* APIClient.swift */,
 				D653F5DE21A806EB005736FE /* WebRTCClient.swift */,
 				D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */,
@@ -511,6 +514,7 @@
 				D6781867216CD1B600E650DB /* .gitignore in Resources */,
 				D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */,
 				D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */,
+				D649976721F3C28000EF72DE /* Call.storyboard in Resources */,
 				D6781858216CD16D00E650DB /* Main.storyboard in Resources */,
 				D6E0B80921B87AF400D560D7 /* Acknowledgements.plist in Resources */,
 				D67818BA2179BB8600E650DB /* sample.m4a in Resources */,
@@ -607,6 +611,7 @@
 				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
 				D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
+				D649976521F3C19E00EF72DE /* CallViewController.swift in Sources */,
 				D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */,
 				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
@@ -616,7 +621,6 @@
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
-				D65FD70A218913B200BBE679 /* CallKitTestViewController.swift in Sources */,
 				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
 				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
@@ -649,7 +653,7 @@
 				D65FD71B2189C90200BBE679 /* SPMessage.swift in Sources */,
 				D6286D2B21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift in Sources */,
 				D65FD71D2189CA2100BBE679 /* SPVoicemail.swift in Sources */,
-				D653F5E121AD853E005736FE /* SPPeerConnectionManager.swift in Sources */,
+				D653F5E121AD853E005736FE /* PeerConnectionManager.swift in Sources */,
 				D65FD7152189C55200BBE679 /* SPRecentCall.swift in Sources */,
 				D65FD71F2189CAE800BBE679 /* SPGateway.swift in Sources */,
 				D65FD7192189C88700BBE679 /* SPChat.swift in Sources */,

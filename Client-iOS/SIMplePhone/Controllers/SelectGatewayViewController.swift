@@ -100,22 +100,24 @@ class SelectGatewayViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let gateway = self.gateways![indexPath.item]
-        SPPeerConnectionManager.shared.makeCall(self.number, with: gateway) { (success, error) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-            }else{
+        let storyboard = UIStoryboard(name: "Call", bundle: nil)
+        let callUIVC = storyboard.instantiateViewController(withIdentifier: "CallUI") as! CallViewController
+        callUIVC.receiver = self.number
+        callUIVC.gateway = gateway
+        self.dismiss(animated: true, completion: {
+            callUIVC.show()
+        })
+        
+        SPManager.shared.makeCall(to: self.number, on: gateway) { error in
+            if let error = error {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: {
-                        var config = SwiftMessages.Config()
-                        config.presentationContext = .window(windowLevel: .statusBar)
-                        let view = MessageView.viewFromNib(layout: .cardView)
-                        view.configureTheme(.error)
-                        view.configureContent(title: "Error while trying to make call", body: "\(error!)")
-                        view.button?.isHidden = true
-                        view.layoutMarginAdditions = UIEdgeInsets(top: 25, left: 20, bottom: 20, right: 20)
-                        SwiftMessages.show(config: config, view: view)
-                    })
+                    callUIVC.close(error)
                 }
+                return
+            }
+
+            DispatchQueue.main.async {
+                callUIVC.connected()
             }
         }
     }

@@ -22,6 +22,7 @@ public enum APIError: LocalizedError {
     case deviceAlreadyExists
     case mailAlreadyExists
     case noDeviceFound
+    case gatewayNotConnected(withIMEI: String)
     case noGatewaysForUser
     case noDevicesForUser
     case parsingError
@@ -68,7 +69,7 @@ class APIClient: NSObject {
                         }
                     }
                 }
-                SignalingClient.shared.setCredentials(username: username, password: password)
+                PeerConnectionManager.shared.setSignalingCredentials(username: username, password: password)
                 completion(true, nil)
             }else{
                 self.username = nil
@@ -571,6 +572,9 @@ extension APIClient {
             return APIError.noDeviceFound
         case 10006:
             return APIError.mailAlreadyExists
+        case 10007:
+            let parameter = String(response["errorMessage"].string!.components(separatedBy: "(withIMEI: ")[1].dropLast())
+            return APIError.gatewayNotConnected(withIMEI: parameter)
         case 10008:
             return APIError.noGatewaysForUser
         case 10009:

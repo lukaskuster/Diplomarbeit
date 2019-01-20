@@ -70,7 +70,7 @@ class SettingsGatewayViewController: TableViewController {
                 ]),
             Section(header: "Testing", rows: [
                 Row(text: "WebRTC Test", selection: {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let storyboard = UIStoryboard(name: "Call", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "WebRTCTest") as! WebRTCTestViewController
                     controller.gateway = self.gateway
                     self.navigationController?.pushViewController(controller, animated: true)

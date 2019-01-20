@@ -10,7 +10,7 @@ import Foundation
 import CallKit
 
 public protocol CallKitManagerDelegate {
-    func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (_ success: Bool) -> Void)
     func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
     func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
     func callKitManager(didChangeHeldState isOnHold: Bool, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
@@ -21,6 +21,7 @@ public class CallKitManager: NSObject {
     public static let shared = CallKitManager()
     public var delegate: CallKitManagerDelegate?
     private let provider: CXProvider
+    private let callController: CXCallController
     private let callManager = CallManager()
     
     public override init() {
@@ -30,9 +31,24 @@ public class CallKitManager: NSObject {
         configuration.supportedHandleTypes = [.phoneNumber]
         configuration.includesCallsInRecents = true
         configuration.maximumCallsPerCallGroup = 1
+        configuration.iconTemplateImageData = #imageLiteral(resourceName: "callkit-icon").pngData()
         self.provider = CXProvider(configuration: configuration)
+        self.callController = CXCallController()
         super.init()
         self.provider.setDelegate(self, queue: nil)
+    }
+    
+    public func reportOutgoingCall(to number: SPNumber, on gateway: SPGateway) {
+        let call = Call(with: number, on: gateway)
+        let handle = CXHandle(type: .phoneNumber, value: number.phoneNumber)
+        let callAction = CXStartCallAction(call: call.uuid, handle: handle)
+        self.callController.requestTransaction(with: callAction) { error in
+            if let error = error {
+                print("Error while initializing call \(error.localizedDescription)")
+                return
+            }
+            self.callManager.add(call: call)
+        }
     }
     
     public func reportIncomingCall(from number: SPNumber, on gateway: SPGateway) {
@@ -40,7 +56,7 @@ public class CallKitManager: NSObject {
         callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: number.phoneNumber)
         callUpdate.supportsGrouping = false
         callUpdate.supportsUngrouping = false
-        let call = Call(gateway: gateway)
+        let call = Call(with: number, on: gateway)
         self.provider.reportNewIncomingCall(with: call.uuid, update: callUpdate) { (error) in
             if let error = error {
                 print("Error while initializing call \(error.localizedDescription)")
@@ -55,9 +71,21 @@ public class CallKitManager: NSObject {
         case otherDeviceDidDecline
         case endedByRemote
         case unanswered
+        case userInitiated
     }
     public func reportCallEnded(because reason: CallEndReason, on gateway: SPGateway) {
         guard let call = self.callManager.callOnGateway(gateway) else {
+            return
+        }
+        if reason == .userInitiated {
+            let callAction = CXEndCallAction(call: call.uuid)
+            self.callController.requestTransaction(with: callAction) { error in
+                if let error = error {
+                    print("EndCallAction transaction request failed: \(error.localizedDescription).")
+                    self.reportCallEnded(because: .endedByRemote, on: gateway)
+                }
+            }
+            self.callManager.remove(call: call)
             return
         }
         let cxreason: CXCallEndedReason
@@ -70,8 +98,11 @@ public class CallKitManager: NSObject {
             cxreason = .remoteEnded
         case .unanswered:
             cxreason = .unanswered
+        case .userInitiated:
+            return
         }
         self.provider.reportCall(with: call.uuid, endedAt: Date(), reason: cxreason)
+        self.callManager.remove(call: call)
     }
 }
 
@@ -89,7 +120,7 @@ extension CallKitManager: CXProviderDelegate {
             action.fail()
             return
         }
-        delegate?.callKitManager(didAcceptIncomingCallFromGateway: call.gateway, completion: { success in
+        delegate?.callKitManager(didAcceptIncomingCallFromGateway: call.gateway, with: call.number, completion: { success in
             if success {
                 call.isConnected = true
                 action.fulfill()
@@ -170,11 +201,13 @@ fileprivate class CallManager {
 
 fileprivate class Call {
     let uuid: UUID
+    let number: SPNumber
     let gateway: SPGateway
     var isConnected = false
     
-    init(gateway: SPGateway) {
+    init(with number: SPNumber, on gateway: SPGateway) {
         self.uuid = UUID()
+        self.number = number
         self.gateway = gateway
     }
 }

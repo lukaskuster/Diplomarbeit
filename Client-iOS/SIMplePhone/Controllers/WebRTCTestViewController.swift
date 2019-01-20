@@ -10,8 +10,6 @@ import UIKit
 import SIMplePhoneKit
 
 class WebRTCTestViewController: UIViewController {
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var logField: UITextView!
     
     public var gateway: SPGateway?
@@ -23,32 +21,32 @@ class WebRTCTestViewController: UIViewController {
     }
     
     @IBAction func clickAnswer(_ sender: Any) {
+        guard let gateway = self.gateway else { return }
         let number = SPNumber(withNumber: "00436641817908")
-        
-        SPPeerConnectionManager.shared.makeCall(number, with: self.gateway!) { (success, error) in
-            if success {
+        SPManager.shared.makeCall(to: number, on: gateway) { error in
+            if let error = error {
                 DispatchQueue.main.async {
-                    self.lprint("action")
+                    self.lprint("\(error)")
                 }
-            }else{
-                DispatchQueue.main.async {
-                    self.lprint("\(error!)")
-                }
+                return
+            }
+            DispatchQueue.main.async {
+                self.lprint("Call to \(number.prettyPhoneNumber()) initiated...")
             }
         }
     }
     
     @IBAction func clickOffer(_ sender: Any) {
-        SPPeerConnectionManager.shared.hangUpCall(on: self.gateway!) { (success, error) in
-            if success {
+        guard let gateway = self.gateway else { return }
+        SPManager.shared.hangUpCall(via: gateway) { error in
+            if let error = error {
                 DispatchQueue.main.async {
-                    self.logField.text = ""
-                    self.lprint("ready for new call!")
+                    self.lprint("\(error)")
                 }
-            }else{
-                DispatchQueue.main.async {
-                    self.lprint("\(error!)")
-                }
+                return
+            }
+            DispatchQueue.main.async {
+                self.lprint("Ready for new Call!")
             }
         }
     }

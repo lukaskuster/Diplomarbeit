@@ -17,6 +17,7 @@ import UserNotifications
     private var realmManager: RealmManager
     private var apiClient: APIClient
     private var callKitManager: CallKitManager
+    private var peerConnectionManager: PeerConnectionManager
     private var keychainEnvironment: SPKeychainEnvironment {
         get { return (SPDevice.local?.sync ?? true) ? .cloud : .local }
         set { SPDevice.local?.sync = (newValue == .cloud) }
@@ -29,6 +30,7 @@ import UserNotifications
         self.realmManager = RealmManager.shared
         self.apiClient = APIClient.shared
         self.callKitManager = CallKitManager.shared
+        self.peerConnectionManager = PeerConnectionManager.shared
         self.cloudKeychain = KeychainSwift()
         self.cloudKeychain.synchronizable = true
         self.localKeychain = KeychainSwift()
@@ -178,6 +180,36 @@ import UserNotifications
     }
     
     // MARK: - Call handling
+    public func makeCall(to number: SPNumber, on gateway: SPGateway, completion: @escaping (Error?) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .dial(number: number.phoneNumber)) { (success, response, error) in
+            if success {
+                self.peerConnectionManager.makeCall(number, with: gateway, completion: { error in
+                    if let error = error {
+                        completion(error)
+                        return
+                    }
+                    
+                    self.callKitManager.reportOutgoingCall(to: number, on: gateway)
+                    completion(nil)
+                })
+            }else{
+                completion(error)
+            }
+        }
+    }
+    
+    public func hangUpCall(via gateway: SPGateway, notifyCallKit: Bool = true, completion: @escaping (Error?) -> Void) {
+        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
+            if success && notifyCallKit {
+                self.peerConnectionManager.hangUpCall(on: gateway, completion: { error in
+                    self.callKitManager.reportCallEnded(because: .userInitiated, on: gateway)
+                    completion(error)
+                })
+            }
+            completion(error)
+        }
+    }
+    
     @objc public func handleVoIPToken(_ data: Data) {
         let token = data.reduce("", {$0 + String(format: "%02X", $1)})
         self.apiClient.register(voipToken: token) { (success, error) in
@@ -217,13 +249,22 @@ import UserNotifications
         }
     }
     
-    public func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+    public func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (Bool) -> Void) {
         if let localDevice = SPDevice.local {
             self.apiClient.pushEventToGateway(gateway, event: .deviceDidAnswerCall(client: localDevice)) { (success, response, error) in
                 if let error = error {
                     self.sendErrorNotification(for: error)
-                }else{
                     completion(success)
+                    return
+                }
+                
+                self.peerConnectionManager.receivingIncomingCall(from: caller, with: gateway) { error in
+                    if let error = error {
+                        self.sendErrorNotification(for: error)
+                        completion(false)
+                        return
+                    }
+                    completion(true)
                 }
             }
         }
@@ -242,12 +283,13 @@ import UserNotifications
     }
     
     public func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
-        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
+        self.hangUpCall(via: gateway, notifyCallKit: false) { error in
             if let error = error {
                 self.sendErrorNotification(for: error)
-            }else{
-                completion(success)
+                completion(false)
+                return
             }
+            completion(true)
         }
     }
     
@@ -348,18 +390,6 @@ import UserNotifications
                 RealmManager.shared.addMessageToChat(message: message, chat: chat)
                 completion(false, error!)
             }
-        }
-    }
-    
-    public func dial(number: SPNumber, with gateway: SPGateway, completion: @escaping (_ success: Bool, _ response: String?, _ error: Error?) -> Void) {
-        self.apiClient.pushEventToGateway(gateway, event: .dial(number: number.phoneNumber)) { (success, response, error) in
-            completion(success, String(describing: response?.array), error)
-        }
-    }
-    
-    public func hangUpCurrentCall(on gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
-            completion(success, error)
         }
     }
     

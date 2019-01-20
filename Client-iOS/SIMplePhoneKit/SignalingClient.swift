@@ -15,9 +15,7 @@ public enum SignalingClientError: Error {
     case unableToSignIn(reason: String)
 }
 
-public class SignalingClient: NSObject {
-    public static let shared = SignalingClient()
-    
+public class SignalingClient: NSObject {    
     private var username: String?
     private var password: String?
     private let socket: WebSocket
@@ -33,7 +31,7 @@ public class SignalingClient: NSObject {
     }
     
     
-    private override init() {
+    public override init() {
         socket = WebSocket(url: self.serverUrl)
         super.init()
     }

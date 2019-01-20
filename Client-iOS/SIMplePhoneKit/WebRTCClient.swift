@@ -12,18 +12,18 @@ import AVFoundation
 
 public protocol WebRTCClientDelegate {
     func webRTCClient(client: WebRTCClient, didReceiveError error: Error)
+    func webRTCClient(didGenerateNewCandidate candidateSdp: String)
     func webRTCClient(client: WebRTCClient, didReceiveRemoteTrack track: RTCAudioTrack)
 }
 
 public class WebRTCClient: NSObject {
-    public static let shared = WebRTCClient()
     public var delegate: WebRTCClientDelegate?
     private var connectionFactory: RTCPeerConnectionFactory
     private var peerConnection: RTCPeerConnection
     
     private var iceCandidatesAvailable: Bool = false
     
-    private override init() {
+    override init() {
         RTCPeerConnectionFactory.initialize()
         self.connectionFactory = RTCPeerConnectionFactory()
 
@@ -35,24 +35,14 @@ public class WebRTCClient: NSObject {
                                                               "stun:stun4.l.google.com:19302"])]
         let constraint = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: ["DtlsSrtpKeyAgreement": "true"])
         self.peerConnection = self.connectionFactory.peerConnection(with: configuration, constraints: constraint, delegate: nil)
-//        self.peerConnection.stopRtcEventLog()
         super.init()
         self.peerConnection.delegate = self
+        self.setup()
     }
     
-    func setupSdp() {
-        RTCPeerConnectionFactory.initialize()
-        self.connectionFactory = RTCPeerConnectionFactory()
-        
-        let configuration = RTCConfiguration()
-        configuration.iceServers = [RTCIceServer(urlStrings: ["stun:stun.l.google.com:19302",
-                                                              "stun:stun1.l.google.com:19302",
-                                                              "stun:stun2.l.google.com:19302",
-                                                              "stun:stun3.l.google.com:19302",
-                                                              "stun:stun4.l.google.com:19302"])]
-        let constraint = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: ["DtlsSrtpKeyAgreement": "true"])
-        self.peerConnection = self.connectionFactory.peerConnection(with: configuration, constraints: constraint, delegate: nil)
-        self.peerConnection.delegate = self
+    private func setup() {
+        let localStream = self.addMicrophone()
+        self.peerConnection.add(localStream)
     }
     
     func addMicrophone() -> RTCMediaStream {
@@ -126,18 +116,11 @@ public class WebRTCClient: NSObject {
         }
     }
     
-    func startConnection() {
-        self.setupSdp()
-        let localStream = self.addMicrophone()
-        self.peerConnection.add(localStream)
-    }
-    
     func closeConnection() {
         if let stream = self.peerConnection.localStreams.first {
             self.peerConnection.remove(stream)
         }
         self.peerConnection.close()
-        
     }
     
 }
@@ -177,12 +160,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     }
     
     public func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
-        SignalingClient.shared.postCandidate(candidate: candidate.sdp) { (success, error) in
-            print("post candidate \(candidate)")
-            if !success {
-                print("Error: RTCIceCandidate/Signalling \(error)")
-            }
-        }
+        self.delegate?.webRTCClient(didGenerateNewCandidate: candidate.sdp)
         print("peerConnection: didGenerate RTCIceCandidate")
         debugPrint(candidate)
     }
