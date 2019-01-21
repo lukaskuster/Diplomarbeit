@@ -306,6 +306,17 @@ class Sim800(EventEmitter):
 
         return await self.write(at_command.ATCommand('AT+CIMI\r\n', name='IMSI', parser=at_parser.IMEIParser))
 
+    async def transmit_dtmf_tone(self, tone):
+        """
+        Transmits one ore more dtmf tones.
+        Supported characters: 0-9, #,*, A-D
+
+        :param tone: tones
+        :type tone: str
+        :return: event
+        """
+        return await self.write(at_command.ATCommand('AT+VTS="{}"\r\n'.format(tone), name='DTMFTone'))
+
     async def setup(self, pin=None):
         """
         Setup the module to return error codes and set sms commands to text mode.

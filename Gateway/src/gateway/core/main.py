@@ -59,6 +59,7 @@ async def main():
 
     sim.on('ring', partial(on_outgoing_call, api, webrtc))
 
+    api.on('playDTMF', partial(on_play_dtmf, sim))
     api.on('hangUp', partial(on_hang_up, webrtc))  # Eventually not needed
     api.on('dial', partial(on_dial, sim, webrtc))
     api.on('clientDidDeclineCall', partial(on_hang_up, webrtc))
@@ -86,6 +87,18 @@ async def on_outgoing_call(api, webrtc):
 
 # API Callbacks
 
+async def on_play_dtmf(sim, data):
+    if not data:
+        return logger.error('SSE', 'Play DTMF Event - No data!')
+    if 'digits' not in data:
+        return logger.error('SSE', 'Play DTMF Event - No "digits" property in data!')
+
+    event = await sim.transmit_dtmf_tone(data['digits'])
+
+    if event.error:
+        logger.error('Sim800', 'Error at transmit dtmf at-command: {}'.format(event))
+
+
 async def on_hang_up(webrtc, data):
     logger.log('GATEWAY', 'Hang up call!')
     if webrtc.is_ongoing():
@@ -96,7 +109,7 @@ async def on_answer_call(sim, data):
     logger.log('GATEWAY', 'Answer call!')
     event = await sim.answer_call()
     if event.error:
-        logger.info('Sim800', "Could not answer call!")
+        logger.error('Sim800', 'Error at answer at-command: {}'.format(event))
 
 
 async def on_dial(sim, webrtc, data):
@@ -129,7 +142,7 @@ async def on_request_signal(sim, api, data):
     if not event.error:
         api.put_gateway(signal_strength=event.data.rssi)
     else:
-        logger.info('Sim800', "Error at signal quality at-command: {}".format(event))
+        logger.error('Sim800', "Error at signal quality at-command: {}".format(event))
 
 
 async def on_send_sms(sim, data):
@@ -142,7 +155,7 @@ async def on_send_sms(sim, data):
 
     event = await sim.send_sms(data['recipient'], data['message'])
     if event.error:
-        logger.info('Sim800', "Error at send sms at-command: {}".format(event))
+        logger.error('Sim800', "Error at send sms at-command: {}".format(event))
 
 
 # WebRTC Callbacks
@@ -152,7 +165,7 @@ async def on_connection_closed(sim):
     event = await sim.hang_up_call()
 
     if event.error:
-        logger.info('Sim800', "Error at hang up at-command: {}".format(event))
+        logger.error('Sim800', "Error at hang up at-command: {}".format(event))
 
 
 async def on_signaling_timeout():
