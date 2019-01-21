@@ -75,7 +75,7 @@ public class WebRTCClient: NSObject {
                         completion(false, nil, error)
                     }else{
                         if let localDescription = self.peerConnection.localDescription {
-                            completion(true, localDescription.sdp, nil)
+                            completion(true, localDescription.PCMAonly.sdp, nil)
                         }else{
                             completion(false, nil, error!)
                         }
@@ -98,7 +98,7 @@ public class WebRTCClient: NSObject {
                     if let error = error {
                         completion(false, nil, error)
                     }else{
-                        completion(true, sdp!.sdp, nil)
+                        completion(true, sdp!.PCMAonly.sdp, nil)
                     }
                 })
             }

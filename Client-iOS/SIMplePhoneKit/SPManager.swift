@@ -200,12 +200,12 @@ import UserNotifications
     
     public func hangUpCall(via gateway: SPGateway, notifyCallKit: Bool = true, completion: @escaping (Error?) -> Void) {
         self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
-            if success && notifyCallKit {
-                self.peerConnectionManager.hangUpCall(on: gateway, completion: { error in
+            self.peerConnectionManager.hangUpCall(on: gateway, completion: { error in
+                if notifyCallKit {
                     self.callKitManager.reportCallEnded(because: .userInitiated, on: gateway)
-                    completion(error)
-                })
-            }
+                }
+                completion(error)
+            })
             completion(error)
         }
     }
