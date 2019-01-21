@@ -75,7 +75,7 @@ class CallStreamTrack(AudioStreamTrack):
 
             self.frame.planes[0].update(bytearray([self.count for i in range(FRAME_SAMPLES)]))
 
-            self.count += 1
+            # self.count += 1
         else:
             # Get the amount of samples a frame can hold from the pcm interface
             frame_data = self.pcm.read_frame()

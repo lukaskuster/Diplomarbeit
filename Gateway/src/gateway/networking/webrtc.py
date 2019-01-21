@@ -31,7 +31,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='localhost', signaling_timeout=10, debug=False):
+    def __init__(self, username, password, host='localhost', signaling_timeout=10, webrtc_timeout=5, debug=False):
         """
         Construct a new 'SerialLoop' object.
 
@@ -54,6 +54,7 @@ class WebRTC(EventEmitter):
         self._role = None
         self._recv_ice_candidates = True
         self.signaling_timeout = signaling_timeout
+        self.webrtc_timeout = webrtc_timeout
 
         # Don't include the pcm module in debug mode
         if not debug:
@@ -103,7 +104,7 @@ class WebRTC(EventEmitter):
         """
 
         capabilities = RTCRtpSender.getCapabilities('audio')
-        preferences = list(filter(lambda x: x.name == 'PCMU', capabilities.codecs))
+        preferences = list(filter(lambda x: x.name == 'PCMA', capabilities.codecs))
         transceiver = self._peer_connection.getTransceivers()[0]
         transceiver.setCodecPreferences(preferences)
 
@@ -144,7 +145,7 @@ class WebRTC(EventEmitter):
         @self._peer_connection.on('iceconnectionstatechange')
         def ice_connection_state_change():
             if self._peer_connection.iceConnectionState == 'completed':
-                self.emit('connect')
+                self.emit('connected')
 
             logger.debug('Connection State', 'Ice connection state changed to ' + AnsiEscapeSequence.UNDERLINE +
                          self._peer_connection.iceConnectionState + AnsiEscapeSequence.DEFAULT)
@@ -284,11 +285,11 @@ class WebRTC(EventEmitter):
             # Receive and send the audio frames until the connection closes
             try:
                 while True:
-                    done, pending = await asyncio.wait([remote_track.recv()])
 
-                    # Received frame
-                    # This is actually a JitterFrame, because decoding is removed in custom aiortc build
-                    frame = list(done)[0].result()
+                    try:
+                        frame = await asyncio.wait_for(remote_track.recv(), timeout=self.webrtc_timeout)
+                    except asyncio.TimeoutError:
+                        raise MediaStreamError('local')
 
                     logger.log('Mediatrack', 'Receiving frame (samples: {}, timestamp (pts): {})'
                                .format(len(frame.data), frame.timestamp))
@@ -299,6 +300,7 @@ class WebRTC(EventEmitter):
 
                     if not self._call.is_set():
                         raise MediaStreamError('local')
+
             except MediaStreamError as err:
                 if not self.debug:
                     self.pcm.disable()
@@ -308,5 +310,7 @@ class WebRTC(EventEmitter):
                 else:
                     logger.info('Connection', 'Peer connection closed from remote client!')
                     self._call.clear()
+                resv_ice_task.cancel()
+                print("Cancelled: {}".format(resv_ice_task.cancelled()))
                 await self._peer_connection.close()
                 self.emit('connectionClosed')
