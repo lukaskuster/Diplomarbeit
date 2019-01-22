@@ -317,6 +317,14 @@ class Sim800(EventEmitter):
         """
         return await self.write(at_command.ATCommand('AT+VTS="{}"\r\n'.format(tone), name='DTMFTone'))
 
+    # TODO: Fill in the right parameter for n in hold_call and resume_call
+
+    async def hold_call(self):
+        return await self.write(at_command.ATCommand('AT+CHLD=n\r\n', name='CallHold'))
+
+    async def resume_call(self):
+        return await self.write(at_command.ATCommand('AT+CHLD=n\r\n', name='CallResume'))
+
     async def setup(self, pin=None):
         """
         Setup the module to return error codes and set sms commands to text mode.

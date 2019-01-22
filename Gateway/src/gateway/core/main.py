@@ -59,6 +59,8 @@ async def main():
 
     sim.on('ring', partial(on_outgoing_call, api, webrtc))
 
+    api.on('holdCall', partial(on_hold_call, sim))
+    api.on('resumeCall', partial(on_resume_call, sim))
     api.on('playDTMF', partial(on_play_dtmf, sim))
     api.on('hangUp', partial(on_hang_up, webrtc))  # Eventually not needed
     api.on('dial', partial(on_dial, sim, webrtc))
@@ -86,6 +88,20 @@ async def on_outgoing_call(api, webrtc):
 
 
 # API Callbacks
+
+async def on_resume_call(sim, data):
+    event = await sim.resume_call()
+
+    if event.error:
+        logger.error('Sim800', 'Error at resume call at-command: {}'.format(event))
+
+
+async def on_hold_call(sim, data):
+    event = await sim.hold_call()
+
+    if event.error:
+        logger.error('Sim800', 'Error at hold call at-command: {}'.format(event))
+
 
 async def on_play_dtmf(sim, data):
     if not data:
