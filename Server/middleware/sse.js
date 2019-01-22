@@ -10,6 +10,10 @@ module.exports = function (req, res, next) {
         });
 
         res.locals.sse.timeout = setInterval(() => res.write("\n\n"), 5000);
+        res.locals.sse.timeout = setInterval(() => {
+            res.write(JSON.stringify({'event': 'reconnect', 'data': ''}));
+            res.emit('close');
+        }, 20000);
     };
 
     res.locals.sse.dispose = function () {
@@ -18,7 +22,7 @@ module.exports = function (req, res, next) {
 
     res.locals.sse.emit = function (event, data) {
         let notification = {event: event, data: data};
-        res.write(JSON.stringify(notification) + "\n\n");
+        res.write(JSON.stringify(notification) + "\r\n");
     };
 
     next()
