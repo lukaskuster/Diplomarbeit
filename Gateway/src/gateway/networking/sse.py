@@ -113,15 +113,15 @@ class SSE(Thread):
 
                 if response.status_code != 200 and notification:
                     self.emitter.emit('connectionFailed', notification)
-                    logger.error('SSE', 'An error occurred: ' + notification['errorMessage'])
+                    logger.error('SSE', 'ConnectionError({})'.format(notification['errorMessage']))
                     time.sleep(self.timeout)
 
             except ConnectionError:  # Failed to connect
                 self.emitter.emit('connectionRefused')
-                logger.error('SSE', 'Can not connect to host!')
+                logger.error('SSE', 'ConnectionError')
                 time.sleep(self.timeout)
             except ChunkedEncodingError:  # Connection was aborted
                 self.emitter.emit('connectionAborted')
-                logger.error('SSE', 'Connection was aborted!')
+                logger.error('SSE', 'EncodingError')
                 self.connection_state = 'connecting'
                 time.sleep(self.timeout)

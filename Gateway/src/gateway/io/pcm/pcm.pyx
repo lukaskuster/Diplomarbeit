@@ -31,13 +31,13 @@ cdef class PCM:
         ret = cpcmlib.enable_pcm()
 
         if ret < 0:
-            logger.error('PCM', 'Failed to start call! Error code: {}'.format(ret))
+            logger.error('PCM', 'EnablePCMError({})'.format(ret))
 
     def disable(self):
         ret = cpcmlib.disable_pcm()
 
         if ret < 0:
-            logger.error('PCM', 'Failed to stop call! Error code: {}'.format(ret))
+            logger.error('PCM', 'DisablePCMError({})'.format(ret))
 
         cpcmlib.disable_clk()
 

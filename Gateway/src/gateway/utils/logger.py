@@ -40,6 +40,20 @@ class Logger:
     # The applied log level
     level = Level.LOG
 
+    def __init__(self):
+        self._error_handler = None
+
+    def set_error_handler(self, func):
+        """
+        Sets the error handler for log_error.
+        The handler needs the error code and message as arguments.
+
+        :param func: error handler
+        :return:
+        """
+
+        self._error_handler = func
+
     def log(self, namespace, message):
         """
         Prints the message if the log level is set to 'LOG'.
@@ -93,3 +107,15 @@ class Logger:
         """
         message = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
         print('{} {}'.format(_time_str(), message))
+
+        if self._error_handler:
+            if namespace.upper() == 'SIM800':
+                self._error_handler(20000, message)
+            if namespace.upper() == 'API':
+                self._error_handler(20001, message)
+            if namespace.upper() == 'GATEWAY':
+                self._error_handler(20002, message)
+            if namespace.upper() == 'SIGNALING':
+                self._error_handler(20003, message)
+            if namespace.upper() == 'WEBRTC':
+                self._error_handler(20004, message)

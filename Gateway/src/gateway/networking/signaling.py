@@ -42,7 +42,7 @@ async def authenticate(socket, role, username, password):
     # Check parameter types
     if not isinstance(socket, WebSocketClientProtocol):
         error = TypeError('Socket must be of type WebSocketClientProtocol!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     # Authenticate request
@@ -64,19 +64,19 @@ async def authenticate(socket, role, username, password):
     # Check if the right response arrived
     if 'event' not in response or 'authenticated' not in response:
         error = KeyError('Event or authenticated is missing in response: ' + str(response))
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'ArgumentError')
         raise error
     if response['event'] != 'authenticate':
         error = ValueError('Event should be authenticate! Event: ' + response['event'])
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'EventError(authenticate)')
         raise error
 
     if not response['authenticated']:
         if 'error' in response:
             error = AuthenticationError('Authentication was not successful: ' + response['error'])
         else:
-            error = AuthenticationError('Authentication was not successful: ' + response['error'])
-        logger.error('Signaling', error.args[0])
+            error = AuthenticationError('Authentication was not successful: ')
+        logger.error('Signaling', 'AuthenticationError')
         raise error
 
 
@@ -99,11 +99,11 @@ async def resv_ice_candidate(socket):
     # Check if the right response arrived
     if 'event' not in response or 'ice' not in response:
         error = KeyError('Event or ice is missing in response: ' + str(response))
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'ArgumentError')
         return error, None, socket
     if response['event'] != 'sendIce':
         error = ValueError('Event should be sendIce! Event: ' + response['event'])
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'EventError(sendIce)')
         return error, None, socket
 
     logger.debug('Signaling', 'Received ice candidate:\n' + AnsiEscapeSequence.HEADER
@@ -133,11 +133,11 @@ async def recv_answer(socket):
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
         error = KeyError('Event or sdp is missing in response: ' + str(response))
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'ArgumentError')
         raise error
     if response['event'] != 'answer':
         error = ValueError('Event should be answer! Event: ' + response['event'])
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'EventError(answer)')
         raise error
 
     logger.debug('Signaling', 'Received answer with sdp:\n' + AnsiEscapeSequence.HEADER
@@ -159,7 +159,7 @@ async def recv_offer(socket):
     # Check parameter type
     if not isinstance(socket, WebSocketClientProtocol):
         error = TypeError('Socket must be of type WebSocketClientProtocol!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     # Get the offer event from the server
@@ -173,11 +173,11 @@ async def recv_offer(socket):
     # Check if the right response arrived
     if 'event' not in response or 'sdp' not in response:
         error = KeyError('Event or sdp is missing in response: ' + str(response))
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'ArgumentError')
         raise error
     if response['event'] != 'offer':
         error = ValueError('Event should be offer! Event: ' + response['event'])
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'EventError(offer)')
         raise error
 
     logger.debug('Signaling', 'Received offer with sdp:\n' + AnsiEscapeSequence.HEADER
@@ -201,12 +201,12 @@ async def send_answer(socket, desc):
     # Check parameter types
     if not isinstance(desc, RTCSessionDescription):
         error = TypeError('Description must be of type RTCSessionDescription!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     if not isinstance(socket, WebSocketClientProtocol):
         error = TypeError('Socket must be of type WebSocketClientProtocol!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     # Answer event request
@@ -237,12 +237,12 @@ async def send_offer(socket, desc):
     # Check parameter types
     if not isinstance(desc, RTCSessionDescription):
         error = TypeError('Description must be of type RTCSessionDescription!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     if not isinstance(socket, WebSocketClientProtocol):
         error = TypeError('Socket must be of type WebSocketClientProtocol!')
-        logger.error('Signaling', error.args[0])
+        logger.info('Signaling', error.args[0])
         raise error
 
     # Wait for the start event, that indicates the peer client connected to the server
@@ -256,12 +256,12 @@ async def send_offer(socket, desc):
     # Check if the right response arrived
     if 'event' not in response:
         error = KeyError('Event is missing in response: ' + str(response))
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'ArgumentError')
         raise error
 
     if response['event'] != 'start':
         error = ValueError('Event should be start! Event: ' + response['event'])
-        logger.error('Signaling', error.args[0])
+        logger.error('Signaling', 'EventError(start)')
         raise error
 
     # Offer event request

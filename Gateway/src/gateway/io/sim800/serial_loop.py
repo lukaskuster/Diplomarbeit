@@ -85,8 +85,7 @@ class SerialLoop(Thread):
                     # The sim800 module sends usually the same command back first
                     if response != command.command:
                         # Print an error and continue with the next command if not the same is send back
-                        logger.error('Sim800', 'Wrong event returned on serial port! Got: {}, at_command.py: {}'
-                                     .format(response, command.command))
+                        logger.error('Sim800', 'SerialError(WrongEcho: {})'.format(response))
                         continue
 
                 # Listen on the serial interface until an error or success
@@ -113,8 +112,7 @@ class SerialLoop(Thread):
                             # the event line by line until OK or ERROR is send
                             event.content.append(response)
                     except UnicodeDecodeError:
-                        logger.error('Sim800',
-                                     'Could not decode the message from the serial interface! Message: {}'.format(res))
+                        logger.error('Sim800', 'SerialError')
 
                 if not event.error:
                     # Parse the event content
@@ -140,8 +138,7 @@ class SerialLoop(Thread):
                         self.emitter.emit('ring', number)
                         logger.info('Sim800', 'Ring event!')
                 except UnicodeDecodeError:
-                    logger.error('Sim800',
-                                 'Could not decode the message from the serial interface! Message: {}'.format(res))
+                    logger.error('Sim800', 'SerialError')
 
     def _read(self):
         """
@@ -173,7 +170,7 @@ class SerialLoop(Thread):
         # When the data is not a string or bytes raise an value error
         if type(data) != bytes and type(data) != str:
             error = ValueError('Data must be type string or bytes')
-            logger.error('Sim800', error.args[0])
+            logger.info('Sim800', error.args[0])
             raise error
 
         # If the data is a string encode it to bytes

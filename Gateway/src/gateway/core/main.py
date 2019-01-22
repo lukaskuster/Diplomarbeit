@@ -33,7 +33,7 @@ async def check_imei(sim):
         event = await sim.request_imei()
 
         if event.error:
-            logger.info('Sim800', "Error at request imei at-command: {}".format(event))
+            logger.error('Sim800', 'RequestIMEIError({})'.format(event.error))
 
         auth_config['imei'] = event.data.imei
 
@@ -48,13 +48,16 @@ async def main():
         try:
             await sim.setup(config['Test']['pin'])
         except Sim800Error as e:
-            logger.error('Sim800', 'Name: {}, Message: {}'.format(*e.args))
-            logger.error('Gateway', 'Closing Program because Sim800 could not be initialized!')
+            logger.error('Sim800', 'SimSetupError(Name: {}, Message: {})'.format(*e.args))
+            logger.info('Gateway', 'Closing Program because Sim800 could not be initialized!')
             sys.exit(-1)
 
     await check_imei(sim)
 
     api = API(auth_config['user'], auth_config['password'], auth_config['imei'], host=API_HOST)
+
+    logger.set_error_handler(api.push_error)
+
     webrtc = WebRTC(auth_config['user'], auth_config['password'], host=SIGNALING_HOST, debug=PCM_DEBUG)
 
     sim.on('ring', partial(on_outgoing_call, api, webrtc))
@@ -93,26 +96,26 @@ async def on_resume_call(sim, data):
     event = await sim.resume_call()
 
     if event.error:
-        logger.error('Sim800', 'Error at resume call at-command: {}'.format(event))
+        logger.error('Sim800', 'ResumeCallError({})'.format(event.error))
 
 
 async def on_hold_call(sim, data):
     event = await sim.hold_call()
 
     if event.error:
-        logger.error('Sim800', 'Error at hold call at-command: {}'.format(event))
+        logger.error('Sim800', 'HoldCallError({})'.format(event.error))
 
 
 async def on_play_dtmf(sim, data):
     if not data:
-        return logger.error('SSE', 'Play DTMF Event - No data!')
+        return logger.error('SSE', 'ArgumentError(data)')
     if 'digits' not in data:
-        return logger.error('SSE', 'Play DTMF Event - No "digits" property in data!')
+        return logger.error('SSE', 'ArgumentError(digits)')
 
     event = await sim.transmit_dtmf_tone(data['digits'])
 
     if event.error:
-        logger.error('Sim800', 'Error at transmit dtmf at-command: {}'.format(event))
+        logger.error('Sim800', 'PlayDTMFError({})'.format(event.error))
 
 
 async def on_hang_up(webrtc, data):
@@ -125,16 +128,16 @@ async def on_answer_call(sim, data):
     logger.log('GATEWAY', 'Answer call!')
     event = await sim.answer_call()
     if event.error:
-        logger.error('Sim800', 'Error at answer at-command: {}'.format(event))
+        logger.error('Sim800', 'AnswerCallError({})'.format(event.error))
 
 
 async def on_dial(sim, webrtc, data):
     logger.log('GATEWAY', 'Initialize Call!')
 
     if not data:
-        return logger.error('SSE', 'Dial Event - No data!')
+        return logger.error('SSE', 'ArgumentError(data)')
     if 'number' not in data:
-        return logger.error('SSE', 'Dial Event - No "number" property in data!')
+        return logger.error('SSE', 'ArgumentError(number)')
 
     async def on_connection():
         logger.log('Sim800', 'Dial Number!')
@@ -142,7 +145,7 @@ async def on_dial(sim, webrtc, data):
         event = await sim.dial_number(data['number'])
 
         if event.error:
-            logger.error('Sim800', "Error at dial at-command: {}".format(event))
+            logger.error('Sim800', 'DialError({})'.format(event.error))
             webrtc.stop_call()
 
     if webrtc.is_ongoing():
@@ -158,20 +161,20 @@ async def on_request_signal(sim, api, data):
     if not event.error:
         api.put_gateway(signal_strength=event.data.rssi)
     else:
-        logger.error('Sim800', "Error at signal quality at-command: {}".format(event))
+        logger.error('Sim800', 'RequestSignalQualityError({})'.format(event.error))
 
 
 async def on_send_sms(sim, data):
     if not data:
-        return logger.error('SSE', 'Send SMS Event - No data!')
+        return logger.error('SSE', 'ArgumentError(data)')
     if 'recipient' not in data:
-        return logger.error('SSE', 'SEND SMS EVENT - No "recipient" property in data!')
+        return logger.error('SSE', 'ArgumentError(recipient)')
     if 'message' not in data:
-        return logger.error('SSE', 'SEND SMS EVENT - No "message" property in data!')
+        return logger.error('SSE', 'ArgumentError(message)')
 
     event = await sim.send_sms(data['recipient'], data['message'])
     if event.error:
-        logger.error('Sim800', "Error at send sms at-command: {}".format(event))
+        logger.error('Sim800', 'SendSMSError({})'.format(event.error))
 
 
 # WebRTC Callbacks
@@ -181,7 +184,7 @@ async def on_connection_closed(sim):
     event = await sim.hang_up_call()
 
     if event.error:
-        logger.error('Sim800', "Error at hang up at-command: {}".format(event))
+        logger.error('Sim800', 'HangUpError({})'.format(event.error))
 
 
 async def on_signaling_timeout():

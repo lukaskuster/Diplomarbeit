@@ -119,18 +119,23 @@ class API(EventEmitter):
         return self._request('/device/broadcast', requests.post, body)
 
     def push_incoming_call(self, number):
-        data, status = self.broadcast_notification('incomingCall',
-                                    data={
-                                        'number': number,
-                                        'gateway': self.id
-                                    },
-                                    silent=True,
-                                    voip=True)
+        data, status = self.broadcast_notification('incomingCall', data={
+            'number': number,
+            'gateway': self.id
+        }, silent=True, voip=True)
+
         if status != 200:
-            logger.error('API', 'Error while broadcasting incoming call: {}'.format(data))
+            logger.error('API', 'BroadcastError')
 
     def push_error(self, code, message):
-        pass
+        data, status = self.broadcast_notification('gatewayError', data={
+            'code': code,
+            'message': message,
+            'gateway': self.id
+        }, silent=True, voip=True)
+
+        if status != 200:
+            logger.info('API', 'PushErrorError')
 
     def _request(self, path, method, body=None):
         """
@@ -149,7 +154,7 @@ class API(EventEmitter):
 
         if type(body) is not dict and body is not None:
             error = ValueError('Body has to be of type dict!')
-            logger.error('API', error.args[0])
+            logger.info('API', error.args[0])
             raise error
 
         if body is None:

@@ -268,7 +268,7 @@ class WebRTC(EventEmitter):
             try:
                 await asyncio.wait_for(self._exchange_sdp(socket), timeout=self.signaling_timeout)
             except asyncio.TimeoutError:
-                logger.error('Signaling', 'Signaling process timed out after {} seconds!'
+                logger.error('Signaling', 'TimeoutError'
                              .format(self.signaling_timeout))
                 self.emit("timeoutError")
                 self._call.clear()
@@ -311,6 +311,5 @@ class WebRTC(EventEmitter):
                     logger.info('Connection', 'Peer connection closed from remote client!')
                     self._call.clear()
                 resv_ice_task.cancel()
-                print("Cancelled: {}".format(resv_ice_task.cancelled()))
                 await self._peer_connection.close()
                 self.emit('connectionClosed')
