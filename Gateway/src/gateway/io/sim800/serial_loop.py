@@ -116,10 +116,11 @@ class SerialLoop(Thread):
                         logger.error('Sim800',
                                      'Could not decode the message from the serial interface! Message: {}'.format(res))
 
-                # Parse the event content
-                event.data = command.parser.parse(event.content)
-                # Emit an event to the last called command function and set the event for tasks that are waiting for it
+                if not event.error:
+                    # Parse the event content
+                    event.data = command.parser.parse(event.content)
 
+                # Set the event for tasks that are waiting for it
                 event.set()
 
             # If no events are in the queue, just listen on the serial port
