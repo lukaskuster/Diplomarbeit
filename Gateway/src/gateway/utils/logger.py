@@ -119,3 +119,5 @@ class Logger:
                 self._error_handler(20003, message)
             if namespace.upper() == 'WEBRTC':
                 self._error_handler(20004, message)
+            if namespace.upper() == 'SSE':
+                self._error_handler(20005, message)
