@@ -1,6 +1,7 @@
 import asyncio
 
 import requests
+import time
 from pyee import EventEmitter
 
 import gateway.networking.sse
@@ -12,7 +13,7 @@ class API(EventEmitter):
     Wrapper to send requests to the REST-API.
     """
 
-    def __init__(self, username, password, _id, host='localhost', loop=asyncio.get_event_loop()):
+    def __init__(self, username, password, _id, host='localhost', loop=asyncio.get_event_loop(), timeout=5):
         """
         Construct a new 'API' object.
 
@@ -27,10 +28,19 @@ class API(EventEmitter):
         self.auth = (username, password)
         self.host = host
         self.id = _id
+        self.timeout = timeout
         # Create an new sse connection, that emits the incoming push notifications on the API object
         self.sse = gateway.networking.sse.SSE(self)
         # Create the device if it is not created yet
-        self.post_gateway()
+
+        connected = False
+        while not connected:
+            try:
+                self.post_gateway()
+                connected = True
+            except ConnectionError:
+                logger.info('API', 'ConnectionError')
+                time.sleep(self.timeout)
 
         logger.info('Gateway', 'IMEI({})'.format(self.id))
 
@@ -157,10 +167,13 @@ class API(EventEmitter):
             logger.info('API', error.args[0])
             raise error
 
-        if body is None:
-            response = method(self.host + path, auth=self.auth)
-        else:
-            response = method(self.host + path, auth=self.auth, json=body)
+        try:
+            if body is None:
+                response = method(self.host + path, auth=self.auth)
+            else:
+                response = method(self.host + path, auth=self.auth, json=body)
+        except requests.exceptions.ConnectionError:
+            raise ConnectionError
 
         data = response.json()
         status_code = AnsiEscapeSequence.BOLD + str(response.status_code) + AnsiEscapeSequence.DEFAULT
