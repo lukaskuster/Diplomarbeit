@@ -3,7 +3,7 @@ from enum import IntEnum
 from threading import Event
 
 import websockets
-from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration, RTCRtpSender
+from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration, RTCRtpSender, RTCRtpReceiver
 from aiortc.mediastreams import MediaStreamError
 from pyee import EventEmitter
 
@@ -31,7 +31,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='localhost', signaling_timeout=10, webrtc_timeout=5, debug=False):
+    def __init__(self, username, password, host='localhost', signaling_timeout=10, webrtc_timeout=10, debug=False):
         """
         Construct a new 'SerialLoop' object.
 
@@ -39,6 +39,9 @@ class WebRTC(EventEmitter):
         :param password: password of the gateway
         :param host: signaling server
         """
+
+        RTCRtpSender.disableEncoding = True
+        RTCRtpReceiver.disableDecoding = True
 
         super().__init__()
 
