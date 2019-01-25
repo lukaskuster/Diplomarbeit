@@ -1,5 +1,5 @@
-aioice==0.6.10
-aiortc==0.9.15
+aioice==0.6.12
+aiortc-custom=0.9.18
 asn1crypto==0.24.0
 asyncio==3.4.3
 attrs==18.2.0
@@ -9,7 +9,6 @@ cffi==1.11.5
 chardet==3.0.4
 crcmod==1.7
 cryptography==2.4.2
-Cython==0.29.1
 idna==2.8
 netifaces==0.10.7
 pigpio==1.42

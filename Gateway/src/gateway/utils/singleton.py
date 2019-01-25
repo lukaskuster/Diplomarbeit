@@ -1,6 +1,3 @@
-# cython: language_level=3
-
-
 class Singleton:
     """
     Singleton class decorator.

@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import asyncio
 
 from pyee import EventEmitter
@@ -224,7 +222,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(at_command.ATCommand('AT+GSN', name='IMEI', parser=at_parser.IMEIParser))
+        return await self.write(at_command.ATCommand('AT+GSN\r\n', name='IMEI', parser=at_parser.IMEIParser))
 
     async def request_network_status(self):
         """
@@ -235,7 +233,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(at_command.ATCommand('AT+CREG?', name='NetworkStatus', parser=at_parser.NetworkStatusParser))
+        return await self.write(at_command.ATCommand('AT+CREG?\r\n', name='NetworkStatus', parser=at_parser.NetworkStatusParser))
 
     async def set_echo_mode(self, mode):
         """
@@ -249,7 +247,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        event = await self.write(at_command.ATCommand('ATE{}'.format(mode), name='EchoMode'))
+        event = await self.write(at_command.ATCommand('ATE{}\r\n'.format(mode), name='EchoMode'))
 
         if not event.error:
             self.serial_loop.echo = bool(mode)
@@ -268,7 +266,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        event = await self.write(at_command.ATCommand('AT+CLIP={}'.format(mode), name='CallerIdentificationMode'))
+        event = await self.write(at_command.ATCommand('AT+CLIP={}\r\n'.format(mode), name='CallerIdentificationMode'))
 
         if not event.error:
             self.serial_loop.caller_identification = bool(mode)
@@ -288,7 +286,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(at_command.ATCommand('AT+CMEE={}'.format(mode), name='ErrorMode'))
+        return await self.write(at_command.ATCommand('AT+CMEE={}\r\n'.format(mode), name='ErrorMode'))
 
     async def request_subscriber_number(self):
         """
@@ -297,7 +295,7 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(at_command.ATCommand('AT+CNUM', name='SubscriberNumber'))
+        return await self.write(at_command.ATCommand('AT+CNUM\r\n', name='SubscriberNumber'))
 
     async def request_imsi(self):
         """
@@ -306,7 +304,26 @@ class Sim800(EventEmitter):
         :return: event
         """
 
-        return await self.write(at_command.ATCommand('AT+CIMI', name='IMSI', parser=at_parser.IMEIParser))
+        return await self.write(at_command.ATCommand('AT+CIMI\r\n', name='IMSI', parser=at_parser.IMEIParser))
+
+    async def transmit_dtmf_tone(self, tone):
+        """
+        Transmits one ore more dtmf tones.
+        Supported characters: 0-9, #,*, A-D
+
+        :param tone: tones
+        :type tone: str
+        :return: event
+        """
+        return await self.write(at_command.ATCommand('AT+VTS="{}"\r\n'.format(tone), name='DTMFTone'))
+
+    # TODO: Fill in the right parameter for n in hold_call and resume_call
+
+    async def hold_call(self):
+        return await self.write(at_command.ATCommand('AT+CHLD=n\r\n', name='CallHold'))
+
+    async def resume_call(self):
+        return await self.write(at_command.ATCommand('AT+CHLD=n\r\n', name='CallResume'))
 
     async def setup(self, pin=None):
         """

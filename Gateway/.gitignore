@@ -2,4 +2,3 @@ build/
 dist/
 test_files/
 helper/data/
-src/gateway/**/*.c

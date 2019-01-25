@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import json
 import time
 from threading import Thread, Event
@@ -52,7 +50,7 @@ class SSE(Thread):
             self.emitter.emit('connectionStateChange', value)
 
             state = AnsiEscapeSequence.UNDERLINE + self._connection_state + AnsiEscapeSequence.DEFAULT
-            logger.info('SSE', 'Connection state changed to ' + state)
+            logger.debug('SSE', 'Connection state changed to ' + state)
 
     def close(self):
         """
@@ -80,7 +78,7 @@ class SSE(Thread):
 
                 response = requests.get(self.emitter.host + '/gateway/stream', stream=True,
                                         json={'imei': self.emitter.id},
-                                        auth=self.emitter.auth)
+                                        auth=self.emitter.auth, timeout=10)
 
                 self.connection_state = 'connected'
                 self.emitter.emit('connect')
@@ -100,23 +98,33 @@ class SSE(Thread):
                     if line:
                         try:
                             notification = json.loads(line)
+                            logger.debug('SSE', 'Received {}{}{} event with data: {}{}{}'.format(
+                                AnsiEscapeSequence.UNDERLINE,
+                                notification['event'],
+                                AnsiEscapeSequence.DEFAULT,
+                                AnsiEscapeSequence.HEADER,
+                                notification['data'],
+                                AnsiEscapeSequence.DEFAULT))
+                            if notification['event'] == 'reconnect':
+                                logger.info('SSE', 'Reconnecting')
+                                break
                             self.emitter.emit(notification['event'], notification['data'])
                         except ValueError:  # Json failed to load
                             pass  # For now ignore when a wrong message arrived
-                        except KeyError:  # An error occurred if event and data is not available
-                            break
+                        except KeyError:  # An error occurs if event or data is not available
+                            pass
 
                 if response.status_code != 200 and notification:
                     self.emitter.emit('connectionFailed', notification)
-                    logger.error('SSE', 'An error occurred: ' + notification['errorMessage'])
+                    logger.error('SSE', 'ConnectionError({})'.format(notification['errorMessage']))
                     time.sleep(self.timeout)
 
             except ConnectionError:  # Failed to connect
                 self.emitter.emit('connectionRefused')
-                logger.error('SSE', 'Can not connect to host!')
+                logger.info('SSE', 'ConnectionError')
                 time.sleep(self.timeout)
             except ChunkedEncodingError:  # Connection was aborted
                 self.emitter.emit('connectionAborted')
-                logger.error('SSE', 'Connection was aborted!')
+                logger.info('SSE', 'EncodingError')
                 self.connection_state = 'connecting'
                 time.sleep(self.timeout)

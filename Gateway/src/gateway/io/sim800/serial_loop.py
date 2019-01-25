@@ -1,5 +1,3 @@
-# cython: language_level=3
-
 import threading
 from queue import Queue
 from threading import Thread
@@ -39,7 +37,7 @@ class SerialLoop(Thread):
 
         if not debug:
             # Initialize a new serial connection
-            self.serial = Serial(serial_port, baudrate=115200, timeout=1)
+            self.serial = Serial(serial_port, baudrate=9600, timeout=1)
 
         # Set the event emitter
 
@@ -87,8 +85,7 @@ class SerialLoop(Thread):
                     # The sim800 module sends usually the same command back first
                     if response != command.command:
                         # Print an error and continue with the next command if not the same is send back
-                        logger.error('Sim800', 'Wrong event returned on serial port! Got: {}, at_command.py: {}'
-                                     .format(response, command.command))
+                        logger.error('Sim800', 'SerialError(WrongEcho: {})'.format(response))
                         continue
 
                 # Listen on the serial interface until an error or success
@@ -115,13 +112,13 @@ class SerialLoop(Thread):
                             # the event line by line until OK or ERROR is send
                             event.content.append(response)
                     except UnicodeDecodeError:
-                        logger.error('Sim800',
-                                     'Could not decode the message from the serial interface! Message: {}'.format(res))
+                        logger.error('Sim800', 'SerialError')
 
-                # Parse the event content
-                event.data = command.parser.parse(event.content)
-                # Emit an event to the last called command function and set the event for tasks that are waiting for it
+                if not event.error:
+                    # Parse the event content
+                    event.data = command.parser.parse(event.content)
 
+                # Set the event for tasks that are waiting for it
                 event.set()
 
             # If no events are in the queue, just listen on the serial port
@@ -141,8 +138,7 @@ class SerialLoop(Thread):
                         self.emitter.emit('ring', number)
                         logger.info('Sim800', 'Ring event!')
                 except UnicodeDecodeError:
-                    logger.error('Sim800',
-                                 'Could not decode the message from the serial interface! Message: {}'.format(res))
+                    logger.error('Sim800', 'SerialError')
 
     def _read(self):
         """
@@ -158,8 +154,8 @@ class SerialLoop(Thread):
         else:
             # Read the data from the serial interface
             data = self.serial.readline()
-
-            logger.debug('Sim800', 'Received data from serial interface: ' + str(data))
+            if data:
+                logger.debug('Sim800', 'Received data from serial interface: ' + str(data))
             return data
 
     def _write(self, data):
@@ -174,7 +170,7 @@ class SerialLoop(Thread):
         # When the data is not a string or bytes raise an value error
         if type(data) != bytes and type(data) != str:
             error = ValueError('Data must be type string or bytes')
-            logger.error('Sim800', error.args[0])
+            logger.info('Sim800', error.args[0])
             raise error
 
         # If the data is a string encode it to bytes

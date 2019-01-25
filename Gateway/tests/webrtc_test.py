@@ -1,38 +1,42 @@
 from gateway.networking import WebRTC, Role
 from gateway.utils import logger, Level
-from gateway.core import set_config
+from gateway.core import set_config, get_config
 import asyncio
 import sys
 
 logger.level = Level.DEBUG
 
-USERNAME = 'quentin@wendegass.com'
-PASSWORD = 'test123'
-HOST = 'wss://signaling.da.digitalsubmarine.com:443'
+CALL_TIMER = 60
+
+set_config('config.ini')
+config = get_config()
+USERNAME = config['Auth']['user']
+PASSWORD = config['Auth']['password']
+HOST = config['Server']['signalinghost']
 
 
-def test_answer():
-    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True)
-    con.start_call(Role.ANSWER)
+async def test(role):
+    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True, signaling_timeout=100)
+    con.on('connectionClosed', asyncio.get_event_loop().stop)
+    con.on('timeoutError', asyncio.get_event_loop().stop)
 
-
-def test_offer():
-    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True)
-    con.start_call(Role.OFFER)
+    con.start_call(role)
+    if CALL_TIMER > 0:
+        await asyncio.sleep(CALL_TIMER)
+        con.stop_call()
 
 
 if __name__ == '__main__':
-
-    set_config('config.ini')
-
     if len(sys.argv) >= 2:
         if sys.argv[1] == 'offer':
-            test_offer()
+            asyncio.ensure_future(test(Role.OFFER))
+
         elif sys.argv[1] == 'answer':
-            test_answer()
+            asyncio.ensure_future(test(Role.ANSWER))
+
         else:
             raise ValueError('No proper role!')
     else:
-        test_offer()
+        asyncio.ensure_future(test(Role.OFFER))
 
     asyncio.get_event_loop().run_forever()
