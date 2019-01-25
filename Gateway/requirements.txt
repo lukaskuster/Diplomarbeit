@@ -9,7 +9,6 @@ cffi==1.11.5
 chardet==3.0.4
 crcmod==1.7
 cryptography==2.4.2
-Cython==0.29.1
 idna==2.8
 netifaces==0.10.7
 pigpio==1.42
