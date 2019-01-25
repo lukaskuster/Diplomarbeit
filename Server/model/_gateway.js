@@ -9,6 +9,7 @@ let GatewaySchema = new mongoose.Schema({
     signalStrength: Number,
     carrier: String,
     firmwareVersion: String,
+    color: String,
     newSMS: [sms]
 }, {_id: false});
 

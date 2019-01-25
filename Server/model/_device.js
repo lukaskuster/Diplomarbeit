@@ -7,6 +7,7 @@ DeviceSchema = new mongoose.Schema({
     deviceModelName: String,
     systemVersion: String,
     apnToken: String,
+    voipToken: String,
     deviceName: String,
     isSync: {type: Boolean, default: false}
 }, {_id: false});
@@ -18,6 +19,7 @@ DeviceSchema.method('toClient', function () {
     obj.sync = obj.isSync;
     delete obj._id;
     delete obj.apnToken;
+    delete obj.voipToken;
     delete obj.isSync;
 
     return obj;

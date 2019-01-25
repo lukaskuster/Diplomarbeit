@@ -88,6 +88,9 @@ module.exports.putGateway = function (req, res) {
     if (req.body.firmwareVersion) {
         user.gateway[index].firmwareVersion = req.body.firmwareVersion;
     }
+    if (req.body.color) {
+        user.gateway[index].color = req.body.color;
+    }
 
     user.save().then(function () {
         res.json(user.gateway[index].toClient());
