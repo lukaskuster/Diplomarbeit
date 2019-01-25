@@ -105,8 +105,8 @@ class Logger:
         :type message: str
         :return: nothing
         """
-        message = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
-        print('{} {}'.format(_time_str(), message))
+        m = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
+        print('{} {}'.format(_time_str(), m))
 
         if self._error_handler:
             if namespace.upper() == 'SIM800':
