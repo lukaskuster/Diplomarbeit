@@ -1,0 +1,4 @@
+
+obj-m := bcm2835_pcm.o
+
+ccflags-y := -I$(src)/inc

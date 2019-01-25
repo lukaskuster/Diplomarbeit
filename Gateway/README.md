@@ -1,13 +1,11 @@
 # Gateway
 
+## Build source
 
-## Run virtual-environment
-
-* `cd /src`
-* `sudo -E pipenv shell`
+To build a source distribution:
+`python setup.py sdist`
 
 
-## To run tests
+## Install and build binaries
 
-* `export PYTHONPATH={Path to src folder}`
-
+With pip: `pip install gateway.tar.gz`
