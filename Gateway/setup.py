@@ -18,11 +18,9 @@ setup(
     ext_modules=ext,
     package_dir={'': 'src'},
     packages=find_packages('src'),
-    dependency_links=[
-        'http://github.com/quentinwendegass/aiortc/tarball/master#egg=aiortc-custom-1.0'
-    ],
-    install_requires=['aiortc-custom', 'websockets', 'av', 'pyee', 'attrs', 'asyncio',
-                      'pyserial', 'requests', 'aioice'],
+    install_requires=['websockets', 'av', 'pyee', 'attrs', 'asyncio',
+                      'pyserial', 'requests', 'aioice',
+                      'aiortc-custom @ http://github.com/quentinwendegass/aiortc/tarball/master#egg=aiortc-custom-0.9.18'],
     entry_points={
         'console_scripts': ['gatewayw=gateway.core.main:start'],
     },
