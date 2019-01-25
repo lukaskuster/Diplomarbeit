@@ -14,7 +14,7 @@ except ImportError:
 
 setup(
     name='gateway',
-    version='0.1.0',
+    version='0.1.1',
     ext_modules=ext,
     package_dir={'': 'src'},
     packages=find_packages('src'),
