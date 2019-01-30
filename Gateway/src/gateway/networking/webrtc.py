@@ -31,7 +31,7 @@ class WebRTC(EventEmitter):
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, host='localhost', signaling_timeout=10, webrtc_timeout=10, debug=False):
+    def __init__(self, username, password, gateway_imei, host='localhost', signaling_timeout=10, webrtc_timeout=10, debug=False):
         """
         Construct a new 'SerialLoop' object.
 
@@ -58,6 +58,7 @@ class WebRTC(EventEmitter):
         self._recv_ice_candidates = True
         self.signaling_timeout = signaling_timeout
         self.webrtc_timeout = webrtc_timeout
+        self._gateway_imei = gateway_imei
 
         # Don't include the pcm module in debug mode
         if not debug:
@@ -173,7 +174,7 @@ class WebRTC(EventEmitter):
 
         logger.info('Signaling', 'Connected with signaling server!')
         try:
-            await signaling.authenticate(socket, self._role, self.username, self.password)
+            await signaling.authenticate(socket, self._role, self.username, self.password, self._gateway_imei)
         except AuthenticationError:
             raise
 

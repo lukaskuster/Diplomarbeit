@@ -12,11 +12,12 @@ set_config('config.ini')
 config = get_config()
 USERNAME = config['Auth']['user']
 PASSWORD = config['Auth']['password']
+IMEI = config['Auth']['imei']
 HOST = config['Server']['signalinghost']
 
 
 async def test(role):
-    con = WebRTC(USERNAME, PASSWORD, HOST, debug=True, signaling_timeout=100)
+    con = WebRTC(USERNAME, PASSWORD, IMEI, HOST, debug=True, signaling_timeout=100)
     con.on('connectionClosed', asyncio.get_event_loop().stop)
     con.on('timeoutError', asyncio.get_event_loop().stop)
 

@@ -24,7 +24,7 @@ def to_ice_candidate(ice):
     return candidate
 
 
-async def authenticate(socket, role, username, password):
+async def authenticate(socket, role, username, password, gateway):
     """
     Send the authentication event to the signaling server
 
@@ -51,7 +51,8 @@ async def authenticate(socket, role, username, password):
         'event': 'authenticate',
         'username': username,
         'password': password,
-        'role': int(role)
+        'role': int(role),
+        'gateway': gateway
     }
 
     # Send the request to the signaling server
