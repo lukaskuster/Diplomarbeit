@@ -180,7 +180,7 @@ async def on_send_sms(sim, data):
 # WebRTC Callbacks
 
 async def on_connection_closed(sim):
-    logger.log('WebRTC', 'Conncection Closed!')
+    logger.log('WebRTC', 'Connection Closed!')
     event = await sim.hang_up_call()
 
     if event.error:
