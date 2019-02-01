@@ -314,6 +314,5 @@ class WebRTC(EventEmitter):
                 else:
                     logger.info('Connection', 'Peer connection closed from remote client!')
                     self._call.clear()
-                resv_ice_task.cancel()
                 await self._peer_connection.close()
                 self.emit('connectionClosed')
