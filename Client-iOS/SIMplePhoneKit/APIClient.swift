@@ -244,7 +244,7 @@ class APIClient: NSObject {
         case deviceDidAnswerCall(client: SPDevice)
         case deviceDidDeclineCall(client: SPDevice)
         case holdCall
-        case continueCall
+        case resumeCall
         case playDTMF(digits: String)
         case sendSMS(to: String, message: String)
         case updateSignalStrength
@@ -282,8 +282,8 @@ class APIClient: NSObject {
             data["data"] = ["device": client.id]
         case .holdCall:
             data["event"] = "holdCall"
-        case .continueCall:
-            data["event"] = "continueCall"
+        case .resumeCall:
+            data["event"] = "resumeCall"
         case .playDTMF(let digits):
             data["event"] = "playDTMF"
             data["data"] = ["digits": digits]

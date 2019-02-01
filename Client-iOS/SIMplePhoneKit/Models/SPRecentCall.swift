@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public enum SPRecentCallType: Int {
+public enum SPCallDirection: Int {
     case outgoing
     case incoming
 }
@@ -28,22 +28,28 @@ public class SPRecentCall: Object {
         get { return TimeInterval(exactly: _duration)! }
         set { _duration = Double(newValue) }
     }
-    @objc private dynamic var _type = SPRecentCallType.outgoing.rawValue
-    public var type: SPRecentCallType {
-        get { return SPRecentCallType(rawValue: _type)! }
-        set { _type = newValue.rawValue }
+    @objc private dynamic var _direction = SPCallDirection.outgoing.rawValue
+    public var direction: SPCallDirection {
+        get { return SPCallDirection(rawValue: _direction)! }
+        set { _direction = newValue.rawValue }
     }
     @objc public dynamic var missed: Bool = false
     @objc public dynamic var gateway: SPGateway?
     
-    public convenience init(with secondParty: SPNumber, at time: Date, for duration: TimeInterval, type: SPRecentCallType, missed: Bool, gateway: SPGateway) {
+    public convenience init(with secondParty: SPNumber, at time: Date?, for duration: TimeInterval?, direction: SPCallDirection, missed: Bool, gateway: SPGateway) {
         self.init()
         self.secondParty = secondParty
-        self.time = time
-        self.duration = duration
-        self.type = type
+        self.time = time ?? Date()
+        self.duration = duration ?? TimeInterval(0)
+        self.direction = direction
         self.missed = missed
-        self.gateway = gateway
+        try! realm?.write {
+            if let gatewayInDB = realm?.object(ofType: SPGateway.self, forPrimaryKey: gateway.imei) {
+                self.gateway = gatewayInDB
+            }else{
+                self.gateway = gateway
+            }
+        }
     }
     
     override public static func primaryKey() -> String? {
@@ -51,6 +57,6 @@ public class SPRecentCall: Object {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["duration", "type", "secondParty"]
+        return ["duration", "direction", "secondParty"]
     }
 }

@@ -246,11 +246,7 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
             let pnkNumber = try phonenumberkit.parse(phoneNumber)
             let fNumber = phonenumberkit.format(pnkNumber, toType: .e164)
             let number = SPNumber(withNumber: fNumber)
-            let vc = SelectGatewayViewController(number: number)
-            let navController = UINavigationController(rootViewController: vc)
-            vc.parentVC = parent
-            let seque = SelectGatewaySegue(identifier: nil, source: parent, destination: navController)
-            seque.perform()
+            SPDelegate.shared.initiateCall(with: number)
         } catch let error as NSError {
             print(error.localizedDescription)
         }

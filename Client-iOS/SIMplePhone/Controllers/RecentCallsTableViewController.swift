@@ -75,6 +75,12 @@ class RecentCallsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let call = self.showMissedCallsOnly ? missedCalls[indexPath.row] : recentCalls[indexPath.row]
+        let phoneNumber = call.secondParty
+        SPDelegate.shared.initiateCall(with: phoneNumber)
+    }
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let call = self.showMissedCallsOnly ? missedCalls[indexPath.row] : recentCalls[indexPath.row]
         
@@ -150,7 +156,8 @@ class RecentCallsTableViewController: UITableViewController {
     
     func initiateCall(with contact: CNContact, _ property: CNContactProperty) {
         let phoneNumber = (property.value as! CNPhoneNumber).stringValue
-        print("Call \(contact.givenName+" "+contact.familyName) (\(phoneNumber))")
+        let spNumber = SPNumber(withNumber: phoneNumber)
+        SPDelegate.shared.initiateCall(with: spNumber)
     }
 
 }

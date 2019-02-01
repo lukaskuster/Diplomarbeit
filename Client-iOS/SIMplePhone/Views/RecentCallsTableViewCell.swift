@@ -40,7 +40,7 @@ class RecentCallsTableViewCell: UITableViewCell {
             
             self.callerSubtitleLabel.text = (call.gateway?.name ?? "No Gateway")+" Duration: \(call.duration.description)"
             
-            self.callerGlyph.isHidden = call.type == .outgoing
+            self.callerGlyph.isHidden = (call.direction == .outgoing)
             
             self.timeStampLabel.text = DateFormatter.localizedString(from: call.time, dateStyle: .none, timeStyle: .short)
         }

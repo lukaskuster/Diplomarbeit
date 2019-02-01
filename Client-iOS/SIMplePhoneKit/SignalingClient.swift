@@ -15,299 +15,201 @@ public enum SignalingClientError: Error {
     case unableToSignIn(reason: String)
 }
 
-public class SignalingClient: NSObject {    
-    private var username: String?
-    private var password: String?
+public class SignalingClient: NSObject {
+    private let username: String
+    private let password: String
+    private let imei: String
     private let socket: WebSocket
     
-    private var candidateCache = SynchronizedArray<String>()
-    
     private let serverUrl = URL(string: "wss://signaling.da.digitalsubmarine.com:443")!
-
-    private enum SignalingType: String {
+    
+    private var currentType: SignalingType?
+    
+    private var readyToSendCandidates: Bool = false
+    private var candidates = [String]()
+    
+    public enum SignalingType: String {
         case offer = "offer"
         case answer = "answer"
         case addCandidate = "sendIce"
     }
     
-    
-    public override init() {
+    public init(username: String, password: String, imei: String) {
         socket = WebSocket(url: self.serverUrl)
-        super.init()
-    }
-    
-    public func setCredentials(username: String, password: String) {
         self.username = username
         self.password = password
+        self.imei = imei
+        super.init()
     }
     
     public func close() {
         self.socket.disconnect()
     }
     
-    public func post(offer: String, completion: @escaping (_ success: Bool, _ answer: String?, _ error: Error?) -> Void) {
-        self.socket.onConnect = {
-            self.authenticate(type: .offer, completion: { error in
-                if let error = error {
-                    completion(false, nil, error)
-                }
-            })
-        }
-        
-        self.socket.onText = { (response: String) in
-            if let data = response.data(using: .utf8) {
-                if let json = try? JSON(data: data) {
-                    if let event = json["event"].string {
-                        print(json.debugDescription)
-                        // TO-DO: Monitor socket responses and tidy up here
-                        switch event {
-                        case "authenticate":
-                            if let authenticated = json["authenticated"].bool {
-                                if !authenticated {
-                                    self.socket.disconnect()
-                                    completion(false, nil, SignalingClientError.unableToSignIn(reason: json["error"].string!))
-                                }
-                            }
-                            break
-                            
-                        case "start":
-                            self.write(type: .offer, payload: offer, completion: { error in
-                                if let error = error {
-                                    completion(false, nil, error)
-                                }
-                            })
-                            break
-                            
-                            
-                        case "answer":
-                            if let sdp = json["sdp"].string {
-                                print("candidates : \(self.candidateCache.count)")
-                                while self.candidateCache.count > 0 {
-                                    let index = self.candidateCache.count-1
-                                    self.write(type: .addCandidate, payload: self.candidateCache[index], completion: { error in
-                                        self.candidateCache.removeAtIndex(index: index)
-                                        if let error = error {
-                                            completion(false, nil, error)
-                                        }
-                                    })
-                                }
-                                completion(true, sdp, nil)
-                            }
-                            break
-                            
-                        default:
-                            break
-                        }
-                    }
-                    
+    private func parseResponse(_ response: String) -> (event: String?, data: JSON?) {
+        if let data = response.data(using: .utf8) {
+            if let json = try? JSON(data: data) {
+                if let event = json["event"].string {
+                    return (event: event, data: json)
                 }
             }
         }
-        
-        if !self.socket.isConnected {
-            socket.connect()
-        }
+        return (event: nil, data: nil)
     }
     
-//    private func sendCandidates() {
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            for candidate in self.candidateCache {
-//                self.write(type: .addCandidate, payload: candidate) { (error) in
-//                    if let error = error {
-//                        print("error")
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-    public func postCandidate(candidate: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        print("postCandidate \(candidate)")
-        if !self.socket.isConnected {
-            print("append")
-            let sdp = candidate.replacingOccurrences(of: "candidate:", with: "")
-            self.candidateCache.append(newElement: sdp)
-        }
-        completion(true, nil)
-    }
-    
-    public func getOffer(completion: @escaping (_ success: Bool, _ offer: String?, _ error: Error?) -> Void) {
-        let socket = WebSocket(url: self.serverUrl)
-        
-        socket.onConnect = {
-            self.authenticate(type: .answer, completion: { error in
-                if let error = error {
-                    completion(false, nil, error)
-                }
-            })
-        }
-        
-        socket.onText = { (response: String) in
-            if let data = response.data(using: .utf8) {
-                if let json = try? JSON(data: data) {
-                    if let event = json["event"].string {
-                        print(json.debugDescription)
-                        // TO-DO: Monitor socket responses and tidy up here
-                        switch event {
-                        case "authenticate":
-                            if let authenticated = json["authenticated"].bool {
-                                if authenticated {
-                                    
-                                }else{
-                                    self.socket.disconnect()
-                                    completion(false, nil, SignalingClientError.unableToSignIn(reason: json["error"].string!))
-                                }
-                            }
-                            break
-                            
-                        case "offer":
-                            if let sdp = json["sdp"].string {
-                                completion(true, sdp, nil)
-                            }
-                            break
-                            
-                        default:
-                            break
-                        }
-                    }
-                    
-                }
-            }
-        }
-        
-        if !self.socket.isConnected {
-            socket.connect()
-        }
-    }
-    
-    public func post(answer: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        self.write(type: .answer, payload: answer) { error in
-            if let error = error {
-                completion(false, error)
-            }
-        }
-        
-        socket.onText = { (response: String) in
-            if let data = response.data(using: .utf8) {
-                if let json = try? JSON(data: data) {
-                    if let event = json["event"].string {
-                        print(json.debugDescription)
-                        // TO-DO: Monitor socket responses and tidy up here
-                        switch event {
-                        case "authenticate":
-                            if let authenticated = json["authenticated"].bool {
-                                if authenticated {
-                                    
-                                    // Send offer
-                                    
-                                }else{
-                                    self.socket.disconnect()
-                                    completion(false, SignalingClientError.unableToSignIn(reason: json["error"].string!))
-                                }
-                            }
-                            break
-                            
-                        default:
-                            break
-                        }
-                    }
-                    
-                }
-            }
-        }
-        
-        if !self.socket.isConnected {
-            socket.connect()
-        }
-    }
-
-    private func authenticate(type: SignalingType, completion: @escaping (_ error: Error?) -> Void) {
+    public func authenticate(type: SignalingType, completion: @escaping (Error?) -> Void) {
         let request: [String: String] = [
             "event": "authenticate",
-            "username": self.username!,
-            "password": self.password!,
+            "username": self.username,
+            "password": self.password,
+            "gateway": self.imei,
             "role": "\(type.rawValue)"
         ]
         
         do {
             let data = try JSON(request).rawData()
-            self.socket.write(data: data)
-            completion(nil)
+            self.socket.onConnect = {
+                self.socket.write(data: data)
+            }
+            
+            self.socket.onText = { (response: String) in
+                let response = self.parseResponse(response)
+                if response.event == "authenticate" {
+                    if let autheticated = response.data?["authenticated"].bool {
+                        if autheticated {
+                            print("Authetificated!!!!")
+                            completion(nil)
+                        }else{
+                            self.socket.disconnect()
+                            completion(SignalingClientError.unableToSignIn(reason: (response.data?["error"].string)!))
+                        }
+                    }
+                }
+            }
+            
+            self.socket.connect()
         }catch{
             completion(SignalingClientError.jsonDecodingFailed)
+        }
+    }
+    
+    public func post(offer: String, completion: @escaping (String?, Error?) -> Void) {
+        self.authenticate(type: .offer) { error in
+            if let error = error {
+                completion(nil, error)
+            }
+
+            self.socket.onText = { (response: String) in
+                let response = self.parseResponse(response)
+                if let event = response.event,
+                   let data = response.data {
+                    switch event {
+                    case "start":
+                        let offerWithCandidates = self.addCandidates(to: offer)
+                        self.write(type: .offer, payload: offerWithCandidates, completion: { error in
+                            if let error = error {
+                                completion(nil, error)
+                            }
+                        })
+                        break
+                    case "answer":
+                        if let answerSdp = data["sdp"].string {
+                            self.sendCandidatesQueue()
+                            completion(answerSdp, nil)
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    public func post(answer: String, completion: @escaping (Error?) -> Void) {
+        self.authenticate(type: .offer) { error in
+            if let error = error {
+                completion(error)
+            }
+            
+            self.write(type: .answer, payload: answer, completion: { error in
+                if let error = error {
+                    completion(error)
+                }
+                self.sendCandidatesQueue()
+                completion(nil)
+            })
+        }
+    }
+    
+    public func post(candidate: String, completion: @escaping (Error?) -> Void) {
+        let sdp = candidate.replacingOccurrences(of: "candidate:", with: "")
+        if self.readyToSendCandidates {
+            self.write(type: .addCandidate, payload: sdp) { error in
+                completion(error)
+            }
+        }else{
+            // Add candidate to queue
+            self.candidates.append(sdp)
+        }
+    }
+    
+    private func sendCandidatesQueue() {
+        self.readyToSendCandidates = true
+        for candidate in self.candidates {
+            self.write(type: .addCandidate, payload: candidate) { error in
+                if let error = error {
+                    print("Log \(error)")
+                    return
+                }
+            }
+        }
+    }
+    
+    private func addCandidates(to sdp: String) -> String {
+        var offer = sdp
+        for candidate in self.candidates {
+            offer += "\r\na=candidate:\(candidate)"
+        }
+        self.candidates.removeAll()
+        return offer
+    }
+    
+    public func receiveOffer(completion: @escaping (String?, Error?) -> Void) {
+        self.authenticate(type: .answer) { error in
+            if let error = error {
+                completion(nil, error)
+            }
+            
+            self.socket.onText = { (response: String) in
+                let response = self.parseResponse(response)
+                if let event = response.event,
+                    let data = response.data {
+                    if event == "offer",
+                       let offerSdp = data["sdp"].string {
+                            completion(offerSdp, nil)
+                       }
+                }
+                completion(nil, SignalingClientError.jsonDecodingFailed)
+            }
         }
     }
     
     private func write(type: SignalingType, payload: String, completion: @escaping (_ error: Error?) -> Void) {
         let request: [String: String] = [
             "event": "\(type.rawValue)",
-            "\(type == .addCandidate ? "ice" : "sdp")": payload
+            (type == .addCandidate ? "ice" : "sdp"): payload
         ]
         
         do {
             let data = try JSON(request).rawData()
             print("Signaling write \(type) \(request)")
-            self.socket.write(data: data)
-            completion(nil)
+            self.socket.write(data: data) {
+                print("send")
+                completion(nil)
+            }
         }catch{
             completion(SignalingClientError.jsonDecodingFailed)
-        }
-    }
-}
-
-public class SynchronizedArray<T> {
-    private var array: [T] = []
-    private let accessQueue = DispatchQueue(label: "SynchronizedArrayAccess", attributes: .concurrent)
-    
-    public func append(newElement: T) {
-        
-        self.accessQueue.async(flags:.barrier) {
-            self.array.append(newElement)
-        }
-    }
-    
-    public func removeAtIndex(index: Int) {
-        
-        self.accessQueue.async(flags:.barrier) {
-            self.array.remove(at: index)
-        }
-    }
-    
-    public var count: Int {
-        var count = 0
-        
-        self.accessQueue.sync {
-            count = self.array.count
-        }
-        
-        return count
-    }
-    
-    public func first() -> T? {
-        var element: T?
-        
-        self.accessQueue.sync {
-            if !self.array.isEmpty {
-                element = self.array[0]
-            }
-        }
-        
-        return element
-    }
-    
-    public subscript(index: Int) -> T {
-        set {
-            self.accessQueue.async(flags:.barrier) {
-                self.array[index] = newValue
-            }
-        }
-        get {
-            var element: T!
-            self.accessQueue.sync {
-                element = self.array[index]
-            }
-            
-            return element
         }
     }
 }

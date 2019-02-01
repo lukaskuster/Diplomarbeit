@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 #import <PushKit/PushKit.h>
+#import <Intents/Intents.h>
 #import <SIMplePhoneKit/SIMplePhoneKit.h>
 #import "SIMplePhone-Swift.h"
 

@@ -39,6 +39,20 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSLog(@"openURL: %@", url);
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+    if ([userActivity.interaction.intent isKindOfClass:[INStartAudioCallIntent class]]) {
+        INPerson *person = [[(INStartAudioCallIntent*)userActivity.interaction.intent contacts] firstObject];
+        NSString *phoneNumber = person.personHandle.value;
+        [[SPDelegate sharedInstance] initiateCallWith:phoneNumber];
+    }
+    return YES;
+}
+
 - (void)voipRegistration {
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
     PKPushRegistry* voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];

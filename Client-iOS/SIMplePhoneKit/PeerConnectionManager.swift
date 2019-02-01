@@ -11,8 +11,7 @@ import WebRTC
 
 class PeerConnectionManager: NSObject {
     public static let shared = PeerConnectionManager()
-    private var rtcClient: WebRTCClient?
-    private var signalingClient: SignalingClient?
+    private var peerConnections = [String: PeerConnection]()
     
     private var signalingUsername: String?
     private var signalingPassword: String?
@@ -29,104 +28,72 @@ class PeerConnectionManager: NSObject {
         case RTCError(_ error: Error)
     }
     
-    private func initDependancies(completion: @escaping (Error?) -> Void) {
-        self.rtcClient = WebRTCClient()
-        self.rtcClient?.delegate = self
-        self.signalingClient = SignalingClient()
-        if let username = signalingUsername,
-           let password = signalingPassword {
-            self.signalingClient?.setCredentials(username: username, password: password)
+    private func getPeerConnection(with gateway: SPGateway, completion: @escaping (PeerConnection) -> Void) {
+        if let peerconnection = self.peerConnections[gateway.imei] {
+            completion(peerconnection)
         }else{
-            completion(PeerConnectionError.MissingSignalingCredentials)
-            return
+            if let username = signalingUsername,
+               let password = signalingPassword {
+                    let peerconnection = PeerConnection(username: username, password: password, gateway: gateway)
+                    self.peerConnections[gateway.imei] = peerconnection
+                    completion(peerconnection)
+            }
         }
-        completion(nil)
+    }
+    
+    private func destroyPeerConnection(with gateway: SPGateway) {
+        self.peerConnections.removeValue(forKey: gateway.imei)
     }
     
     public func makeCall(_ phoneNumber: SPNumber, with gateway: SPGateway, completion: @escaping (Error?) -> Void) {
-        self.initDependancies { error in
-            if let error = error {
-                completion(error)
-                return
-            }
-        }
-        guard let rtcClient = self.rtcClient else {
-            completion(PeerConnectionError.NoRTCInstanceFound)
-            return
-        }
-        guard let signalingClient = self.signalingClient else {
-            completion(PeerConnectionError.NoSignalingInstanceFound)
-            return
-        }
-        rtcClient.generateOffer { (success, sdp, error) in
-            if success {
-                signalingClient.post(offer: sdp!, completion: { (success, answer, error) in
-                    if success {
-                        rtcClient.handle(answer: answer!, completion: { (success, error) in
-                            if success {
-                                completion(nil)
-                            }else{
-                                completion(PeerConnectionError.RTCError(error!))
-                            }
-                        })
-                    }else{
-                        completion(PeerConnectionError.CouldNotGetAnswerFromGateway)
-                    }
-                })
-            }else{
-                completion(PeerConnectionError.CouldNotGenerateOffer)
-            }
+        self.getPeerConnection(with: gateway) { peerconnection in
+            peerconnection.call(phoneNumber, completion: completion)
         }
     }
     
     public func hangUpCall(on gateway: SPGateway, completion: @escaping (Error?) -> Void) {
-        guard let rtcClient = self.rtcClient else {
-            completion(PeerConnectionError.NoRTCInstanceFound)
-            return
+        self.getPeerConnection(with: gateway) { peerconnection in
+            peerconnection.hangUp(completion: { error in
+                if let error = error {
+                    completion(error)
+                }
+                self.destroyPeerConnection(with: gateway)
+                completion(nil)
+            })
         }
-        guard let signalingClient = self.signalingClient else {
-            completion(PeerConnectionError.NoSignalingInstanceFound)
-            return
-        }
-        rtcClient.closeConnection()
-        self.rtcClient = nil
-        signalingClient.close()
-        self.signalingClient = nil
-        completion(nil)
     }
     
     public func receivingIncomingCall(from phoneNumber: SPNumber, with gateway: SPGateway, completion: @escaping (Error?) -> Void) {
-        self.initDependancies { error in
-            if let error = error {
-                completion(error)
-                return
+        self.getPeerConnection(with: gateway) { peerconnection in
+            peerconnection.incomingCall(from: phoneNumber, completion: completion)
+        }
+    }
+    
+    public func notify(didActivate audioSession: AVAudioSession) {
+        RTCAudioSession.sharedInstance().audioSessionDidActivate(audioSession)
+        RTCAudioSession.sharedInstance().isAudioEnabled = true
+    }
+    
+    public func notify(didDeactivate audioSession: AVAudioSession) {
+        RTCAudioSession.sharedInstance().audioSessionDidDeactivate(audioSession)
+    }
+    
+    public func notify(callOnGateway gateway: SPGateway, isOnHold: Bool) {
+        self.getPeerConnection(with: gateway) { peerconnection in
+            if isOnHold {
+                peerconnection.muteAudio()
+            }else{
+                peerconnection.unmuteAudio()
             }
         }
-        guard let rtcClient = self.rtcClient else {
-            completion(PeerConnectionError.NoRTCInstanceFound)
-            return
-        }
-        guard let signalingClient = self.signalingClient else {
-            completion(PeerConnectionError.NoSignalingInstanceFound)
-            return
-        }
-        signalingClient.getOffer { (success, offer, error) in
-            if success {
-                rtcClient.handle(offer: offer!, completion: { (success, answer, error) in
-                    if success {
-                        signalingClient.post(answer: answer!, completion: { (success, error) in
-                            if success {
-                                completion(nil)
-                            }else{
-                                completion(PeerConnectionError.SignalingError(error!))
-                            }
-                        })
-                    }else{
-                        completion(PeerConnectionError.CouldNotGenerateAnswer)
-                    }
-                })
+    }
+    
+    public func notify(callOnGateway gateway: SPGateway, isMuted: Bool) {
+        self.getPeerConnection(with: gateway) { peerconnection in
+            if isMuted {
+                peerconnection.muteAudio()
             }else{
-                completion(PeerConnectionError.CouldNotGetOfferFromGateway)
+                peerconnection.unmuteAudio()
             }
         }
     }
@@ -137,26 +104,116 @@ class PeerConnectionManager: NSObject {
     }
 }
 
-extension PeerConnectionManager: WebRTCClientDelegate {
-    public func webRTCClient(client: WebRTCClient, didReceiveError error: Error) {
-        print(error.localizedDescription)
+fileprivate class PeerConnection: NSObject {
+    private var rtcClient: WebRTCClient
+    private var signalingClient: SignalingClient
+    
+    public init(username: String, password: String, gateway: SPGateway) {
+        self.rtcClient = WebRTCClient()
+        self.signalingClient = SignalingClient(username: username, password: password, imei: gateway.imei)
+        super.init()
+        self.rtcClient.delegate = self
     }
     
-    public func webRTCClient(client: WebRTCClient, didReceiveRemoteTrack track: RTCAudioTrack) {
-        print("\(track.source.volume)")
-    }
-    
-    public func webRTCClient(didGenerateNewCandidate candidateSdp: String) {
-        guard let signalingClient = self.signalingClient else {
-            print("Error while postingNewCandidate \(PeerConnectionError.NoSignalingInstanceFound)")
-            return
-        }
-        
-        signalingClient.postCandidate(candidate: candidateSdp, completion: { (success, error) in
-            print("post candidate \(candidateSdp)")
+    public func call(_ phoneNumber: SPNumber, completion: @escaping (Error?) -> Void) {
+        self.rtcClient.offer(completion: { (offerSdp, error) in
             if let error = error {
-                print("Error: RTCIceCandidate/Signalling \(error)")
+                completion(error)
             }
+            guard let offerSdp = offerSdp else {
+                completion(PeerConnectionManager.PeerConnectionError.CouldNotGenerateOffer)
+                return
+            }
+            
+            self.signalingClient.post(offer: offerSdp, completion: { (answerSdp, error) in
+                if let error = error {
+                    completion(error)
+                }
+                guard let answerSdp = answerSdp else {
+                    completion(PeerConnectionManager.PeerConnectionError.CouldNotGetAnswerFromGateway)
+                    return
+                }
+                
+                self.rtcClient.handle(answer: answerSdp, completion: { error in
+                    if let error = error {
+                        completion(error)
+                    }
+                    
+                    completion(nil)
+                })
+                
+            })
+            
         })
+    }
+    
+    public func incomingCall(from phoneNumber: SPNumber, completion: @escaping (Error?) -> Void) {
+        self.signalingClient.receiveOffer(completion: { (offerSdp, error) in
+            if let error = error {
+                completion(error)
+            }
+            guard let offerSdp = offerSdp else {
+                completion(PeerConnectionManager.PeerConnectionError.CouldNotGetOfferFromGateway)
+                return
+            }
+            
+            self.rtcClient.handle(offer: offerSdp, completion: { error in
+                if let error = error {
+                    completion(error)
+                }
+                
+                self.rtcClient.answer(completion: { (answerSdp, error) in
+                    if let error = error {
+                        completion(error)
+                    }
+                    guard let answerSdp = answerSdp else {
+                        completion(PeerConnectionManager.PeerConnectionError.CouldNotGenerateAnswer)
+                        return
+                    }
+                    
+                    self.signalingClient.post(answer: answerSdp, completion: { error in
+                        if let error = error {
+                            completion(error)
+                        }
+                        
+                        completion(nil)
+                    })
+                })
+                
+            })
+            
+        })
+    }
+    
+    public func hangUp(completion: @escaping (Error?) -> Void) {
+        self.rtcClient.closeConnection()
+        self.signalingClient.close()
+        completion(nil)
+    }
+    
+    public func muteAudio() {
+        self.rtcClient.muteAudio()
+    }
+    
+    public func unmuteAudio() {
+        self.rtcClient.unmuteAudio()
+    }
+}
+
+extension PeerConnection: WebRTCClientDelegate {
+    func webRTCClient(didReceiveError error: Error) {
+        print("[WEBRTC-CLIENT]: \(error)")
+    }
+    
+    func webRTCClient(didGenerateNewCandidate candidateSdp: String) {
+        self.signalingClient.post(candidate: candidateSdp) { error in
+            if let error = error {
+                print("[SIGNALING-CLIENT]: Error while sending out candidate \(error)")
+            }
+        }
+    }
+    
+    func webRTCClient(didReceiveRemoteTrack track: RTCAudioTrack) {
+        print("did receive remote track \(track)")
     }
 }

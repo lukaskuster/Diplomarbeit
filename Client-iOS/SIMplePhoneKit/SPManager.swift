@@ -12,8 +12,13 @@ import CloudKit
 import SwiftyJSON
 import UserNotifications
 
+public protocol SPManagerDelegate {
+    func spManager(didAnswerIncomingCall from: SPNumber, on gateway: SPGateway)
+}
+
 @objc public class SPManager: NSObject, CallKitManagerDelegate {
     public static let shared = SPManager()
+    public var delegate: SPManagerDelegate?
     private var realmManager: RealmManager
     private var apiClient: APIClient
     private var callKitManager: CallKitManager
@@ -183,15 +188,8 @@ import UserNotifications
     public func makeCall(to number: SPNumber, on gateway: SPGateway, completion: @escaping (Error?) -> Void) {
         self.apiClient.pushEventToGateway(gateway, event: .dial(number: number.phoneNumber)) { (success, response, error) in
             if success {
-                self.peerConnectionManager.makeCall(number, with: gateway, completion: { error in
-                    if let error = error {
-                        completion(error)
-                        return
-                    }
-                    
-                    self.callKitManager.reportOutgoingCall(to: number, on: gateway)
-                    completion(nil)
-                })
+                self.callKitManager.reportOutgoingCall(to: number, on: gateway)
+                completion(nil)
             }else{
                 completion(error)
             }
@@ -211,10 +209,15 @@ import UserNotifications
     }
     
     @objc public func handleVoIPToken(_ data: Data) {
-        let token = data.reduce("", {$0 + String(format: "%02X", $1)})
-        self.apiClient.register(voipToken: token) { (success, error) in
-            if !success {
-                print("\(error!)")
+        if let localDevice = SPDevice.local {
+            let token = data.reduce("", {$0 + String(format: "%02X", $1)})
+            if localDevice.voipToken != token {
+                self.apiClient.register(voipToken: token) { (success, error) in
+                    if success {
+                        localDevice.voipToken = token
+                        SPDevice.local = localDevice
+                    }
+                }
             }
         }
     }
@@ -239,6 +242,11 @@ import UserNotifications
                         self.callKitManager.reportCallEnded(because: .endedByRemote, on: gateway)
                     case "callUnanswered":
                         self.callKitManager.reportCallEnded(because: .unanswered, on: gateway)
+                    case "gatewayError":
+                        if let errorCode = payload["data"]["code"].int,
+                            let errorMessage = payload["data"]["message"].string {
+                            self.handleGatewayError(code: errorCode, message: errorMessage)
+                        }
                     default:
                         return
                     }
@@ -247,6 +255,39 @@ import UserNotifications
                 }
             }
         }
+    }
+    
+    public enum GatewayError: LocalizedError {
+        case RTCError(msg: String)
+        case SignalingError(msg: String)
+        case PushError(msg: String)
+        case GSMModuleError(msg: String)
+        case APIError(msg: String)
+        case other(msg: String)
+        
+        public var errorDescription: String? {
+            return "The operation couldn't be completed. (SIMplePhoneKit.GatewayError.\(self))"
+        }
+    }
+    public func handleGatewayError(code: Int, message: String) {
+        let error: GatewayError
+        switch code {
+        case 20000:
+            error = .GSMModuleError(msg: message)
+        case 20001:
+            error = .APIError(msg: message)
+        case 20002:
+            error = .other(msg: message)
+        case 20003:
+            error = .SignalingError(msg: message)
+        case 20004:
+            error = .RTCError(msg: message)
+        case 20005:
+            error = .PushError(msg: message)
+        default:
+            error = .other(msg: message)
+        }
+        self.sendErrorNotification(for: error)
     }
     
     public func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (Bool) -> Void) {
@@ -264,37 +305,52 @@ import UserNotifications
                         completion(false)
                         return
                     }
+                    self.delegate?.spManager(didAnswerIncomingCall: caller, on: gateway)
                     completion(true)
                 }
             }
         }
     }
     
-    public func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+    public func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, withRecentCallItem recentItem: SPRecentCall, completion: @escaping (Bool) -> Void) {
         if let localDevice = SPDevice.local {
-            self.apiClient.pushEventToGateway(gateway, event: .deviceDidAnswerCall(client: localDevice)) { (success, response, error) in
+            self.apiClient.pushEventToGateway(gateway, event: .deviceDidDeclineCall(client: localDevice)) { (success, response, error) in
                 if let error = error {
                     self.sendErrorNotification(for: error)
                 }else{
+                    self.addRecentCall(recentItem)
                     completion(success)
                 }
             }
         }
     }
     
-    public func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+    public func callKitManager(didEndCallFromGateway gateway: SPGateway, withRecentCallItem recentItem: SPRecentCall, completion: @escaping (Bool) -> Void) {
         self.hangUpCall(via: gateway, notifyCallKit: false) { error in
             if let error = error {
                 self.sendErrorNotification(for: error)
                 completion(false)
                 return
             }
+            self.addRecentCall(recentItem)
             completion(true)
         }
     }
     
+    public func callKitManager(didConnectOutgoingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (Bool) -> Void) {
+        self.peerConnectionManager.makeCall(caller, with: gateway, completion: { error in
+            if let error = error {
+                self.sendErrorNotification(for: error)
+                completion(false)
+                return
+            }
+            completion(true)
+        })
+    }
+    
     public func callKitManager(didChangeHeldState isOnHold: Bool, onCallFrom gateway: SPGateway, completion: @escaping (Bool) -> Void) {
-        let event: APIClient.GatewayPushEvent = isOnHold ? .holdCall : .continueCall
+        let event: APIClient.GatewayPushEvent = isOnHold ? .holdCall : .resumeCall
+        self.peerConnectionManager.notify(callOnGateway: gateway, isOnHold: isOnHold)
         self.apiClient.pushEventToGateway(gateway, event: event) { (success, response, error) in
             if let error = error {
                 self.sendErrorNotification(for: error)
@@ -302,6 +358,11 @@ import UserNotifications
                 completion(success)
             }
         }
+    }
+    
+    public func callKitManager(didChangeMuteState isMuted: Bool, onCallFrom gateway: SPGateway, completion: @escaping (Bool) -> Void) {
+        self.peerConnectionManager.notify(callOnGateway: gateway, isMuted: isMuted)
+        completion(true)
     }
     
     public func callKitManager(didEnterDTMF digits: String, onCallFrom gateway: SPGateway, completion: @escaping (Bool) -> Void) {
@@ -455,7 +516,9 @@ import UserNotifications
     
     // MARK: - Just for testing purposes (Will be deleted)
     public func addRecentCall(_ call: SPRecentCall) {
-        self.realmManager.addNewRecentCall(call)
+        DispatchQueue.main.async {
+            self.realmManager.addNewRecentCall(call)
+        }
     }
 
     public func addVoicemail(_ voicemail: SPVoicemail) {

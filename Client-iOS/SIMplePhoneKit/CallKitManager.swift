@@ -8,12 +8,15 @@
 
 import Foundation
 import CallKit
+import AVFoundation
 
 public protocol CallKitManagerDelegate {
     func callKitManager(didAcceptIncomingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (_ success: Bool) -> Void)
-    func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
-    func callKitManager(didEndCallFromGateway gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didConnectOutgoingCallFromGateway gateway: SPGateway, with caller: SPNumber, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didDeclineIncomingCallFromGateway gateway: SPGateway, withRecentCallItem recentItem: SPRecentCall, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didEndCallFromGateway gateway: SPGateway, withRecentCallItem recentItem: SPRecentCall, completion: @escaping (_ success: Bool) -> Void)
     func callKitManager(didChangeHeldState isOnHold: Bool, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
+    func callKitManager(didChangeMuteState isMuted: Bool, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
     func callKitManager(didEnterDTMF digits: String, onCallFrom gateway: SPGateway, completion: @escaping (_ success: Bool) -> Void)
 }
 
@@ -39,7 +42,7 @@ public class CallKitManager: NSObject {
     }
     
     public func reportOutgoingCall(to number: SPNumber, on gateway: SPGateway) {
-        let call = Call(with: number, on: gateway)
+        let call = Call(with: number, on: gateway, .outgoing)
         let handle = CXHandle(type: .phoneNumber, value: number.phoneNumber)
         let callAction = CXStartCallAction(call: call.uuid, handle: handle)
         self.callController.requestTransaction(with: callAction) { error in
@@ -56,7 +59,7 @@ public class CallKitManager: NSObject {
         callUpdate.remoteHandle = CXHandle(type: .phoneNumber, value: number.phoneNumber)
         callUpdate.supportsGrouping = false
         callUpdate.supportsUngrouping = false
-        let call = Call(with: number, on: gateway)
+        let call = Call(with: number, on: gateway, .incoming)
         self.provider.reportNewIncomingCall(with: call.uuid, update: callUpdate) { (error) in
             if let error = error {
                 print("Error while initializing call \(error.localizedDescription)")
@@ -84,8 +87,8 @@ public class CallKitManager: NSObject {
                     print("EndCallAction transaction request failed: \(error.localizedDescription).")
                     self.reportCallEnded(because: .endedByRemote, on: gateway)
                 }
+                self.callManager.remove(call: call)
             }
-            self.callManager.remove(call: call)
             return
         }
         let cxreason: CXCallEndedReason
@@ -122,7 +125,7 @@ extension CallKitManager: CXProviderDelegate {
         }
         delegate?.callKitManager(didAcceptIncomingCallFromGateway: call.gateway, with: call.number, completion: { success in
             if success {
-                call.isConnected = true
+                call.start()
                 action.fulfill()
             }else{
                 action.fail()
@@ -136,17 +139,36 @@ extension CallKitManager: CXProviderDelegate {
             return
         }
         if call.isConnected {
-            delegate?.callKitManager(didEndCallFromGateway: call.gateway, completion: { success in
+            let recentCallItem = SPRecentCall(with: call.number, at: call.startTime, for: call.duration, direction: call.direction, missed: false, gateway: call.gateway)
+            delegate?.callKitManager(didEndCallFromGateway: call.gateway, withRecentCallItem: recentCallItem, completion: { success in
                 success ? action.fulfill() : action.fail()
             })
         }else{
-            delegate?.callKitManager(didDeclineIncomingCallFromGateway: call.gateway, completion: { success in
+            let recentCallItem = SPRecentCall(with: call.number, at: call.startTime, for: nil, direction: call.direction, missed: true, gateway: call.gateway)
+            delegate?.callKitManager(didDeclineIncomingCallFromGateway: call.gateway, withRecentCallItem: recentCallItem, completion: { success in
                 success ? action.fulfill() : action.fail()
             })
         }
         self.callManager.remove(call: call)
     }
     
+    public func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        self.provider.reportOutgoingCall(with: call.uuid, startedConnectingAt: nil)
+        delegate?.callKitManager(didConnectOutgoingCallFromGateway: call.gateway, with: call.number, completion: { success in
+            if success {
+                self.provider.reportOutgoingCall(with: call.uuid, connectedAt: nil)
+                call.start()
+                action.fulfill()
+            }else{
+                action.fail()
+            }
+        })
+    }
+
     public func provider(_ provider: CXProvider, perform action: CXSetHeldCallAction) {
         guard let call = self.callManager.callWithUUID(action.callUUID) else {
             action.fail()
@@ -165,6 +187,24 @@ extension CallKitManager: CXProviderDelegate {
         delegate?.callKitManager(didEnterDTMF: action.digits, onCallFrom: call.gateway, completion: { success in
             success ? action.fulfill() : action.fail()
         })
+    }
+    
+    public func provider(_ provider: CXProvider, perform action: CXSetMutedCallAction) {
+        guard let call = self.callManager.callWithUUID(action.callUUID) else {
+            action.fail()
+            return
+        }
+        delegate?.callKitManager(didChangeMuteState: action.isMuted, onCallFrom: call.gateway, completion: { success in
+            success ? action.fulfill() : action.fail()
+        })
+    }
+    
+    public func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+        PeerConnectionManager.shared.notify(didActivate: audioSession)
+    }
+    
+    public func provider(_ provider: CXProvider, didDeactivate audioSession: AVAudioSession) {
+        PeerConnectionManager.shared.notify(didDeactivate: audioSession)
     }
 }
 
@@ -203,11 +243,26 @@ fileprivate class Call {
     let uuid: UUID
     let number: SPNumber
     let gateway: SPGateway
+    var startTime: Date?
     var isConnected = false
+    var direction: SPCallDirection
+    var duration: TimeInterval {
+        get { return self.end() }
+    }
     
-    init(with number: SPNumber, on gateway: SPGateway) {
+    init(with number: SPNumber, on gateway: SPGateway, _ direction: SPCallDirection) {
         self.uuid = UUID()
         self.number = number
         self.gateway = gateway
+        self.direction = direction
+    }
+    
+    func start() {
+        self.isConnected = true
+        self.startTime = Date()
+    }
+    
+    private func end() -> TimeInterval {
+        return Date().timeIntervalSince(self.startTime ?? Date())
     }
 }
