@@ -1,5 +1,5 @@
 //
-//  SettingsGatewayChangeSIMPinViewController.swift
+//  GatewaySIMPinViewController.swift
 //  SIMplePhone
 //
 //  Created by Lukas Kuster on 10.01.19.
@@ -9,7 +9,7 @@
 import UIKit
 import SIMplePhoneKit
 
-class SettingsGatewayChangeSIMPinViewController: UIViewController {
+class GatewaySIMPinViewController: UIViewController {
     private let gateway: SPGateway
     private let config: Config
     private var loadingIndicator: UIView?
@@ -168,7 +168,7 @@ class SettingsGatewayChangeSIMPinViewController: UIViewController {
     }
 }
 
-extension SettingsGatewayChangeSIMPinViewController {
+extension GatewaySIMPinViewController {
     func showSpinner() {
         self.loadingIndicator = UIView(frame: self.view.bounds)
         self.loadingIndicator?.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
@@ -196,7 +196,7 @@ extension SettingsGatewayChangeSIMPinViewController {
     }
 }
 
-extension SettingsGatewayChangeSIMPinViewController: KAPinFieldDelegate {
+extension GatewaySIMPinViewController: KAPinFieldDelegate {
     func ka_pinField(_ field: KAPinField, didFinishWith code: String) {
         // To-Do: Implement logic
         self.currentView = .loading

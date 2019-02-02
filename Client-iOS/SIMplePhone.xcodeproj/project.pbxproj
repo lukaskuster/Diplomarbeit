@@ -14,7 +14,7 @@
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */; };
 		D6195A3621E790E5002D724E /* KAPinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3521E790E5002D724E /* KAPinField.swift */; };
-		D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */; };
+		D6195A3821E79856002D724E /* GatewaySIMPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3721E79856002D724E /* GatewaySIMPinViewController.swift */; };
 		D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */; };
 		D6195A3D21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */; };
 		D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62731CC21B910FD00CFCE28 /* SettingsAccountViewController.swift */; };
@@ -138,7 +138,7 @@
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		D6195A3521E790E5002D724E /* KAPinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAPinField.swift; sourceTree = "<group>"; };
-		D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayChangeSIMPinViewController.swift; sourceTree = "<group>"; };
+		D6195A3721E79856002D724E /* GatewaySIMPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewaySIMPinViewController.swift; sourceTree = "<group>"; };
 		D6195A3921E79F1A002D724E /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUpdateCheckerCell.swift; sourceTree = "<group>"; };
 		D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayFirmwareUpdateStatusViewController.swift; sourceTree = "<group>"; };
@@ -358,12 +358,12 @@
 				D62731D221C07D9300CFCE28 /* SettingsGatewayViewController.swift */,
 				D62731D821E541DC00CFCE28 /* SettingsGatewayColorViewController.swift */,
 				D62731DE21E6757600CFCE28 /* SettingsGatewayNameViewController.swift */,
-				D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */,
 				D6195A3C21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift */,
 				D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */,
 				D649976421F3C19E00EF72DE /* CallViewController.swift */,
 				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
 				D6881226220494700054C2F9 /* GatewaySetup */,
+				D6195A3721E79856002D724E /* GatewaySIMPinViewController.swift */,
 				D688121C220426840054C2F9 /* GatewaySetupViewController.swift */,
 			);
 			path = Controllers;
@@ -659,7 +659,7 @@
 				D62731DD21E611CC00CFCE28 /* UIView+Extensions.swift in Sources */,
 				D68812152203AA0F0054C2F9 /* SPDelegate.swift in Sources */,
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
-				D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */,
+				D6195A3821E79856002D724E /* GatewaySIMPinViewController.swift in Sources */,
 				D688122A2204BF340054C2F9 /* GSSearchingForGatewayViewController.swift in Sources */,
 				D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,

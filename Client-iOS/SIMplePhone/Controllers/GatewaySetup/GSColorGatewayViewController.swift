@@ -50,7 +50,7 @@ class GSColorGatewayViewController: UIViewController {
             self.gateways?.last?.color = color
             DispatchQueue.main.async {
                 // Check whether gateway needs to unlocked
-                let pinVC = SettingsGatewayChangeSIMPinViewController(gateway: gateway, config: .unlockGateway)
+                let pinVC = GatewaySIMPinViewController(gateway: gateway, config: .unlockGateway)
                 let navController = UINavigationController(rootViewController: pinVC)
                 self.present(navController, animated: true, completion: nil)
                 
