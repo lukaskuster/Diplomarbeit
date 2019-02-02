@@ -2,3 +2,4 @@ build/
 dist/
 test_files/
 helper/data/
+**/node_modules
