@@ -76,6 +76,17 @@
 		D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */; };
 		D68812152203AA0F0054C2F9 /* SPDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812142203AA0D0054C2F9 /* SPDelegate.swift */; };
 		D68812172203C2C10054C2F9 /* UINavigation+TopMost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */; };
+		D688121B22041A400054C2F9 /* BLESetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688121A22041A3F0054C2F9 /* BLESetupManager.swift */; };
+		D688121D220426840054C2F9 /* GatewaySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688121C220426840054C2F9 /* GatewaySetupViewController.swift */; };
+		D6881225220439290054C2F9 /* SwiftyBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6881224220439290054C2F9 /* SwiftyBluetooth.framework */; };
+		D6881228220494B70054C2F9 /* GSSelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */; };
+		D688122A2204BF340054C2F9 /* GSSearchingForGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */; };
+		D688122C2204C17F0054C2F9 /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D688122B2204C17F0054C2F9 /* Pulsator.framework */; };
+		D688122E2204C6E10054C2F9 /* GSEnterNetworkPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688122D2204C6E10054C2F9 /* GSEnterNetworkPasswordViewController.swift */; };
+		D68812302204ECD60054C2F9 /* GSNameGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688122F2204ECD60054C2F9 /* GSNameGatewayViewController.swift */; };
+		D68812322204F0D70054C2F9 /* GSColorGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812312204F0D70054C2F9 /* GSColorGatewayViewController.swift */; };
+		D68812342205AD700054C2F9 /* GSSetupFinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812332205AD700054C2F9 /* GSSetupFinishedViewController.swift */; };
+		D68812362205BE200054C2F9 /* FancyBounceVCAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812352205BE200054C2F9 /* FancyBounceVCAnimation.swift */; };
 		D688F0C021EDEA8F00C465AA /* SelectGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */; };
 		D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
 		D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -196,6 +207,18 @@
 		D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTestViewController.swift; sourceTree = "<group>"; };
 		D68812142203AA0D0054C2F9 /* SPDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDelegate.swift; sourceTree = "<group>"; };
 		D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+TopMost.swift"; sourceTree = "<group>"; };
+		D6881218220418F60054C2F9 /* BluetoothKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothKit.framework; path = Carthage/Build/iOS/BluetoothKit.framework; sourceTree = "<group>"; };
+		D688121A22041A3F0054C2F9 /* BLESetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESetupManager.swift; sourceTree = "<group>"; };
+		D688121C220426840054C2F9 /* GatewaySetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewaySetupViewController.swift; sourceTree = "<group>"; };
+		D6881224220439290054C2F9 /* SwiftyBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBluetooth.framework; path = Carthage/Build/iOS/SwiftyBluetooth.framework; sourceTree = "<group>"; };
+		D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSelectNetworkViewController.swift; sourceTree = "<group>"; };
+		D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSearchingForGatewayViewController.swift; sourceTree = "<group>"; };
+		D688122B2204C17F0054C2F9 /* Pulsator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsator.framework; path = Carthage/Build/iOS/Pulsator.framework; sourceTree = "<group>"; };
+		D688122D2204C6E10054C2F9 /* GSEnterNetworkPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSEnterNetworkPasswordViewController.swift; sourceTree = "<group>"; };
+		D688122F2204ECD60054C2F9 /* GSNameGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSNameGatewayViewController.swift; sourceTree = "<group>"; };
+		D68812312204F0D70054C2F9 /* GSColorGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSColorGatewayViewController.swift; sourceTree = "<group>"; };
+		D68812332205AD700054C2F9 /* GSSetupFinishedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSetupFinishedViewController.swift; sourceTree = "<group>"; };
+		D68812352205BE200054C2F9 /* FancyBounceVCAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyBounceVCAnimation.swift; sourceTree = "<group>"; };
 		D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGatewayViewController.swift; sourceTree = "<group>"; };
 		D6BE880B2194398900F87B35 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireSwiftyJSON.framework; path = Carthage/Build/iOS/AlamofireSwiftyJSON.framework; sourceTree = "<group>"; };
@@ -219,6 +242,8 @@
 				D653F5E321B0179E005736FE /* Static.framework in Frameworks */,
 				D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */,
 				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
+				D6881225220439290054C2F9 /* SwiftyBluetooth.framework in Frameworks */,
+				D688122C2204C17F0054C2F9 /* Pulsator.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
 				D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */,
 				D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */,
@@ -296,6 +321,8 @@
 		D6781871216CE7E600E650DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D688122B2204C17F0054C2F9 /* Pulsator.framework */,
+				D6881224220439290054C2F9 /* SwiftyBluetooth.framework */,
 				D65FD70B2189BB5600BBE679 /* Frameworks.md */,
 				D6E0B80621B8797800D560D7 /* SwiftyAcknowledgements.framework */,
 				D653F5E221B0179D005736FE /* Static.framework */,
@@ -306,6 +333,7 @@
 				D604917E219431DD00F46B18 /* Alamofire.framework */,
 				D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */,
 				D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */,
+				D6881218220418F60054C2F9 /* BluetoothKit.framework */,
 				D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */,
 				D65FD70C2189C14D00BBE679 /* Realm.framework */,
 				D65FD70D2189C14D00BBE679 /* RealmSwift.framework */,
@@ -335,6 +363,8 @@
 				D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */,
 				D649976421F3C19E00EF72DE /* CallViewController.swift */,
 				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
+				D6881226220494700054C2F9 /* GatewaySetup */,
+				D688121C220426840054C2F9 /* GatewaySetupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -370,6 +400,7 @@
 			children = (
 				D6E0B80821B87AF400D560D7 /* Acknowledgements.plist */,
 				D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */,
+				D68812352205BE200054C2F9 /* FancyBounceVCAnimation.swift */,
 				D65FD70421888FDF00BBE679 /* SIMplePhone.entitlements */,
 				D678185E216CD16F00E650DB /* Info.plist */,
 				D678185F216CD16F00E650DB /* main.m */,
@@ -400,6 +431,7 @@
 				D653F5DE21A806EB005736FE /* WebRTCClient.swift */,
 				D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */,
 				D65FD702218884DF00BBE679 /* CallKitManager.swift */,
+				D688121A22041A3F0054C2F9 /* BLESetupManager.swift */,
 				D6328CA721930FD200E48FD3 /* RealmManager.swift */,
 				D6328CA92193128600E48FD3 /* RealmExtensions.swift */,
 				D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */,
@@ -409,6 +441,19 @@
 				D6286D2A21ECEEE800552231 /* RTCSessionDescription+PCMAonly.swift */,
 			);
 			path = SIMplePhoneKit;
+			sourceTree = "<group>";
+		};
+		D6881226220494700054C2F9 /* GatewaySetup */ = {
+			isa = PBXGroup;
+			children = (
+				D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */,
+				D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */,
+				D688122D2204C6E10054C2F9 /* GSEnterNetworkPasswordViewController.swift */,
+				D688122F2204ECD60054C2F9 /* GSNameGatewayViewController.swift */,
+				D68812312204F0D70054C2F9 /* GSColorGatewayViewController.swift */,
+				D68812332205AD700054C2F9 /* GSSetupFinishedViewController.swift */,
+			);
+			path = GatewaySetup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,6 +619,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Static.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ChromaColorPicker.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBluetooth.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Pulsator.framework",
 			);
 			name = Carthage;
 			outputFileListPaths = (
@@ -613,22 +660,27 @@
 				D68812152203AA0F0054C2F9 /* SPDelegate.swift in Sources */,
 				D678184F216CD16D00E650DB /* AppDelegate.m in Sources */,
 				D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */,
+				D688122A2204BF340054C2F9 /* GSSearchingForGatewayViewController.swift in Sources */,
 				D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
 				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
+				D6881228220494B70054C2F9 /* GSSelectNetworkViewController.swift in Sources */,
 				D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
 				D649976521F3C19E00EF72DE /* CallViewController.swift in Sources */,
 				D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */,
 				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
+				D68812322204F0D70054C2F9 /* GSColorGatewayViewController.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */,
+				D688121D220426840054C2F9 /* GatewaySetupViewController.swift in Sources */,
 				D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */,
 				D68812172203C2C10054C2F9 /* UINavigation+TopMost.swift in Sources */,
 				D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */,
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
+				D68812342205AD700054C2F9 /* GSSetupFinishedViewController.swift in Sources */,
 				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
 				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
@@ -636,7 +688,10 @@
 				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
 				D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */,
 				D6195A3D21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift in Sources */,
+				D688122E2204C6E10054C2F9 /* GSEnterNetworkPasswordViewController.swift in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
+				D68812362205BE200054C2F9 /* FancyBounceVCAnimation.swift in Sources */,
+				D68812302204ECD60054C2F9 /* GSNameGatewayViewController.swift in Sources */,
 				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
 				D6195A3621E790E5002D724E /* KAPinField.swift in Sources */,
 				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
@@ -654,6 +709,7 @@
 				D604917D2194289F00F46B18 /* APIClient.swift in Sources */,
 				D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */,
 				D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */,
+				D688121B22041A400054C2F9 /* BLESetupManager.swift in Sources */,
 				D62731D721E53C0200CFCE28 /* UIColor+Hex.swift in Sources */,
 				D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */,
 				D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */,

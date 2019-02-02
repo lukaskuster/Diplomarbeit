@@ -122,49 +122,17 @@ extension SettingsViewController: GatewayCollectionDelegate {
     }
     
     func gatewayCollection(requestsGatewaySetup bool: Bool) {
-        let messageView: MessageView = MessageView.viewFromNib(layout: .centeredView)
-        messageView.configureBackgroundView(width: 250)
-        messageView.configureContent(title: "Sorry", body: "Not yet implemented.", iconImage: nil, iconText: "💩", buttonImage: nil, buttonTitle: "Okay") { _ in
-            SwiftMessages.hide()
-        }
-        messageView.backgroundView.backgroundColor = UIColor.init(white: 0.97, alpha: 1)
-        messageView.backgroundView.layer.cornerRadius = 10
-        var config = SwiftMessages.defaultConfig
-        config.presentationStyle = .center
-        config.duration = .forever
-        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
-        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
-        SwiftMessages.show(config: config, view: messageView)
+        let storyboard = UIStoryboard(name: "Setup", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: String(describing: GSSearchingForGatewayViewController.self))
+        let setupNavController = UINavigationController(rootViewController: vc)
+        setupNavController.isNavigationBarHidden = true
+        setupNavController.isToolbarHidden = true
+        self.present(setupNavController, animated: true, completion: nil)
     }
 }
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-class LargeAutoSizedExtremityView: UIView {
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Is this the real life?\nIs this just fantasy?\nCaught in a landslide,\nNo escape from reality."
-        return label
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        
-        layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        addSubview(label)
-        label.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
