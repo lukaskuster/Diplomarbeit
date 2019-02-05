@@ -1,5 +1,10 @@
 build/
-dist/
-test_files/
-helper/data/
-**/node_modules
+**/build/
+**/node_modules/
+gatewayw/dist/
+gatewayw/docs
+gatewayw/docs/_build/
+gatewayw/docs/_static/
+gatewayw/docs/_templates/
+gatewayw/helper/data/
+gatewayw/gateway.egg-info
