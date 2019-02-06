@@ -6,14 +6,14 @@
 # Arguments:
 # $1 - name of the program to package (Can be 'all' to package all three programs)
 # $2 - can be set to 'deploy', to transfer the files directly with scp
-# REMOTE_HOST - indicates the host (default: gateway@raspberrypi.local)
-# REMOTE_PATH - indicates the path on the remote system where the packages are transferred (default: /home/gateway)
+# REMOTEHOST - indicates the host (default: gateway@raspberrypi.local)
+# REMOTEPATH - indicates the path on the remote system where the packages are transferred (default: /home/gateway)
 #
 # The packages are created in the dist/ directory.
 
 
-REMOTE_HOST=gateway@raspberrypi.local
-REMOTE_DIR=/home/gateway
+REMOTE_HOST=${REMOTEHOST:=gateway@raspberrypi.local}
+REMOTE_DIR=${REMOTEPATH:=/home/gateway}
 
 DIST_DIR=dist
 SERVICE_DIR=etc/services
