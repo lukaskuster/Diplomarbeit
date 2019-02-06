@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+
+# Packages one/all programs into a .tar.gz archive that can be installed with
+# the associated installation script.
+#
+# Arguments:
+# $1 - name of the program to package (Can be 'all' to package all three programs)
+# $2 - can be set to 'deploy', to transfer the files directly with scp
+# REMOTE_HOST - indicates the host (default: gateway@raspberrypi.local)
+# REMOTE_PATH - indicates the path on the remote system where the packages are transferred (default: /home/gateway)
+#
+# The packages are created in the dist/ directory.
+
+
+REMOTE_HOST=gateway@raspberrypi.local
+REMOTE_DIR=/home/gateway
+
+DIST_DIR=dist
+SERVICE_DIR=etc/services
+GATEWAYW_CONFIG_DIR=etc
+
+
+# Versions
+GATEWAYW_VERSION=0.1.1
+PCM_DRIVER_VERSION=1.0.0
+BLE_SETUP_VERSION=1.0.0
+
+TAR_EXCLUDE_PARAMS=(--exclude='**/.DS_Store' --exclude='**/node_modules' --exclude='**/.idea')
+
+
+if [[ ! -e ${DIST_DIR} ]]; then
+    mkdir ${DIST_DIR}
+fi
+
+if [[ -e ${DIST_DIR}/temp ]]; then
+    rm -r ${DIST_DIR}/temp
+fi
+
+
+#
+# Transfer package to the remote host
+#
+deploy () {
+    if [[ -z $1 ]]; then
+        echo "Deploy: No file path specified!"
+    else
+        echo "Moving ${1} to ${REMOTE_HOST}:${REMOTE_DIR}"
+        scp ${1} ${REMOTE_HOST}:${REMOTE_DIR}
+    fi
+}
+
+
+#
+# Create gatewayw package
+#
+gatewayw () {
+    mkdir ${DIST_DIR}/temp
+
+    cd gatewayw
+    python setup.py sdist --dist-dir=../${DIST_DIR}/temp
+    cd ..
+    cp ${SERVICE_DIR}/gatewayw.service ${DIST_DIR}/temp
+    cp ${GATEWAYW_CONFIG_DIR}/config.ini ${DIST_DIR}/temp
+    cp ${GATEWAYW_CONFIG_DIR}/apn-conf.json ${DIST_DIR}/temp
+
+    tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/gatewayw-${GATEWAYW_VERSION}.tar.gz .
+
+    rm -r ${DIST_DIR}/temp
+
+    if [[ "$1" == "deploy" ]]; then
+       deploy ${DIST_DIR}/gatewayw-${GATEWAYW_VERSION}.tar.gz
+    fi
+}
+
+
+#
+# Create bcm2835 pcm driver package
+#
+pcm-driver () {
+    mkdir ${DIST_DIR}/temp
+
+    cp ${SERVICE_DIR}/bcm2835-pcm-driver.service ${DIST_DIR}/temp
+    cp -r bcm2835-pcm-driver ${DIST_DIR}/temp
+
+    tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/bcm2835-pcm-driver-${PCM_DRIVER_VERSION}.tar.gz .
+
+    rm -r ${DIST_DIR}/temp
+
+    if [[ "$1" == "deploy" ]]; then
+       deploy ${DIST_DIR}/bcm2835-pcm-driver-${PCM_DRIVER_VERSION}.tar.gz
+    fi
+}
+
+#
+# Create ble setup package
+#
+ble-setup () {
+    mkdir ${DIST_DIR}/temp
+
+    cp ${SERVICE_DIR}/ble-setup.service ${DIST_DIR}/temp
+    cp -r ble-setup ${DIST_DIR}/temp
+
+    tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/ble-setup-${BLE_SETUP_VERSION}.tar.gz .
+
+    rm -r ${DIST_DIR}/temp
+
+
+    if [[ "$1" == "deploy" ]]; then
+    deploy ${DIST_DIR}/ble-setup-${BLE_SETUP_VERSION}.tar.gz
+    fi
+}
+
+
+case $1 in
+    gatewayw|pcm-driver|ble-setup)
+        "$1" $2
+    ;;
+    all)
+        gatewayw $2
+        pcm-driver $2
+        ble-setup $2
+    ;;
+    *) echo "Specify the module to deploy! (gatewayw|pcm-driver|ble-setup|all)"
+    ;;
+esac
+
+exit 0

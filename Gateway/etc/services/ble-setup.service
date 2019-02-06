@@ -1,0 +1,12 @@
+[Unit]
+Description=BLE Setup Program
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /usr/lib/ble-setup/index.js
+RemainAfterExit=no
+Restart=on-failure
+WorkingDirectory=/usr/lib/ble-setup
+
+[Install]
+WantedBy=multi-user.target
