@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 process.env['BLENO_DEVICE_NAME'] = 'Gateway';
 
 const bleno = require('bleno');

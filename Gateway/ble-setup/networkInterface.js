@@ -18,7 +18,6 @@ function checkNetwork(callback) {
             callback(null)
         } else {
             let error = `Not connected to the network ${self.ssid}!`;
-            console.error(error);
             callback({error: error})
         }
     });
@@ -29,8 +28,9 @@ function connectToNetwork(callback, check=false, timeout=2000){
     piWifi.connectTo({ssid: self.ssid, password: self.psk}, function(err) {
         if (!err) { //Network created correctly
             if(check) {
+                console.log("Checking network status...");
                 setTimeout(function () {
-                    checkNetwork(function (err) {
+                    self.check(function (err) {
                         if(err){
                             return callback(err)
                         }
@@ -50,7 +50,7 @@ function connectToNetwork(callback, check=false, timeout=2000){
 
 
 function getAvailableNetworks(callback) {
-
+    console.log("Scan for available networks...");
     let networks = [];
     piWifi.scan((err, nets) => {
         if (err) {
