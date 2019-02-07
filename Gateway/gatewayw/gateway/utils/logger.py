@@ -1,7 +1,18 @@
 import datetime
 from enum import IntEnum
+import sys
+import re
 
 from gateway.utils.singleton import Singleton
+
+
+def escape_ansi(line):
+    """
+    :param line: string that should be escaped
+    :return: string without ansi escape sequences
+    """
+    ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -/]*[@-~]')
+    return ansi_escape.sub('', line)
 
 
 class AnsiEscapeSequence:
@@ -27,21 +38,53 @@ class Level(IntEnum):
     LOG = 1
 
 
-def _time_str():
-    return datetime.datetime.today().strftime(AnsiEscapeSequence.BOLD + '[%x %X]') + AnsiEscapeSequence.DEFAULT
-
-
 @Singleton
 class Logger:
     """
     Logger with log levels.
     """
 
-    # The applied log level
-    level = Level.LOG
-
     def __init__(self):
+        # Config
+        self.enable_ansi_strings = True
+        self.enable_time = True
+        self.time_format = '[%x %X]'
+        self.level = Level.LOG
+
         self._error_handler = None
+        self.config = None
+
+    def use_config_options(self):
+        c = self.config['LOG']
+        self.enable_time = c.getboolean('enabletime', fallback=self.enable_time)
+        self.enable_ansi_strings = c.getboolean('enableansistrings', fallback=self.enable_ansi_strings)
+        self.time_format = c.get('timeformat', self.time_format)
+        log_level = c.get('level', 'LOG')
+        log_level = log_level.upper()
+        if log_level == 'LOG':
+            self.level = Level.LOG
+        elif log_level == 'DEBUG':
+            self.level = Level.DEBUG
+        elif log_level == 'INFO':
+            self.level = Level.INFO
+        else:
+            self.error('Logger', 'Can not detect log level!')
+
+    def _time_str(self):
+        """
+        Gets the time string based on the available options.
+
+        :return: string
+        """
+
+        if self.enable_time:
+            time_str = datetime.datetime.today().strftime(self.time_format)
+
+            if self.enable_ansi_strings:
+                time_str = AnsiEscapeSequence.BOLD + time_str + AnsiEscapeSequence.DEFAULT
+
+            return time_str
+        return ''
 
     def set_error_handler(self, func):
         """
@@ -64,8 +107,12 @@ class Logger:
         :type message: str
         :return: nothing
         """
+
         if self.level >= Level.LOG:
-            print('{} {}: {}'.format(_time_str(), namespace.upper(), message))
+            if not self.enable_ansi_strings:
+                message = escape_ansi(message)
+
+            print('{} {}: {}'.format(self._time_str(), namespace.upper(), message), flush=True)
 
     def info(self, namespace, message):
         """
@@ -77,9 +124,15 @@ class Logger:
         :type message: str
         :return: nothing
         """
+
         if self.level >= Level.INFO:
             namespace = AnsiEscapeSequence.OK_BLUE + namespace.upper() + AnsiEscapeSequence.DEFAULT
-            print('{} {}: {}'.format(_time_str(), namespace, message))
+
+            if not self.enable_ansi_strings:
+                message = escape_ansi(message)
+                namespace = escape_ansi(namespace)
+
+            print('{} {}: {}'.format(self._time_str(), namespace, message), flush=True)
 
     def debug(self, namespace, message):
         """
@@ -91,9 +144,15 @@ class Logger:
         :type message: str
         :return: nothing
         """
+
         if self.level >= Level.DEBUG:
             namespace = AnsiEscapeSequence.OK_GREEN + namespace.upper() + AnsiEscapeSequence.DEFAULT
-            print('{} {}: {}'.format(_time_str(), namespace, message))
+
+            if not self.enable_ansi_strings:
+                message = escape_ansi(message)
+                namespace = escape_ansi(namespace)
+
+            print('{} {}: {}'.format(self._time_str(), namespace, message), flush=True)
 
     def error(self, namespace, message):
         """
@@ -105,10 +164,19 @@ class Logger:
         :type message: str
         :return: nothing
         """
+
         m = AnsiEscapeSequence.FAIL + namespace.upper() + ': ' + message + AnsiEscapeSequence.DEFAULT
-        print('{} {}'.format(_time_str(), m))
+
+        without_ansi = escape_ansi(m)
+
+        if not self.enable_ansi_strings:
+            m = without_ansi
+
+        print('{}{}'.format(self._time_str(), m), file=sys.stderr, flush=True)
 
         if self._error_handler:
+            message = escape_ansi(message)
+
             if namespace.upper() == 'SIM800':
                 self._error_handler(20000, message)
             if namespace.upper() == 'API':

@@ -90,7 +90,7 @@ class CallStreamTrack(AudioStreamTrack):
         # Include the timestamp in the frame
         self.frame.pts = self._timestamp
 
-        logger.log('Mediatrack', 'Sending frame (samples: {}, sample_rate: {}, format: {}, pts: {}, '
+        logger.debug('Mediatrack', 'Sending frame (samples: {}, sample_rate: {}, format: {}, pts: {}, '
                                  'rate: {}, time: {}. planes: {}, index: {}, layout: {}, dts: {})'
                    .format(self.frame.samples, self.frame.sample_rate, self.frame.format.name, self.frame.pts,
                            self.frame.rate,

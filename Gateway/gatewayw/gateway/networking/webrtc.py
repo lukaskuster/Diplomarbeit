@@ -295,8 +295,8 @@ class WebRTC(EventEmitter):
                     except asyncio.TimeoutError:
                         raise MediaStreamError('local')
 
-                    logger.log('Mediatrack', 'Receiving frame (samples: {}, timestamp (pts): {})'
-                               .format(len(frame.data), frame.timestamp))
+                    logger.debug('Mediatrack', 'Receiving frame (samples: {}, timestamp (pts): {})'
+                                 .format(len(frame.data), frame.timestamp))
 
                     # Write the samples of the frame to the pcm interface
                     if not self.debug:

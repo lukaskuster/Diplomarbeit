@@ -27,8 +27,6 @@ class SerialLoop(Thread):
         :return: returns nothing
         """
 
-        self.daemon = True
-
         if not hasattr(emitter, 'emit'):
             raise ValueError
 
@@ -55,6 +53,8 @@ class SerialLoop(Thread):
 
         # Set running to stop the loop
         self.running = threading.Event()
+
+        self.daemon = True
 
     def run(self):  # TODO: Clean up run()
         """
