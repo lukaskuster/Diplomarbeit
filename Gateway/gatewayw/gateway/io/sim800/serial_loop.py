@@ -27,6 +27,8 @@ class SerialLoop(Thread):
         :return: returns nothing
         """
 
+        self.daemon = True
+
         if not hasattr(emitter, 'emit'):
             raise ValueError
 

@@ -40,4 +40,7 @@ if __name__ == '__main__':
     else:
         asyncio.ensure_future(test(Role.OFFER))
 
-    asyncio.get_event_loop().run_forever()
+    try:
+        asyncio.get_event_loop().run_forever()
+    except KeyboardInterrupt:
+        pass

@@ -61,6 +61,7 @@ class Scheduler(threading.Thread):
         """
 
         super().__init__()
+        self.daemon = True
         self.tasks = []
         self.sleep = sleep
         self._running = threading.Event()

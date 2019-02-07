@@ -22,6 +22,7 @@ class SSE(Thread):
         """
 
         super(SSE, self).__init__()
+        self.daemon = True
         self.emitter = emitter
         self.timeout = timeout
         self._running = Event()
