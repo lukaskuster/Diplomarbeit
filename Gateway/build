@@ -62,6 +62,7 @@ gatewayw () {
     cp ${SERVICE_DIR}/gatewayw.service ${DIST_DIR}/temp
     cp ${GATEWAYW_CONFIG_DIR}/config.ini ${DIST_DIR}/temp
     cp ${GATEWAYW_CONFIG_DIR}/apn-conf.json ${DIST_DIR}/temp
+    cp ${GATEWAYW_CONFIG_DIR}/log-config.ini ${DIST_DIR}/temp
 
     tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/gatewayw-${GATEWAYW_VERSION}.tar.gz .
 
