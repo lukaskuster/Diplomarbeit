@@ -5,19 +5,44 @@ const networkInt = require('../networkInterface');
 let BlenoCharacteristic = bleno.Characteristic;
 
 
-let NetworkCharacteristic = function(){
+let NetworkCharacteristic = function(config){
     NetworkCharacteristic.super_.call(this, {
-        uuid: 'ff51b30e-d7e2-4d93-8842-a7c4a57dfb09',
-        properties: ['write', 'read'],
+        uuid: config.uuid,
+        properties: config.properties,
     });
 };
+
+
+NetworkCharacteristic.prototype.sendNotification = function(obj){
+    if(!self.updateValueCallback){
+        return console.error("Client has not subscribed!")
+    }
+
+    let buff = new Buffer(JSON.stringify(status));
+
+    console.log(`Send notification: ${buff.toString()}`);
+
+    self.updateValueCallback(buff);
+};
+
+NetworkCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback){
+    console.log(`Client subscribed with maxValueSize: ${maxValueSize}!`);
+    this.updateValueCallback = updateValueCallback;
+};
+
+
+NetworkCharacteristic.prototype.onUnsubscribe = function(){
+    console.log("Client unsubscribed!");
+    this.updateValueCallback = null;
+};
+
 
 NetworkCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback){
     let self = this;
 
     if(!data){
         console.error("No data!");
-        return callback(self.RESULT_UNLIKELY_ERROR);
+        return callback(self.RESULT_INVALID_ATTRIBUTE_LENGTH);
     }
 
     console.log(`Network: ${data}`);
@@ -42,10 +67,26 @@ NetworkCharacteristic.prototype.onWriteRequest = function(data, offset, withoutR
         if(err){
             console.error("Failed to connect to ", network.ssid);
             console.error(err.error);
+            self.sendNotification({status: 3});
             return callback(self.RESULT_UNLIKELY_ERROR);
         }
         console.log("Connected to ", network.ssid);
         callback(this.RESULT_SUCCESS);
+
+        setTimeout(function () {
+            network.check(function (err) {
+                let status = null;
+                if(err){
+                    console.error(`Connection error: ${err.error}`);
+                    status = {status: 1}
+                }else {
+                    console.log("Connection was successful established!");
+                    status = {status: 0};
+                }
+
+                self.sendNotification(status);
+            });
+        }, 5000);
     });
 };
 
@@ -99,6 +140,3 @@ NetworkCharacteristic.prototype.onReadRequest = function(offset, callback){
 
 util.inherits(NetworkCharacteristic, BlenoCharacteristic);
 module.exports = NetworkCharacteristic;
-
-
-

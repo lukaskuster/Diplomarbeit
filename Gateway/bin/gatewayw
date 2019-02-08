@@ -2,7 +2,7 @@
 
 
 PACKAGE_NAME=gatewayw
-CONFIG_DIR=/etc/${PACKAGE_NAME}
+CONFIG_DIR=/etc/gateway
 CONFIG_FILES=( "apn-conf.json" "config.ini" "log-config.ini" )
 
 

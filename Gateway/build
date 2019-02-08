@@ -17,7 +17,7 @@ REMOTE_DIR=${REMOTEPATH:=/home/gateway}
 
 DIST_DIR=dist
 SERVICE_DIR=etc/services
-GATEWAYW_CONFIG_DIR=etc
+CONFIG_DIR=etc
 
 
 # Versions
@@ -60,9 +60,9 @@ gatewayw () {
     python setup.py sdist --dist-dir=../${DIST_DIR}/temp
     cd ..
     cp ${SERVICE_DIR}/gatewayw.service ${DIST_DIR}/temp
-    cp ${GATEWAYW_CONFIG_DIR}/config.ini ${DIST_DIR}/temp
-    cp ${GATEWAYW_CONFIG_DIR}/apn-conf.json ${DIST_DIR}/temp
-    cp ${GATEWAYW_CONFIG_DIR}/log-config.ini ${DIST_DIR}/temp
+    cp ${CONFIG_DIR}/config.ini ${DIST_DIR}/temp
+    cp ${CONFIG_DIR}/apn-conf.json ${DIST_DIR}/temp
+    cp ${CONFIG_DIR}/log-config.ini ${DIST_DIR}/temp
 
     tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/gatewayw-${GATEWAYW_VERSION}.tar.gz .
 
@@ -100,6 +100,7 @@ ble-setup () {
 
     cp ${SERVICE_DIR}/ble-setup.service ${DIST_DIR}/temp
     cp -r ble-setup ${DIST_DIR}/temp
+    cp ${CONFIG_DIR}/ble-config.json ${DIST_DIR}/temp
 
     tar -C ${DIST_DIR}/temp ${TAR_EXCLUDE_PARAMS[@]} -czvf ${DIST_DIR}/ble-setup-${BLE_SETUP_VERSION}.tar.gz .
 

@@ -4,11 +4,11 @@ const util = require('util');
 let NetworkCharacteristic = require('../characteristics/networkCharacteristic');
 
 
-function WifiService(){
+function WifiService(config){
     bleno.PrimaryService.call(this, {
-        uuid: 'ff51b30e-d7e2-4d93-8842-a7c4a57dfb08',
+        uuid: config.uuid,
         characteristics: [
-            new NetworkCharacteristic(),
+            new NetworkCharacteristic(config.characteristic.network),
         ]
     });
 }
