@@ -1,27 +1,31 @@
 import asyncio
 import os
+import uuid
 import sys
 from functools import partial
 
 from gateway.core import get_config, set_config
-from gateway.io.sim800 import Sim800, Sim800Error
+from gateway.io.sim800 import Sim800, Sim800Error, response_objects
 from gateway.networking import API, WebRTC, Role
 from gateway.utils import logger, use_config_file
 
 
 config_env = os.environ.get('GATEWAYCONFIGPATH')
 
+
 if len(sys.argv) > 1:
-    set_config(os.path.join(sys.argv[1], 'config.ini'))
+    config_path = os.path.join(sys.argv[1], 'config.ini')
 elif config_env:
-    set_config(os.path.join(config_env, 'config.ini'))
-elif os.path.isfile('/etc/gatewayw/config.ini'):
-    set_config('/etc/gatewayw/config.ini')
+    config_path = os.path.join(config_env, 'config.ini')
+elif os.path.isfile('/etc/gateway/config.ini'):
+    config_path = '/etc/gateway/config.ini'
 else:
     raise FileNotFoundError('Config file not found!')
 
-if os.path.isfile('/etc/gatewayw/log-config.ini'):
-    use_config_file('/etc/gatewayw/log-config.ini')
+set_config(config_path)
+
+if os.path.isfile('/etc/gateway/log-config.ini'):
+    use_config_file('/etc/gateway/log-config.ini')
 elif config_env:
     use_config_file(os.path.join(config_env, 'log-config.ini'))
 
@@ -35,33 +39,55 @@ SERIAL_PORT = config['DEFAULT']['serialport']
 PCM_DEBUG = config['DEFAULT'].getboolean('pcmdebug')
 
 
+async def check_pin_status(sim: Sim800, api: API):
+    event = await sim.request_pin_status()
+    if event.error_message:
+        return logger.error('Sim800', 'RequestPinStatusError({})'.format(event.error_message))
+
+    if event.data != response_objects.PINStatus.Ready:
+        logger.info('Sim800', 'Sim card locked with {}'.format(event.data))
+        api.put_gateway(pin_required=True)
+    else:
+        logger.info('Sim800', 'Sim card ready!')
+        api.put_gateway(pin_required=False)
+
+
 async def check_imei(sim):
     if 'imei' not in auth_config:
         event = await sim.request_imei()
 
         if event.error:
-            logger.error('Sim800', 'RequestIMEIError({})'.format(event.error))
+            logger.error('Sim800', 'RequestIMEIError({})'.format(event.error_message))
+            auth_config['imei'] = uuid.uuid1()
+            logger.info('Gateway', 'Generating unique uuid to replace imei: {}'.format(auth_config['imei']))
+        else:
+            auth_config['imei'] = event.data.imei
+            logger.info('Gateway', 'Set imei: {}'.format(event.data.imei))
 
-        auth_config['imei'] = event.data.imei
-
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini'), 'w') as configfile:
-            config.write(configfile)
+    logger.debug('Open config file...')
+    with open(config_path, 'w') as configfile:
+        logger.debug('Write to config file...')
+        config.write(configfile)
 
 
 async def main():
     sim = Sim800(debug=SERIAL_DEBUG, serial_port=SERIAL_PORT)
 
-    if not SERIAL_DEBUG:
-        try:
-            await sim.setup(config['Test']['pin'])
-        except Sim800Error as e:
-            logger.error('Sim800', 'SimSetupError(Name: {}, Message: {})'.format(*e.args))
-            logger.info('Gateway', 'Closing Program because Sim800 could not be initialized!')
-            sys.exit(-1)
-
     await check_imei(sim)
 
     api = API(auth_config['user'], auth_config['password'], auth_config['imei'], host=API_HOST)
+
+    pin = None
+    if 'pin' in auth_config:
+        pin = auth_config['pin']
+    try:
+        await sim.setup(pin)
+    except Sim800Error as e:
+        logger.error('Sim800', 'SimSetupError(Name: {}, Message: {})'.format(*e.args))
+        logger.info('Gateway', 'Closing Program because Sim800 could not be initialized!')
+        sys.exit(-1)
+
+    await check_pin_status(sim, api)
 
     logger.set_error_handler(api.push_error)
 
@@ -78,6 +104,7 @@ async def main():
     api.on('clientDidAnswerCall', partial(on_answer_call, sim))
     api.on('requestSignal', partial(on_request_signal, sim, api))
     api.on('sendSMS', partial(on_send_sms, sim))
+    api.on('enterPIN', partial(on_enter_pin, sim))
 
     webrtc.on('connectionClosed', partial(on_connection_closed, sim))
     webrtc.on('signalingTimeout', on_signaling_timeout)
@@ -103,14 +130,14 @@ async def on_resume_call(sim, data):
     event = await sim.resume_call()
 
     if event.error:
-        logger.error('Sim800', 'ResumeCallError({})'.format(event.error))
+        logger.error('Sim800', 'ResumeCallError({})'.format(event.error_message))
 
 
 async def on_hold_call(sim, data):
     event = await sim.hold_call()
 
     if event.error:
-        logger.error('Sim800', 'HoldCallError({})'.format(event.error))
+        logger.error('Sim800', 'HoldCallError({})'.format(event.error_message))
 
 
 async def on_play_dtmf(sim, data):
@@ -122,7 +149,7 @@ async def on_play_dtmf(sim, data):
     event = await sim.transmit_dtmf_tone(data['digits'])
 
     if event.error:
-        logger.error('Sim800', 'PlayDTMFError({})'.format(event.error))
+        logger.error('Sim800', 'PlayDTMFError({})'.format(event.error_message))
 
 
 async def on_hang_up(webrtc, data):
@@ -135,7 +162,7 @@ async def on_answer_call(sim, data):
     logger.log('GATEWAY', 'Answer call!')
     event = await sim.answer_call()
     if event.error:
-        logger.error('Sim800', 'AnswerCallError({})'.format(event.error))
+        logger.error('Sim800', 'AnswerCallError({})'.format(event.error_message))
 
 
 async def on_dial(sim, webrtc, data):
@@ -152,7 +179,7 @@ async def on_dial(sim, webrtc, data):
         event = await sim.dial_number(data['number'])
 
         if event.error:
-            logger.error('Sim800', 'DialError({})'.format(event.error))
+            logger.error('Sim800', 'DialError({})'.format(event.error_message))
             webrtc.stop_call()
 
     if webrtc.is_ongoing():
@@ -168,7 +195,7 @@ async def on_request_signal(sim, api, data):
     if not event.error:
         api.put_gateway(signal_strength=event.data.rssi)
     else:
-        logger.error('Sim800', 'RequestSignalQualityError({})'.format(event.error))
+        logger.error('Sim800', 'RequestSignalQualityError({})'.format(event.error_message))
 
 
 async def on_send_sms(sim, data):
@@ -181,7 +208,30 @@ async def on_send_sms(sim, data):
 
     event = await sim.send_sms(data['recipient'], data['message'])
     if event.error:
-        logger.error('Sim800', 'SendSMSError({})'.format(event.error))
+        logger.error('Sim800', 'SendSMSError({})'.format(event.error_message))
+
+
+async def on_enter_pin(sim: Sim800, api: API, data):
+    if not data:
+        return logger.error('SSE', 'ArgumentError(data)')
+    if 'pin' not in data:
+        return logger.error('SSE', 'ArgumentError(pin)')
+
+    event = await sim.enter_pin(data['pin'])
+    if event.error:
+        return logger.error('Sim800', 'EnterPINError({})'.format(event.error_message))
+
+    event = await sim.request_pin_status()
+    if event.error:
+        return logger.error('Sim800', 'RequestPINStatusError({})'.format(event.error_message))
+
+    if event.data == response_objects.PINStatus.Ready:
+        logger.info('Gateway', 'PIN was entered successful!')
+        auth_config['pin'] = data['pin']
+        api.put_gateway(pin_required=False)
+    else:
+        logger.error('Gateway', 'WrongPINError')
+        api.broadcast_notification('invalidPIN', silent=True, voip=True)
 
 
 # WebRTC Callbacks
@@ -191,7 +241,7 @@ async def on_connection_closed(sim):
     event = await sim.hang_up_call()
 
     if event.error:
-        logger.error('Sim800', 'HangUpError({})'.format(event.error))
+        logger.error('Sim800', 'HangUpError({})'.format(event.error_message))
 
 
 async def on_signaling_timeout():
