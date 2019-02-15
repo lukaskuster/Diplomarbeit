@@ -20,6 +20,7 @@ class GSEnterNetworkPasswordViewController: UIViewController, UITextFieldDelegat
             self.fillVCWithData()
         }
     }
+    public var wrongPassword: Bool?
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var headerDescLabel: UILabel!
     @IBOutlet weak var networkPasswordTextField: SetupTextField!
@@ -29,6 +30,10 @@ class GSEnterNetworkPasswordViewController: UIViewController, UITextFieldDelegat
         self.networkPasswordTextField.becomeFirstResponder()
         self.networkPasswordTextField.delegate = self
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        if self.wrongPassword ?? false {
+            headerDescLabel.text = "The password you entered is incorrect, please try again."
+            headerDescLabel.textColor = .red
+        }
     }
     
     func fillVCWithData() {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyBluetooth
 import Pulsator
 import SIMplePhoneKit
 
@@ -17,6 +16,7 @@ class GSSearchingForGatewayViewController: UIViewController, UINavigationControl
     @IBOutlet weak var loadingIndicatorView: UIView!
     @IBOutlet weak var cancelBtn: SetupBoldButton!
     public var gateways: [SPGateway]?
+    private let blesetupmanager = BLESetupManager()
     private let pulsator = Pulsator()
     
     override func viewDidLoad() {
@@ -26,11 +26,7 @@ class GSSearchingForGatewayViewController: UIViewController, UINavigationControl
         pulsator.radius = self.loadingIndicatorView.frame.height/2
         pulsator.animationDuration = 3
         self.view.layer.insertSublayer(pulsator, above: self.loadingIndicatorView.layer)
-        pulsator.start()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-            self.foundGateway(nil)
-        })
+        self.searchGateway()
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,11 +35,33 @@ class GSSearchingForGatewayViewController: UIViewController, UINavigationControl
         pulsator.position = self.loadingIndicatorView.layer.position
     }
     
-    private func foundGateway(_ gateway: Peripheral?) {
+    private func searchGateway() {
+        self.pulsator.start()
+        self.blesetupmanager.getGateway { error in
+            if let error = error as? BLESetupManager.SetupError {
+                switch error {
+                case .noGatewayToSetupFound:
+                    self.pulsator.stop()
+                case .moreThanOneGatewayToSetup:
+                    self.pulsator.stop()
+                default:
+                    return
+                }
+                print("error while searching for gateway \(error)")
+                return
+            }
+            // Sometimes this is too fast to make fancy animation visible thereby adding manual 2s delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.foundGateway()
+            })
+        }
+    }
+    
+    private func foundGateway() {
         let storyboard = UIStoryboard(name: "Setup", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: String(describing: GSSelectNetworkViewController.self)) as! GSSelectNetworkViewController
-        vc.bleGateway = gateway
         vc.gateways = self.gateways
+        vc.blesetupmanager = self.blesetupmanager
         self.navigationController?.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }

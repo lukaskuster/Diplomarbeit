@@ -77,7 +77,6 @@
 		D68812152203AA0F0054C2F9 /* SPDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812142203AA0D0054C2F9 /* SPDelegate.swift */; };
 		D68812172203C2C10054C2F9 /* UINavigation+TopMost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */; };
 		D688121B22041A400054C2F9 /* BLESetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688121A22041A3F0054C2F9 /* BLESetupManager.swift */; };
-		D688121D220426840054C2F9 /* GatewaySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688121C220426840054C2F9 /* GatewaySetupViewController.swift */; };
 		D6881225220439290054C2F9 /* SwiftyBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6881224220439290054C2F9 /* SwiftyBluetooth.framework */; };
 		D6881228220494B70054C2F9 /* GSSelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */; };
 		D688122A2204BF340054C2F9 /* GSSearchingForGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */; };
@@ -209,7 +208,6 @@
 		D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+TopMost.swift"; sourceTree = "<group>"; };
 		D6881218220418F60054C2F9 /* BluetoothKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothKit.framework; path = Carthage/Build/iOS/BluetoothKit.framework; sourceTree = "<group>"; };
 		D688121A22041A3F0054C2F9 /* BLESetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESetupManager.swift; sourceTree = "<group>"; };
-		D688121C220426840054C2F9 /* GatewaySetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewaySetupViewController.swift; sourceTree = "<group>"; };
 		D6881224220439290054C2F9 /* SwiftyBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBluetooth.framework; path = Carthage/Build/iOS/SwiftyBluetooth.framework; sourceTree = "<group>"; };
 		D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSelectNetworkViewController.swift; sourceTree = "<group>"; };
 		D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSearchingForGatewayViewController.swift; sourceTree = "<group>"; };
@@ -364,7 +362,6 @@
 				D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */,
 				D6881226220494700054C2F9 /* GatewaySetup */,
 				D6195A3721E79856002D724E /* GatewaySIMPinViewController.swift */,
-				D688121C220426840054C2F9 /* GatewaySetupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -673,7 +670,6 @@
 				D68812322204F0D70054C2F9 /* GSColorGatewayViewController.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */,
-				D688121D220426840054C2F9 /* GatewaySetupViewController.swift in Sources */,
 				D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */,
 				D68812172203C2C10054C2F9 /* UINavigation+TopMost.swift in Sources */,
 				D62731D121BFE3CD00CFCE28 /* GatewayCollectionView.swift in Sources */,
