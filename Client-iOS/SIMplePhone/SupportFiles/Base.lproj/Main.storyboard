@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -114,39 +113,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RW3-ye-ad2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="785" y="-1325"/>
-        </scene>
-        <!--Dialpad-->
-        <scene sceneID="53K-GN-1ig">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="wHQ-lA-Sd9" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dKS-MB-YBJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="cCy-Yw-Gfs"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Dialpad" largeTitleDisplayMode="never" id="F2D-O1-uxo"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SL9-ae-EyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2518" y="-648"/>
-        </scene>
-        <!--Title-->
-        <scene sceneID="Ta8-cK-4kf">
-            <objects>
-                <viewController id="rVY-sA-Bdb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0fV-lN-r7Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="see-oC-LEr"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="N2G-Fl-d4A"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BfG-RB-0ra" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2518" y="-1325"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -638,11 +604,6 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" image="number_pad" id="Yja-fF-PlO">
-                            <connections>
-                                <segue destination="wHQ-lA-Sd9" kind="show" id="WeX-d5-1kW"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sP3-UB-9od" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -652,7 +613,6 @@
     </scenes>
     <resources>
         <image name="messages" width="30" height="30"/>
-        <image name="number_pad" width="30" height="30"/>
         <image name="open_with" width="30" height="30"/>
         <image name="phone-out" width="30" height="30"/>
         <image name="play" width="30" height="30"/>

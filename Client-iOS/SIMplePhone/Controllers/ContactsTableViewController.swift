@@ -99,6 +99,8 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "number_pad"), style: .done, target: self, action: #selector(didTapDialpadBtn))
+        
         self.resultSearchController = ( {
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -112,6 +114,14 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
         })()
         
         self.fetchContacts()
+    }
+    
+    @objc func didTapDialpadBtn() {
+        let dialpadVC = DialpadViewController()
+        dialpadVC.delegate = self
+        let navVc = UINavigationController(rootViewController: dialpadVC)
+        let seque = DialpadSegue(identifier: nil, source: self, destination: navVc)
+        seque.perform()
     }
 
     // MARK: - Table view data source
@@ -230,14 +240,21 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     @IBAction func didTapAddContactBtn(_ sender: UIBarButtonItem) {
-        let contact = CNContact()
+        self.addNewContact()
+    }
+    
+    func addNewContact(withNumber number: SPNumber? = nil) {
+        let contact = CNMutableContact()
+        if let number = number {
+            let homePhone = CNLabeledValue(label: CNLabelHome, value: CNPhoneNumber(stringValue: number.phoneNumber))
+            contact.phoneNumbers = [homePhone]
+        }
         let contactView = CNContactViewController(forNewContact: contact)
         contactView.contactStore = self.contactStore
         contactView.delegate = self
         let navController = UINavigationController(rootViewController: contactView)
         self.present(navController, animated:true, completion: nil)
     }
-    
     
     func initiateCall(with contact: CNContact, _ property: CNContactProperty, parent: CNContactViewController) {
         do {
@@ -267,6 +284,22 @@ extension ContactsTableViewController: CNContactViewControllerDelegate {
         }else{
             return true
         }
+    }
+}
+
+extension ContactsTableViewController: DialpadViewControllerDelegate {
+    func dialpadViewController(didRequestCall to: SPNumber) {
+        SPDelegate.shared.initiateCall(with: to)
+    }
+    
+    func dialpadViewController(didRequestNewContact with: SPNumber) {
+        self.addNewContact(withNumber: with)
+    }
+    
+    func dialpadViewController(didRequestContactViewFor contact: CNContact) {
+        let contactView = CNContactViewController(for: contact)
+        contactView.delegate = self
+        self.navigationController?.pushViewController(contactView, animated: true)
     }
 }
 

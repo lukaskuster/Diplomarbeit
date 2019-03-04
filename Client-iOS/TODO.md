@@ -8,6 +8,5 @@
 
 ## General
 - Call UI
-- Dialpad UI
 
 ## Messages

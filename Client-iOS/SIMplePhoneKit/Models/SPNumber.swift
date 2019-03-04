@@ -47,4 +47,20 @@ extension SPNumber {
         }
         return nil
     }
+    public func isEqual(to phoneNumberString: String) -> Bool {
+        do {
+            let phonenumberkit = PhoneNumberKit()
+            let number = try phonenumberkit.parse(self.phoneNumber)
+            let compareNumber = try phonenumberkit.parse(phoneNumberString)
+            let formattedNumber = phonenumberkit.format(number, toType: .international, withPrefix: true)
+            let formattedCompareNumber = phonenumberkit.format(compareNumber, toType: .international, withPrefix: true)
+            if formattedNumber == formattedCompareNumber {
+                return true
+            }else{
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
 }

@@ -16,6 +16,14 @@ extension UIColor {
                        alpha: 1.0)
     }
     
+    static var iosGreen: UIColor {
+        return UIColor(red: 0.30, green: 0.85, blue: 0.39, alpha: 1.0)
+    }
+    
+    static var lighterGray: UIColor {
+        return UIColor(red: 0.83, green: 0.83, blue: 0.84, alpha: 1.0)
+    }
+    
     static var cellSeperatorGray: UIColor {
         return UIColor(red: 0.78, green: 0.78, blue: 0.80, alpha: 1.0)
     }
