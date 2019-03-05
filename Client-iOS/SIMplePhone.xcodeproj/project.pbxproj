@@ -12,6 +12,8 @@
 		D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
+		D615527F222DA32600E0208D /* CNContact+AttributedFullName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */; };
+		D6155281222EE14A00E0208D /* UIBorderedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6155280222EE14A00E0208D /* UIBorderedLabel.swift */; };
 		D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */; };
 		D6195A3621E790E5002D724E /* KAPinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3521E790E5002D724E /* KAPinField.swift */; };
 		D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */; };
@@ -126,6 +128,8 @@
 		D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudEnvironmentButton.swift; sourceTree = "<group>"; };
 		D604917C2194289F00F46B18 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+AttributedFullName.swift"; sourceTree = "<group>"; };
+		D6155280222EE14A00E0208D /* UIBorderedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBorderedLabel.swift; sourceTree = "<group>"; };
 		D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		D6195A3521E790E5002D724E /* KAPinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAPinField.swift; sourceTree = "<group>"; };
 		D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayChangeSIMPinViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				D62731D021BFE3CD00CFCE28 /* GatewayCollectionView.swift */,
 				D62731D421C12CF600CFCE28 /* SignalStrengthIndicatorView.swift */,
 				D6195A3A21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift */,
+				D6155280222EE14A00E0208D /* UIBorderedLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */,
 				D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */,
 				D6195A3521E790E5002D724E /* KAPinField.swift */,
+				D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -633,6 +639,7 @@
 				D67818B421799CD000E650DB /* VoicemailProgressSlider.swift in Sources */,
 				D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */,
 				D67818BC217DC53000E650DB /* WebRTCTestViewController.swift in Sources */,
+				D6155281222EE14A00E0208D /* UIBorderedLabel.swift in Sources */,
 				D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */,
 				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
@@ -645,6 +652,7 @@
 				D6195A3621E790E5002D724E /* KAPinField.swift in Sources */,
 				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
 				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
+				D615527F222DA32600E0208D /* CNContact+AttributedFullName.swift in Sources */,
 				D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */,
 				D688F0C021EDEA8F00C465AA /* SelectGatewayViewController.swift in Sources */,
 				D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */,

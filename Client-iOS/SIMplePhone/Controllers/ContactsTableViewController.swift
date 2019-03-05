@@ -157,33 +157,7 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
             contact = section![indexPath.row]
         }
         
-        if contact.familyName != "" {
-            let displayName = contact.givenName+" "+contact.familyName
-            
-            let fontSize = CGFloat(17.0)
-            let attrs = [
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize),
-                NSAttributedString.Key.foregroundColor: UIColor.black
-            ]
-            let nonBoldAttribute = [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
-                ]
-            let attrStr = NSMutableAttributedString(string: displayName, attributes: attrs)
-            let range = NSMakeRange(0, contact.givenName.count)
-            attrStr.setAttributes(nonBoldAttribute, range: range)
-            
-            cell.textLabel?.attributedText = attrStr
-        }else{
-            let displayName = contact.organizationName
-            let attrs = [
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0),
-                NSAttributedString.Key.foregroundColor: UIColor.black
-            ]
-            let attrStr = NSMutableAttributedString(string: displayName, attributes: attrs)
-            
-            cell.textLabel?.attributedText = attrStr
-        }
-
+        cell.textLabel?.attributedText = contact.attributedFullName()
         return cell
     }
     

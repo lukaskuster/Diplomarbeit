@@ -24,16 +24,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="327" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBq-P3-cyj">
-                                            <rect key="frame" x="39" y="8" width="44" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBq-P3-cyj">
+                                            <rect key="frame" x="42" y="10" width="43.5" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-3L-4Ue">
-                                            <rect key="frame" x="39" y="29" width="44" height="19.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                            <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRQ-lX-Onu">
@@ -42,33 +36,52 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="phone-out" translatesAutoresizingMaskIntoConstraints="NO" id="7fr-fX-zlc">
-                                            <rect key="frame" x="16" y="9.5" width="18" height="18"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone-out" translatesAutoresizingMaskIntoConstraints="NO" id="7fr-fX-zlc">
+                                            <rect key="frame" x="16" y="11" width="18" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="8l1-82-Nht"/>
                                                 <constraint firstAttribute="width" constant="18" id="zpO-jT-v8t"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gateway" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZR-L4-d8s" customClass="UIBorderedLabel" customModule="SIMplePhone" customModuleProvider="target">
+                                            <rect key="frame" x="42" y="30" width="63" height="19.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="WAU-2M-vMp"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8v-3L-4Ue">
+                                            <rect key="frame" x="110" y="30" width="62" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="top" secondItem="PZR-L4-d8s" secondAttribute="top" id="0CN-pP-jFP"/>
                                         <constraint firstItem="fBq-P3-cyj" firstAttribute="top" secondItem="B2p-iV-YKW" secondAttribute="top" constant="10" id="1UZ-HM-cnB"/>
+                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="leading" secondItem="PZR-L4-d8s" secondAttribute="trailing" constant="5" id="3Ua-WY-zcb"/>
                                         <constraint firstAttribute="bottom" secondItem="i8v-3L-4Ue" secondAttribute="bottom" constant="10" id="8Yv-le-KLK"/>
-                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="leading" secondItem="fBq-P3-cyj" secondAttribute="leading" id="AeL-dp-dfb"/>
                                         <constraint firstItem="7fr-fX-zlc" firstAttribute="centerY" secondItem="fBq-P3-cyj" secondAttribute="centerY" id="Ahr-HQ-J1J"/>
-                                        <constraint firstItem="bRQ-lX-Onu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBq-P3-cyj" secondAttribute="trailing" constant="8" symbolic="YES" id="N2z-S5-JCh"/>
-                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="top" secondItem="fBq-P3-cyj" secondAttribute="bottom" id="P3W-fw-Gsk"/>
-                                        <constraint firstItem="fBq-P3-cyj" firstAttribute="leading" secondItem="7fr-fX-zlc" secondAttribute="trailing" constant="5" id="Rdz-11-WAi"/>
+                                        <constraint firstItem="PZR-L4-d8s" firstAttribute="leading" secondItem="fBq-P3-cyj" secondAttribute="leading" id="Fsj-IQ-FA6"/>
+                                        <constraint firstItem="fBq-P3-cyj" firstAttribute="leading" secondItem="7fr-fX-zlc" secondAttribute="trailing" constant="8" symbolic="YES" id="Rdz-11-WAi"/>
                                         <constraint firstItem="bRQ-lX-Onu" firstAttribute="centerY" secondItem="B2p-iV-YKW" secondAttribute="centerY" id="Ric-Sd-lzD"/>
-                                        <constraint firstItem="i8v-3L-4Ue" firstAttribute="trailing" secondItem="fBq-P3-cyj" secondAttribute="trailing" id="ehF-ti-GbD"/>
+                                        <constraint firstItem="bRQ-lX-Onu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i8v-3L-4Ue" secondAttribute="trailing" id="S1Z-Ao-fL6"/>
                                         <constraint firstItem="7fr-fX-zlc" firstAttribute="leading" secondItem="B2p-iV-YKW" secondAttribute="leadingMargin" id="ihP-xM-YjQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="bRQ-lX-Onu" secondAttribute="trailing" id="yZI-nE-bCU"/>
+                                        <constraint firstItem="bRQ-lX-Onu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBq-P3-cyj" secondAttribute="trailing" constant="8" symbolic="YES" id="nQN-ab-COV"/>
+                                        <constraint firstAttribute="bottom" secondItem="PZR-L4-d8s" secondAttribute="bottom" constant="10" id="qm3-Xm-PPA"/>
+                                        <constraint firstItem="PZR-L4-d8s" firstAttribute="top" secondItem="fBq-P3-cyj" secondAttribute="bottom" id="uel-2a-pXP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="bRQ-lX-Onu" secondAttribute="trailingMargin" id="yZI-nE-bCU"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="callerGlyph" destination="7fr-fX-zlc" id="BSp-X6-5GA"/>
                                     <outlet property="callerNameLabel" destination="fBq-P3-cyj" id="JLS-us-TJ9"/>
-                                    <outlet property="callerSubtitleLabel" destination="i8v-3L-4Ue" id="hfP-bw-8os"/>
+                                    <outlet property="durationLabel" destination="i8v-3L-4Ue" id="ngv-ZK-fk1"/>
+                                    <outlet property="gatewayNameLabel" destination="PZR-L4-d8s" id="vaN-9n-e9m"/>
                                     <outlet property="timeStampLabel" destination="bRQ-lX-Onu" id="Wu3-Kj-poo"/>
                                 </connections>
                             </tableViewCell>
@@ -80,7 +93,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Recents" id="CJk-Ea-CRR">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="sOD-oS-JBJ">
-                            <rect key="frame" x="130" y="7" width="115" height="30"/>
+                            <rect key="frame" x="130" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
