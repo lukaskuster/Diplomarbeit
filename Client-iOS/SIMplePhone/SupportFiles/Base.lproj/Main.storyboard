@@ -93,7 +93,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Recents" id="CJk-Ea-CRR">
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="sOD-oS-JBJ">
-                            <rect key="frame" x="130" y="7" width="150" height="30"/>
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
@@ -528,56 +528,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="80" id="SO4-oN-d9u">
-                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SO4-oN-d9u" id="4tl-Dr-Xm0">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="79.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TFd-Dm-VXX">
-                                            <rect key="frame" x="16" y="11" width="58" height="58"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="TFd-Dm-VXX" secondAttribute="height" multiplier="1:1" id="MQB-g5-wim"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gateway Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVc-fZ-XGm">
-                                            <rect key="frame" x="84" y="11" width="239" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+43 6641817908" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD5-fR-tNj">
-                                            <rect key="frame" x="84" y="32" width="239" height="15"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" red="0.56078431370000004" green="0.5568627451" blue="0.58039215690000001" alpha="1" colorSpace="deviceRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(signal) LTE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVc-P4-J74">
-                                            <rect key="frame" x="84" y="54" width="239" height="15"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="NVc-P4-J74" secondAttribute="trailing" constant="10" id="AWP-VS-709"/>
-                                        <constraint firstItem="AVc-fZ-XGm" firstAttribute="leading" secondItem="TFd-Dm-VXX" secondAttribute="trailing" constant="10" id="IGB-fM-RNe"/>
-                                        <constraint firstItem="mD5-fR-tNj" firstAttribute="top" secondItem="AVc-fZ-XGm" secondAttribute="bottom" id="Jq5-mn-cKE"/>
-                                        <constraint firstItem="TFd-Dm-VXX" firstAttribute="leading" secondItem="4tl-Dr-Xm0" secondAttribute="leadingMargin" id="QrM-x5-MOR"/>
-                                        <constraint firstItem="NVc-P4-J74" firstAttribute="leading" secondItem="TFd-Dm-VXX" secondAttribute="trailing" constant="10" id="S2i-EU-h1I"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="AVc-fZ-XGm" secondAttribute="trailing" constant="10" id="a1K-YW-oS6"/>
-                                        <constraint firstItem="TFd-Dm-VXX" firstAttribute="bottom" secondItem="4tl-Dr-Xm0" secondAttribute="bottomMargin" id="dMh-ct-wnW"/>
-                                        <constraint firstItem="mD5-fR-tNj" firstAttribute="leading" secondItem="TFd-Dm-VXX" secondAttribute="trailing" constant="10" id="eKM-63-mBT"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="mD5-fR-tNj" secondAttribute="trailing" constant="10" id="hUb-3D-4go"/>
-                                        <constraint firstItem="TFd-Dm-VXX" firstAttribute="top" secondItem="4tl-Dr-Xm0" secondAttribute="topMargin" id="huZ-uD-yeJ"/>
-                                        <constraint firstItem="NVc-P4-J74" firstAttribute="bottom" secondItem="4tl-Dr-Xm0" secondAttribute="bottomMargin" id="qI7-O8-3Pl"/>
-                                        <constraint firstItem="AVc-fZ-XGm" firstAttribute="top" secondItem="4tl-Dr-Xm0" secondAttribute="topMargin" id="tvN-7P-q9l"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Identifier" textLabel="Kyr-F4-GQd" style="IBUITableViewCellStyleDefault" id="pg6-t7-Yr5">
-                                <rect key="frame" x="0.0" y="108" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" textLabel="Kyr-F4-GQd" style="IBUITableViewCellStyleDefault" id="pg6-t7-Yr5">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pg6-t7-Yr5" id="olV-BI-5DI">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

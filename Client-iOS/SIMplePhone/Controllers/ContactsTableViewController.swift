@@ -147,7 +147,7 @@ class ContactsTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Identifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
         
         var contact: CNContact
         if resultSearchController.isActive {
