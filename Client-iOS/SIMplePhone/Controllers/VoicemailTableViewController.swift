@@ -9,38 +9,56 @@
 import UIKit
 import Contacts
 import SIMplePhoneKit
+import SwiftMessages
 
 class VoicemailTableViewController: UITableViewController {
 
-    var voicemails: [SPVoicemail] {
-        return SPManager.shared.getVoicemails() ?? []
-    }
+    public var voicemails = [SPVoicemail]()
     var selectedRow: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem.badgeValue = "\(voicemails.count)"
         
         self.tableView.allowsMultipleSelection = false
         self.tableView.allowsSelection = true
         self.tableView.allowsSelectionDuringEditing = false
         self.tableView.tableFooterView = UIView()
-                
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func addVoicemailsToDB() {
-        let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
-        
-        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", colorString: "#000000", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
-        
-        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436641817908"), audio: sampleAudio))
-        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338456"), audio: sampleAudio))
-        SPManager.shared.addVoicemail(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338457"), audio: sampleAudio))
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.loadVoicemails()
+            self.tableView.reloadData()
+        }
+    }
+    
+    func loadVoicemails() {
+        if let voicemails = SPManager.shared.getVoicemails() {
+            self.voicemails = voicemails
+            self.tabBarItem.badgeValue = "\(self.voicemails.count)"
+        }
+    }
+    
+    @IBAction func didTapGreetingBtn(_ sender: UIBarButtonItem) {
+        let messageView: MessageView = MessageView.viewFromNib(layout: .centeredView)
+        messageView.configureBackgroundView(width: 250)
+        messageView.configureContent(title: "Sorry", body: "Not yet implemented.", iconImage: nil, iconText: "💩", buttonImage: nil, buttonTitle: "But this adds sample voicemails") { _ in
+            SPManager.shared.addSampleVoicemails()
+            self.loadVoicemails()
+            self.tableView.reloadData()
+            SwiftMessages.hide()
+        }
+        messageView.backgroundView.backgroundColor = UIColor.init(white: 0.97, alpha: 1)
+        messageView.backgroundView.layer.cornerRadius = 10
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.duration = .forever
+        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
+        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
+        SwiftMessages.show(config: config, view: messageView)
     }
 
     // MARK: - Table view data source
@@ -57,10 +75,17 @@ class VoicemailTableViewController: UITableViewController {
         if self.selectedRow == indexPath && self.tableView.cellForRow(at: indexPath)?.reuseIdentifier == "voicemailMessageCell" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "expandedVoicemailMessageCell", for: indexPath) as! SelectedVoicemailTableViewCell
             cell.voicemail = voicemails[indexPath.row]
+            cell.cellIndex = indexPath
             cell.parentVC = self
             
             return cell
         }else{
+            // Reset Audio Player of old cell
+            if let index = self.selectedRow,
+                let oldCell = self.tableView.cellForRow(at: index) as? SelectedVoicemailTableViewCell {
+                oldCell.resetAudioPlayer()
+            }
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "voicemailMessageCell", for: indexPath) as! VoicemailTableViewCell
             cell.voicemail = voicemails[indexPath.row]
             
@@ -68,7 +93,6 @@ class VoicemailTableViewController: UITableViewController {
         }
     }
 
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Disable editing while expanded
         if let selection = self.selectedRow {
@@ -79,14 +103,27 @@ class VoicemailTableViewController: UITableViewController {
         return true
     }
 
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            self.deleteVoicemail(at: indexPath)
+        }
+    }
+    
+    public func deleteVoicemail(at index: IndexPath) {
+        let voicemail = self.voicemails[index.row]
+        let otherparty = voicemail.secondParty.contact != nil ? voicemail.secondParty.contact!.attributedFullName().string : voicemail.secondParty.prettyPhoneNumber()
+        let date = DateFormatter.localizedString(from: voicemail.time, dateStyle: .long, timeStyle: .short)
+        let alert = UIAlertController(title: "Delete Voicemail?", message: "Received from \(otherparty) on \(date). This can not be undone and happens across all your devices.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete Voicemail", style: .destructive, handler: { (action) in
+            if SPManager.shared.deleteVoicemail(with: self.voicemails[index.row].id) {
+                self.loadVoicemails()
+                self.tableView.deleteRows(at: [index], with: .fade)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        if let controller = UIApplication.shared.topMostViewController() {
+            controller.present(alert, animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -99,41 +136,5 @@ class VoicemailTableViewController: UITableViewController {
         }
         self.tableView.reloadRows(at: [indexPath], with: .fade)
     }
-    
-//    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-//        print(indexPath)
-//        if let selectedCell = self.selectedRow {
-//            if selectedCell == indexPath {
-//                print("match")
-//                self.selectedRow = nil
-//                self.tableView.reloadRows(at: [indexPath], with: .fade)
-//            }
-//        }
-//    }
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
 }

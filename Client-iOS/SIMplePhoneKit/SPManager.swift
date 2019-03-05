@@ -11,6 +11,7 @@ import KeychainSwift
 import CloudKit
 import SwiftyJSON
 import UserNotifications
+import RealmSwift
 
 public protocol SPManagerDelegate {
     func spManager(didAnswerIncomingCall from: SPNumber, on gateway: SPGateway)
@@ -476,9 +477,37 @@ public protocol SPManagerDelegate {
         return self.realmManager.getCountOfUnheardVoicemails()
     }
     
+    public func deleteVoicemail(with id: String) -> Bool {
+        if let voicemail = self.realmManager.getVoicemail(byId: id) {
+            self.realmManager.deleteVoicemail(voicemail)
+            return true
+        }else{
+            return false
+        }
+    }
+    
     func checkForNewVoicemails() -> [SPVoicemail]? {
         // TODO: Implement
         return nil
+    }
+    
+    // Delete this! Test only!
+    public func addSampleVoicemails() {
+        let sampleAudio = Bundle.main.url(forResource: "sample", withExtension: "m4a")!
+
+        var voicemails = [SPVoicemail]()
+        let realm = try! Realm()
+        try! realm.write {
+            if let gateway = realm.object(ofType: SPGateway.self, forPrimaryKey: "444406380982382") {
+                voicemails.append(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436641817908"), audio: sampleAudio))
+                voicemails.append(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338456"), audio: sampleAudio))
+                voicemails.append(SPVoicemail(gateway, date: Date(), origin: SPNumber(withNumber: "00436648338457"), audio: sampleAudio))
+            }
+        }
+        
+        for voicemail in voicemails {
+            self.realmManager.addNewVoicemail(voicemail)
+        }
     }
     
     // MARK: - Settings

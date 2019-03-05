@@ -19,7 +19,7 @@ class VoicemailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var heardIndicatorLabel: UIView!
     @IBOutlet weak var originPhoneNumberLabel: UILabel!
-    @IBOutlet weak var originGatewayLabel: UILabel!
+    @IBOutlet weak var originGatewayLabel: UIBorderedLabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
@@ -41,20 +41,40 @@ class VoicemailTableViewCell: UITableViewCell {
         if let data = self.voicemail {
             self.heardIndicatorLabel.isHidden = data.heard
             if let contact = data.secondParty.contact {
-                if contact.givenName != "" && contact.familyName != "" {
-                    self.originPhoneNumberLabel.text = contact.givenName+" "+contact.familyName
-                }else{
-                    self.originPhoneNumberLabel.text = contact.organizationName
-                }
+                self.originPhoneNumberLabel.attributedText = contact.attributedFullName(fullyBold: true)
             }else{
                 self.originPhoneNumberLabel.text = data.secondParty.prettyPhoneNumber()
             }
-            self.originGatewayLabel.text = "Gateway: \(String(describing: data.gateway?.name))"
-            self.dateLabel.text = DateFormatter.localizedString(from: data.time, dateStyle: .none, timeStyle: .short)
+            if let gateway = data.gateway {
+                self.originGatewayLabel.text = gateway.name ?? "Gateway"
+                self.originGatewayLabel.backgroundColor = gateway.color ?? .lightGray
+            }else{
+                self.originGatewayLabel.text = "N/A"
+                self.originGatewayLabel.backgroundColor = .lightGray
+            }
+            self.dateLabel.text = formatDate(data.time)
+            
             let s: Int = Int(data.duration) % 60
             let m: Int = Int(data.duration) / 60
             self.durationLabel.text = String(format: "%0d:%02d", m, s)
         }
     }
 
+    func formatDate(_ date: Date) -> String {
+        if Calendar.current.isDateInToday(date) {
+            return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)
+        }else{
+            let day = Calendar.current.startOfDay(for: date)
+            if day.timeIntervalSinceNow >= -(60*60*24*6) { // last six days in seconds
+                // Display Weekday
+                let f = DateFormatter()
+                f.locale = Locale.autoupdatingCurrent
+                let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: day)]
+                return weekday
+            }else{
+                // Display Date
+                return DateFormatter.localizedString(from: day, dateStyle: .short, timeStyle: .none)
+            }
+        }
+    }
 }

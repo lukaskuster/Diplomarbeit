@@ -11,7 +11,7 @@ import RealmSwift
 import AVFoundation
 
 public class SPVoicemail: Object {
-    @objc dynamic var id: String = NSUUID().uuidString
+    @objc public dynamic var id: String = NSUUID().uuidString
     @objc public dynamic var heard = false
     @objc public dynamic var time = Date(timeIntervalSince1970: 1)
     public var secondParty: SPNumber {
@@ -22,6 +22,10 @@ public class SPVoicemail: Object {
     @objc public dynamic var gateway: SPGateway?
     @objc public dynamic var duration: Double = 0.0
     @objc private dynamic var _audioFilePath = ""
+    public var audioFilePath: URL? {
+        get { return URL(string: self._audioFilePath) }
+        set { _audioFilePath = newValue != nil ? newValue!.absoluteString : "" }
+    }
     
     public convenience init(_ gateway: SPGateway, date: Date, origin: SPNumber, audio audioURL: URL) {
         self.init()
@@ -29,7 +33,7 @@ public class SPVoicemail: Object {
         self.time = date
         self.secondParty = origin
         self.gateway = gateway
-        self._audioFilePath = audioURL.absoluteString
+        self.audioFilePath = audioURL
         self.duration = calcDuration(forPath: audioURL)
     }
     
@@ -38,15 +42,11 @@ public class SPVoicemail: Object {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["secondParty"]
+        return ["secondParty", "audioFilePath"]
     }
 }
 
-extension SPVoicemail {
-    public func getAudioFilePath() -> URL {
-        return URL(fileURLWithPath: self._audioFilePath)
-    }
-    
+extension SPVoicemail {    
     private func calcDuration(forPath fileURL: URL) -> Double {
         let asset = AVURLAsset(url: fileURL)
         let duration = asset.duration

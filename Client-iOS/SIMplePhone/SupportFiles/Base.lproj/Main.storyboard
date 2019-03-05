@@ -264,39 +264,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="voicemailMessageCell" rowHeight="62" id="8ZO-cp-RVk" customClass="VoicemailTableViewCell" customModule="SIMplePhone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="62"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="voicemailMessageCell" rowHeight="60" id="8ZO-cp-RVk" customClass="VoicemailTableViewCell" customModule="SIMplePhone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8ZO-cp-RVk" id="wt2-Vp-eib">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF7-Qh-goF">
-                                            <rect key="frame" x="36" y="11" width="120" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF7-Qh-goF">
+                                            <rect key="frame" x="36" y="16.5" width="120" height="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="13" id="9xm-Ac-2Of"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Receiving Gateway Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-Nw-ppC">
-                                            <rect key="frame" x="36" y="37" width="144" height="15"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqQ-jA-KGn">
-                                            <rect key="frame" x="324.5" y="11" width="34.5" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gateway" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-Nw-ppC" customClass="UIBorderedLabel" customModule="SIMplePhone" customModuleProvider="target">
+                                            <rect key="frame" x="36" y="34.5" width="63" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="x0b-aP-eyi"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfN-zR-hH6">
-                                            <rect key="frame" x="310" y="37" width="49" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqQ-jA-KGn">
+                                            <rect key="frame" x="324.5" y="16.5" width="34.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfN-zR-hH6">
+                                            <rect key="frame" x="310" y="38" width="49" height="15"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCv-mi-aPo">
-                                            <rect key="frame" x="16" y="26" width="10" height="10"/>
+                                            <rect key="frame" x="16" y="29.5" width="10" height="10"/>
                                             <color key="backgroundColor" red="0.80784314869999996" green="0.027450980619999999" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="10" id="M2t-0f-WX7"/>
@@ -306,12 +312,14 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="GCv-mi-aPo" firstAttribute="leading" secondItem="wt2-Vp-eib" secondAttribute="leadingMargin" id="4O6-St-IYc"/>
+                                        <constraint firstItem="hqQ-jA-KGn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IF7-Qh-goF" secondAttribute="trailing" constant="8" symbolic="YES" id="4qp-5o-H71"/>
                                         <constraint firstItem="IF7-Qh-goF" firstAttribute="leading" secondItem="wt2-Vp-eib" secondAttribute="leadingMargin" constant="20" id="8oK-QQ-fsq"/>
+                                        <constraint firstItem="OfN-zR-hH6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fVj-Nw-ppC" secondAttribute="trailing" constant="8" symbolic="YES" id="AZN-GQ-8Gg"/>
                                         <constraint firstItem="OfN-zR-hH6" firstAttribute="trailing" secondItem="wt2-Vp-eib" secondAttribute="trailingMargin" id="ICq-O2-nHx"/>
                                         <constraint firstItem="fVj-Nw-ppC" firstAttribute="leading" secondItem="wt2-Vp-eib" secondAttribute="leadingMargin" constant="20" id="UJP-NC-ZAX"/>
                                         <constraint firstItem="OfN-zR-hH6" firstAttribute="top" secondItem="hqQ-jA-KGn" secondAttribute="bottom" constant="2" id="Ymb-Ra-MVx"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="fVj-Nw-ppC" secondAttribute="bottom" constant="5" id="Zn6-7d-EPK"/>
-                                        <constraint firstItem="fVj-Nw-ppC" firstAttribute="top" secondItem="IF7-Qh-goF" secondAttribute="bottom" constant="2" id="dqX-pB-oX1"/>
+                                        <constraint firstItem="fVj-Nw-ppC" firstAttribute="top" secondItem="IF7-Qh-goF" secondAttribute="bottom" constant="5" id="dqX-pB-oX1"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="OfN-zR-hH6" secondAttribute="bottom" constant="5" id="v8L-mo-FOe"/>
                                         <constraint firstItem="IF7-Qh-goF" firstAttribute="top" secondItem="wt2-Vp-eib" secondAttribute="topMargin" constant="5" id="vQD-VI-xyu"/>
                                         <constraint firstItem="hqQ-jA-KGn" firstAttribute="top" secondItem="wt2-Vp-eib" secondAttribute="topMargin" constant="5" id="vgH-tG-OKC"/>
@@ -329,50 +337,52 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="expandedVoicemailMessageCell" rowHeight="150" id="g8C-CI-6R8" customClass="SelectedVoicemailTableViewCell" customModule="SIMplePhone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="90" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g8C-CI-6R8" id="KpF-xK-COA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-LH-esO">
-                                            <rect key="frame" x="36" y="11" width="120" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-LH-esO">
+                                            <rect key="frame" x="36" y="16" width="120" height="13"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="13" id="NvY-mX-AR2"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Receiving Gateway Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBf-vY-wU1">
-                                            <rect key="frame" x="36" y="37" width="144" height="15"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gateway" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBf-vY-wU1" customClass="UIBorderedLabel" customModule="SIMplePhone" customModuleProvider="target">
+                                            <rect key="frame" x="36" y="34" width="63" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="CRC-Ri-tMB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSb-Ub-5ss">
-                                            <rect key="frame" x="16" y="16.5" width="10" height="10"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSb-Ub-5ss">
+                                            <rect key="frame" x="16" y="17.5" width="10" height="10"/>
                                             <color key="backgroundColor" red="0.80784314869999996" green="0.027450980619999999" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="10" id="c0b-LG-HTB"/>
-                                                <constraint firstAttribute="width" constant="10" id="x40-Pt-gaf"/>
+                                                <constraint firstAttribute="height" constant="10" id="1FK-VD-oIl"/>
+                                                <constraint firstAttribute="width" constant="10" id="SHA-GK-rwM"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lk0-ca-nyC">
-                                            <rect key="frame" x="36" y="57" width="26.5" height="14.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lk0-ca-nyC">
+                                            <rect key="frame" x="36" y="57" width="26.5" height="12"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTu-Xt-fkv">
-                                            <rect key="frame" x="329" y="16" width="30" height="30"/>
-                                            <state key="normal" image="open_with"/>
-                                            <connections>
-                                                <action selector="shareVoicemailBtn:" destination="g8C-CI-6R8" eventType="touchUpInside" id="dca-FA-vza"/>
-                                            </connections>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ta4-gP-W2t">
                                             <rect key="frame" x="36" y="79" width="323" height="55"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wij-15-CHd" customClass="VoicemailProgressSlider" customModule="SIMplePhone" customModuleProvider="target">
                                                     <rect key="frame" x="84.5" y="10" width="190.5" height="36"/>
+                                                    <connections>
+                                                        <action selector="scrub:" destination="g8C-CI-6R8" eventType="valueChanged" id="F8H-zG-Pbx"/>
+                                                    </connections>
                                                 </slider>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9K-p8-RlY">
                                                     <rect key="frame" x="10" y="5" width="30" height="45"/>
@@ -412,20 +422,62 @@
                                                 <constraint firstItem="w9K-p8-RlY" firstAttribute="leading" secondItem="Ta4-gP-W2t" secondAttribute="leading" constant="10" id="zsZ-bf-fqH"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYv-zi-1Rw">
+                                            <rect key="frame" x="222" y="25" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="CfR-V1-rIQ"/>
+                                                <constraint firstAttribute="width" secondItem="zYv-zi-1Rw" secondAttribute="height" multiplier="1:1" id="rHY-2c-q9C"/>
+                                            </constraints>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" image="call-phone-icon"/>
+                                            <connections>
+                                                <action selector="callBackBtn:" destination="g8C-CI-6R8" eventType="touchUpInside" id="jkZ-A2-KXF"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygH-5n-d3R">
+                                            <rect key="frame" x="310" y="25" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ygH-5n-d3R" secondAttribute="height" multiplier="1:1" id="OTv-ht-xRG"/>
+                                            </constraints>
+                                            <state key="normal" image="delete"/>
+                                            <connections>
+                                                <action selector="deleteVoicemailBtn:" destination="g8C-CI-6R8" eventType="touchUpInside" id="YAe-ZW-IGv"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTu-Xt-fkv">
+                                            <rect key="frame" x="266" y="25" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="VTu-Xt-fkv" secondAttribute="height" multiplier="1:1" id="6P4-o2-F7C"/>
+                                            </constraints>
+                                            <state key="normal" image="download-voicemail"/>
+                                            <connections>
+                                                <action selector="shareVoicemailBtn:" destination="g8C-CI-6R8" eventType="touchUpInside" id="dca-FA-vza"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="VTu-Xt-fkv" firstAttribute="top" secondItem="KpF-xK-COA" secondAttribute="topMargin" constant="5" id="0Vr-95-mKw"/>
-                                        <constraint firstItem="VTu-Xt-fkv" firstAttribute="trailing" secondItem="Ta4-gP-W2t" secondAttribute="trailing" id="20R-Eo-puw"/>
-                                        <constraint firstItem="Lk0-ca-nyC" firstAttribute="top" secondItem="JBf-vY-wU1" secondAttribute="bottom" constant="2" id="3Fl-ol-BeC"/>
+                                        <constraint firstItem="Lk0-ca-nyC" firstAttribute="top" secondItem="JBf-vY-wU1" secondAttribute="bottom" constant="3" id="3Fl-ol-BeC"/>
                                         <constraint firstItem="Ta4-gP-W2t" firstAttribute="top" secondItem="Lk0-ca-nyC" secondAttribute="bottom" constant="10" id="9hr-gy-UEA"/>
+                                        <constraint firstItem="ygH-5n-d3R" firstAttribute="leading" secondItem="VTu-Xt-fkv" secondAttribute="trailing" id="BzS-zb-F2i"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Ta4-gP-W2t" secondAttribute="trailing" id="FUA-TN-ZIa"/>
                                         <constraint firstItem="A0F-LH-esO" firstAttribute="leading" secondItem="KpF-xK-COA" secondAttribute="leadingMargin" constant="20" id="IY4-sn-cpK"/>
-                                        <constraint firstItem="JBf-vY-wU1" firstAttribute="top" secondItem="A0F-LH-esO" secondAttribute="bottom" constant="2" id="Ljr-3N-zdP"/>
+                                        <constraint firstItem="ygH-5n-d3R" firstAttribute="top" secondItem="VTu-Xt-fkv" secondAttribute="top" id="KSC-iR-vh5"/>
+                                        <constraint firstItem="JBf-vY-wU1" firstAttribute="top" secondItem="A0F-LH-esO" secondAttribute="bottom" constant="5" id="Ljr-3N-zdP"/>
+                                        <constraint firstItem="VTu-Xt-fkv" firstAttribute="bottom" secondItem="Lk0-ca-nyC" secondAttribute="bottom" id="MNz-WU-ei3"/>
+                                        <constraint firstItem="ygH-5n-d3R" firstAttribute="bottom" secondItem="VTu-Xt-fkv" secondAttribute="bottom" id="S7G-mR-hm7"/>
                                         <constraint firstItem="JBf-vY-wU1" firstAttribute="leading" secondItem="KpF-xK-COA" secondAttribute="leadingMargin" constant="20" id="S8f-YM-BdU"/>
+                                        <constraint firstItem="zYv-zi-1Rw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JBf-vY-wU1" secondAttribute="trailing" constant="8" symbolic="YES" id="VAl-sO-JO7"/>
                                         <constraint firstItem="Ta4-gP-W2t" firstAttribute="leading" secondItem="KpF-xK-COA" secondAttribute="leadingMargin" constant="20" id="bJ9-KF-UgE"/>
+                                        <constraint firstItem="VTu-Xt-fkv" firstAttribute="leading" secondItem="zYv-zi-1Rw" secondAttribute="trailing" id="bhK-ba-fbh"/>
+                                        <constraint firstItem="uSb-Ub-5ss" firstAttribute="centerY" secondItem="A0F-LH-esO" secondAttribute="centerY" id="exK-ZN-5HX"/>
+                                        <constraint firstItem="zYv-zi-1Rw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A0F-LH-esO" secondAttribute="trailing" constant="8" symbolic="YES" id="g3c-tu-rrX"/>
+                                        <constraint firstItem="zYv-zi-1Rw" firstAttribute="bottom" secondItem="VTu-Xt-fkv" secondAttribute="bottom" id="hki-lN-jro"/>
                                         <constraint firstItem="Lk0-ca-nyC" firstAttribute="leading" secondItem="KpF-xK-COA" secondAttribute="leadingMargin" constant="20" id="keT-S4-Qqx"/>
                                         <constraint firstItem="uSb-Ub-5ss" firstAttribute="centerY" secondItem="A0F-LH-esO" secondAttribute="centerY" id="pD2-ab-Ptk"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="VTu-Xt-fkv" secondAttribute="trailing" id="sAY-Hr-Zgr"/>
+                                        <constraint firstItem="zYv-zi-1Rw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lk0-ca-nyC" secondAttribute="trailing" constant="8" symbolic="YES" id="sxa-aD-PFb"/>
+                                        <constraint firstItem="zYv-zi-1Rw" firstAttribute="top" secondItem="VTu-Xt-fkv" secondAttribute="top" id="vnB-Sn-Dyi"/>
                                         <constraint firstItem="uSb-Ub-5ss" firstAttribute="leading" secondItem="KpF-xK-COA" secondAttribute="leadingMargin" id="w3p-RO-vwT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ygH-5n-d3R" secondAttribute="trailing" constant="5" id="xLi-W2-rQI"/>
                                         <constraint firstItem="A0F-LH-esO" firstAttribute="top" secondItem="KpF-xK-COA" secondAttribute="topMargin" constant="5" id="yy0-gv-wTV"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Ta4-gP-W2t" secondAttribute="bottom" constant="5" id="zYD-ia-94A"/>
                                     </constraints>
@@ -450,13 +502,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Voicemail" id="cff-re-5CL">
-                        <barButtonItem key="leftBarButtonItem" title="Greeting" id="rbv-pL-2i4"/>
+                        <barButtonItem key="leftBarButtonItem" title="Greeting" id="rbv-pL-2i4">
+                            <connections>
+                                <action selector="didTapGreetingBtn:" destination="THX-kB-0j4" id="dJo-Hw-YTj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="NoB-IG-1MI"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rY-g7-c6n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="733.5832083958021"/>
+            <point key="canvasLocation" x="1740" y="732.68365817091455"/>
         </scene>
         <!--Voicemail-->
         <scene sceneID="kMq-3Z-uLj">
@@ -577,8 +633,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="call-phone-icon" width="30" height="30"/>
+        <image name="delete" width="30" height="30"/>
+        <image name="download-voicemail" width="30" height="30"/>
         <image name="messages" width="30" height="30"/>
-        <image name="open_with" width="30" height="30"/>
         <image name="phone-out" width="30" height="30"/>
         <image name="play" width="30" height="30"/>
         <image name="recent-calls" width="30" height="30"/>

@@ -46,7 +46,7 @@ class RealmManager: NSObject {
     }
     
     public func getAllVoicemails() -> [SPVoicemail]? {
-        let voicemails = self.realm.objects(SPVoicemail.self).toArray(ofType: SPVoicemail.self) as [SPVoicemail]
+        let voicemails = self.realm.objects(SPVoicemail.self).sorted(byKeyPath: "time", ascending: false).toArray(ofType: SPVoicemail.self) as [SPVoicemail]
         return voicemails.count > 0 ? voicemails : nil
     }
     
@@ -57,6 +57,15 @@ class RealmManager: NSObject {
     
     public func addNewVoicemail(_ voicemail: SPVoicemail) {
         self.realmAdd(voicemail)
+    }
+    
+    public func getVoicemail(byId id: String) -> SPVoicemail? {
+        let voicemails = realm.objects(SPVoicemail.self).filter("id = '\(id)'")
+        return voicemails.first
+    }
+    
+    public func deleteVoicemail(_ voicemail: SPVoicemail) {
+        self.realmDelete(voicemail)
     }
     
     public func markVoicemailAs(_ voicemail: SPVoicemail, heard: Bool) {
