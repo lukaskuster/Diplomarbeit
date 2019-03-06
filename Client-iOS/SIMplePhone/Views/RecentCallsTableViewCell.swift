@@ -47,7 +47,9 @@ class RecentCallsTableViewCell: UITableViewCell {
                 self.gatewayNameLabel.backgroundColor = .lightGray
             }
             
+            self.durationLabel.isHidden = call.duration.isEqual(to: 0)
             self.durationLabel.text = "- Duration: \(formatDuration(call.duration))"
+            
             self.callerGlyph.isHidden = (call.direction == .incoming)
             
             self.timeStampLabel.text = formatDate(call.time)
