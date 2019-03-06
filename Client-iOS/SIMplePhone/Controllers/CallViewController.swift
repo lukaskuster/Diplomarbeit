@@ -140,14 +140,7 @@ extension CallViewController {
     
     public func close(_ error: Error) {
         self.close()
-        var config = SwiftMessages.Config()
-        config.presentationContext = .window(windowLevel: .statusBar)
-        let view = MessageView.viewFromNib(layout: .cardView)
-        view.configureTheme(.error)
-        view.configureContent(title: "Error while trying to make call", body: "\(error)")
-        view.button?.isHidden = true
-        view.layoutMarginAdditions = UIEdgeInsets(top: 25, left: 20, bottom: 20, right: 20)
-        SwiftMessages.show(config: config, view: view)
+        SPDelegate.shared.display(error: error)
     }
     
     public func close() {

@@ -13,12 +13,12 @@ public class SPGateway: Object {
     @objc public dynamic var imei = ""
     @objc public dynamic var name: String?
     @objc public dynamic var phoneNumber: String?
-    private var _signalStrength = RealmOptional<Double>()
+    private let _signalStrength = RealmOptional<Double>()
     public var signalStrength: Double? {
         get { return _signalStrength.value }
         set { _signalStrength.value = newValue }
     }
-    private var _color: String?
+    @objc private dynamic var _color: String?
     public var color: UIColor? {
         get { return _color != nil ? UIColor(hexString: _color!) : nil }
         set { _color = newValue?.toHexString() }

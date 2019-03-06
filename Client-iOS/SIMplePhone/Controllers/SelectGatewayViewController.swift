@@ -40,11 +40,7 @@ class SelectGatewayViewController: UICollectionViewController {
         self.collectionView?.register(GatewayCollectionCell.self, forCellWithReuseIdentifier: String(describing: GatewayCollectionCell.self))
         let height = (self.parentVC?.view.frame.height ?? 0)*0.65
         self.preferredContentSize = CGSize(width: 0, height: height)
-        self.loadGateways { (error) in
-            if let error = error {
-                print("error while loading gateways \(error)")
-            }
-        }
+        self.loadGateways()
         self.collectionView.backgroundColor = .tableViewBackground
         // Do any additional setup after loading the view.
     }
@@ -122,23 +118,22 @@ class SelectGatewayViewController: UICollectionViewController {
         }
     }
     
-    func loadGateways(completion: @escaping (_ error: Error?) -> Void) {
-        SPManager.shared.getAllGateways { (success, gateways, error) in
-            if success {
-                if gateways?.count == 1 {
-                    // Call directly
-                }
-                if gateways?.count == 0 {
-                    // No gateway / configure now
-                }
-                self.gateways = gateways
-                DispatchQueue.main.async {
-                    self.collectionView!.reloadData()
-                    completion(nil)
-                }
-            }else{
-                completion(error)
-                // TO-DO: Error handling
+    func loadGateways() {
+        SPManager.shared.getAllGateways { (gateways, error) in
+            if let error = error {
+                SPDelegate.shared.display(error: error)
+                return
+            }
+            guard let gateways = gateways else { return }
+            if gateways.count == 1 {
+                // Call directly
+            }
+            if gateways.count == 0 {
+                // No gateway / configure now
+            }
+            self.gateways = gateways
+            DispatchQueue.main.async {
+                self.collectionView!.reloadData()
             }
         }
     }

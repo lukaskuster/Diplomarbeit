@@ -8,6 +8,7 @@
 
 import Foundation
 import SIMplePhoneKit
+import SwiftMessages
 
 @objc class SPDelegate: NSObject {
     public static let shared = SPDelegate()
@@ -30,6 +31,17 @@ import SIMplePhoneKit
             let seque = SelectGatewaySegue(identifier: nil, source: controller, destination: selectVC)
             seque.perform()
         }
+    }
+    
+    public func display(error: Error) {
+        var config = SwiftMessages.Config()
+        config.presentationContext = .window(windowLevel: .statusBar)
+        let view = MessageView.viewFromNib(layout: .cardView)
+        view.configureTheme(.error)
+        view.configureContent(title: "An Error occured!", body: "\(error)")
+        view.button?.isHidden = true
+        view.layoutMarginAdditions = UIEdgeInsets(top: 25, left: 20, bottom: 20, right: 20)
+        SwiftMessages.show(config: config, view: view)
     }
     
     @objc public class func sharedInstance() -> SPDelegate {

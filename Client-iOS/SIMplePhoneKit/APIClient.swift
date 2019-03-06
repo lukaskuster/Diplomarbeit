@@ -83,21 +83,20 @@ class APIClient: NSObject {
      Fetches all gateways associated with user
      - Parameters:
      - completion: Closure which is called after server response
-        - success: Bool indicating operation success
         - gateways: all SPGateways associated with current user
         - error: Error, if operation unsuccessful
     */
-    public func getAllGateways(completion: @escaping (_ success: Bool, _ gateways: [SPGateway]?, _ error: APIError?) -> Void) {
+    public func getAllGateways(completion: @escaping (_ gateways: [SPGateway]?, _ error: APIError?) -> Void) {
         self.request(API.gateways, type: .get, parameters: nil) { (success, json, error) in
             if success {
                 if let error = error {
-                    completion(false, nil, error)
+                    completion(nil, error)
                     return
                 }
                 
                 if let error = json!["error"].string {
                     let cerror = APIError.other(desc: error)
-                    completion(false, nil, cerror)
+                    completion(nil, cerror)
                     return
                 }
                 
@@ -113,11 +112,11 @@ class APIClient: NSObject {
                             let carrier = gateway["carrier"].string
                             returnGateways.append(SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, colorString: colorString, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier))
                         }else{
-                            completion(false, nil, APIError.parsingError)
+                            completion(nil, APIError.parsingError)
                             return
                         }
                     }
-                    completion(true, returnGateways, nil)
+                    completion(returnGateways, nil)
                     return
                 }
             }
@@ -129,11 +128,10 @@ class APIClient: NSObject {
      - Parameters:
      - imei: IMEI of the gateway
      - completion: Closure which is called after server response
-     - success: Bool indicating operation success
      - gateways: all SPGateways associated with current user
      - error: Error, if operation unsuccessful
      */
-    public func getGateway(imei: String, completion: @escaping (_ success: Bool, _ gateway: SPGateway?, _ error: APIError?) -> Void) {
+    public func getGateway(imei: String, completion: @escaping (_ gateway: SPGateway?, _ error: APIError?) -> Void) {
         self.request(API.gateway(imei), type: .get, parameters: nil) { (success, response, error) in
             if success {
                 if let gateway = response {
@@ -145,13 +143,13 @@ class APIClient: NSObject {
                         let firmwareVersion = gateway["firmwareVersion"].string
                         let carrier = gateway["carrier"].string
                         let gateway = SPGateway(withIMEI: imei, name: name, phoneNumber: phoneNumber, colorString: colorString, signalStrength: signalStrength, firmwareVersion: firmwareVersion, carrier: carrier)
-                        completion(true, gateway, nil)
+                        completion(gateway, nil)
                     }else{
-                        completion(false, nil, APIError.parsingError)
+                        completion(nil, APIError.parsingError)
                     }
                 }
             }else{
-                completion(false, nil, error!)
+                completion(nil, error!)
             }
         }
     }
@@ -160,16 +158,15 @@ class APIClient: NSObject {
      Update name of gateway
      - Parameters:
      - completion: Closure which is called after server response
-     - success: Bool indicating operation success
      - error: Error, if operation unsuccessful
      */
-    public func updateGateway(name newName: String, of gateway: SPGateway, completion: @escaping (_ success: Bool,  _ error: APIError?) -> Void) {
+    public func updateGateway(name newName: String, of gateway: SPGateway, completion: @escaping (APIError?) -> Void) {
         let data = ["name": newName]
         self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
             if success {
-                completion(true, nil)
+                completion(nil)
             }else{
-                completion(false, error!)
+                completion(error!)
             }
         }
     }
@@ -178,16 +175,15 @@ class APIClient: NSObject {
      Update color of gateway
      - Parameters:
      - completion: Closure which is called after server response
-     - success: Bool indicating operation success
      - error: Error, if operation unsuccessful
      */
-    public func updateGateway(color newColor: UIColor, of gateway: SPGateway, completion: @escaping (_ success: Bool,  _ error: APIError?) -> Void) {
+    public func updateGateway(color newColor: UIColor, of gateway: SPGateway, completion: @escaping (APIError?) -> Void) {
         let data = ["color": newColor.toHexString()]
         self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
             if success {
-                completion(true, nil)
+                completion(nil)
             }else{
-                completion(false, error!)
+                completion(error!)
             }
         }
     }
@@ -211,29 +207,6 @@ class APIClient: NSObject {
                 completion(true, nil)
             }else{
                 completion(false, error!)
-            }
-        }
-    }
-    
-    /**
-     Updates commited gateway on server (change in name or phoneNumber)
-     - Parameters:
-        - gateway: SPGateway to be updated
-        - completion: Closure which is called after server response
-            - success: Bool indicating operation success
-            - error: Error, if operation unsuccessful
-    */
-    public func updateGateway(_ gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
-        let data = ["name": gateway.name,
-                    "phoneNumber": gateway.phoneNumber] as [String:Any]
-        
-        self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, response, error) in
-            if success {
-                completion(true, nil)
-                return
-            }else{
-                // TODO: Error handling
-                print(error!)
             }
         }
     }

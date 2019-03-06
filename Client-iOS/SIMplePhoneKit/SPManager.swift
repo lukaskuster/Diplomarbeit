@@ -227,8 +227,8 @@ public protocol SPManagerDelegate {
         let payload = JSON(pushPayload)
         if let event = payload["event"].string,
             let gatewayString = payload["data"]["gateway"].string {
-            self.getGateway(withImei: gatewayString) { (success, gateway, error) in
-                if success, let gateway = gateway {
+            self.getGateway(withImei: gatewayString) { (gateway, error) in
+                if let gateway = gateway {
                     switch event {
                     case "incomingCall":
                         if let numberString = payload["data"]["number"].string {
@@ -519,35 +519,59 @@ public protocol SPManagerDelegate {
         completion(nil, APIError.other(desc: "not yet implemented"))
     }
     
-    public func getAllGateways(completion: @escaping (_ success: Bool, _ gateways: [SPGateway]?, _ error: Error?) -> Void) {
-        self.apiClient.getAllGateways { (success, gateways, error) in
-            completion(success, gateways, error)
+    public func getAllGateways(completion: @escaping ([SPGateway]?, Error?) -> Void) {
+        self.apiClient.getAllGateways { (gateways, error) in
+            self.realmManager.saveGateways(gateways, completion: { realmError in
+                if let realmError = realmError {
+                    completion(nil, realmError)
+                }
+                completion(gateways, error)
+            })
         }
     }
     
-    public func getGateway(withImei imei: String, completion: @escaping (_ success: Bool, _ gateway: SPGateway?, _ error: Error?) -> Void) {
-        self.apiClient.getGateway(imei: imei) { (success, gateway, error) in
-            completion(success, gateway, error)
+    public func getGateway(withImei imei: String, completion: @escaping (SPGateway?, Error?) -> Void) {
+        self.apiClient.getGateway(imei: imei) { (gateway, error) in
+            if let gateway = gateway {
+                self.realmManager.saveGateway(gateway, completion: { error in
+                    completion(nil, error)
+                })
+            }
+            completion(gateway, error)
         }
     }
     
-    public func updateGatewayName(_ name: String, of gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        self.apiClient.updateGateway(name: name, of: gateway) { (success, error) in
-            completion(success, error)
+    public func updateGatewayName(_ name: String, of gateway: SPGateway, completion: @escaping (Error?) -> Void) {
+        self.apiClient.updateGateway(name: name, of: gateway) { apiError in
+            if let apiError = apiError {
+                completion(apiError)
+            }
+            self.realmManager.updateGateway(gateway, name: name, completion: { realmError in
+                if let realmError = realmError {
+                    completion(realmError)
+                }
+                completion(nil)
+            })
         }
     }
     
-    public func updateGatewayColor(_ color: UIColor, of gateway: SPGateway, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        self.apiClient.updateGateway(color: color, of: gateway) { (success, error) in
-            completion(success, error)
+    public func updateGatewayColor(_ color: UIColor, of gateway: SPGateway, completion: @escaping (Error?) -> Void) {
+        self.apiClient.updateGateway(color: color, of: gateway) { apiError in
+            if let apiError = apiError {
+                completion(apiError)
+            }
+            self.realmManager.updateGateway(gateway, color: color, completion: { realmError in
+                if let realmError = realmError {
+                    completion(realmError)
+                }
+                completion(nil)
+            })
         }
     }
     
     // MARK: - Just for testing purposes (Will be deleted)
     public func addRecentCall(_ call: SPRecentCall) {
-        DispatchQueue.main.async {
-            self.realmManager.addNewRecentCall(call)
-        }
+        self.realmManager.addNewRecentCall(call)
     }
 
     public func addVoicemail(_ voicemail: SPVoicemail) {

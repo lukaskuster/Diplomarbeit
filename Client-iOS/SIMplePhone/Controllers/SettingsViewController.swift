@@ -92,7 +92,7 @@ class SettingsViewController: TableViewController {
     }
     
     @objc func refreshGateways() {
-        self.gatewayCollectionView?.loadGateways(completion: { (error) in
+        self.gatewayCollectionView?.loadGateways(completion: {
             self.refreshControl.endRefreshing()
         })
     }
@@ -100,8 +100,7 @@ class SettingsViewController: TableViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        self.gatewayCollectionView?.loadGateways(completion: { (error) in
-        })
+        self.gatewayCollectionView?.loadGateways()
     }
     
     required init?(coder aDecoder: NSCoder) {

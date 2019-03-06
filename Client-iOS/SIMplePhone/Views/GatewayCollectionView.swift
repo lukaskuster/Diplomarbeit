@@ -62,27 +62,24 @@ class GatewayCollectionView: UIView, UICollectionViewDataSource, UICollectionVie
         self.collectionView?.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.collectionView?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        self.loadGateways { (error) in
-            if let error = error {
-                print("error while loading gateways \(error)")
-            }
-        }
+        self.loadGateways()
         self.backgroundColor = .clear
         self.collectionView?.backgroundColor = .clear
     }
     
-    func loadGateways(completion: @escaping (_ error: Error?) -> Void) {
-        SPManager.shared.getAllGateways { (success, gateways, error) in
-            if success {
-                self.gateways = gateways
-                DispatchQueue.main.async {
-                    self.collectionView!.reloadData()
-                    completion(nil)
-                }
-            }else{
-                completion(error)
-                // TO-DO: Error handling
+    func loadGateways(completion: @escaping () -> () = {}) {
+        SPManager.shared.getAllGateways { (gateways, error) in
+            if let error = error {
+                SPDelegate.shared.display(error: error)
+                completion()
+                return
             }
+            guard let gateways = gateways else { return }
+            self.gateways = gateways
+            DispatchQueue.main.async {
+                self.collectionView!.reloadData()
+            }
+            completion()
         }
     }
     

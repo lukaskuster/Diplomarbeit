@@ -28,11 +28,21 @@ class RealmManager: NSObject {
     }
     
     public func addNewRecentCall(_ call: SPRecentCall) {
-        self.realmAdd(call)
+        self.realmAdd(call) { error in
+            if let error = error {
+                // handle error
+                SPManager.shared.sendErrorNotification(for: error)
+            }
+        }
     }
     
     public func deleteRecentCall(_ call: SPRecentCall) {
-        self.realmDelete(call)
+        self.realmDelete(call) { error in
+            if let error = error {
+                // handle error
+                SPManager.shared.sendErrorNotification(for: error)
+            }
+        }
     }
     
     public func getCountOfUnseenRecentCalls() -> Int {
@@ -56,16 +66,26 @@ class RealmManager: NSObject {
     }
     
     public func addNewVoicemail(_ voicemail: SPVoicemail) {
-        self.realmAdd(voicemail)
+        self.realmAdd(voicemail) { error in
+            if let error = error {
+                // handle error
+                SPManager.shared.sendErrorNotification(for: error)
+            }
+        }
     }
     
     public func getVoicemail(byId id: String) -> SPVoicemail? {
-        let voicemails = realm.objects(SPVoicemail.self).filter("id = '\(id)'")
+        let voicemails = realm.objects(SPVoicemail.self).filter(NSPredicate(format: "id = %@", id))
         return voicemails.first
     }
     
     public func deleteVoicemail(_ voicemail: SPVoicemail) {
-        self.realmDelete(voicemail)
+        self.realmDelete(voicemail, completion: { error in
+            if let error = error {
+                // handle error
+                SPManager.shared.sendErrorNotification(for: error)
+            }
+        })
     }
     
     public func markVoicemailAs(_ voicemail: SPVoicemail, heard: Bool) {
@@ -80,15 +100,72 @@ class RealmManager: NSObject {
         }
     }
     
-    func realmAdd(_ object: Object) {
-        try! self.realm.write {
-            self.realm.add(object)
+    public func saveGateways(_ gateways: [SPGateway]?, completion: @escaping (Error?) -> Void) {
+        if let gateways = gateways {
+            for gateway in gateways {
+                self.saveGateway(gateway, completion: completion)
+            }
+        }
+        completion(nil)
+    }
+    
+    public func saveGateway(_ gateway: SPGateway, completion: @escaping (Error?) -> Void) {
+        self.realmAdd(gateway, completion: { error in
+            if let error = error {
+                completion(error)
+            }
+        })
+    }
+    
+    public func updateGateway(_ gateway: SPGateway, name: String, completion: @escaping (Error?) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                try self.realm.write {
+                    gateway.name = name
+                    completion(nil)
+                }
+            } catch let error {
+                completion(error)
+            }
         }
     }
     
-    func realmDelete(_ object: Object) {
-        try! self.realm.write {
-            self.realm.delete(object)
+    public func updateGateway(_ gateway: SPGateway, color: UIColor, completion: @escaping (Error?) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                try self.realm.write {
+                    gateway.color = color
+                    completion(nil)
+                }
+            } catch let error {
+                completion(error)
+            }
+        }
+    }
+    
+    func realmAdd(_ object: Object, completion: @escaping (Error?) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                try self.realm.write {
+                    self.realm.add(object, update: true)
+                    completion(nil)
+                }
+            } catch let error {
+                completion(error)
+            }
+        }
+    }
+    
+    func realmDelete(_ object: Object, completion: @escaping (Error?) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                try self.realm.write {
+                    self.realm.delete(object)
+                    completion(nil)
+                }
+            } catch let error {
+                completion(error)
+            }
         }
     }
 }

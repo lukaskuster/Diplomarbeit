@@ -137,24 +137,26 @@ class ColorPreviewCell: UITableViewCell, Cell {
 
 extension SettingsGatewayViewController: SettingsGatewayColorViewControllerDelegate, SettingsGatewayNameViewControllerDelegate {
     func gatewayNameDidChange(to newName: String) {
-        SPManager.shared.updateGatewayName(newName, of: self.gateway) { (success, error) in
-            if success {
-                self.gateway.name = newName
-                DispatchQueue.main.async {
-                    self.dataSource.sections[0].rows[0].detailText = newName
-                    self.title = newName
-                }
+        SPManager.shared.updateGatewayName(newName, of: self.gateway) { error in
+            if let error = error {
+                SPDelegate.shared.display(error: error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.dataSource.sections[0].rows[0].detailText = self.gateway.name
+                self.title = self.gateway.name
             }
         }
     }
     
     func gatewayColorDidChange(to newColor: UIColor) {
-        SPManager.shared.updateGatewayColor(newColor, of: self.gateway) { (success, error) in
-            if success {
-                self.gateway.color = newColor
-                DispatchQueue.main.async {
-                    self.dataSource.sections[0].rows[1].context?["color"] = newColor
-                }
+        SPManager.shared.updateGatewayColor(newColor, of: self.gateway) { error in
+            if let error = error {
+                SPDelegate.shared.display(error: error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.dataSource.sections[0].rows[1].context?["color"] = self.gateway.color
             }
         }
     }
