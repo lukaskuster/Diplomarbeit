@@ -115,10 +115,10 @@ class VoicemailTableViewController: UITableViewController {
         let date = DateFormatter.localizedString(from: voicemail.time, dateStyle: .long, timeStyle: .short)
         let alert = UIAlertController(title: "Delete Voicemail?", message: "Received from \(otherparty) on \(date). This can not be undone and happens across all your devices.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete Voicemail", style: .destructive, handler: { (action) in
-            if SPManager.shared.deleteVoicemail(with: self.voicemails[index.row].id) {
+            SPManager.shared.deleteVoicemail(withId: self.voicemails[index.row].id, completion: {
                 self.loadVoicemails()
                 self.tableView.deleteRows(at: [index], with: .fade)
-            }
+            })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {

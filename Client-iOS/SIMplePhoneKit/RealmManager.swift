@@ -79,12 +79,19 @@ class RealmManager: NSObject {
         return voicemails.first
     }
     
-    public func deleteVoicemail(_ voicemail: SPVoicemail) {
+    public func getVoicemail(byId id: String, completion: @escaping (SPVoicemail?) -> Void) {
+        let voicemails = realm.objects(SPVoicemail.self).filter(NSPredicate(format: "id = %@", id))
+        completion(voicemails.first)
+    }
+    
+    public func deleteVoicemail(_ voicemail: SPVoicemail, completion: @escaping () -> ()) {
         self.realmDelete(voicemail, completion: { error in
             if let error = error {
                 // handle error
                 SPManager.shared.sendErrorNotification(for: error)
+                return
             }
+            completion()
         })
     }
     

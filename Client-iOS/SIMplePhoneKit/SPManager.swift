@@ -477,12 +477,11 @@ public protocol SPManagerDelegate {
         return self.realmManager.getCountOfUnheardVoicemails()
     }
     
-    public func deleteVoicemail(with id: String) -> Bool {
-        if let voicemail = self.realmManager.getVoicemail(byId: id) {
-            self.realmManager.deleteVoicemail(voicemail)
-            return true
-        }else{
-            return false
+    public func deleteVoicemail(withId id: String, completion: @escaping () -> ()) {
+        self.realmManager.getVoicemail(byId: id) { voicemail in
+            if let voicemail = voicemail {
+                self.realmManager.deleteVoicemail(voicemail, completion: completion)
+            }
         }
     }
     
