@@ -184,6 +184,12 @@ class SelectedVoicemailTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 self.playBtnLongPressDetected = false
             }))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.playbackControlBtn
+                popoverController.sourceRect = self.playbackControlBtn.bounds
+                popoverController.canOverlapSourceViewRect = false
+                popoverController.permittedArrowDirections = [.left]
+            }
             if let controller = UIApplication.shared.topMostViewController() {
                 controller.present(alert, animated: true)
             }

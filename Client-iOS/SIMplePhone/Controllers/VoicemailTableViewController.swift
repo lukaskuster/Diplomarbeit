@@ -121,6 +121,12 @@ class VoicemailTableViewController: UITableViewController {
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.tableView.cellForRow(at: index)
+            popoverController.sourceRect = self.tableView.cellForRow(at: index)!.bounds
+            popoverController.canOverlapSourceViewRect = false
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
         if let controller = UIApplication.shared.topMostViewController() {
             controller.present(alert, animated: true)
         }
