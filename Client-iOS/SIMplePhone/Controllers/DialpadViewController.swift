@@ -67,6 +67,7 @@ class DialpadViewController: UIViewController {
             [.font: UIFont.systemFont(ofSize: 23),
              .foregroundColor: UIColor.lighterGray]), for: .disabled)
         actionBtn.imageView?.contentMode = .scaleAspectFit
+        actionBtn.imageView?.tintColor = .white
         actionBtn.adjustsImageWhenHighlighted = false
         actionBtn.imageEdgeInsets = UIEdgeInsets(top: 20, left: -10, bottom: 20, right: 0)
         actionBtn.addTarget(self, action: #selector(didTapCallBtn), for: .touchUpInside)
