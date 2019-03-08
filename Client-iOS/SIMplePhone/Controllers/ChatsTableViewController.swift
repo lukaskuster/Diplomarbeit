@@ -87,15 +87,33 @@ class ChatsTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let chat = self.chats?[indexPath.row] {
+            self.deleteChat(at: indexPath)
+        }
+    }
+    
+    public func deleteChat(at index: IndexPath) {
+        if let chat = self.chats?[index.row] {
+            let otherparty = chat.secondParty.contact != nil ? chat.secondParty.contact!.attributedFullName().string : chat.secondParty.prettyPhoneNumber()
+            let alert = UIAlertController(title: "Delete Chat with \(otherparty)?", message: "Do you really want to delete this chat? This also deletes all the messages associated with the chat across all your devices. This can not be undone.", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Delete Chat", style: .destructive, handler: { (action) in
                 SPManager.shared.deleteChat(chat) { error in
                     if let error = error {
                         SPDelegate.shared.display(error: error)
                         return
                     }
-                    self.chats?.remove(at: indexPath.row)
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.chats?.remove(at: index.row)
+                    self.tableView.deleteRows(at: [index], with: .fade)
                 }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.tableView.cellForRow(at: index)
+                popoverController.sourceRect = self.tableView.cellForRow(at: index)!.bounds
+                popoverController.canOverlapSourceViewRect = false
+                popoverController.permittedArrowDirections = [.up, .down]
+            }
+            if let controller = UIApplication.shared.topMostViewController() {
+                controller.present(alert, animated: true)
             }
         }
     }
