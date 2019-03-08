@@ -52,7 +52,7 @@ class RecentCallsTableViewCell: UITableViewCell {
             
             self.callerGlyph.isHidden = (call.direction == .incoming)
             
-            self.timeStampLabel.text = formatDate(call.time)
+            self.timeStampLabel.text = call.time.formatted
         }
     }
     
@@ -62,24 +62,6 @@ class RecentCallsTableViewCell: UITableViewCell {
         formatter.unitsStyle = .abbreviated
         formatter.maximumUnitCount = 3
         return formatter.string(from: duration)!
-    }
-    
-    func formatDate(_ date: Date) -> String {
-        if Calendar.current.isDateInToday(date) {
-            return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)
-        }else{
-            let day = Calendar.current.startOfDay(for: date)
-            if day.timeIntervalSinceNow >= -(60*60*24*6) { // last six days in seconds
-                // Display Weekday
-                let f = DateFormatter()
-                f.locale = Locale.autoupdatingCurrent
-                let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: day)]
-                return weekday
-            }else{
-                // Display Date
-                return DateFormatter.localizedString(from: day, dateStyle: .short, timeStyle: .none)
-            }
-        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

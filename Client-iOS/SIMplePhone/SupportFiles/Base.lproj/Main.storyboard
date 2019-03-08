@@ -156,28 +156,28 @@
         <!--Chats-->
         <scene sceneID="4VD-br-UdE">
             <objects>
-                <tableViewController id="CC8-Uz-MRI" customClass="ChatsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="CC8-Uz-MRI" customClass="ChatsTableViewController" customModule="SIMplePhone" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yTE-aS-qi1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ChatPreviewCell" rowHeight="70" id="esE-YY-jd4" customClass="ChatPreviewTableViewCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ChatPreviewTableViewCell" rowHeight="85" id="esE-YY-jd4" customClass="ChatPreviewTableViewCell" customModule="SIMplePhone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="esE-YY-jd4" id="Tiz-R5-yzt">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTD-Q5-mim">
-                                            <rect key="frame" x="16" y="11" width="48" height="48"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTD-Q5-mim" customClass="RoundedImageView" customModule="SIMplePhone" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="11" width="63" height="63"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="eO5-Ww-I9n"/>
+                                                <constraint firstAttribute="width" constant="63" id="BcQ-PM-EcF"/>
                                                 <constraint firstAttribute="width" secondItem="QTD-Q5-mim" secondAttribute="height" multiplier="1:1" id="u3S-ze-9s0"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y41-8X-KMy">
-                                            <rect key="frame" x="74" y="11" width="199" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y41-8X-KMy">
+                                            <rect key="frame" x="89" y="11" width="199.5" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20.5" id="R0b-vw-4CA"/>
                                             </constraints>
@@ -185,53 +185,59 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rF-tv-7de">
-                                            <rect key="frame" x="74" y="31.5" width="249" height="27.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kP-o0-Rf0">
+                                            <rect key="frame" x="293.5" y="11.5" width="39.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                             <color key="textColor" red="0.78024488690000005" green="0.78007096050000002" blue="0.80069750549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kP-o0-Rf0">
-                                            <rect key="frame" x="283" y="11" width="50" height="14.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="9sh-hV-BTt"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" red="0.78024488690000005" green="0.78007096050000002" blue="0.80069750549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Last Message sdf" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo9-Xr-chN">
+                                            <rect key="frame" x="84" y="34.5" width="249" height="39.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99o-yK-zFi" customClass="UIBorderedLabel" customModule="SIMplePhone" customModuleProvider="target">
+                                            <rect key="frame" x="291" y="32" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="7kP-o0-Rf0" firstAttribute="top" secondItem="Tiz-R5-yzt" secondAttribute="topMargin" id="AXc-Il-j4D"/>
+                                        <constraint firstItem="bo9-Xr-chN" firstAttribute="top" secondItem="y41-8X-KMy" secondAttribute="bottom" constant="3" id="17j-rz-ZUv"/>
+                                        <constraint firstItem="99o-yK-zFi" firstAttribute="trailing" secondItem="7kP-o0-Rf0" secondAttribute="trailing" id="ALT-bg-UVH"/>
                                         <constraint firstItem="QTD-Q5-mim" firstAttribute="leading" secondItem="Tiz-R5-yzt" secondAttribute="leadingMargin" id="Ac6-My-E0H"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="0rF-tv-7de" secondAttribute="trailing" constant="10" id="DMn-oS-guk"/>
-                                        <constraint firstItem="0rF-tv-7de" firstAttribute="top" secondItem="y41-8X-KMy" secondAttribute="bottom" id="ajV-zi-6VT"/>
+                                        <constraint firstItem="bo9-Xr-chN" firstAttribute="trailing" secondItem="7kP-o0-Rf0" secondAttribute="trailing" id="DpP-Hi-y4U"/>
+                                        <constraint firstItem="bo9-Xr-chN" firstAttribute="leadingMargin" secondItem="y41-8X-KMy" secondAttribute="leading" constant="3" id="Oof-4O-lBc"/>
+                                        <constraint firstItem="99o-yK-zFi" firstAttribute="top" secondItem="7kP-o0-Rf0" secondAttribute="bottom" constant="1" id="dqY-Kl-Mwj"/>
+                                        <constraint firstItem="99o-yK-zFi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QTD-Q5-mim" secondAttribute="trailing" constant="8" symbolic="YES" id="gns-Gp-Rkc"/>
                                         <constraint firstItem="y41-8X-KMy" firstAttribute="leading" secondItem="QTD-Q5-mim" secondAttribute="trailing" constant="10" id="j7G-7C-tAX"/>
-                                        <constraint firstItem="7kP-o0-Rf0" firstAttribute="leading" secondItem="y41-8X-KMy" secondAttribute="trailing" constant="10" id="jRq-6A-Si7"/>
-                                        <constraint firstItem="0rF-tv-7de" firstAttribute="leading" secondItem="y41-8X-KMy" secondAttribute="leading" id="kqh-gE-YZ7"/>
+                                        <constraint firstItem="7kP-o0-Rf0" firstAttribute="leading" secondItem="y41-8X-KMy" secondAttribute="trailing" constant="5" id="jRq-6A-Si7"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="QTD-Q5-mim" secondAttribute="bottom" id="lez-dD-92v"/>
                                         <constraint firstItem="y41-8X-KMy" firstAttribute="top" secondItem="Tiz-R5-yzt" secondAttribute="topMargin" id="lyK-I6-EwC"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="0rF-tv-7de" secondAttribute="bottom" id="z5d-Sh-jYy"/>
+                                        <constraint firstItem="bo9-Xr-chN" firstAttribute="bottom" secondItem="Tiz-R5-yzt" secondAttribute="bottomMargin" id="ooN-1B-gyK"/>
+                                        <constraint firstItem="7kP-o0-Rf0" firstAttribute="centerY" secondItem="y41-8X-KMy" secondAttribute="centerY" id="yEa-Nr-2Vs"/>
                                         <constraint firstItem="QTD-Q5-mim" firstAttribute="top" secondItem="Tiz-R5-yzt" secondAttribute="topMargin" id="zlS-1C-LhL"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="7kP-o0-Rf0" secondAttribute="trailing" id="zo6-5n-8rS"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="latestChatLabel" destination="0rF-tv-7de" id="cCV-iX-cpf"/>
-                                    <outlet property="timeInfoLabel" destination="7kP-o0-Rf0" id="0W7-4O-eu0"/>
-                                    <outlet property="userAvatar" destination="QTD-Q5-mim" id="Eq5-f8-CV5"/>
-                                    <outlet property="userNameLabel" destination="y41-8X-KMy" id="8Vt-aS-YM3"/>
+                                    <outlet property="avatarImageView" destination="QTD-Q5-mim" id="7xG-yH-Qjz"/>
+                                    <outlet property="gatewayNameLabel" destination="99o-yK-zFi" id="cPZ-sl-brV"/>
+                                    <outlet property="lastMessagePreviewLabel" destination="bo9-Xr-chN" id="bC5-69-xW2"/>
+                                    <outlet property="secondPartyNameLabel" destination="y41-8X-KMy" id="8xX-95-d2v"/>
+                                    <outlet property="timeOfLastMessageLabel" destination="7kP-o0-Rf0" id="Q1y-SY-csL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="CC8-Uz-MRI" id="PdP-Z8-HHt"/>
-                            <outlet property="delegate" destination="CC8-Uz-MRI" id="iG0-aq-asE"/>
-                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="jO9-fk-mAz">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="TcN-a2-jNz"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="ddh-LQ-2Wd"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="ddh-LQ-2Wd">
+                            <connections>
+                                <action selector="didTapComposeNewMessage:" destination="CC8-Uz-MRI" id="B4K-cV-mo6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m45-GD-WBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

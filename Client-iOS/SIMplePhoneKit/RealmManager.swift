@@ -101,6 +101,23 @@ class RealmManager: NSObject {
         }
     }
     
+    // MARK: SMS Messages
+    public func getAllChats(completion: @escaping ([SPChat]?, Error?) -> Void) {
+        DispatchQueue.main.async {
+            let chats = self.realm.objects(SPChat.self).toArray(ofType: SPChat.self)
+            let response = chats.count > 0 ? chats : nil
+            completion(response, nil)
+        }
+    }
+    
+    public func deleteChat(_ chat: SPChat, completion: @escaping (Error?) -> Void) {
+        self.realmDelete(chat, completion: completion)
+    }
+    
+    public func addNewChat(_ chat: SPChat, completion: @escaping (Error?) -> Void) {
+        self.realmAdd(chat, completion: completion)
+    }
+    
     public func addMessageToChat(message: SPMessage, chat: SPChat) {
         try! self.realm.write {
 //            chat.messages.append(message)

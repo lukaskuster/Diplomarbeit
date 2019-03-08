@@ -52,29 +52,11 @@ class VoicemailTableViewCell: UITableViewCell {
                 self.originGatewayLabel.text = "N/A"
                 self.originGatewayLabel.backgroundColor = .lightGray
             }
-            self.dateLabel.text = formatDate(data.time)
+            self.dateLabel.text = data.time.formatted
             
             let s: Int = Int(data.duration) % 60
             let m: Int = Int(data.duration) / 60
             self.durationLabel.text = String(format: "%0d:%02d", m, s)
-        }
-    }
-
-    func formatDate(_ date: Date) -> String {
-        if Calendar.current.isDateInToday(date) {
-            return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)
-        }else{
-            let day = Calendar.current.startOfDay(for: date)
-            if day.timeIntervalSinceNow >= -(60*60*24*6) { // last six days in seconds
-                // Display Weekday
-                let f = DateFormatter()
-                f.locale = Locale.autoupdatingCurrent
-                let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: day)]
-                return weekday
-            }else{
-                // Display Date
-                return DateFormatter.localizedString(from: day, dateStyle: .short, timeStyle: .none)
-            }
         }
     }
 }

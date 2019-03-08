@@ -15,7 +15,7 @@ public enum SPMessageState: Int {
 }
 
 public class SPMessage: Object {
-    @objc dynamic var id: String = NSUUID().uuidString
+    @objc public dynamic var id: String = NSUUID().uuidString
     @objc public dynamic var time = Date(timeIntervalSince1970: 1)
     @objc public dynamic var text = ""
     @objc private dynamic var _state = SPMessageState.sent.rawValue
@@ -26,9 +26,10 @@ public class SPMessage: Object {
     @objc public dynamic var gatewayIsSender = false
     let chats = LinkingObjects(fromType: SPChat.self, property: "messages")
     
-    public convenience init(_ text: String, state: SPMessageState, byGateway: Bool = false) {
+    public convenience init(_ text: String, time: Date, state: SPMessageState, byGateway: Bool = false) {
         self.init()
         self.text = text
+        self.time = time
         self.state = state
         self.gatewayIsSender = byGateway
     }

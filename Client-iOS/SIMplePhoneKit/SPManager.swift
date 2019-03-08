@@ -428,17 +428,34 @@ public protocol SPManagerDelegate {
     }
     
     // MARK: - Chats
-    @objc public func getAllChats(completion: @escaping (_ success: Bool, _ chats: [SPChat]?, _ error: Error?) -> Void) {
-        let gateway = SPGateway(withIMEI: NSUUID().uuidString, name: "Main-Gateway", phoneNumber: "00436648338455", colorString: "#AAABBB", signalStrength: 0.0, firmwareVersion: "0.0.1", carrier: "spusu")
-        let secondParty1 = SPNumber(withNumber: "00436643038891")
-        let secondParty2 = SPNumber(withNumber: "00436644523954")
-        let msgs = [SPMessage("test msg", state: .sent), SPMessage("test msg 2", state: .sent)]
-        let chat1 = SPChat(with: secondParty1, on: gateway, messages: msgs)
-        let chat2 = SPChat(with: secondParty2, on: gateway, messages: msgs)
+    public func getAllChats(completion: @escaping (_ chats: [SPChat]?, _ error: Error?) -> Void) {
+        self.realmManager.getAllChats(completion: completion)
+    }
+    
+    public func deleteChat(_ chat: SPChat, completion: @escaping (Error?) -> Void) {
+        self.realmManager.deleteChat(chat, completion: completion)
+    }
+    
+    // Delete this! Test only!
+    public func addSampleChats() {
+        var chats = [SPChat]()
+        let realm = try! Realm()
+        try! realm.write {
+            if let gateway = realm.object(ofType: SPGateway.self, forPrimaryKey: "444406380982382") {
+                chats.append(SPChat(with: SPNumber(withNumber: "00436641817908"), on: gateway, messages: []))
+                chats.append(SPChat(with: SPNumber(withNumber: "00436648338455"), on: gateway, messages:
+                    [SPMessage("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date(), state: .sent),
+                     SPMessage("Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date().addingTimeInterval(TimeInterval(-65.0)), state: .sent)]))
+            }
+        }
         
-        let chats = [chat1, chat2]
-        
-        completion(true, chats, nil)
+        for chat in chats {
+            self.realmManager.addNewChat(chat) { error in
+                if let error = error {
+                    print("problem \(error)")
+                }
+            }
+        }
     }
     
     public func sendSMS(_ message: SPMessage, in chat: SPChat, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {

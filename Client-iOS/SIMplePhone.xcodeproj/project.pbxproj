@@ -14,6 +14,7 @@
 		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D615527F222DA32600E0208D /* CNContact+AttributedFullName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */; };
 		D6155281222EE14A00E0208D /* UIBorderedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6155280222EE14A00E0208D /* UIBorderedLabel.swift */; };
+		D615528322314A0400E0208D /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615528222314A0400E0208D /* ChatsTableViewController.swift */; };
 		D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */; };
 		D6195A3621E790E5002D724E /* KAPinField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3521E790E5002D724E /* KAPinField.swift */; };
 		D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */; };
@@ -42,6 +43,9 @@
 		D653F5E121AD853E005736FE /* PeerConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E021AD853E005736FE /* PeerConnectionManager.swift */; };
 		D653F5E321B0179E005736FE /* Static.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D653F5E221B0179D005736FE /* Static.framework */; };
 		D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5E421B01928005736FE /* SettingsViewController.swift */; };
+		D65C6C5022314D0500CEEDFE /* ChatPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C6C4F22314D0500CEEDFE /* ChatPreviewTableViewCell.swift */; };
+		D65C6C522231505B00CEEDFE /* Date+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C6C512231505B00CEEDFE /* Date+Format.swift */; };
+		D65C6C5422315C1B00CEEDFE /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C6C5322315C1B00CEEDFE /* RoundedImageView.swift */; };
 		D65FD6F7217F8F3D00BBE679 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */; };
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
 		D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD702218884DF00BBE679 /* CallKitManager.swift */; };
@@ -63,8 +67,6 @@
 		D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D678185B216CD16F00E650DB /* LaunchScreen.storyboard */; };
 		D6781860216CD16F00E650DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D678185F216CD16F00E650DB /* main.m */; };
 		D6781867216CD1B600E650DB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D6781866216CD1B600E650DB /* .gitignore */; };
-		D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781875216F432900E650DB /* ChatsTableViewController.m */; };
-		D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */; };
 		D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188D2178549200E650DB /* VoicemailTableViewController.swift */; };
 		D67818902178572500E650DB /* VoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D678188F2178572500E650DB /* VoicemailTableViewCell.swift */; };
 		D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */; };
@@ -130,6 +132,7 @@
 		D604917E219431DD00F46B18 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+AttributedFullName.swift"; sourceTree = "<group>"; };
 		D6155280222EE14A00E0208D /* UIBorderedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBorderedLabel.swift; sourceTree = "<group>"; };
+		D615528222314A0400E0208D /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		D6195A3321E77A4E002D724E /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		D6195A3521E790E5002D724E /* KAPinField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KAPinField.swift; sourceTree = "<group>"; };
 		D6195A3721E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGatewayChangeSIMPinViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +162,9 @@
 		D653F5E021AD853E005736FE /* PeerConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionManager.swift; sourceTree = "<group>"; };
 		D653F5E221B0179D005736FE /* Static.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Static.framework; path = Carthage/Build/iOS/Static.framework; sourceTree = "<group>"; };
 		D653F5E421B01928005736FE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D65C6C4F22314D0500CEEDFE /* ChatPreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPreviewTableViewCell.swift; sourceTree = "<group>"; };
+		D65C6C512231505B00CEEDFE /* Date+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Format.swift"; sourceTree = "<group>"; };
+		D65C6C5322315C1B00CEEDFE /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		D65FD6F6217F8F3D00BBE679 /* SignalingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCaptureState.swift; sourceTree = "<group>"; };
 		D65FD702218884DF00BBE679 /* CallKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitManager.swift; sourceTree = "<group>"; };
@@ -183,10 +189,6 @@
 		D678185E216CD16F00E650DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D678185F216CD16F00E650DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6781866216CD1B600E650DB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D6781874216F432900E650DB /* ChatsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
-		D6781875216F432900E650DB /* ChatsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
-		D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatPreviewTableViewCell.h; sourceTree = "<group>"; };
-		D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatPreviewTableViewCell.m; sourceTree = "<group>"; };
 		D678188821777B4800E650DB /* SIMplePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SIMplePhone-Bridging-Header.h"; sourceTree = "<group>"; };
 		D678188D2178549200E650DB /* VoicemailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewController.swift; sourceTree = "<group>"; };
 		D678188F2178572500E650DB /* VoicemailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicemailTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,8 +326,7 @@
 		D6781884217617B200E650DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D6781874216F432900E650DB /* ChatsTableViewController.h */,
-				D6781875216F432900E650DB /* ChatsTableViewController.m */,
+				D615528222314A0400E0208D /* ChatsTableViewController.swift */,
 				D65FD707218893C200BBE679 /* ContactsTableViewController.swift */,
 				D678188D2178549200E650DB /* VoicemailTableViewController.swift */,
 				D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */,
@@ -349,8 +350,7 @@
 		D6781885217617F600E650DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D6781877216F465700E650DB /* ChatPreviewTableViewCell.h */,
-				D6781878216F465700E650DB /* ChatPreviewTableViewCell.m */,
+				D65C6C4F22314D0500CEEDFE /* ChatPreviewTableViewCell.swift */,
 				D678188F2178572500E650DB /* VoicemailTableViewCell.swift */,
 				D67818912178860C00E650DB /* SelectedVoicemailTableViewCell.swift */,
 				D67818B321799CD000E650DB /* VoicemailProgressSlider.swift */,
@@ -395,6 +395,8 @@
 				D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */,
 				D6195A3521E790E5002D724E /* KAPinField.swift */,
 				D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */,
+				D65C6C512231505B00CEEDFE /* Date+Format.swift */,
+				D65C6C5322315C1B00CEEDFE /* RoundedImageView.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -624,13 +626,17 @@
 				D6195A3821E79856002D724E /* SettingsGatewayChangeSIMPinViewController.swift in Sources */,
 				D6195A3B21E7D8AA002D724E /* FirmwareUpdateCheckerCell.swift in Sources */,
 				D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */,
+				D65C6C522231505B00CEEDFE /* Date+Format.swift in Sources */,
+				D65C6C5022314D0500CEEDFE /* ChatPreviewTableViewCell.swift in Sources */,
 				D62731D321C07D9300CFCE28 /* SettingsGatewayViewController.swift in Sources */,
 				D62731D521C12CF600CFCE28 /* SignalStrengthIndicatorView.swift in Sources */,
 				D68C23A822175FD9009B7809 /* DialpadViewController.swift in Sources */,
 				D678188E2178549200E650DB /* VoicemailTableViewController.swift in Sources */,
 				D649976521F3C19E00EF72DE /* CallViewController.swift in Sources */,
+				D615528322314A0400E0208D /* ChatsTableViewController.swift in Sources */,
 				D653F5E521B01928005736FE /* SettingsViewController.swift in Sources */,
 				D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */,
+				D65C6C5422315C1B00CEEDFE /* RoundedImageView.swift in Sources */,
 				D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */,
 				D62731CD21B910FD00CFCE28 /* SettingsAccountViewController.swift in Sources */,
 				D6195A3421E77A4E002D724E /* UIColor+CustomColors.swift in Sources */,
@@ -644,13 +650,11 @@
 				D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */,
 				D6781860216CD16F00E650DB /* main.m in Sources */,
 				D62731D921E541DC00CFCE28 /* SettingsGatewayColorViewController.swift in Sources */,
-				D6781876216F432900E650DB /* ChatsTableViewController.m in Sources */,
 				D62731DF21E6757700CFCE28 /* SettingsGatewayNameViewController.swift in Sources */,
 				D6195A3D21E7DACD002D724E /* SettingsGatewayFirmwareUpdateStatusViewController.swift in Sources */,
 				D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */,
 				D6BE881C2199FF0800F87B35 /* SetupTextField.swift in Sources */,
 				D6195A3621E790E5002D724E /* KAPinField.swift in Sources */,
-				D6781879216F465700E650DB /* ChatPreviewTableViewCell.m in Sources */,
 				D67818922178860C00E650DB /* SelectedVoicemailTableViewCell.swift in Sources */,
 				D615527F222DA32600E0208D /* CNContact+AttributedFullName.swift in Sources */,
 				D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */,
