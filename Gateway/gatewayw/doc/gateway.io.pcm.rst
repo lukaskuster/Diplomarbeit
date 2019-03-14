@@ -1,9 +1,6 @@
 gateway.io.pcm package
 ======================
 
-Submodules
-----------
-
 gateway.io.pcm.pcm module
 -------------------------
 
@@ -12,11 +9,11 @@ gateway.io.pcm.pcm module
     :undoc-members:
     :show-inheritance:
 
+gateway.io.pcm.register\_control module
+---------------------------------------
 
-Module contents
----------------
-
-.. automodule:: gateway.io.pcm
+.. automodule:: gateway.io.pcm.register_control
     :members:
     :undoc-members:
     :show-inheritance:
+

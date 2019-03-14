@@ -1,9 +1,6 @@
 gateway.io.sim800 package
 =========================
 
-Submodules
-----------
-
 gateway.io.sim800.at\_command module
 ------------------------------------
 
@@ -20,18 +17,18 @@ gateway.io.sim800.at\_event module
     :undoc-members:
     :show-inheritance:
 
-gateway.io.sim800.parser module
--------------------------------
+gateway.io.sim800.at\_parser module
+-----------------------------------
 
-.. automodule:: gateway.io.sim800.parser
+.. automodule:: gateway.io.sim800.at_parser
     :members:
     :undoc-members:
     :show-inheritance:
 
-gateway.io.sim800.response\_objects module
-------------------------------------------
+gateway.io.sim800.at\_response module
+-------------------------------------
 
-.. automodule:: gateway.io.sim800.response_objects
+.. automodule:: gateway.io.sim800.at_response
     :members:
     :undoc-members:
     :show-inheritance:
@@ -52,11 +49,3 @@ gateway.io.sim800.sim800 module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: gateway.io.sim800
-    :members:
-    :undoc-members:
-    :show-inheritance:

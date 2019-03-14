@@ -1,9 +1,6 @@
 gateway.utils package
 =====================
 
-Submodules
-----------
-
 gateway.utils.logger module
 ---------------------------
 
@@ -36,11 +33,3 @@ gateway.utils.string\_utils module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: gateway.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:

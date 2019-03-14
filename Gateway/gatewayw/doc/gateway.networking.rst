@@ -1,13 +1,18 @@
 gateway.networking package
 ==========================
 
-Submodules
-----------
-
 gateway.networking.api module
 -----------------------------
 
 .. automodule:: gateway.networking.api
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+gateway.networking.caller module
+--------------------------------
+
+.. automodule:: gateway.networking.caller
     :members:
     :undoc-members:
     :show-inheritance:
@@ -24,31 +29,6 @@ gateway.networking.sse module
 -----------------------------
 
 .. automodule:: gateway.networking.sse
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-gateway.networking.track module
--------------------------------
-
-.. automodule:: gateway.networking.track
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-gateway.networking.webrtc module
---------------------------------
-
-.. automodule:: gateway.networking.webrtc
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: gateway.networking
     :members:
     :undoc-members:
     :show-inheritance:

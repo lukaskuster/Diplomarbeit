@@ -12,10 +12,11 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+#import sys
+#sys.path.insert(0, '/Users/quentinwendegass/Documents/Projects/Diplomarbeit/Gateway/gatewayw')
 
+cautodoc_root = os.path.abspath('/Users/quentinwendegass/Documents/Projects/Diplomarbeit/Gateway/gatewayw')
 
 # -- Project information -----------------------------------------------------
 
@@ -24,7 +25,7 @@ copyright = '2019, Quentin Wendegass'
 author = 'Quentin Wendegass'
 
 # The short X.Y version
-version = ''
+version = '0.1.1'
 # The full version, including alpha/beta/rc tags
 release = '0.1.1'
 
@@ -40,6 +41,9 @@ release = '0.1.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.todo',
+    'hawkmoth'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,7 +63,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -108,6 +112,8 @@ htmlhelp_basename = 'gatewaywdoc'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
+    'extraclassoptions': 'openany,oneside'
+
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
@@ -175,3 +181,8 @@ epub_exclude_files = ['search.html']
 
 
 # -- Extension configuration -------------------------------------------------
+
+# -- Options for todo extension ----------------------------------------------
+
+# If true, `todo` and `todoList` produce output, else they produce nothing.
+todo_include_todos = True
