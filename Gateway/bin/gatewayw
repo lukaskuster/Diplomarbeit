@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+
+PACKAGE_NAME=gatewayw
+CONFIG_DIR=/etc/gateway
+CONFIG_FILES=( "apn-conf.json" "config.ini" "log-config.ini" )
+
+
+install () {
+    echo "Install ${PACKAGE_NAME}..."
+
+    mkdir temp
+
+    echo "Unpack ${1} to temp/..."
+    tar -xzf $1 -C temp/
+
+    echo "Install python module with pip..."
+    sudo pip3.6 install temp/$1
+
+    sudo chmod 644 temp/${PACKAGE_NAME}.service
+    sudo chown root:root temp/${PACKAGE_NAME}.service
+
+    echo "Move system unit to /lib/systemd/system/..."
+    sudo mv temp/${PACKAGE_NAME}.service /lib/systemd/system/
+    sudo ln -s /lib/systemd/system/${PACKAGE_NAME}.service /etc/systemd/system/
+
+    sudo mkdir -p ${CONFIG_DIR}
+
+    for i in ${CONFIG_FILES[@]}
+    do
+        echo "Move ${i} to ${CONFIG_DIR}"
+        mv temp/${i} ${CONFIG_DIR}
+    done
+
+    echo "Enable system unit..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable ${PACKAGE_NAME}.service
+
+    rm -r temp/
+
+    echo "${PACKAGE_NAME} successfully installed!"
+}
+
+uninstall () {
+    # TODO
+    echo "Not yet implemented :)"
+}
+
+case $1 in
+    install)
+        if [[ ! -f $2 ]]; then
+            echo "File $2 does not exist! Exiting..."
+            exit 1
+        fi
+        "$1" $2
+        ;;
+    uninstall)
+        "$1"
+        ;;
+    *)
+        echo "Please specify a command to execute..."
+        ;;
+esac

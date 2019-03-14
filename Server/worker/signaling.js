@@ -23,7 +23,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const server = new WebSocket.Server({port: port, keepAlive: true});
 
 let peers = new WeakMap();
-let pendingUser = {};
+let pending = {};
 
 server.on('connection', function connection(socket) {
 
@@ -31,7 +31,7 @@ server.on('connection', function connection(socket) {
     let authenticated = false;
 
     // Authentication event that requires username and password
-    const authenticate = function ({username, password, role}) {
+    const authenticate = function ({username, password, role, gateway}) {
 
         // If the role is not passed, set it to offer
         if (!role) {
@@ -67,6 +67,12 @@ server.on('connection', function connection(socket) {
                 return;
             }
 
+            if (!(user.gateway.id(gateway))){
+                response.error = `No gateway with IMEI: ${gateway}!`;
+                socket.send(JSON.stringify(response));
+                return;
+            }
+
             // The authorization was successful
             authenticated = true;
             response.authenticated = true;
@@ -76,10 +82,10 @@ server.on('connection', function connection(socket) {
 
             });
             // Check if a socket with that user is already connected.
-            if (user._id in pendingUser) {
+            if (gateway in pending) {
 
                 // Get the already connected socket
-                let peerUser = pendingUser[user._id];
+                let peerUser = pending[gateway];
 
                 // Set the remote peer for both sockets
                 peers.set(peerUser.socket, socket);
@@ -90,7 +96,7 @@ server.on('connection', function connection(socket) {
                     peerUser.socket.send('');
                 } catch (e) {
                     // If the peer user is disconnected
-                    pendingUser[user._id] = {socket: socket, role: role};
+                    pending[gateway] = {socket: socket, role: role};
                     return;
                 }
 
@@ -105,11 +111,11 @@ server.on('connection', function connection(socket) {
                 }
 
                 // Now the first user pending any more
-                delete pendingUser[user._id];
+                delete pending[gateway];
 
             } else {
                 // If no client with that user is connected, set the current client as pending
-                pendingUser[user._id] = {socket: socket, role: role};
+                pending[gateway] = {socket: socket, role: role};
             }
         });
     };

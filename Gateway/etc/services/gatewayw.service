@@ -1,0 +1,11 @@
+[Unit]
+Description=Main Gateway worker
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gatewayw
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

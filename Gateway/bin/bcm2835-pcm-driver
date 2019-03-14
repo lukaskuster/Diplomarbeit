@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+
+PACKAGE_NAME=bcm2835-pcm-driver
+LIB_PATH=/usr/local/lib
+SCRIPT_PATH=/usr/local/bin
+
+
+start() {
+    # Set GPIO alternate functions
+    gpio_alt -p 18 -f 0
+    gpio_alt -p 19 -f 0
+    gpio_alt -p 20 -f 0
+    gpio_alt -p 21 -f 0
+
+    # Install PCM kernel module
+    if [[ -e ${LIB_PATH}/${PACKAGE_NAME}/bcm2835_pcm.ko ]] ; then
+        sudo insmod ${LIB_PATH}/${PACKAGE_NAME}/bcm2835_pcm.ko
+        MAJOR="$(grep bcm2835_pcm /proc/devices | awk '{print $1}')"
+        sudo mknod /dev/pcm c ${MAJOR} 0
+        sudo chmod 666 /dev/pcm
+    else
+        echo "bcm2835_pcm.ko doesn't exist. Exiting..."
+        exit 1
+    fi
+}
+
+stop() {
+    sudo rmmod bcm2835_pcm
+    if [[ -e /dev/pcm ]] ; then
+        sudo rm /dev/pcm
+    fi
+
+    gpio -g mode 18 in
+    gpio -g mode 19 in
+    gpio -g mode 20 in
+    gpio -g mode 21 in
+}
+
+install() {
+    echo "Install ${PACKAGE_NAME}..."
+
+    mkdir temp
+
+    echo "Unpack ${1} to temp/..."
+    tar -xzf $1 -C temp/
+
+    cd temp/${PACKAGE_NAME}
+
+    # Build PCM kernel module
+    echo "Build kernel module..."
+    if [[ -e bcm2835_pcm.c ]] ; then
+        sudo make
+    else
+        echo "No source found! Exiting..."
+        exit 1
+    fi
+
+    sudo mkdir -p ${LIB_PATH}/${PACKAGE_NAME}
+
+    echo "Copy kernel module to ${LIB_PATH}/${PACKAGE_NAME}..."
+    sudo cp -r bcm2835_pcm.ko ${LIB_PATH}/${PACKAGE_NAME}
+
+    cd ../..
+
+    echo "Copy installation script to ${SCRIPT_PATH}..."
+    sudo cp ./${PACKAGE_NAME} ${SCRIPT_PATH}
+
+    chmod 644 temp/${PACKAGE_NAME}.service
+    chown root:root temp/${PACKAGE_NAME}.service
+
+
+    echo "Move system unit to /lib/systemd/system/..."
+    sudo mv temp/${PACKAGE_NAME}.service /lib/systemd/system/
+    sudo ln -s /lib/systemd/system/${PACKAGE_NAME}.service /etc/systemd/system/
+
+    rm -r temp/
+
+    echo "Enable system unit..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable ${PACKAGE_NAME}.service
+
+    echo "${PACKAGE_NAME} successfully installed!"
+}
+
+uninstall() {
+    echo "Uninstall ${PACKAGE_NAME}..."
+    echo "Stop and disable service..."
+    sudo systemctl stop ${PACKAGE_NAME}.service
+    sudo systemctl disable ${PACKAGE_NAME}.service
+
+    echo "Remove kernel module from ${LIB_PATH}/${PACKAGE_NAME}..."
+    sudo rm -r ${LIB_PATH}/${PACKAGE_NAME}
+
+    echo "Remove init script from ${SCRIPT_PATH}..."
+    sudo rm ${SCRIPT_PATH}/${PACKAGE_NAME}
+
+    echo "${PACKAGE_NAME} successfully uninstalled!"
+}
+
+case $1 in
+    install)
+        if [[ ! -f $2 ]]; then
+            echo "File $2 does not exist! Exiting..."
+            exit 1
+        fi
+        "$1" $2
+        ;;
+    start|stop|uninstall)
+        "$1"
+        ;;
+    *)
+        echo "Please specify a command to execute..."
+        ;;
+esac

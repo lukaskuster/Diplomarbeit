@@ -1,0 +1,12 @@
+[Unit]
+Description=BCM2835 PCM Driver
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/bcm2835-pcm-driver start
+ExecStop=/usr/local/bin/bcm2835-pcm-driver stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

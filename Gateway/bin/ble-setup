@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+
+PACKAGE_NAME=ble-setup
+LIB_PATH=/usr/local/lib
+CONFIG_DIR=/etc/gateway
+CONFIG_FILES=( "ble-config.json" )
+
+
+install () {
+    echo "Install ${PACKAGE_NAME}..."
+
+    mkdir temp
+
+    echo "Unpack ${1} to temp/..."
+    tar -xzf $1 -C temp/
+
+    echo "Copy ${PACKAGE_NAME} to ${LIB_PATH}"
+    sudo cp -r temp/${PACKAGE_NAME} ${LIB_PATH}
+
+    sudo chmod 644 temp/${PACKAGE_NAME}.service
+    sudo chown root:root temp/${PACKAGE_NAME}.service
+
+    echo "Move system unit to /lib/systemd/system/..."
+    sudo mv temp/${PACKAGE_NAME}.service /lib/systemd/system/
+    sudo ln -s /lib/systemd/system/${PACKAGE_NAME}.service /etc/systemd/system/
+
+    sudo mkdir -p ${CONFIG_DIR}
+
+    for i in ${CONFIG_FILES[@]}
+    do
+        echo "Move ${i} to ${CONFIG_DIR}"
+        mv temp/${i} ${CONFIG_DIR}
+    done
+
+    rm -r temp/
+
+    echo "Install required npm packages..."
+    cd /usr/local/lib/${PACKAGE_NAME}
+    sudo npm i
+
+    echo "Enable system unit..."
+    sudo systemctl daemon-reload
+    sudo systemctl enable ${PACKAGE_NAME}.service
+
+    echo "${PACKAGE_NAME} successfully installed!"
+}
+
+
+uninstall () {
+    # TODO
+    echo "Not yet implemented :)"
+}
+
+
+case $1 in
+    install)
+        if [[ ! -f $2 ]]; then
+            echo "File $2 does not exist! Exiting..."
+            exit 1
+        fi
+        "$1" $2
+        ;;
+    uninstall)
+        "$1"
+        ;;
+    *)
+        echo "Please specify a command to execute..."
+        ;;
+esac
