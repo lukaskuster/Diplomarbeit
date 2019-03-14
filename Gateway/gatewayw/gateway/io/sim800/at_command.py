@@ -1,4 +1,4 @@
-from gateway.io.sim800 import parser as sim_parser
+from gateway.io.sim800.at_parser import ATParser
 
 
 class ATCommand:
@@ -6,7 +6,7 @@ class ATCommand:
     Represents an AT-Command that gets send to the sim module.
     """
 
-    def __init__(self, command, name='', data=None, parser=sim_parser.Parser()):
+    def __init__(self, command, name='', data=None, parser=ATParser()):
         """
         Construct a new 'Command' object.
 

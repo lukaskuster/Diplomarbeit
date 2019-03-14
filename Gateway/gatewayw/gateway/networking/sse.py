@@ -68,7 +68,7 @@ class SSE(Thread):
         Try to establish a connection until the thread is closed.
         Emits the parsed events on the API.
 
-        :return: noting
+        :return: nothing
         """
 
         logger.info('SSE', 'Started service!')
@@ -107,7 +107,6 @@ class SSE(Thread):
                                 notification['data'],
                                 AnsiEscapeSequence.DEFAULT))
                             if notification['event'] == 'reconnect':
-                                logger.info('SSE', 'Reconnecting')
                                 break
                             self.emitter.emit(notification['event'], notification['data'])
                         except ValueError:  # Json failed to load

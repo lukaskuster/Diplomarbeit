@@ -1,16 +1,110 @@
 import asyncio
+import time
+import fractions
 from enum import IntEnum
 from threading import Event
 
 import websockets
-from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration, RTCRtpSender, RTCRtpReceiver
+from aiortc import RTCPeerConnection, RTCIceServer, RTCConfiguration, RTCRtpSender, RTCRtpReceiver, AudioStreamTrack
 from aiortc.mediastreams import MediaStreamError
 from pyee import EventEmitter
+from av import AudioFrame
 
-from gateway.networking import signaling, AuthenticationError
-from gateway.networking.track import CallStreamTrack
+from gateway.networking.signaling import send_answer, send_offer, recv_answer, recv_offer, \
+    resv_ice_candidate, authenticate, AuthenticationError
 from gateway.utils import logger, AnsiEscapeSequence
 from gateway.io import PCM
+
+
+SAMPLE_RATE = 8000
+
+# 20ms audio packetization
+AUDIO_PTIME = 0.020
+
+# Samples per frame
+FRAME_SAMPLES = int(AUDIO_PTIME * SAMPLE_RATE)
+
+
+class CallStreamTrack(AudioStreamTrack):
+    """
+    WebRTC audio track that gets send to the remote peer.
+    """
+
+    def __init__(self, pcm):
+        super().__init__()
+        # Start time of the transmission to calculate the wait time
+        self._start = 0
+
+        # The pcm module to read samples from the driver buffer
+        self._pcm = pcm
+
+        # Configure a standard frame:
+        # Sample rate - 8kHz
+        # Sample length - 8bit
+        # 1 Channel
+        frame = AudioFrame(format='u8', layout='mono', samples=FRAME_SAMPLES)
+        frame.sample_rate = SAMPLE_RATE
+        frame.time_base = fractions.Fraction(1, SAMPLE_RATE)
+        self._frame = frame
+
+        # Only for testing the track without the pcm module
+        self._count = 0
+
+    # Send a frame to the peer connection
+    async def recv(self):
+        """
+        Gets called when a new audio frame gets send to the remote peer.
+        This method must return a audio frame that is g.711 encoded.
+
+        :return: audio frame
+        """
+
+        if hasattr(self, '_timestamp'):
+            # Increase the timestamp and wait if needed, to keep everything sync
+            self._timestamp += FRAME_SAMPLES
+            wait = self._start + (self._timestamp / SAMPLE_RATE) - time.time()
+            if wait > 0:
+                await asyncio.sleep(wait)
+        else:
+            # Gets called on the first execution
+            self._start = time.time()
+
+            # Timestamp for the audio frame measured in samples
+            self._timestamp = 0
+
+            # Enable the pcm bus
+            if self._pcm is not None:
+                self._pcm.enable()
+
+        # Only for testing without the pcm module
+        if self._pcm is None:
+            if self._count > 255:
+                self._count = 0
+
+            self._frame.planes[0].update(bytearray([self._count for i in range(FRAME_SAMPLES)]))
+
+            self._count += 1
+        else:
+            # Get the amount of samples a frame can hold from the pcm interface
+            frame_data = self._pcm.read_frame()
+
+            if frame_data is None:
+                # If there are no new samples send silence for now
+                self._frame.planes[0].update(bytes(FRAME_SAMPLES))
+            else:
+                # Fill the buffer in the frame with the pcm samples
+                self._frame.planes[0].update(frame_data)
+
+        # Include the timestamp in the frame
+        self._frame.pts = self._timestamp
+
+        logger.debug('Mediatrack', 'Sending frame (samples: {}, sample_rate: {}, format: {}, pts: {}, '
+                                   'rate: {}, time: {}. planes: {}, index: {}, layout: {}, dts: {})'
+                     .format(self._frame.samples, self._frame.sample_rate, self._frame.format.name, self._frame.pts,
+                             self._frame.rate,
+                             self._frame.time, self._frame.planes, self._frame.index, self._frame.layout, self._frame.dts))
+
+        return self._frame
 
 
 class Role(IntEnum):
@@ -22,22 +116,31 @@ class Role(IntEnum):
     ANSWER = 1
 
 
-class WebRTCError(Exception):
+class CallError(Exception):
     pass
 
 
-class WebRTC(EventEmitter):
+class Caller(EventEmitter):
     """
     Class to establish a WebRTC connection and to stream the audio to a device.
     """
 
-    def __init__(self, username, password, gateway_imei, host='localhost', signaling_timeout=10, webrtc_timeout=10, debug=False):
+    def __init__(self, username: str, password: str, gateway_imei, host='localhost', signaling_timeout=10, webrtc_timeout=10, debug=False):
         """
         Construct a new 'SerialLoop' object.
 
         :param username: username of the gateway
         :param password: password of the gateway
         :param host: signaling server
+        :param signaling_timeout: timout limit of the signaling process
+        :param webrtc_timeout: timout limit of the webrtc connection
+        :param debug: debug mode
+        :type username: str
+        :type password: str
+        :type host: str
+        :type signaling_timeout: int
+        :type webrtc_timeout: int
+        :type debug: bool
         """
 
         RTCRtpSender.disableEncoding = True
@@ -62,10 +165,12 @@ class WebRTC(EventEmitter):
 
         # Don't include the pcm module in debug mode
         if not debug:
-            self.pcm = PCM()
+            self._pcm = PCM()
         else:
-            self.pcm = None
+            self._pcm = None
         self.debug = debug
+
+        self.local_track = CallStreamTrack(self._pcm)
 
     def start_call(self, role):
         """
@@ -85,15 +190,14 @@ class WebRTC(EventEmitter):
         self._role = role
 
         # Set local audio track
-        local_track = CallStreamTrack(self.pcm)
-        self._peer_connection.addTrack(local_track)
-        logger.info('Mediatrack', 'Add local media track ({})'.format(local_track.id))
+        self._peer_connection.addTrack(self.local_track)
+        logger.info('Mediatrack', 'Add local media track ({})'.format(self.local_track.id))
 
         self._set_audio_codec()
 
         # Raise an exception if a call is ongoing
         if self._call.is_set():
-            raise WebRTCError('Only one call can be active at a time!')
+            raise CallError('Only one call can be active at a time!')
 
         # Start the call
         self._call.set()
@@ -174,7 +278,7 @@ class WebRTC(EventEmitter):
 
         logger.info('Signaling', 'Connected with signaling server!')
         try:
-            await signaling.authenticate(socket, self._role, self.username, self.password, self._gateway_imei)
+            await authenticate(socket, self._role, self.username, self.password, self._gateway_imei)
         except AuthenticationError:
             raise
 
@@ -189,8 +293,8 @@ class WebRTC(EventEmitter):
         """
 
         await self._peer_connection.setLocalDescription(await self._peer_connection.createOffer())
-        await signaling.send_offer(socket, self._peer_connection.localDescription)
-        answer = await signaling.recv_answer(socket)
+        await send_offer(socket, self._peer_connection.localDescription)
+        answer = await recv_answer(socket)
         await self._peer_connection.setRemoteDescription(answer)
 
     async def _signaling_answer(self, socket):
@@ -201,11 +305,11 @@ class WebRTC(EventEmitter):
         :return: nothing
         """
 
-        offer = await signaling.recv_offer(socket)
+        offer = await recv_offer(socket)
         await self._peer_connection.setRemoteDescription(offer)
 
         await self._peer_connection.setLocalDescription(await self._peer_connection.createAnswer())
-        await signaling.send_answer(socket, self._peer_connection.localDescription)
+        await send_answer(socket, self._peer_connection.localDescription)
 
     async def _exchange_sdp(self, socket):
         """
@@ -244,7 +348,7 @@ class WebRTC(EventEmitter):
         if not error:
             self._peer_connection.addIceCandidate(candidate)
 
-        resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
+        resv_ice_task = asyncio.ensure_future(resv_ice_candidate(socket))
         resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
     async def _make_call(self):
@@ -283,7 +387,7 @@ class WebRTC(EventEmitter):
                 return
 
             # Create new task to add new received ice candidates
-            resv_ice_task = asyncio.ensure_future(signaling.resv_ice_candidate(socket))
+            resv_ice_task = asyncio.ensure_future(resv_ice_candidate(socket))
             resv_ice_task.add_done_callback(self._on_new_ice_candidate)
 
             # Receive and send the audio frames until the connection closes
@@ -300,14 +404,16 @@ class WebRTC(EventEmitter):
 
                     # Write the samples of the frame to the pcm interface
                     if not self.debug:
-                        self.pcm.write_frame(frame.data)
+                        logger.debug('PCM', 'Start writing frame...')
+                        self._pcm.write_frame(frame.data)
+                        logger.debug('PCM', 'Wrote frame to pcm interface!')
 
                     if not self._call.is_set():
                         raise MediaStreamError('local')
 
             except MediaStreamError as err:
                 if not self.debug:
-                    self.pcm.disable()
+                    self._pcm.disable()
 
                 if err.args == ('local', ):
                     logger.info('Connection', 'Peer connection closed from local client!')

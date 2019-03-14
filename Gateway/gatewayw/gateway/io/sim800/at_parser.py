@@ -2,11 +2,11 @@ import json
 from datetime import datetime
 
 import gateway.utils as utils
+from gateway.io.sim800.at_response import *
 from gateway.core.config import get_config
-from gateway.io.sim800 import response_objects
 
 
-class Parser:
+class ATParser:
     """
     Parser with an basic implementation that does nothing.
 
@@ -24,7 +24,7 @@ class Parser:
         return None
 
 
-class SMSListParser(Parser):
+class SMSListParser(ATParser):
     """
     Parser that returns al list of SMS objects.
     """
@@ -40,7 +40,7 @@ class SMSListParser(Parser):
             data[0] = data[0].strip()
 
             # Add a new sms object to the list
-            s = response_objects.SMS(int(data[0]), data[1][1:-1], data[2][1:-1], content[i * 2 + 1])
+            s = SMS(int(data[0]), data[1][1:-1], data[2][1:-1], content[i * 2 + 1])
             if data[3]:
                 s.address_name = data[3][1:-1]
             if len(data) > 4 and data[4]:
@@ -62,7 +62,7 @@ class SMSListParser(Parser):
         return sms
 
 
-class NetworkStatusParser(Parser):
+class NetworkStatusParser(ATParser):
     """
     Parser that returns a NetworkStatus object.
     """
@@ -71,7 +71,7 @@ class NetworkStatusParser(Parser):
     def parse(content):
         data = utils.split_str(content[0][content[0].index(':') + 1:])
 
-        status = response_objects.NetworkStatus(data[0].strip(), int(data[1]))
+        status = NetworkStatus(data[0].strip(), int(data[1]))
 
         if len(data) == 4:
             status.lac = data[2][1:-1]
@@ -80,7 +80,7 @@ class NetworkStatusParser(Parser):
         return status
 
 
-class SignalQualityParser(Parser):
+class SignalQualityParser(ATParser):
     """
     Parser that returns a SignalQuality object.
     """
@@ -88,10 +88,10 @@ class SignalQualityParser(Parser):
     @staticmethod
     def parse(content):
         data = utils.split_str(content[0][content[0].index(':') + 1:])
-        return response_objects.SignalQuality(data[0].strip(), data[1])
+        return SignalQuality(data[0].strip(), data[1])
 
 
-class PinStatusParser(Parser):
+class PinStatusParser(ATParser):
     """
     Parser that returns a PinStatus object.
     """
@@ -99,20 +99,20 @@ class PinStatusParser(Parser):
     @staticmethod
     def parse(content):
         print(content)
-        return response_objects.PINStatus(content[0][content[0].index(':') + 1:].strip())
+        return PINStatus(content[0][content[0].index(':') + 1:].strip())
 
 
-class IMEIParser(Parser):
+class IMEIParser(ATParser):
     """
     Parser that returns a IMEI object.
     """
 
     @staticmethod
     def parse(content):
-        return response_objects.IMEI(content[0])
+        return IMEI(content[0])
 
 
-class SubscriberNumberParser(Parser):
+class SubscriberNumberParser(ATParser):
     """
     Parser that returns a SubscriberNumber object.
     """
@@ -121,7 +121,7 @@ class SubscriberNumberParser(Parser):
     def parse(content):
         data = utils.split_str(content[0][content[0].index(':') + 1:])
 
-        number = response_objects.SubscriberNumber(data[1][1:-1], data[2])
+        number = SubscriberNumber(data[1][1:-1], data[2])
 
         if data[0].strip():
             number.alpha = data[0].strip()
@@ -133,7 +133,7 @@ class SubscriberNumberParser(Parser):
         return number
 
 
-class IMSIParser(Parser):
+class IMSIParser(ATParser):
     """
     Parser that returns an IMSI object.
     """
@@ -158,10 +158,10 @@ class IMSIParser(Parser):
                 if mnc in data[mcc]:
                     network = data[mcc][mnc]
 
-            return response_objects.IMSI(mcc, mnc, msin, network, country, iso)
+            return IMSI(mcc, mnc, msin, network, country, iso)
 
 
-class CallerIdentificationParser(Parser):
+class CallerIdentificationParser(ATParser):
     """
     Parser that returns the caller number.
     """

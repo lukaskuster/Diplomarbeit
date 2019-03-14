@@ -4,7 +4,7 @@ import requests
 import time
 from pyee import EventEmitter
 
-import gateway.networking.sse
+from gateway.networking.sse import SSE
 from gateway.utils import logger, AnsiEscapeSequence
 
 
@@ -30,7 +30,7 @@ class API(EventEmitter):
         self.id = _id
         self.timeout = timeout
         # Create an new sse connection, that emits the incoming push notifications on the API object
-        self.sse = gateway.networking.sse.SSE(self)
+        self.sse = SSE(self)
         # Create the device if it is not created yet
 
         connected = False
@@ -181,5 +181,5 @@ class API(EventEmitter):
         data = response.json()
         status_code = AnsiEscapeSequence.BOLD + str(response.status_code) + AnsiEscapeSequence.DEFAULT
         path = AnsiEscapeSequence.UNDERLINE + path + AnsiEscapeSequence.DEFAULT
-        logger.debug('API', 'Finished request ' + path + ' with status code ' + status_code)
+        logger.debug('API', 'Finished request {} with status code {} and data:{}'.format(path, status_code, data))
         return data, response.status_code

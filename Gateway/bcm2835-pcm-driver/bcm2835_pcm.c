@@ -489,7 +489,7 @@ static int device_open(struct inode *inode, struct file *file)
     return 0;
 }
 
-/* Called when the a process closes the device file */
+/* Called when the process closes the device file */
 static int device_release(struct inode *inode, struct file *file)
 {
 

@@ -5,7 +5,10 @@
 from gateway.io.pcm cimport cpcmlib
 from cpython.bytes cimport PyBytes_FromStringAndSize
 
+from gateway.io.pcm import ModeControlRegister, CHANNEL, BAUD_RATE
 from gateway.utils import logger
+
+import pigpio
 
 
 cdef class PCM:
@@ -25,19 +28,62 @@ cdef class PCM:
         if ret < 0:
             raise MemoryError('CLK could not be allocated! Error code: {}'.format(ret))
 
+    def _power_up(self):
+        connection = pigpio.pi()
+
+        if not connection.connected:
+            logger.error('PCM', 'SPIConnectionError')
+            raise ConnectionError
+
+        handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+        mode_control_register = ModeControlRegister()
+
+        mode_control_register.PD = 0
+        mode_control_register.write(connection, handler)
+
+        logger.info('PCM', 'Set PD bit to 0!')
+
+        connection.spi_close(handler)
+
+        connection.stop()
+
+    def _power_down(self):
+        connection = pigpio.pi()
+
+        if not connection.connected:
+            return logger.error('PCM', 'SPIConnectionError')
+
+        handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+
+        mode_control_register = ModeControlRegister()
+
+        mode_control_register.PD = 1
+        mode_control_register.write(connection, handler)
+
+        logger.info('PCM', 'Set PD bit to 1!')
+
+        connection.spi_close(handler)
+
+        connection.stop()
+
     def enable(self):
         cpcmlib.enable_clk()
+
+        self._power_up()
 
         ret = cpcmlib.enable_pcm()
 
         if ret < 0:
-            logger.error('PCM', 'EnablePCMError({})'.format(ret))
+            return logger.error('PCM', 'EnablePCMError({})'.format(ret))
+
 
     def disable(self):
         ret = cpcmlib.disable_pcm()
 
         if ret < 0:
             logger.error('PCM', 'DisablePCMError({})'.format(ret))
+
+        self._power_down()
 
         cpcmlib.disable_clk()
 

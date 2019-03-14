@@ -1,5 +1,6 @@
 build/
 **/build/
+**/_build/
 **/node_modules/
 gatewayw/dist/
 gatewayw/docs/_build/

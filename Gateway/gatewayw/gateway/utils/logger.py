@@ -49,7 +49,7 @@ class Logger:
         self.enable_ansi_strings = True
         self.enable_time = True
         self.time_format = '[%x %X]'
-        self.level = Level.LOG
+        self.level = Level.DEBUG
 
         self._error_handler = None
         self.config = None

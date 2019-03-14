@@ -843,7 +843,7 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM;
 
-/* "gateway/io/pcm/pcm.pyx":11
+/* "gateway/io/pcm/pcm.pyx":14
  * 
  * 
  * cdef class PCM:             # <<<<<<<<<<<<<<
@@ -1058,6 +1058,15 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
 
+/* PyObjectSetAttrStr.proto */
+#if CYTHON_USE_TYPE_SLOTS
+#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o, n, NULL)
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value);
+#else
+#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
+#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
+#endif
+
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -1182,45 +1191,75 @@ int __pyx_module_is_main_gateway__io__pcm__pcm = 0;
 /* Implementation of 'gateway.io.pcm.pcm' */
 static PyObject *__pyx_builtin_MemoryError;
 static PyObject *__pyx_builtin_TypeError;
+static const char __pyx_k_PD[] = "PD";
+static const char __pyx_k_pi[] = "pi";
 static const char __pyx_k_PCM[] = "PCM";
 static const char __pyx_k_info[] = "info";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
+static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_error[] = "error";
+static const char __pyx_k_write[] = "write";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_logger[] = "logger";
+static const char __pyx_k_pigpio[] = "pigpio";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_CHANNEL[] = "CHANNEL";
 static const char __pyx_k_getstate[] = "__getstate__";
+static const char __pyx_k_power_up[] = "_power_up";
 static const char __pyx_k_setstate[] = "__setstate__";
+static const char __pyx_k_spi_open[] = "spi_open";
+static const char __pyx_k_BAUD_RATE[] = "BAUD_RATE";
 static const char __pyx_k_TypeError[] = "TypeError";
+static const char __pyx_k_connected[] = "connected";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_spi_close[] = "spi_close";
+static const char __pyx_k_SPI_MODE_0[] = "SPI_MODE_0";
+static const char __pyx_k_power_down[] = "_power_down";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_read_frame[] = "read_frame";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_gateway_utils[] = "gateway.utils";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_EnablePCMError[] = "EnablePCMError({})";
+static const char __pyx_k_gateway_io_pcm[] = "gateway.io.pcm";
+static const char __pyx_k_ConnectionError[] = "ConnectionError";
 static const char __pyx_k_DisablePCMError[] = "DisablePCMError({})";
+static const char __pyx_k_Set_PD_bit_to_0[] = "Set PD bit to 0!";
+static const char __pyx_k_Set_PD_bit_to_1[] = "Set PD bit to 1!";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
+static const char __pyx_k_SPIConnectionError[] = "SPIConnectionError";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_ModeControlRegister[] = "ModeControlRegister";
 static const char __pyx_k_Could_not_read_samples[] = "Could not read samples!";
 static const char __pyx_k_Could_not_write_samples[] = "Could not write samples!";
 static const char __pyx_k_CLK_could_not_be_allocated_Error[] = "CLK could not be allocated! Error code: {}";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
+static PyObject *__pyx_n_s_BAUD_RATE;
+static PyObject *__pyx_n_s_CHANNEL;
 static PyObject *__pyx_kp_u_CLK_could_not_be_allocated_Error;
+static PyObject *__pyx_n_s_ConnectionError;
 static PyObject *__pyx_kp_u_Could_not_read_samples;
 static PyObject *__pyx_kp_u_Could_not_write_samples;
 static PyObject *__pyx_kp_u_DisablePCMError;
 static PyObject *__pyx_kp_u_EnablePCMError;
 static PyObject *__pyx_n_s_MemoryError;
+static PyObject *__pyx_n_s_ModeControlRegister;
 static PyObject *__pyx_n_s_PCM;
 static PyObject *__pyx_n_u_PCM;
+static PyObject *__pyx_n_s_PD;
+static PyObject *__pyx_n_u_SPIConnectionError;
+static PyObject *__pyx_n_s_SPI_MODE_0;
+static PyObject *__pyx_kp_u_Set_PD_bit_to_0;
+static PyObject *__pyx_kp_u_Set_PD_bit_to_1;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_connected;
 static PyObject *__pyx_n_s_error;
 static PyObject *__pyx_n_s_format;
+static PyObject *__pyx_n_s_gateway_io_pcm;
 static PyObject *__pyx_n_s_gateway_utils;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_import;
@@ -1229,6 +1268,10 @@ static PyObject *__pyx_n_s_logger;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
+static PyObject *__pyx_n_s_pi;
+static PyObject *__pyx_n_s_pigpio;
+static PyObject *__pyx_n_s_power_down;
+static PyObject *__pyx_n_s_power_up;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_read_frame;
 static PyObject *__pyx_n_s_reduce;
@@ -1236,23 +1279,34 @@ static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
+static PyObject *__pyx_n_s_spi_close;
+static PyObject *__pyx_n_s_spi_open;
+static PyObject *__pyx_n_s_stop;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_write;
 static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, PyObject *__pyx_v_samples); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8read_frame(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10__dealloc__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2_power_up(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4_power_down(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6enable(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8disable(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10write_frame(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, PyObject *__pyx_v_samples); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12read_frame(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__dealloc__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_16__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_18__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_7gateway_2io_3pcm_3pcm_PCM(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_int_0;
+static PyObject *__pyx_int_1;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
+static PyObject *__pyx_tuple__5;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__7;
 /* Late includes */
 
-/* "gateway/io/pcm/pcm.pyx":16
+/* "gateway/io/pcm/pcm.pyx":19
  *     """
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1287,7 +1341,7 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":24
+  /* "gateway/io/pcm/pcm.pyx":27
  *         """
  * 
  *         ret = cpcmlib.alloc_clk()             # <<<<<<<<<<<<<<
@@ -1296,7 +1350,7 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
  */
   __pyx_v_ret = alloc_clk();
 
-  /* "gateway/io/pcm/pcm.pyx":25
+  /* "gateway/io/pcm/pcm.pyx":28
  * 
  *         ret = cpcmlib.alloc_clk()
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -1306,16 +1360,16 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
   __pyx_t_1 = ((__pyx_v_ret < 0) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "gateway/io/pcm/pcm.pyx":26
+    /* "gateway/io/pcm/pcm.pyx":29
  *         ret = cpcmlib.alloc_clk()
  *         if ret < 0:
  *             raise MemoryError('CLK could not be allocated! Error code: {}'.format(ret))             # <<<<<<<<<<<<<<
  * 
- *     def enable(self):
+ *     def _power_up(self):
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_CLK_could_not_be_allocated_Error, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_CLK_could_not_be_allocated_Error, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -1330,17 +1384,17 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
     __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_MemoryError, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_MemoryError, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 26, __pyx_L1_error)
+    __PYX_ERR(0, 29, __pyx_L1_error)
 
-    /* "gateway/io/pcm/pcm.pyx":25
+    /* "gateway/io/pcm/pcm.pyx":28
  * 
  *         ret = cpcmlib.alloc_clk()
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -1349,7 +1403,7 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
  */
   }
 
-  /* "gateway/io/pcm/pcm.pyx":16
+  /* "gateway/io/pcm/pcm.pyx":19
  *     """
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1372,8 +1426,774 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
   return __pyx_r;
 }
 
-/* "gateway/io/pcm/pcm.pyx":28
+/* "gateway/io/pcm/pcm.pyx":31
  *             raise MemoryError('CLK could not be allocated! Error code: {}'.format(ret))
+ * 
+ *     def _power_up(self):             # <<<<<<<<<<<<<<
+ *         connection = pigpio.pi()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3_power_up(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3_power_up(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("_power_up (wrapper)", 0);
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2_power_up(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2_power_up(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+  PyObject *__pyx_v_connection = NULL;
+  PyObject *__pyx_v_handler = NULL;
+  PyObject *__pyx_v_mode_control_register = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  __Pyx_RefNannySetupContext("_power_up", 0);
+
+  /* "gateway/io/pcm/pcm.pyx":32
+ * 
+ *     def _power_up(self):
+ *         connection = pigpio.pi()             # <<<<<<<<<<<<<<
+ * 
+ *         if not connection.connected:
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pigpio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pi); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_connection = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":34
+ *         connection = pigpio.pi()
+ * 
+ *         if not connection.connected:             # <<<<<<<<<<<<<<
+ *             logger.error('PCM', 'SPIConnectionError')
+ *             raise ConnectionError
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_connected); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = ((!__pyx_t_4) != 0);
+  if (unlikely(__pyx_t_5)) {
+
+    /* "gateway/io/pcm/pcm.pyx":35
+ * 
+ *         if not connection.connected:
+ *             logger.error('PCM', 'SPIConnectionError')             # <<<<<<<<<<<<<<
+ *             raise ConnectionError
+ * 
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_error); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "gateway/io/pcm/pcm.pyx":36
+ *         if not connection.connected:
+ *             logger.error('PCM', 'SPIConnectionError')
+ *             raise ConnectionError             # <<<<<<<<<<<<<<
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ConnectionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 36, __pyx_L1_error)
+
+    /* "gateway/io/pcm/pcm.pyx":34
+ *         connection = pigpio.pi()
+ * 
+ *         if not connection.connected:             # <<<<<<<<<<<<<<
+ *             logger.error('PCM', 'SPIConnectionError')
+ *             raise ConnectionError
+ */
+  }
+
+  /* "gateway/io/pcm/pcm.pyx":38
+ *             raise ConnectionError
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)             # <<<<<<<<<<<<<<
+ *         mode_control_register = ModeControlRegister()
+ * 
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_spi_open); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CHANNEL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_BAUD_RATE); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_pigpio); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_SPI_MODE_0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_7)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  #if CYTHON_FAST_PYCALL
+  if (PyFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_2, __pyx_t_6, __pyx_t_8};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  } else
+  #endif
+  #if CYTHON_FAST_PYCCALL
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_2, __pyx_t_6, __pyx_t_8};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  } else
+  #endif
+  {
+    __pyx_t_10 = PyTuple_New(3+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    if (__pyx_t_7) {
+      __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_7); __pyx_t_7 = NULL;
+    }
+    __Pyx_GIVEREF(__pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_10, 0+__pyx_t_9, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_9, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_8);
+    PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_9, __pyx_t_8);
+    __pyx_t_2 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_8 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_handler = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":39
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+ *         mode_control_register = ModeControlRegister()             # <<<<<<<<<<<<<<
+ * 
+ *         mode_control_register.PD = 0
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ModeControlRegister); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_10 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_10) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_10) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_mode_control_register = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":41
+ *         mode_control_register = ModeControlRegister()
+ * 
+ *         mode_control_register.PD = 0             # <<<<<<<<<<<<<<
+ *         mode_control_register.write(connection, handler)
+ * 
+ */
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_mode_control_register, __pyx_n_s_PD, __pyx_int_0) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+
+  /* "gateway/io/pcm/pcm.pyx":42
+ * 
+ *         mode_control_register.PD = 0
+ *         mode_control_register.write(connection, handler)             # <<<<<<<<<<<<<<
+ * 
+ *         logger.info('PCM', 'Set PD bit to 0!')
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mode_control_register, __pyx_n_s_write); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_10 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  #if CYTHON_FAST_PYCALL
+  if (PyFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_connection, __pyx_v_handler};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else
+  #endif
+  #if CYTHON_FAST_PYCCALL
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_connection, __pyx_v_handler};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else
+  #endif
+  {
+    __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    if (__pyx_t_10) {
+      __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_10); __pyx_t_10 = NULL;
+    }
+    __Pyx_INCREF(__pyx_v_connection);
+    __Pyx_GIVEREF(__pyx_v_connection);
+    PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_9, __pyx_v_connection);
+    __Pyx_INCREF(__pyx_v_handler);
+    __Pyx_GIVEREF(__pyx_v_handler);
+    PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_9, __pyx_v_handler);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":44
+ *         mode_control_register.write(connection, handler)
+ * 
+ *         logger.info('PCM', 'Set PD bit to 0!')             # <<<<<<<<<<<<<<
+ * 
+ *         connection.spi_close(handler)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":46
+ *         logger.info('PCM', 'Set PD bit to 0!')
+ * 
+ *         connection.spi_close(handler)             # <<<<<<<<<<<<<<
+ * 
+ *         connection.stop()
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_spi_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_8 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_8);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_8, __pyx_v_handler) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_handler);
+  __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":48
+ *         connection.spi_close(handler)
+ * 
+ *         connection.stop()             # <<<<<<<<<<<<<<
+ * 
+ *     def _power_down(self):
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_stop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_8 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_8);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":31
+ *             raise MemoryError('CLK could not be allocated! Error code: {}'.format(ret))
+ * 
+ *     def _power_up(self):             # <<<<<<<<<<<<<<
+ *         connection = pigpio.pi()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_AddTraceback("gateway.io.pcm.pcm.PCM._power_up", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_connection);
+  __Pyx_XDECREF(__pyx_v_handler);
+  __Pyx_XDECREF(__pyx_v_mode_control_register);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "gateway/io/pcm/pcm.pyx":50
+ *         connection.stop()
+ * 
+ *     def _power_down(self):             # <<<<<<<<<<<<<<
+ *         connection = pigpio.pi()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5_power_down(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5_power_down(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("_power_down (wrapper)", 0);
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4_power_down(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4_power_down(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+  PyObject *__pyx_v_connection = NULL;
+  PyObject *__pyx_v_handler = NULL;
+  PyObject *__pyx_v_mode_control_register = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  int __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
+  __Pyx_RefNannySetupContext("_power_down", 0);
+
+  /* "gateway/io/pcm/pcm.pyx":51
+ * 
+ *     def _power_down(self):
+ *         connection = pigpio.pi()             # <<<<<<<<<<<<<<
+ * 
+ *         if not connection.connected:
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pigpio); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pi); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_connection = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":53
+ *         connection = pigpio.pi()
+ * 
+ *         if not connection.connected:             # <<<<<<<<<<<<<<
+ *             return logger.error('PCM', 'SPIConnectionError')
+ * 
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_connected); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = ((!__pyx_t_4) != 0);
+  if (__pyx_t_5) {
+
+    /* "gateway/io/pcm/pcm.pyx":54
+ * 
+ *         if not connection.connected:
+ *             return logger.error('PCM', 'SPIConnectionError')             # <<<<<<<<<<<<<<
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_error); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "gateway/io/pcm/pcm.pyx":53
+ *         connection = pigpio.pi()
+ * 
+ *         if not connection.connected:             # <<<<<<<<<<<<<<
+ *             return logger.error('PCM', 'SPIConnectionError')
+ * 
+ */
+  }
+
+  /* "gateway/io/pcm/pcm.pyx":56
+ *             return logger.error('PCM', 'SPIConnectionError')
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)             # <<<<<<<<<<<<<<
+ * 
+ *         mode_control_register = ModeControlRegister()
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_spi_open); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CHANNEL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_BAUD_RATE); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_pigpio); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_SPI_MODE_0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_7 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_7)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  #if CYTHON_FAST_PYCALL
+  if (PyFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_2, __pyx_t_6, __pyx_t_8};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  } else
+  #endif
+  #if CYTHON_FAST_PYCCALL
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_2, __pyx_t_6, __pyx_t_8};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 3+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  } else
+  #endif
+  {
+    __pyx_t_10 = PyTuple_New(3+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    if (__pyx_t_7) {
+      __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_7); __pyx_t_7 = NULL;
+    }
+    __Pyx_GIVEREF(__pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_10, 0+__pyx_t_9, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_9, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_8);
+    PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_9, __pyx_t_8);
+    __pyx_t_2 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_8 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_handler = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":58
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+ * 
+ *         mode_control_register = ModeControlRegister()             # <<<<<<<<<<<<<<
+ * 
+ *         mode_control_register.PD = 1
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_ModeControlRegister); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_10 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_10) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_10) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_mode_control_register = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":60
+ *         mode_control_register = ModeControlRegister()
+ * 
+ *         mode_control_register.PD = 1             # <<<<<<<<<<<<<<
+ *         mode_control_register.write(connection, handler)
+ * 
+ */
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_mode_control_register, __pyx_n_s_PD, __pyx_int_1) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
+
+  /* "gateway/io/pcm/pcm.pyx":61
+ * 
+ *         mode_control_register.PD = 1
+ *         mode_control_register.write(connection, handler)             # <<<<<<<<<<<<<<
+ * 
+ *         logger.info('PCM', 'Set PD bit to 1!')
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mode_control_register, __pyx_n_s_write); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_10 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  #if CYTHON_FAST_PYCALL
+  if (PyFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_connection, __pyx_v_handler};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else
+  #endif
+  #if CYTHON_FAST_PYCCALL
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_10, __pyx_v_connection, __pyx_v_handler};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else
+  #endif
+  {
+    __pyx_t_8 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    if (__pyx_t_10) {
+      __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_10); __pyx_t_10 = NULL;
+    }
+    __Pyx_INCREF(__pyx_v_connection);
+    __Pyx_GIVEREF(__pyx_v_connection);
+    PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_9, __pyx_v_connection);
+    __Pyx_INCREF(__pyx_v_handler);
+    __Pyx_GIVEREF(__pyx_v_handler);
+    PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_9, __pyx_v_handler);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":63
+ *         mode_control_register.write(connection, handler)
+ * 
+ *         logger.info('PCM', 'Set PD bit to 1!')             # <<<<<<<<<<<<<<
+ * 
+ *         connection.spi_close(handler)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_info); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":65
+ *         logger.info('PCM', 'Set PD bit to 1!')
+ * 
+ *         connection.spi_close(handler)             # <<<<<<<<<<<<<<
+ * 
+ *         connection.stop()
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_spi_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_8 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_8);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_8, __pyx_v_handler) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_handler);
+  __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":67
+ *         connection.spi_close(handler)
+ * 
+ *         connection.stop()             # <<<<<<<<<<<<<<
+ * 
+ *     def enable(self):
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_connection, __pyx_n_s_stop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_8 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_8);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_8) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_8) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":50
+ *         connection.stop()
+ * 
+ *     def _power_down(self):             # <<<<<<<<<<<<<<
+ *         connection = pigpio.pi()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_AddTraceback("gateway.io.pcm.pcm.PCM._power_down", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_connection);
+  __Pyx_XDECREF(__pyx_v_handler);
+  __Pyx_XDECREF(__pyx_v_mode_control_register);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "gateway/io/pcm/pcm.pyx":69
+ *         connection.stop()
  * 
  *     def enable(self):             # <<<<<<<<<<<<<<
  *         cpcmlib.enable_clk()
@@ -1381,43 +2201,69 @@ static int __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM___cinit__(CYTHON_UNUSED struct _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("enable (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6enable(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6enable(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
   int __pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
+  PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   int __pyx_t_8;
   __Pyx_RefNannySetupContext("enable", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":29
+  /* "gateway/io/pcm/pcm.pyx":70
  * 
  *     def enable(self):
  *         cpcmlib.enable_clk()             # <<<<<<<<<<<<<<
  * 
- *         ret = cpcmlib.enable_pcm()
+ *         self._power_up()
  */
   enable_clk();
 
-  /* "gateway/io/pcm/pcm.pyx":31
+  /* "gateway/io/pcm/pcm.pyx":72
  *         cpcmlib.enable_clk()
+ * 
+ *         self._power_up()             # <<<<<<<<<<<<<<
+ * 
+ *         ret = cpcmlib.enable_pcm()
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_power_up); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":74
+ *         self._power_up()
  * 
  *         ret = cpcmlib.enable_pcm()             # <<<<<<<<<<<<<<
  * 
@@ -1425,31 +2271,32 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
  */
   __pyx_v_ret = enable_pcm();
 
-  /* "gateway/io/pcm/pcm.pyx":33
+  /* "gateway/io/pcm/pcm.pyx":76
  *         ret = cpcmlib.enable_pcm()
  * 
  *         if ret < 0:             # <<<<<<<<<<<<<<
- *             logger.error('PCM', 'EnablePCMError({})'.format(ret))
+ *             return logger.error('PCM', 'EnablePCMError({})'.format(ret))
  * 
  */
-  __pyx_t_1 = ((__pyx_v_ret < 0) != 0);
-  if (__pyx_t_1) {
+  __pyx_t_4 = ((__pyx_v_ret < 0) != 0);
+  if (__pyx_t_4) {
 
-    /* "gateway/io/pcm/pcm.pyx":34
+    /* "gateway/io/pcm/pcm.pyx":77
  * 
  *         if ret < 0:
- *             logger.error('PCM', 'EnablePCMError({})'.format(ret))             # <<<<<<<<<<<<<<
+ *             return logger.error('PCM', 'EnablePCMError({})'.format(ret))             # <<<<<<<<<<<<<<
  * 
- *     def disable(self):
+ * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_error); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_error); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_EnablePCMError, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_EnablePCMError, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -1461,44 +2308,44 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
         __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    __pyx_t_3 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
+    __pyx_t_2 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
     __pyx_t_8 = 0;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_3);
       if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
         __pyx_t_8 = 1;
       }
     }
     #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_6 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 34, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -1506,27 +2353,29 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
       __Pyx_INCREF(__pyx_n_u_PCM);
       __Pyx_GIVEREF(__pyx_n_u_PCM);
       PyTuple_SET_ITEM(__pyx_t_6, 0+__pyx_t_8, __pyx_n_u_PCM);
-      __Pyx_GIVEREF(__pyx_t_3);
-      PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_8, __pyx_t_3);
-      __pyx_t_3 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_8, __pyx_t_2);
+      __pyx_t_2 = 0;
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
 
-    /* "gateway/io/pcm/pcm.pyx":33
+    /* "gateway/io/pcm/pcm.pyx":76
  *         ret = cpcmlib.enable_pcm()
  * 
  *         if ret < 0:             # <<<<<<<<<<<<<<
- *             logger.error('PCM', 'EnablePCMError({})'.format(ret))
+ *             return logger.error('PCM', 'EnablePCMError({})'.format(ret))
  * 
  */
   }
 
-  /* "gateway/io/pcm/pcm.pyx":28
- *             raise MemoryError('CLK could not be allocated! Error code: {}'.format(ret))
+  /* "gateway/io/pcm/pcm.pyx":69
+ *         connection.stop()
  * 
  *     def enable(self):             # <<<<<<<<<<<<<<
  *         cpcmlib.enable_clk()
@@ -1537,9 +2386,9 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
@@ -1551,8 +2400,8 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
   return __pyx_r;
 }
 
-/* "gateway/io/pcm/pcm.pyx":36
- *             logger.error('PCM', 'EnablePCMError({})'.format(ret))
+/* "gateway/io/pcm/pcm.pyx":80
+ * 
  * 
  *     def disable(self):             # <<<<<<<<<<<<<<
  *         ret = cpcmlib.disable_pcm()
@@ -1560,19 +2409,19 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_2enable(CYTHON_UNUSED stru
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("disable (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8disable(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8disable(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
   int __pyx_v_ret;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -1586,7 +2435,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
   int __pyx_t_8;
   __Pyx_RefNannySetupContext("disable", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":37
+  /* "gateway/io/pcm/pcm.pyx":81
  * 
  *     def disable(self):
  *         ret = cpcmlib.disable_pcm()             # <<<<<<<<<<<<<<
@@ -1595,7 +2444,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
  */
   __pyx_v_ret = disable_pcm();
 
-  /* "gateway/io/pcm/pcm.pyx":39
+  /* "gateway/io/pcm/pcm.pyx":83
  *         ret = cpcmlib.disable_pcm()
  * 
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -1605,21 +2454,21 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
   __pyx_t_1 = ((__pyx_v_ret < 0) != 0);
   if (__pyx_t_1) {
 
-    /* "gateway/io/pcm/pcm.pyx":40
+    /* "gateway/io/pcm/pcm.pyx":84
  * 
  *         if ret < 0:
  *             logger.error('PCM', 'DisablePCMError({})'.format(ret))             # <<<<<<<<<<<<<<
  * 
- *         cpcmlib.disable_clk()
+ *         self._power_down()
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_error); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_error); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_DisablePCMError, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_DisablePCMError, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_ret); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_7 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -1634,7 +2483,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
     __pyx_t_3 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_7, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -1652,7 +2501,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1661,14 +2510,14 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_n_u_PCM, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else
     #endif
     {
-      __pyx_t_6 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -1679,14 +2528,14 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_8, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "gateway/io/pcm/pcm.pyx":39
+    /* "gateway/io/pcm/pcm.pyx":83
  *         ret = cpcmlib.disable_pcm()
  * 
  *         if ret < 0:             # <<<<<<<<<<<<<<
@@ -1695,8 +2544,34 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
  */
   }
 
-  /* "gateway/io/pcm/pcm.pyx":42
+  /* "gateway/io/pcm/pcm.pyx":86
  *             logger.error('PCM', 'DisablePCMError({})'.format(ret))
+ * 
+ *         self._power_down()             # <<<<<<<<<<<<<<
+ * 
+ *         cpcmlib.disable_clk()
+ */
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_power_down); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+    }
+  }
+  __pyx_t_2 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":88
+ *         self._power_down()
  * 
  *         cpcmlib.disable_clk()             # <<<<<<<<<<<<<<
  * 
@@ -1704,8 +2579,8 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
  */
   disable_clk();
 
-  /* "gateway/io/pcm/pcm.pyx":36
- *             logger.error('PCM', 'EnablePCMError({})'.format(ret))
+  /* "gateway/io/pcm/pcm.pyx":80
+ * 
  * 
  *     def disable(self):             # <<<<<<<<<<<<<<
  *         ret = cpcmlib.disable_pcm()
@@ -1730,7 +2605,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
   return __pyx_r;
 }
 
-/* "gateway/io/pcm/pcm.pyx":44
+/* "gateway/io/pcm/pcm.pyx":90
  *         cpcmlib.disable_clk()
  * 
  *     def write_frame(self, samples):             # <<<<<<<<<<<<<<
@@ -1739,19 +2614,19 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_4disable(CYTHON_UNUSED str
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7write_frame(PyObject *__pyx_v_self, PyObject *__pyx_v_samples); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7write_frame(PyObject *__pyx_v_self, PyObject *__pyx_v_samples) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11write_frame(PyObject *__pyx_v_self, PyObject *__pyx_v_samples); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11write_frame(PyObject *__pyx_v_self, PyObject *__pyx_v_samples) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("write_frame (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self), ((PyObject *)__pyx_v_samples));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10write_frame(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self), ((PyObject *)__pyx_v_samples));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, PyObject *__pyx_v_samples) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10write_frame(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, PyObject *__pyx_v_samples) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   char *__pyx_t_1;
@@ -1760,35 +2635,35 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("write_frame", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":45
+  /* "gateway/io/pcm/pcm.pyx":91
  * 
  *     def write_frame(self, samples):
  *         if cpcmlib.write_frame(samples) < 0:             # <<<<<<<<<<<<<<
  *             logger.info('PCM', 'Could not write samples!')
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_AsWritableString(__pyx_v_samples); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsWritableString(__pyx_v_samples); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
   __pyx_t_2 = ((write_frame(__pyx_t_1) < 0) != 0);
   if (__pyx_t_2) {
 
-    /* "gateway/io/pcm/pcm.pyx":46
+    /* "gateway/io/pcm/pcm.pyx":92
  *     def write_frame(self, samples):
  *         if cpcmlib.write_frame(samples) < 0:
  *             logger.info('PCM', 'Could not write samples!')             # <<<<<<<<<<<<<<
  * 
  *     cpdef read_frame(self):
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_info); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_info); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "gateway/io/pcm/pcm.pyx":45
+    /* "gateway/io/pcm/pcm.pyx":91
  * 
  *     def write_frame(self, samples):
  *         if cpcmlib.write_frame(samples) < 0:             # <<<<<<<<<<<<<<
@@ -1797,7 +2672,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED
  */
   }
 
-  /* "gateway/io/pcm/pcm.pyx":44
+  /* "gateway/io/pcm/pcm.pyx":90
  *         cpcmlib.disable_clk()
  * 
  *     def write_frame(self, samples):             # <<<<<<<<<<<<<<
@@ -1819,7 +2694,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "gateway/io/pcm/pcm.pyx":48
+/* "gateway/io/pcm/pcm.pyx":94
  *             logger.info('PCM', 'Could not write samples!')
  * 
  *     cpdef read_frame(self):             # <<<<<<<<<<<<<<
@@ -1827,7 +2702,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_6write_frame(CYTHON_UNUSED
  * 
  */
 
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
 static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, int __pyx_skip_dispatch) {
   char *__pyx_v_samples;
   PyObject *__pyx_v_output = NULL;
@@ -1849,9 +2724,9 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_read_frame); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_read_frame); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9read_frame)) {
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13read_frame)) {
         __Pyx_XDECREF(__pyx_r);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_3 = __pyx_t_1; __pyx_t_4 = NULL;
@@ -1866,7 +2741,7 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -1887,7 +2762,7 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
     #endif
   }
 
-  /* "gateway/io/pcm/pcm.pyx":49
+  /* "gateway/io/pcm/pcm.pyx":95
  * 
  *     cpdef read_frame(self):
  *         cdef char * samples = cpcmlib.read_frame()             # <<<<<<<<<<<<<<
@@ -1896,7 +2771,7 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
  */
   __pyx_v_samples = read_frame();
 
-  /* "gateway/io/pcm/pcm.pyx":51
+  /* "gateway/io/pcm/pcm.pyx":97
  *         cdef char * samples = cpcmlib.read_frame()
  * 
  *         if samples is NULL:             # <<<<<<<<<<<<<<
@@ -1906,24 +2781,24 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
   __pyx_t_5 = ((__pyx_v_samples == NULL) != 0);
   if (__pyx_t_5) {
 
-    /* "gateway/io/pcm/pcm.pyx":52
+    /* "gateway/io/pcm/pcm.pyx":98
  * 
  *         if samples is NULL:
  *             logger.info('PCM', 'Could not read samples!')             # <<<<<<<<<<<<<<
  *             return None
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_info); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_info); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "gateway/io/pcm/pcm.pyx":53
+    /* "gateway/io/pcm/pcm.pyx":99
  *         if samples is NULL:
  *             logger.info('PCM', 'Could not read samples!')
  *             return None             # <<<<<<<<<<<<<<
@@ -1934,7 +2809,7 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "gateway/io/pcm/pcm.pyx":51
+    /* "gateway/io/pcm/pcm.pyx":97
  *         cdef char * samples = cpcmlib.read_frame()
  * 
  *         if samples is NULL:             # <<<<<<<<<<<<<<
@@ -1943,19 +2818,19 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
  */
   }
 
-  /* "gateway/io/pcm/pcm.pyx":56
+  /* "gateway/io/pcm/pcm.pyx":102
  * 
  *         # Copy 160 bytes from the sample pointer, because char * uses null terminator
  *         output = PyBytes_FromStringAndSize(samples, 160)             # <<<<<<<<<<<<<<
  * 
  *         return output
  */
-  __pyx_t_1 = PyBytes_FromStringAndSize(__pyx_v_samples, 0xA0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = PyBytes_FromStringAndSize(__pyx_v_samples, 0xA0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_output = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "gateway/io/pcm/pcm.pyx":58
+  /* "gateway/io/pcm/pcm.pyx":104
  *         output = PyBytes_FromStringAndSize(samples, 160)
  * 
  *         return output             # <<<<<<<<<<<<<<
@@ -1967,7 +2842,7 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
   __pyx_r = __pyx_v_output;
   goto __pyx_L0;
 
-  /* "gateway/io/pcm/pcm.pyx":48
+  /* "gateway/io/pcm/pcm.pyx":94
  *             logger.info('PCM', 'Could not write samples!')
  * 
  *     cpdef read_frame(self):             # <<<<<<<<<<<<<<
@@ -1991,25 +2866,25 @@ static PyObject *__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(CYTHON_UNUSED st
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13read_frame(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("read_frame (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8read_frame(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12read_frame(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8read_frame(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12read_frame(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("read_frame", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2026,7 +2901,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8read_frame(struct __pyx_o
   return __pyx_r;
 }
 
-/* "gateway/io/pcm/pcm.pyx":60
+/* "gateway/io/pcm/pcm.pyx":106
  *         return output
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2035,21 +2910,21 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_8read_frame(struct __pyx_o
  */
 
 /* Python wrapper */
-static void __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10__dealloc__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+  __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__dealloc__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10__dealloc__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__dealloc__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":67
+  /* "gateway/io/pcm/pcm.pyx":113
  *         """
  * 
  *         cpcmlib.dealloc_clk()             # <<<<<<<<<<<<<<
@@ -2057,7 +2932,7 @@ static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10__dealloc__(CYTHON_UNUSED str
  */
   (void)(dealloc_clk());
 
-  /* "gateway/io/pcm/pcm.pyx":60
+  /* "gateway/io/pcm/pcm.pyx":106
  *         return output
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2076,19 +2951,19 @@ static void __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_10__dealloc__(CYTHON_UNUSED str
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12__reduce_cython__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_16__reduce_cython__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_16__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2100,7 +2975,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12__reduce_cython__(CYTHON
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2130,19 +3005,19 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_12__reduce_cython__(CYTHON
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__setstate_cython__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_18__setstate_cython__(((struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_18__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2153,7 +3028,7 @@ static PyObject *__pyx_pf_7gateway_2io_3pcm_3pcm_3PCM_14__setstate_cython__(CYTH
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2205,7 +3080,7 @@ static void __pyx_tp_dealloc_7gateway_2io_3pcm_3pcm_PCM(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11__dealloc__(o);
+    __pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
@@ -2213,12 +3088,14 @@ static void __pyx_tp_dealloc_7gateway_2io_3pcm_3pcm_PCM(PyObject *o) {
 }
 
 static PyMethodDef __pyx_methods_7gateway_2io_3pcm_3pcm_PCM[] = {
-  {"enable", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3enable, METH_NOARGS, 0},
-  {"disable", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5disable, METH_NOARGS, 0},
-  {"write_frame", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7write_frame, METH_O, 0},
-  {"read_frame", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9read_frame, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_15__setstate_cython__, METH_O, 0},
+  {"_power_up", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_3_power_up, METH_NOARGS, 0},
+  {"_power_down", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_5_power_down, METH_NOARGS, 0},
+  {"enable", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_7enable, METH_NOARGS, 0},
+  {"disable", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_9disable, METH_NOARGS, 0},
+  {"write_frame", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_11write_frame, METH_O, 0},
+  {"read_frame", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_13read_frame, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_17__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_7gateway_2io_3pcm_3pcm_3PCM_19__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -2326,18 +3203,29 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_BAUD_RATE, __pyx_k_BAUD_RATE, sizeof(__pyx_k_BAUD_RATE), 0, 0, 1, 1},
+  {&__pyx_n_s_CHANNEL, __pyx_k_CHANNEL, sizeof(__pyx_k_CHANNEL), 0, 0, 1, 1},
   {&__pyx_kp_u_CLK_could_not_be_allocated_Error, __pyx_k_CLK_could_not_be_allocated_Error, sizeof(__pyx_k_CLK_could_not_be_allocated_Error), 0, 1, 0, 0},
+  {&__pyx_n_s_ConnectionError, __pyx_k_ConnectionError, sizeof(__pyx_k_ConnectionError), 0, 0, 1, 1},
   {&__pyx_kp_u_Could_not_read_samples, __pyx_k_Could_not_read_samples, sizeof(__pyx_k_Could_not_read_samples), 0, 1, 0, 0},
   {&__pyx_kp_u_Could_not_write_samples, __pyx_k_Could_not_write_samples, sizeof(__pyx_k_Could_not_write_samples), 0, 1, 0, 0},
   {&__pyx_kp_u_DisablePCMError, __pyx_k_DisablePCMError, sizeof(__pyx_k_DisablePCMError), 0, 1, 0, 0},
   {&__pyx_kp_u_EnablePCMError, __pyx_k_EnablePCMError, sizeof(__pyx_k_EnablePCMError), 0, 1, 0, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
+  {&__pyx_n_s_ModeControlRegister, __pyx_k_ModeControlRegister, sizeof(__pyx_k_ModeControlRegister), 0, 0, 1, 1},
   {&__pyx_n_s_PCM, __pyx_k_PCM, sizeof(__pyx_k_PCM), 0, 0, 1, 1},
   {&__pyx_n_u_PCM, __pyx_k_PCM, sizeof(__pyx_k_PCM), 0, 1, 0, 1},
+  {&__pyx_n_s_PD, __pyx_k_PD, sizeof(__pyx_k_PD), 0, 0, 1, 1},
+  {&__pyx_n_u_SPIConnectionError, __pyx_k_SPIConnectionError, sizeof(__pyx_k_SPIConnectionError), 0, 1, 0, 1},
+  {&__pyx_n_s_SPI_MODE_0, __pyx_k_SPI_MODE_0, sizeof(__pyx_k_SPI_MODE_0), 0, 0, 1, 1},
+  {&__pyx_kp_u_Set_PD_bit_to_0, __pyx_k_Set_PD_bit_to_0, sizeof(__pyx_k_Set_PD_bit_to_0), 0, 1, 0, 0},
+  {&__pyx_kp_u_Set_PD_bit_to_1, __pyx_k_Set_PD_bit_to_1, sizeof(__pyx_k_Set_PD_bit_to_1), 0, 1, 0, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_connected, __pyx_k_connected, sizeof(__pyx_k_connected), 0, 0, 1, 1},
   {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
+  {&__pyx_n_s_gateway_io_pcm, __pyx_k_gateway_io_pcm, sizeof(__pyx_k_gateway_io_pcm), 0, 0, 1, 1},
   {&__pyx_n_s_gateway_utils, __pyx_k_gateway_utils, sizeof(__pyx_k_gateway_utils), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -2346,6 +3234,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
+  {&__pyx_n_s_pi, __pyx_k_pi, sizeof(__pyx_k_pi), 0, 0, 1, 1},
+  {&__pyx_n_s_pigpio, __pyx_k_pigpio, sizeof(__pyx_k_pigpio), 0, 0, 1, 1},
+  {&__pyx_n_s_power_down, __pyx_k_power_down, sizeof(__pyx_k_power_down), 0, 0, 1, 1},
+  {&__pyx_n_s_power_up, __pyx_k_power_up, sizeof(__pyx_k_power_up), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_read_frame, __pyx_k_read_frame, sizeof(__pyx_k_read_frame), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
@@ -2353,11 +3245,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {&__pyx_n_s_spi_close, __pyx_k_spi_close, sizeof(__pyx_k_spi_close), 0, 0, 1, 1},
+  {&__pyx_n_s_spi_open, __pyx_k_spi_open, sizeof(__pyx_k_spi_open), 0, 0, 1, 1},
+  {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_write, __pyx_k_write, sizeof(__pyx_k_write), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 29, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -2368,27 +3264,71 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "gateway/io/pcm/pcm.pyx":46
+  /* "gateway/io/pcm/pcm.pyx":35
+ * 
+ *         if not connection.connected:
+ *             logger.error('PCM', 'SPIConnectionError')             # <<<<<<<<<<<<<<
+ *             raise ConnectionError
+ * 
+ */
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_n_u_SPIConnectionError); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "gateway/io/pcm/pcm.pyx":44
+ *         mode_control_register.write(connection, handler)
+ * 
+ *         logger.info('PCM', 'Set PD bit to 0!')             # <<<<<<<<<<<<<<
+ * 
+ *         connection.spi_close(handler)
+ */
+  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Set_PD_bit_to_0); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+
+  /* "gateway/io/pcm/pcm.pyx":54
+ * 
+ *         if not connection.connected:
+ *             return logger.error('PCM', 'SPIConnectionError')             # <<<<<<<<<<<<<<
+ * 
+ *         handler = connection.spi_open(CHANNEL, BAUD_RATE, pigpio.SPI_MODE_0)
+ */
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_n_u_SPIConnectionError); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "gateway/io/pcm/pcm.pyx":63
+ *         mode_control_register.write(connection, handler)
+ * 
+ *         logger.info('PCM', 'Set PD bit to 1!')             # <<<<<<<<<<<<<<
+ * 
+ *         connection.spi_close(handler)
+ */
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Set_PD_bit_to_1); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "gateway/io/pcm/pcm.pyx":92
  *     def write_frame(self, samples):
  *         if cpcmlib.write_frame(samples) < 0:
  *             logger.info('PCM', 'Could not write samples!')             # <<<<<<<<<<<<<<
  * 
  *     cpdef read_frame(self):
  */
-  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Could_not_write_samples); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Could_not_write_samples); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "gateway/io/pcm/pcm.pyx":52
+  /* "gateway/io/pcm/pcm.pyx":98
  * 
  *         if samples is NULL:
  *             logger.info('PCM', 'Could not read samples!')             # <<<<<<<<<<<<<<
  *             return None
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Could_not_read_samples); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 52, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_u_PCM, __pyx_kp_u_Could_not_read_samples); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -2396,18 +3336,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2417,6 +3357,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2460,14 +3402,14 @@ static int __Pyx_modinit_type_init_code(void) {
   /*--- Type init code ---*/
   __pyx_vtabptr_7gateway_2io_3pcm_3pcm_PCM = &__pyx_vtable_7gateway_2io_3pcm_3pcm_PCM;
   __pyx_vtable_7gateway_2io_3pcm_3pcm_PCM.read_frame = (PyObject *(*)(struct __pyx_obj_7gateway_2io_3pcm_3pcm_PCM *, int __pyx_skip_dispatch))__pyx_f_7gateway_2io_3pcm_3pcm_3PCM_read_frame;
-  if (PyType_Ready(&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_dictoffset && __pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_dict, __pyx_vtabptr_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PCM, (PyObject *)&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7gateway_2io_3pcm_3pcm_PCM.tp_dict, __pyx_vtabptr_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PCM, (PyObject *)&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7gateway_2io_3pcm_3pcm_PCM) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __pyx_ptype_7gateway_2io_3pcm_3pcm_PCM = &__pyx_type_7gateway_2io_3pcm_3pcm_PCM;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -2718,33 +3660,80 @@ if (!__Pyx_RefNanny) {
   /* "gateway/io/pcm/pcm.pyx":8
  * from cpython.bytes cimport PyBytes_FromStringAndSize
  * 
+ * from gateway.io.pcm import ModeControlRegister, CHANNEL, BAUD_RATE             # <<<<<<<<<<<<<<
+ * from gateway.utils import logger
+ * 
+ */
+  __pyx_t_1 = PyList_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_ModeControlRegister);
+  __Pyx_GIVEREF(__pyx_n_s_ModeControlRegister);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_ModeControlRegister);
+  __Pyx_INCREF(__pyx_n_s_CHANNEL);
+  __Pyx_GIVEREF(__pyx_n_s_CHANNEL);
+  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_CHANNEL);
+  __Pyx_INCREF(__pyx_n_s_BAUD_RATE);
+  __Pyx_GIVEREF(__pyx_n_s_BAUD_RATE);
+  PyList_SET_ITEM(__pyx_t_1, 2, __pyx_n_s_BAUD_RATE);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_gateway_io_pcm, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_ModeControlRegister); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ModeControlRegister, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_CHANNEL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CHANNEL, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BAUD_RATE); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BAUD_RATE, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":9
+ * 
+ * from gateway.io.pcm import ModeControlRegister, CHANNEL, BAUD_RATE
  * from gateway.utils import logger             # <<<<<<<<<<<<<<
+ * 
+ * import pigpio
+ */
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_logger);
+  __Pyx_GIVEREF(__pyx_n_s_logger);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_logger);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_gateway_utils, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_logger); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_logger, __pyx_t_2) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "gateway/io/pcm/pcm.pyx":11
+ * from gateway.utils import logger
+ * 
+ * import pigpio             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_pigpio, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_logger);
-  __Pyx_GIVEREF(__pyx_n_s_logger);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_logger);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_gateway_utils, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pigpio, __pyx_t_1) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_logger); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_logger, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "gateway/io/pcm/pcm.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
  * # distutils: sources = lib/pcmlib/pcmlib.c
  * # distutils: include_dirs = lib/pcmlib/
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -3371,6 +4360,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
         }
     }
     return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
+}
+#endif
+
+/* PyObjectSetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_setattr))
+        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
+#endif
+    return PyObject_SetAttr(obj, attr_name, value);
 }
 #endif
 

@@ -3,8 +3,12 @@ from enum import IntEnum, Enum
 import attr
 
 
+class ATResponse:
+    pass
+
+
 @attr.s
-class IMEI:
+class IMEI(ATResponse):
     """
     Wrapper class for IMEI.
     """
@@ -13,7 +17,7 @@ class IMEI:
 
 
 @attr.s
-class IMSI:
+class IMSI(ATResponse):
     """
     Data class for IMSI.
     """
@@ -40,7 +44,7 @@ class PINStatus(Enum):
 
 
 @attr.s
-class NetworkStatus:
+class NetworkStatus(ATResponse):
     """
     Data class for the network status.
 
@@ -78,7 +82,7 @@ class NetworkStatus:
 
 
 @attr.s
-class SignalQuality:
+class SignalQuality(ATResponse):
     """
     Data class for the signal quality.
 
@@ -91,7 +95,7 @@ class SignalQuality:
 
 
 @attr.s
-class SMS:
+class SMS(ATResponse):
     """
     Data class for a sms.
     """
@@ -120,7 +124,7 @@ class SMS:
 
 
 @attr.s
-class SubscriberNumber:
+class SubscriberNumber(ATResponse):
     """
     Data class for subscriber number.
     """

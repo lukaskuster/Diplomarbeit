@@ -2,14 +2,17 @@ from setuptools import find_packages
 from distutils.core import setup
 from distutils.extension import Extension
 
+macros = []
+
 try:
     from Cython.Build import cythonize
-    ext = cythonize([Extension("gateway.io.pcm.pcm", ["gateway/io/pcm/pcm.pyx"]),
-                     Extension("gateway.utils.string_utils", ["gateway/utils/string_utils.pyx"])])
+    ext = cythonize([Extension("gateway.io.pcm.pcm", ["gateway/io/pcm/pcm.pyx"], define_macros=macros),
+                     Extension("gateway.utils.string_utils", ["gateway/utils/string_utils.pyx"], define_macros=macros)])
 except ImportError:
-    ext = [Extension('gateway.io.pcm.pcm', ['gateway/io/pcm/pcm.c', 'lib/pcmlib/pcmlib.c'], ['lib/pcmlib/']),
+    ext = [Extension('gateway.io.pcm.pcm', ['gateway/io/pcm/pcm.c', 'lib/pcmlib/pcmlib.c'], ['lib/pcmlib/'],
+                     define_macros=macros),
            Extension('gateway.utils.string_utils', ['gateway/utils/string_utils.c', 'lib/stringlib/stringlib.c'],
-                     ['lib/stringlib/'])]
+                     ['lib/stringlib/'], define_macros=macros)]
 
 
 setup(

@@ -22,11 +22,6 @@
 
 #define DEVICE_NAME "bcm2835_pcm"
 
-/*
- * Switch these depending on which version of the Raspberry you are using .
- */
-#define RPIZERO // For Raspberry Pi Zero
-// #define RPITHREE   // For Raspberry Pi 3
 
 /*
  * Switch this to the desired mode.
@@ -38,16 +33,15 @@
 /*
  * Defines Address and the interrupt number associated with the I2S interface.
  * Address and the interrupt number is different for rpi zero and 3.
- * */
+ */
 #ifdef RPIZERO
-#define PCM_INTERRUPT 79
-#define PI_PERIPHERAL_BASE 0x20000000
+    #define PCM_INTERRUPT 79
+    #define PI_PERIPHERAL_BASE 0x20000000
+#else
+    #define PI_PERIPHERAL_BASE 0x3F000000
+    #define PCM_INTERRUPT 85
 #endif
 
-#ifdef RPITHREE
-#define PI_PERIPHERAL_BASE 0x3F000000
-#define PCM_INTERRUPT 85
-#endif
 
 // PCM Register
 #define PCM_OFFSET 0x00203000
@@ -68,7 +62,7 @@ typedef struct pcm_map
     uint32_t GRAY;     // Gray mode control
 } pcm_map_t;
 
-/* Buffer for holding pcm data in the kernel space */
+/* Buffer holding pcm data in the kernel space */
 typedef struct pcm_buffer
 {
     uint32_t *buffer;

@@ -5,7 +5,6 @@ from threading import Thread
 import pyee
 from serial import Serial
 
-from gateway.io.sim800 import parser
 from gateway.utils import clear_str, logger
 
 
@@ -130,11 +129,16 @@ class SerialLoop(Thread):
                 try:
                     response = clear_str(res.decode('utf-8'))
 
+                    if not response:
+                        continue
+
+                    logger.debug('Sim800', 'Got other data: {}'.format(response))
                     if response == 'RING':
+                        logger.debug('Sim800', 'Processing ring event...')
                         number = None
 
-                        if self.caller_identification:
-                            number = parser.CallerIdentificationParser.parse([self._read()])
+                        #if self.caller_identification:
+                        #    number = parser.CallerIdentificationParser.parse([self._read()])
 
                         # Emit the ring event
                         self.emitter.emit('ring', number)
