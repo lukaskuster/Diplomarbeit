@@ -327,14 +327,16 @@ public protocol SPManagerDelegate {
     }
     
     public func callKitManager(didEndCallFromGateway gateway: SPGateway, withRecentCallItem recentItem: SPRecentCall, completion: @escaping (Bool) -> Void) {
-        self.hangUpCall(via: gateway, notifyCallKit: false) { error in
-            if let error = error {
-                self.sendErrorNotification(for: error)
-                completion(false)
-                return
-            }
-            self.addRecentCall(recentItem)
-            completion(true)
+        self.apiClient.pushEventToGateway(gateway, event: .hangUp) { (success, response, error) in
+            self.peerConnectionManager.hangUpCall(on: gateway, completion: { error in
+                if let error = error {
+                    self.sendErrorNotification(for: error)
+                    completion(false)
+                    return
+                }
+                self.addRecentCall(recentItem)
+                completion(true)
+            })
         }
     }
     
@@ -444,8 +446,8 @@ public protocol SPManagerDelegate {
             if let gateway = realm.object(ofType: SPGateway.self, forPrimaryKey: "444406380982382") {
                 chats.append(SPChat(with: SPNumber(withNumber: "00436641817908"), on: gateway, messages: []))
                 chats.append(SPChat(with: SPNumber(withNumber: "00436648338455"), on: gateway, messages:
-                    [SPMessage("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date(), state: .sent),
-                     SPMessage("Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date().addingTimeInterval(TimeInterval(-65.0)), state: .sent)]))
+                    [SPMessage("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date(), status: .sent),
+                     SPMessage("Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", time: Date().addingTimeInterval(TimeInterval(-65.0)), status: .sent)]))
             }
         }
         
@@ -458,17 +460,18 @@ public protocol SPManagerDelegate {
         }
     }
     
-    public func sendSMS(_ message: SPMessage, in chat: SPChat, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
-        self.apiClient.pushEventToGateway(chat.gateway!, event: APIClient.GatewayPushEvent.sendSMS(to: chat.secondParty.phoneNumber, message: message.text)) { (success, response, error) in
-            if success {
-                message.state = SPMessageState.sent
-                RealmManager.shared.addMessageToChat(message: message, chat: chat)
-                completion(true, nil)
-            }else{
-                message.state = SPMessageState.failed
-                RealmManager.shared.addMessageToChat(message: message, chat: chat)
-                completion(false, error!)
+    public func sendSMS(_ message: SPMessage, in chat: SPChat, completion: @escaping (Error?) -> Void) {
+        guard let gateway = chat.gateway else {
+            completion(APIError.noGatewayFound)
+            return
+        }
+        self.apiClient.sendSMS(message: message.text, to: chat.secondParty, on: gateway) { error in
+            if let error = error {
+                completion(error)
+                return
             }
+            message.status = .sent
+            self.realmManager.addMessageToChat(message: message, chat: chat)
         }
     }
     

@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-public enum SPCallDirection: Int {
-    case outgoing
-    case incoming
-}
-
 public class SPRecentCall: Object {
+    public enum Direction: Int {
+        case outgoing
+        case incoming
+    }
+    
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var seen: Bool = false
     @objc public dynamic var time = Date(timeIntervalSince1970: 1)
@@ -28,15 +28,15 @@ public class SPRecentCall: Object {
         get { return TimeInterval(exactly: _duration)! }
         set { _duration = Double(newValue) }
     }
-    @objc private dynamic var _direction = SPCallDirection.outgoing.rawValue
-    public var direction: SPCallDirection {
-        get { return SPCallDirection(rawValue: _direction)! }
+    @objc private dynamic var _direction = SPRecentCall.Direction.outgoing.rawValue
+    public var direction: SPRecentCall.Direction {
+        get { return SPRecentCall.Direction(rawValue: _direction)! }
         set { _direction = newValue.rawValue }
     }
     @objc public dynamic var missed: Bool = false
     @objc public dynamic var gateway: SPGateway?
     
-    public convenience init(with secondParty: SPNumber, at time: Date?, for duration: TimeInterval?, direction: SPCallDirection, missed: Bool, gateway: SPGateway) {
+    public convenience init(with secondParty: SPNumber, at time: Date?, for duration: TimeInterval?, direction: SPRecentCall.Direction, missed: Bool, gateway: SPGateway) {
         self.init()
         self.secondParty = secondParty
         self.time = time ?? Date()

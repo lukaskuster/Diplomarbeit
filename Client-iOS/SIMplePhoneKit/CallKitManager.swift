@@ -245,12 +245,12 @@ fileprivate class Call {
     let gateway: SPGateway
     var startTime: Date?
     var isConnected = false
-    var direction: SPCallDirection
+    var direction: SPRecentCall.Direction
     var duration: TimeInterval {
         get { return self.end() }
     }
     
-    init(with number: SPNumber, on gateway: SPGateway, _ direction: SPCallDirection) {
+    init(with number: SPNumber, on gateway: SPGateway, _ direction: SPRecentCall.Direction) {
         self.uuid = UUID()
         self.number = number
         self.gateway = gateway

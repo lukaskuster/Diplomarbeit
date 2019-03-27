@@ -273,6 +273,22 @@ class APIClient: NSObject {
         }
     }
     
+    public func sendSMS(message: String, to receiver: SPNumber, on gateway: SPGateway, completion: @escaping (Error?) -> Void) {
+        self.pushEventToGateway(gateway, event: .sendSMS(to: receiver.phoneNumber, message: message)) { (success, json, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            if let error = json!["error"].string {
+                let cerror = APIError.other(desc: error)
+                completion(cerror)
+                return
+            }
+            // TO-DO: If send
+            completion(nil)
+        }
+    }
+    
     
     public func getAllDevices(completion: @escaping (_ success: Bool, _ devices: [SPDevice]?, _ error: APIError?) -> Void) {
         self.request(API.devices, type: .get, parameters: nil) { (success, json, error) in
