@@ -19,7 +19,8 @@ extension Date {
                 // Display Weekday
                 let f = DateFormatter()
                 f.locale = Locale.autoupdatingCurrent
-                let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: day)]
+                let n = Calendar.current.component(.weekday, from: day)-1
+                let weekday = f.weekdaySymbols[n]
                 return weekday
             }else{
                 // Display Date
