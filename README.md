@@ -8,6 +8,7 @@
   * [Assignment of Tasks](#assignment-of-tasks)
   * [Implementation](#implementation)
   * [Results](#results)
+- [Links](#links)
 
 ## Abstract
 People that are travelling in foreign countries and still want to be able to use their phone number from their home country, often have to expect huge roaming costs. Because of that, a user-friendly device equipped with the SIM card of the local carrier will be developed, that can then be placed locally in that country. This device will then be able to receive phone calls and SMS via the local carrier and transmit it through a direct Peer-to-peer connection over the internet to the end-user using a client app. Meanwhile the whole process should look and feel like a real, normal call.
@@ -20,3 +21,7 @@ The system basically consists of three components: the gateway, which establishe
 
 ### Results
 The diploma thesis will show, whether such a product is technically as well as economically viable. While working on this project the whole software for such a product as well as a hard- ware prototype will be established.
+
+## Links
+- [Lukas' repo (@lukaskuster/Diplomarbeit)](https://github.com/lukaskuster/Diplomarbeit)
+- [Quentin's repo (@quentinwendegass/Diplomarbeit)](https://github.com/quentinwendegass/Diplomarbeit)
