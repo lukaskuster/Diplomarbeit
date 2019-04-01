@@ -42,9 +42,10 @@ class GSColorGatewayViewController: UIViewController {
     
     private func setGatewayColor(color: UIColor) {
         guard let gateway = self.gateways?.last else { return }
-        SPManager.shared.updateGatewayColor(color, of: gateway) { (success, error) in
+        SPManager.shared.updateGatewayColor(color, of: gateway) { (error) in
             if let error = error {
                 self.handle(error: error)
+                return
             }
             
             self.gateways?.last?.color = color

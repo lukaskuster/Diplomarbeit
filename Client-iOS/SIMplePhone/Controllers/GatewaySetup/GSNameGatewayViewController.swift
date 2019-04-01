@@ -23,7 +23,7 @@ class GSNameGatewayViewController: UIViewController, UITextFieldDelegate {
     
     private func setGatewayName(name: String) {
         guard let gateway = self.gateways?.last else { return }
-        SPManager.shared.updateGatewayName(name, of: gateway) { (success, error) in
+        SPManager.shared.updateGatewayName(name, of: gateway) { (error) in
             if let error = error {
                 self.handle(error: error)
             }
@@ -35,7 +35,6 @@ class GSNameGatewayViewController: UIViewController, UITextFieldDelegate {
                 vc.gateways = self.gateways
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            
         }
     }
     

@@ -97,14 +97,13 @@ extension GSSelectNetworkViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     private func didConnectToNetwork(withGateway imei: String) {
-        SPManager.shared.getGateway(withImei: imei, completion: { (success, gateway, error) in
-            if success,
-                let gateway = gateway {
-                self.finishedGatewayNetworkConnect(with: gateway)
-            }else{
-                print("error while connecting gateway to network: \(error!)")
+        SPManager.shared.getGateway(withImei: imei) { (gateway, error) in
+            if let error = error {
+                print("error while connecting gateway to network: \(error)")
             }
-        })
+            guard let gateway = gateway else { return }
+            self.finishedGatewayNetworkConnect(with: gateway)
+        }
     }
     
     private func enterPasswordVC(for network: SPNetwork, wrongPassword: Bool = false) -> UINavigationController {
