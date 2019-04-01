@@ -35,7 +35,7 @@ public enum APIError: LocalizedError {
     }
 }
 
-class APIClient: NSObject {
+public class APIClient: NSObject {
     public static let shared = APIClient()
     private var numberOfOngoingQueries: Int = 0
     private var username: String?
