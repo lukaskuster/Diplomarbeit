@@ -1,0 +1,12 @@
+github "daltoniam/Starscream" >= 3.0.2
+github "SwiftyJSON/SwiftyJSON" ~> 4.0
+github "Alamofire/Alamofire" ~> 4.7
+github "SwiftyJSON/Alamofire-SwiftyJSON" >= 3.0.0
+github "marmelroy/PhoneNumberKit"
+github "evgenyneu/keychain-swift" ~> 13.0
+github "SwiftKickMobile/SwiftMessages"
+github "venmo/Static"
+github "mathiasnagler/SwiftyAcknowledgements"
+github "joncardasis/ChromaColorPicker"
+github "jordanebelanger/SwiftyBluetooth"
+github "shu223/Pulsator"
