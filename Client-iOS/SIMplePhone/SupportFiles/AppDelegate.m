@@ -29,7 +29,7 @@
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIStoryboard *setupStoryboard = [UIStoryboard storyboardWithName:@"Setup" bundle:nil];
-                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"login"];
+                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
                 self.window.rootViewController = controller;
             });
         }
@@ -95,7 +95,7 @@
         if(gotRevoked) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIStoryboard *setupStoryboard = [UIStoryboard storyboardWithName:@"Setup" bundle:nil];
-                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"login"];
+                LoginViewController *controller = (LoginViewController*)[setupStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
                 self.window.rootViewController = controller;
             });
         }

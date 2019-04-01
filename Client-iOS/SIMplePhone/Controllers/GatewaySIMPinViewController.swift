@@ -1,5 +1,5 @@
 //
-//  SettingsGatewayChangeSIMPinViewController.swift
+//  GatewaySIMPinViewController.swift
 //  SIMplePhone
 //
 //  Created by Lukas Kuster on 10.01.19.
@@ -9,21 +9,27 @@
 import UIKit
 import SIMplePhoneKit
 
-class SettingsGatewayChangeSIMPinViewController: UIViewController {
+class GatewaySIMPinViewController: UIViewController {
     private let gateway: SPGateway
+    private let config: Config
     private var loadingIndicator: UIView?
     private let pinField = KAPinField()
-    private enum Step {
+    public enum Config {
+        case unlockGateway
+        case changePIN
+    }
+    private enum View {
+        case enterPIN
         case enterCurrentPIN
-        case enterCurrentPIN2ndTry
-        case enterCurrentPINLastTry
+        case enterPIN2ndTry
+        case enterPINLastTry
         case enterNewPIN
         case repeatNewPIN
         case repeatNewPINWrong
         case loading
         case SIMlocked
     }
-    private var currentStep: Step = .enterCurrentPIN {
+    private var currentView: View = .enterCurrentPIN {
         didSet {
             self.layoutInformation()
         }
@@ -59,9 +65,15 @@ class SettingsGatewayChangeSIMPinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Change SIM Pin"
-        self.currentStep = .enterCurrentPIN
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
+        switch self.config {
+        case .unlockGateway:
+            self.title = "Unlock gateway"
+            self.currentView = .enterPIN
+        case .changePIN:
+            self.title = "Change SIM Pin"
+            self.currentView = .enterCurrentPIN
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
+        }
         
         view = UIView()
         view.backgroundColor = .tableViewBackground
@@ -102,16 +114,20 @@ class SettingsGatewayChangeSIMPinViewController: UIViewController {
     
     func layoutInformation() {
         self.hideSpinner()
-        switch self.currentStep {
+        switch self.currentView {
+        case .enterPIN:
+            stepLabel.text = "Enter SIM Pin"
+            infoLabel.text = "Please enter your SIM card PIN to unlock your gateway."
+            triesLabel.isHidden = true
         case .enterCurrentPIN:
             stepLabel.text = "Step 1"
             infoLabel.text = "Please enter your current PIN code"
             triesLabel.isHidden = true
-        case .enterCurrentPIN2ndTry:
+        case .enterPIN2ndTry:
             triesLabel.isHidden = false
             triesLabel.text = "Two attempts left"
             triesLabel.textColor = .darkGray
-        case .enterCurrentPINLastTry:
+        case .enterPINLastTry:
             triesLabel.text = "Only one attempt left"
             triesLabel.textColor = .red
         case .enterNewPIN:
@@ -137,8 +153,9 @@ class SettingsGatewayChangeSIMPinViewController: UIViewController {
         }
     }
     
-    init(gateway: SPGateway) {
+    init(gateway: SPGateway, config: Config) {
         self.gateway = gateway
+        self.config = config
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -151,7 +168,7 @@ class SettingsGatewayChangeSIMPinViewController: UIViewController {
     }
 }
 
-extension SettingsGatewayChangeSIMPinViewController {
+extension GatewaySIMPinViewController {
     func showSpinner() {
         self.loadingIndicator = UIView(frame: self.view.bounds)
         self.loadingIndicator?.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
@@ -169,19 +186,22 @@ extension SettingsGatewayChangeSIMPinViewController {
     func hideSpinner() {
         DispatchQueue.main.async {
             self.loadingIndicator?.removeFromSuperview()
-            if self.currentStep != .SIMlocked {
+            if self.currentView != .SIMlocked {
                 _ = self.pinField.becomeFirstResponder()
+            }
+            if case self.config = Config.unlockGateway {
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
 }
 
-extension SettingsGatewayChangeSIMPinViewController: KAPinFieldDelegate {
+extension GatewaySIMPinViewController: KAPinFieldDelegate {
     func ka_pinField(_ field: KAPinField, didFinishWith code: String) {
         // To-Do: Implement logic
-        self.currentStep = .loading
+        self.currentView = .loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.currentStep = .SIMlocked
+            self.currentView = .SIMlocked
             field.ka_animateFailure() {
                 field.ka_text = ""
             }
