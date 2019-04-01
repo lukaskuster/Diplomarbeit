@@ -23,7 +23,7 @@ The system basically consists of three components: the gateway, which establishe
 The diploma thesis will show, whether such a product is technically as well as economically viable. While working on this project the whole software for such a product as well as a hard- ware prototype will be established.
 
 ## Links
-- [iOS-Client: SIMplePhoneKit Documentation](https://lukaskuster.github.io/Diplomarbeit/code-docs/client-ios/)
+* [iOS-Client: SIMplePhoneKit Documentation](https://lukaskuster.github.io/Diplomarbeit/code-docs/client-ios/) ![SIMplePhoneKit Coverage](docs/code-docs/client-ios/badge.svg)
 
-- [Lukas' repo (@lukaskuster/Diplomarbeit)](https://github.com/lukaskuster/Diplomarbeit)
-- [Quentin's repo (@quentinwendegass/Diplomarbeit)](https://github.com/quentinwendegass/Diplomarbeit)
++ [Lukas' repo (@lukaskuster/Diplomarbeit)](https://github.com/lukaskuster/Diplomarbeit)
++ [Quentin's repo (@quentinwendegass/Diplomarbeit)](https://github.com/quentinwendegass/Diplomarbeit)
