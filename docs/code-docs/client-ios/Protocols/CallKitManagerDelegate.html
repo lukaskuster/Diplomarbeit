@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           SIMplePhoneKit Docs
         </a>
-         (9% documented)
+         (50% documented)
       </p>
     
     
@@ -42,6 +42,15 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/APIClient/GatewayPushEvent.html'>– GatewayPushEvent</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager.html'>BLESetupManager</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/SetupError.html'>– SetupError</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/Status.html'>– Status</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/CallKitManager.html'>CallKitManager</a>
@@ -81,6 +90,9 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPMessage/Direction.html'>– Direction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/SPNetwork.html'>SPNetwork</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPNumber.html'>SPNumber</a>
@@ -128,6 +140,9 @@
             <a class='nav-group-name-link' href='../Protocols.html'>Protocols</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/BLESetupManagerDelegate.html'>BLESetupManagerDelegate</a>
+              </li>
+              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/CallKitManagerDelegate.html'>CallKitManagerDelegate</a>
               </li>
               <li class='nav-group-task'>
@@ -151,7 +166,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Delegate Protocol of the CallKitManagerDelegate</p>
 
           </div>
         </section>
@@ -173,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the user accepts the incoming call from the gateway</p>
 
                       </div>
                       <div class="declaration">
@@ -183,6 +198,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didAcceptIncomingCallFromGateway</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">caller</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPNumber.html">SPNumber</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>caller</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The calling party (SPNumber)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -203,7 +265,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the outgoing call is connected</p>
 
                       </div>
                       <div class="declaration">
@@ -213,6 +275,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didConnectOutgoingCallFromGateway</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">caller</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPNumber.html">SPNumber</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>caller</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The calling party (SPNumber)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -233,7 +342,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the incoming call is declined</p>
 
                       </div>
                       <div class="declaration">
@@ -243,6 +352,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didDeclineIncomingCallFromGateway</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="n">withRecentCallItem</span> <span class="nv">recentItem</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPRecentCall.html">SPRecentCall</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recentItem</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A SPRecentCall object representing inforamtion about the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -263,7 +419,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the call is ended</p>
 
                       </div>
                       <div class="declaration">
@@ -273,6 +429,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didEndCallFromGateway</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="n">withRecentCallItem</span> <span class="nv">recentItem</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPRecentCall.html">SPRecentCall</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recentItem</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A SPRecentCall object representing inforamtion about the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -293,7 +496,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the calls held state is changed</p>
 
                       </div>
                       <div class="declaration">
@@ -303,6 +506,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didChangeHeldState</span> <span class="nv">isOnHold</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">onCallFrom</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isOnHold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Boolean indicating the held state (true = held)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -323,7 +573,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the calls muting state is changed</p>
 
                       </div>
                       <div class="declaration">
@@ -333,6 +583,53 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didChangeMuteState</span> <span class="nv">isMuted</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">onCallFrom</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isMuted</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Boolean indicating the mute state (true = muted)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>()</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -353,7 +650,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when the caller sends out DTMF tones</p>
 
                       </div>
                       <div class="declaration">
@@ -363,6 +660,49 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">callKitManager</span><span class="p">(</span><span class="n">didEnterDTMF</span> <span class="nv">digits</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">onCallFrom</span> <span class="nv">gateway</span><span class="p">:</span> <span class="kt"><a href="../Classes/SPGateway.html">SPGateway</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digits</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>DTMF digits to be send</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPGateway that is operating the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A completion handler that is supposed to be called by the delegate receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         

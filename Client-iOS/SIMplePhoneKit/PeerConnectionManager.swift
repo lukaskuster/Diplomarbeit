@@ -9,13 +9,26 @@
 import Foundation
 import WebRTC
 
+/// Manager responsible for all the active PeerConnections
 class PeerConnectionManager: NSObject {
+    /// Shared instance of the PeerConnectionManager
     public static let shared = PeerConnectionManager()
     private var peerConnections = [String: PeerConnection]()
     
     private var signalingUsername: String?
     private var signalingPassword: String?
     
+    /// Enum indicating an error returned by the PeerConnectionManager
+    ///
+    /// - NoRTCInstanceFound:
+    /// - NoSignalingInstanceFound: <#NoSignalingInstanceFound description#>
+    /// - CouldNotGenerateAnswer: <#CouldNotGenerateAnswer description#>
+    /// - CouldNotGenerateOffer: <#CouldNotGenerateOffer description#>
+    /// - CouldNotGetAnswerFromGateway: <#CouldNotGetAnswerFromGateway description#>
+    /// - CouldNotGetOfferFromGateway: <#CouldNotGetOfferFromGateway description#>
+    /// - MissingSignalingCredentials: <#MissingSignalingCredentials description#>
+    /// - SignalingError: Another Signaling error occurred
+    /// - RTCError: Another WebRTC error occurred
     public enum PeerConnectionError: Error {
         case NoRTCInstanceFound
         case NoSignalingInstanceFound

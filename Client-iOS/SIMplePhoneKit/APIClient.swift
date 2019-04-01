@@ -12,48 +12,67 @@ import Alamofire
 import AlamofireSwiftyJSON
 import SystemConfiguration
 
+/// Enum indicating an error returned by the APIClient
 public enum APIError: LocalizedError {
+    /// Endpoint requested without being authentificated
     case notAuthenticated
+    /// Invalid credentials used to authentificate request
     case wrongCredentials
+    /// A parameter in the request is missing
+    /// - Parameter parameter: Textual representation of the missing parameter
     case missing(parameter: String)
+    /// A gateway with the same IMEI already exists for that account
     case gatewayAlreadyExists
+    /// The gateway with the supplied IMEI does not exist
     case noGatewayFound
+    /// An internal database error occurred
+    /// - Parameter desc: Textual description of the error
     case databaseError(desc: String)
+    /// The supplied mail address has already been used for an account
     case deviceAlreadyExists
+    /// The supplied mail address has already been used for an account
     case mailAlreadyExists
+    /// No SPDevice with the supplied identifier was found
     case noDeviceFound
+    /// The supplied SPGateway is not connected to the service right now
+    /// - Parameter withIMEI: IMEI of the respective SPGateway
     case gatewayNotConnected(withIMEI: String)
+    /// The user does not have any SPGateways connected to his/her account
     case noGatewaysForUser
+    /// The user does not have any SPDevices conntected to his/her account
     case noDevicesForUser
+    /// An error occurred while parsing the response
     case parsingError
+    /// The device does not have a network connection and therefore can not reach the API
     case noNetworkConnection
+    /// The iCloud User Identifier for this account differs from the one of this devices Apple ID
     case differentCloudUserId
+    /// Another error occurred
+    /// - Parameter desc: Textual description of the error
     case other(desc: String)
     
+    /// Overriding errorDescription to get a better error output
     public var errorDescription: String? {
         return "The operation couldn't be completed. (SIMplePhoneKit.APIError.\(self))"
     }
 }
 
+/// Class used to access the API associated with this app
 public class APIClient: NSObject {
+    /// Shared instance of the APIClient
     public static let shared = APIClient()
     private var numberOfOngoingQueries: Int = 0
     private var username: String?
     private var password: String?
     
-    private override init() {
-        
-    }
-    
-    /**
-     Authenticates user with server (needs to be done before other requests, otherwise .notAuthenticated error9
-     - Parameters:
-         - username: username of user
-         - password: password of user
-         - completion: Closure which is called after server response
-            - success: Bool indicating operation success
-            - error: Error, if operation unsuccessful
-     */
+    /// Authenticates user with server (needs to be done before other requests, otherwise an APIError.notAuthenticated occurs)
+    ///
+    /// - Parameters:
+    ///   - username: Username of user
+    ///   - password: Password of user
+    ///   - cloudUserId: Associated Cloud User Id
+    ///   - environment: Environment to use
+    ///   - completion: Completion block that gets called on response
     public func loginUser(username: String, password: String, cloudUserId: String? = nil, environment: SPManager.SPKeychainEnvironment = .local, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         self.username = username
         self.password = password
@@ -79,13 +98,9 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Fetches all gateways associated with user
-     - Parameters:
-     - completion: Closure which is called after server response
-        - gateways: all SPGateways associated with current user
-        - error: Error, if operation unsuccessful
-    */
+    /// Fetches all gateways associated with user
+    ///
+    /// - Parameter completion: Completion block that gets called on response (either an error or an array of SPGateways
     public func getAllGateways(completion: @escaping (_ gateways: [SPGateway]?, _ error: APIError?) -> Void) {
         self.request(API.gateways, type: .get, parameters: nil) { (success, json, error) in
             if success {
@@ -123,14 +138,11 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Fetches a gateway by its IMEI
-     - Parameters:
-     - imei: IMEI of the gateway
-     - completion: Closure which is called after server response
-     - gateways: all SPGateways associated with current user
-     - error: Error, if operation unsuccessful
-     */
+    /// Fetches a gateway by its IMEI
+    ///
+    /// - Parameters:
+    ///   - imei: IMEI of the gateway
+    ///   - completion: Completion block that gets called on response
     public func getGateway(imei: String, completion: @escaping (_ gateway: SPGateway?, _ error: APIError?) -> Void) {
         self.request(API.gateway(imei), type: .get, parameters: nil) { (success, response, error) in
             if success {
@@ -154,12 +166,12 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Update name of gateway
-     - Parameters:
-     - completion: Closure which is called after server response
-     - error: Error, if operation unsuccessful
-     */
+    /// Update name of gateway
+    ///
+    /// - Parameters:
+    ///   - newName: New name of the gateway
+    ///   - gateway: The gateway to update
+    ///   - completion: Completion block that gets called on response
     public func updateGateway(name newName: String, of gateway: SPGateway, completion: @escaping (APIError?) -> Void) {
         let data = ["name": newName]
         self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
@@ -171,12 +183,12 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Update color of gateway
-     - Parameters:
-     - completion: Closure which is called after server response
-     - error: Error, if operation unsuccessful
-     */
+    /// Update color of gateway
+    ///
+    /// - Parameters:
+    ///   - newColor: New color of the gateway
+    ///   - gateway: The gateway to update
+    ///   - completion: Completion block that gets called on response
     public func updateGateway(color newColor: UIColor, of gateway: SPGateway, completion: @escaping (APIError?) -> Void) {
         let data = ["color": newColor.toHexString()]
         self.request(API.gateway(gateway.imei), type: .put, parameters: data) { (success, json, error) in
@@ -188,14 +200,11 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Creates account on server
-     - Parameters:
-        - account: SPAccount representing new account
-        - completion: Closure which is called after server response
-            - success: Bool indicating operation success
-            - error: Error, if operation unsuccessful
-     */
+    /// Creates a new account for the service
+    ///
+    /// - Parameters:
+    ///   - account: SPAccount representing new account
+    ///   - completion: Completion block that gets called on response
     public func registerAccount(_ account: SPAccount, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         let data = ["mail": account.username,
                     "password": account.password,
@@ -211,27 +220,41 @@ public class APIClient: NSObject {
         }
     }
     
+    /// Type of push notification (SSE) to the gateway
     public enum GatewayPushEvent {
+        /// Dial the provided phone number
+        /// - Parameter number: String of the number to be called
         case dial(number: String)
+        /// Hang up the currently connected call
         case hangUp
+        /// Inform the gateway about the answer action
+        /// - Parameter client: SPDevice object of the local device
         case deviceDidAnswerCall(client: SPDevice)
+        /// Inform the gateway about the decline action
+        /// - Parameter client: SPDevice object of the local device
         case deviceDidDeclineCall(client: SPDevice)
+        /// Hold the currently connected call
         case holdCall
+        /// Resume the currently connected call
         case resumeCall
+        /// Send a certain DTMF number
+        /// - Parameter digits: The respective DTMF "keys" to transmit
         case playDTMF(digits: String)
+        /// Send out a SMS Message
+        /// - Parameters:
+        ///   - to: Number of the recipient
+        ///   - message: Message to send
         case sendSMS(to: String, message: String)
+        /// Request an update of the gateways signal strength
         case updateSignalStrength
     }
     
-    /**
-     Push event to gateway
-     - Parameters:
-        - gateway: SPGateway that receives push notification
-        - event: the push event
-        - completion: Closure which is called after server response
-            - success: Bool indicating operation success
-            - error: Error, if operation unsuccessful
-     */
+    /// Push event to gateway (SSE)
+    ///
+    /// - Parameters:
+    ///   - gateway: SPGateway that should receive the notification
+    ///   - event: The type of the notification
+    ///   - completion: Completion block that gets called on response
     public func pushEventToGateway(_ gateway: SPGateway, event: GatewayPushEvent, completion: @escaping (_ success: Bool, _ response: JSON?, _ error: APIError?) -> Void) {
         var data: [String: Any] = ["gateway": gateway.imei]
         
@@ -273,6 +296,13 @@ public class APIClient: NSObject {
         }
     }
     
+    /// Sends a SMS message to the provided receiver
+    ///
+    /// - Parameters:
+    ///   - message: The message
+    ///   - receiver: SPNumber that should receive the message
+    ///   - gateway: SPGateway that should send out the message
+    ///   - completion: Completion block that gets called on response
     public func sendSMS(message: String, to receiver: SPNumber, on gateway: SPGateway, completion: @escaping (Error?) -> Void) {
         self.pushEventToGateway(gateway, event: .sendSMS(to: receiver.phoneNumber, message: message)) { (success, json, error) in
             if let error = error {
@@ -290,6 +320,9 @@ public class APIClient: NSObject {
     }
     
     
+    /// Gives back all the SPDevices connected to an user
+    ///
+    /// - Parameter completion: Completion block that gets called on response (either an error or an array of SPDevices)
     public func getAllDevices(completion: @escaping (_ success: Bool, _ devices: [SPDevice]?, _ error: APIError?) -> Void) {
         self.request(API.devices, type: .get, parameters: nil) { (success, json, error) in
             if success {
@@ -329,14 +362,11 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Cross-checks local device info and registers/updates info on server (Error if revoked by server)
-     - Parameters:
-     - device: SPDevice object of current device
-     - completion: Closure which is called after server response
-     - success: Bool indicating operation success
-     - error: Error, if operation unsuccessful
-     */
+    /// Cross-checks local device info and registers/updates info on server (gives back an error if the device got revoked by server)
+    ///
+    /// - Parameters:
+    ///   - device: SPDevice object of the current device
+    ///   - completion: Closure that gets called after server response
     public func register(deviceWithServer device: SPDevice, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         // Check if local data exists, otherwise register in server
         if let localDevice = SPDevice.local {
@@ -393,14 +423,11 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Cross-checks local device info and registers/updates VoIP APN Token of device
-     - Parameters:
-     - token: VoIP APN Token provided by PushKit
-     - completion: Closure which is called after server response
-     - success: Bool indicating operation success
-     - error: Error, if operation unsuccessful
-     */
+    /// Cross-checks local device info and registers/updates VoIP APN Token of device
+    ///
+    /// - Parameters:
+    ///   - token: VoIP APN Token provided by PushKit
+    ///   - completion: Closure that gets called after server response
     public func register(voipToken token: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         if let localDevice = SPDevice.local {
             let tokenDevice = localDevice
@@ -415,6 +442,11 @@ public class APIClient: NSObject {
         }
     }
     
+    /// Sets the iCloud Sync State of the current device (either sync or keep data local)
+    ///
+    /// - Parameters:
+    ///   - newState: New state. Either synced by iCloud (true) or not (false).
+    ///   - completion: Closure that gets called after server response
     public func setiCloudSyncState(_ newState: Bool, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         if let localDevice = SPDevice.local {
             localDevice.sync = newState
@@ -428,26 +460,20 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Revokes a device using its id
-     - Parameters:
-     - withId: the id of the device
-     - completion: Closure which is called after server response
-        - success: Bool indicating operation success
-        - error: Error, if operation unsuccessful
-     */
+    /// Revokes a device using its Identifier
+    ///
+    /// - Parameters:
+    ///   - id: Identifier of the device
+    ///   - completion: Closure that gets called after server response
     public func revokeDevice(withId id: String, completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         request(API.device(id), type: .delete, parameters: nil) { (success, response, error) in
             completion(success, error)
         }
     }
     
-    /**
-     Revokes all devices of an account that have iCloud Sync enabled
-     - completion: Closure which is called after server response
-        - success: Bool indicating operation success
-        - error: Error, if operation unsuccessful
-     */
+    /// Revokes all devices with iCloud Sync enabled of the provided account
+    ///
+    /// - Parameter completion: Closure that gets called after server response
     public func revokeAllDevicesWithiCloudSyncEnabled(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         let data: [String: Bool] = ["sync": true]
         request(API.devices, type: .delete, parameters: data) { (success, response, error) in
@@ -455,13 +481,9 @@ public class APIClient: NSObject {
         }
     }
     
-    /**
-     Rekoves current device
-     - Parameters:
-     - completion: Closure which is called after server response
-        - success: Bool indicating operation success
-        - error: Error, if operation unsuccessful
-     */
+    /// Rekoves the device that makes the request
+    ///
+    /// - Parameter completion: Closure that gets called after server response
     public func revokeThisDevice(completion: @escaping (_ success: Bool, _ error: APIError?) -> Void) {
         if let localDevice = SPDevice.local {
             self.revokeDevice(withId: localDevice.id) { (success, error) in
@@ -471,7 +493,7 @@ public class APIClient: NSObject {
             fatalError("error while revoking device")
         }
     }
-
+    
     // MARK: - API routing
     private struct API {
         static let base = "https://api.da.digitalsubmarine.com/v1"

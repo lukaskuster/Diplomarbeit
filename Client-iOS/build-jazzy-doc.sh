@@ -6,5 +6,5 @@ jazzy \
 	--author Lukas Kuster \
 	--author_url https://lukaskuster.com \
 	--module SIMplePhoneKit \
-	--output ../Dokumentation/Code-Docs/Client-iOS \
-	--theme ../Dokumentation/Code-Docs/source/jazzy-theme
+	--output ../docs/code-docs/client-ios \
+	--theme ../docs/code-docs/source/jazzy-theme

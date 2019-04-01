@@ -19,7 +19,7 @@
         <a class='header-link' href='../../index.html'>
           SIMplePhoneKit Docs
         </a>
-         (9% documented)
+         (50% documented)
       </p>
     
     
@@ -42,6 +42,15 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../../Classes/APIClient/GatewayPushEvent.html'>– GatewayPushEvent</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../../Classes/BLESetupManager.html'>BLESetupManager</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../../Classes/BLESetupManager/SetupError.html'>– SetupError</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../../Classes/BLESetupManager/Status.html'>– Status</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../../Classes/CallKitManager.html'>CallKitManager</a>
@@ -81,6 +90,9 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../../Classes/SPMessage/Direction.html'>– Direction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../../Classes/SPNetwork.html'>SPNetwork</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../../Classes/SPNumber.html'>SPNumber</a>
@@ -128,6 +140,9 @@
             <a class='nav-group-name-link' href='../../Protocols.html'>Protocols</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../../Protocols/BLESetupManagerDelegate.html'>BLESetupManagerDelegate</a>
+              </li>
+              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../../Protocols/CallKitManagerDelegate.html'>CallKitManagerDelegate</a>
               </li>
               <li class='nav-group-task'>
@@ -151,7 +166,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Type of push notification (SSE) to the gateway</p>
 
           </div>
         </section>
@@ -173,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Dial the provided phone number</p>
 
                       </div>
                       <div class="declaration">
@@ -183,6 +198,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">dial</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>number</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String of the number to be called</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -203,7 +237,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Hang up the currently connected call</p>
 
                       </div>
                       <div class="declaration">
@@ -233,7 +267,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Inform the gateway about the answer action</p>
 
                       </div>
                       <div class="declaration">
@@ -243,6 +277,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">deviceDidAnswerCall</span><span class="p">(</span><span class="nv">client</span><span class="p">:</span> <span class="kt"><a href="../../Classes/SPDevice.html">SPDevice</a></span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>client</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPDevice object of the local device</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -263,7 +316,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Inform the gateway about the decline action</p>
 
                       </div>
                       <div class="declaration">
@@ -273,6 +326,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">deviceDidDeclineCall</span><span class="p">(</span><span class="nv">client</span><span class="p">:</span> <span class="kt"><a href="../../Classes/SPDevice.html">SPDevice</a></span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>client</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>SPDevice object of the local device</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -293,7 +365,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Hold the currently connected call</p>
 
                       </div>
                       <div class="declaration">
@@ -323,7 +395,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Resume the currently connected call</p>
 
                       </div>
                       <div class="declaration">
@@ -353,7 +425,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Send a certain DTMF number</p>
 
                       </div>
                       <div class="declaration">
@@ -363,6 +435,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">playDTMF</span><span class="p">(</span><span class="nv">digits</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digits</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The respective DTMF <q>keys</q> to transmit</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -383,7 +474,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Send out a SMS Message</p>
 
                       </div>
                       <div class="declaration">
@@ -393,6 +484,37 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">sendSMS</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>to</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of the recipient</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Message to send</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -413,7 +535,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Request an update of the gateways signal strength</p>
 
                       </div>
                       <div class="declaration">

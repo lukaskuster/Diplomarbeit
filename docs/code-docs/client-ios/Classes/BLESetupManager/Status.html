@@ -162,11 +162,11 @@
             <h1>Status</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Enum representing the state of gateway setup</p>
 
           </div>
         </section>
@@ -178,9 +178,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:14SIMplePhoneKit9SPMessageC6StatusO4sentyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/sent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit9SPMessageC6StatusO4sentyA2EmF">sent</a>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC6StatusO10connectingyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/connecting" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC6StatusO10connectingyA2EmF">connecting</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,14 +188,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The gateway started connecting to the wireless network</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sent</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">connecting</span></code></pre>
 
                         </div>
                       </div>
@@ -208,9 +208,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:14SIMplePhoneKit9SPMessageC6StatusO6failedyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/failed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit9SPMessageC6StatusO6failedyA2EmF">failed</a>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC6StatusO8wrongPSKyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/wrongPSK" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC6StatusO8wrongPSKyA2EmF">wrongPSK</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -218,16 +218,65 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The passed WPA passkey was wrong</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">failed</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">wrongPSK</span></code></pre>
 
                         </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC6StatusO9connectedyAESS_tcAEmF"></a>
+                    <a name="//apple_ref/swift/Element/connected(imei:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC6StatusO9connectedyAESS_tcAEmF">connected(imei:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The gateway is now connected to the network and registered with the users account</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">connected</span><span class="p">(</span><span class="nv">imei</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>imei</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The IMEI of the newly registered SPGateway</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         

@@ -11,12 +11,18 @@ import Contacts
 import ContactsUI
 import PhoneNumberKit
 
+/// Data object representing a phone number
 public class SPNumber: NSObject {
+    /// The string representation of the phone call
     @objc public dynamic var phoneNumber = ""
+    /// The associated CNContact on the users phone (if there is one)
     @objc public var contact: CNContact? {
         return self.hasContact()
     }
     
+    /// Initializes a SPNumber object
+    ///
+    /// - Parameter phoneNumber: A string representation of the phone call
     public convenience init(withNumber phoneNumber: String) {
         self.init()
         self.phoneNumber = phoneNumber
@@ -24,6 +30,9 @@ public class SPNumber: NSObject {
 }
 
 extension SPNumber {
+    /// Returns a prettified version of the stored phone number
+    ///
+    /// - Returns: Prettified version of the phone number
     @objc public func prettyPhoneNumber() -> String {
         do {
             let phonenumberkit = PhoneNumberKit()
@@ -47,6 +56,10 @@ extension SPNumber {
         }
         return nil
     }
+    /// Checks whether a number is equal to another one
+    ///
+    /// - Parameter phoneNumberString: A string of the other phone number to cross-check
+    /// - Returns: Boolean, whether the number is equal or not
     public func isEqual(to phoneNumberString: String) -> Bool {
         do {
             let phonenumberkit = PhoneNumberKit()

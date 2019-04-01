@@ -1,7 +1,7 @@
 # P2P GSM-Telephone-Gateway with Client App
 ### Diploma thesis by [Lukas Kuster](https://github.com/lukaskuster) and [Quentin Wendegass](https://github.com/quentinwendegass) at HTL Mössingerstraße - 4th April 2019
 
-![Diagram depicting product structure](docs/diagrams-thesis/service-structure.png)
+![Diagram depicting service structure](docs/diagrams-thesis/service-structure.png)
 
 ## Table of contents
 - [Abstract](#abstract)
@@ -23,5 +23,7 @@ The system basically consists of three components: the gateway, which establishe
 The diploma thesis will show, whether such a product is technically as well as economically viable. While working on this project the whole software for such a product as well as a hard- ware prototype will be established.
 
 ## Links
+- [iOS-Client: SIMplePhoneKit Documentation](https://lukaskuster.github.io/Diplomarbeit/code-docs/client-ios/)
+
 - [Lukas' repo (@lukaskuster/Diplomarbeit)](https://github.com/lukaskuster/Diplomarbeit)
 - [Quentin's repo (@quentinwendegass/Diplomarbeit)](https://github.com/quentinwendegass/Diplomarbeit)

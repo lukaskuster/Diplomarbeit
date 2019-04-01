@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           SIMplePhoneKit Docs
         </a>
-         (9% documented)
+         (50% documented)
       </p>
     
     
@@ -42,6 +42,15 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/APIClient/GatewayPushEvent.html'>– GatewayPushEvent</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager.html'>BLESetupManager</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/SetupError.html'>– SetupError</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/Status.html'>– Status</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/CallKitManager.html'>CallKitManager</a>
@@ -81,6 +90,9 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPMessage/Direction.html'>– Direction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/SPNetwork.html'>SPNetwork</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPNumber.html'>SPNumber</a>
@@ -128,6 +140,9 @@
             <a class='nav-group-name-link' href='../Protocols.html'>Protocols</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/BLESetupManagerDelegate.html'>BLESetupManagerDelegate</a>
+              </li>
+              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/CallKitManagerDelegate.html'>CallKitManagerDelegate</a>
               </li>
               <li class='nav-group-task'>
@@ -151,7 +166,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Data object representing a recent call</p>
 
           </div>
         </section>
@@ -173,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Direction of the Call</p>
 
                       </div>
                       <div class="declaration">
@@ -195,9 +210,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)time"></a>
-                    <a name="//apple_ref/swift/Property/time" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)time">time</a>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC2idSSvp"></a>
+                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC2idSSvp">id</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -205,7 +220,69 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Identifier of the Recent Call</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="kd">dynamic</span> <span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC4seenSbvp"></a>
+                    <a name="//apple_ref/swift/Property/seen" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC4seenSbvp">seen</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether the call has already been seen by the user or not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="kd">dynamic</span> <span class="k">var</span> <span class="nv">seen</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC4time10Foundation4DateVvp"></a>
+                    <a name="//apple_ref/swift/Property/time" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC4time10Foundation4DateVvp">time</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Date When the call started</p>
 
                       </div>
                       <div class="declaration">
@@ -236,7 +313,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The second party (e.g. other caller) of the call</p>
 
                       </div>
                       <div class="declaration">
@@ -266,7 +343,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The duration of the call</p>
 
                       </div>
                       <div class="declaration">
@@ -296,7 +373,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The direction of the call (e.g. incoming or outgoing)</p>
 
                       </div>
                       <div class="declaration">
@@ -316,9 +393,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)missed"></a>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC6missedSbvp"></a>
                     <a name="//apple_ref/swift/Property/missed" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)missed">missed</a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC6missedSbvp">missed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -326,7 +403,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Indicates whether the call was missed or not</p>
 
                       </div>
                       <div class="declaration">
@@ -347,9 +424,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)gateway"></a>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC7gatewayAA9SPGatewayCSgvp"></a>
                     <a name="//apple_ref/swift/Property/gateway" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(py)gateway">gateway</a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC7gatewayAA9SPGatewayCSgvp">gateway</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -357,7 +434,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The SPGateway that was used for the call</p>
 
                       </div>
                       <div class="declaration">
@@ -388,7 +465,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a SPRecentCall object</p>
 
                       </div>
                       <div class="declaration">
@@ -399,6 +476,85 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondParty</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second party (e.g. other caller) of the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>time</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Date When the call started</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>duration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The duration of the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The direction of the call (e.g. incoming or outgoing)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>missed</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether the call was missed or not</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gateway</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The SPGateway that was used for the call</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
                       </div>
@@ -408,9 +564,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(cm)primaryKey"></a>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC10primaryKeySSSgyFZ"></a>
                     <a name="//apple_ref/swift/Method/primaryKey()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(cm)primaryKey">primaryKey()</a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC10primaryKeySSSgyFZ">primaryKey()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -418,7 +574,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Defines the primary key of the object</p>
+
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
@@ -428,6 +585,10 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>String representation of the primary key</p>
+                      </div>
                       <div class="slightly-smaller">
                         
                       </div>
@@ -437,9 +598,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(cm)ignoredProperties"></a>
+                    <a name="/s:14SIMplePhoneKit12SPRecentCallC17ignoredPropertiesSaySSGyFZ"></a>
                     <a name="//apple_ref/swift/Method/ignoredProperties()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPRecentCall(cm)ignoredProperties">ignoredProperties()</a>
+                    <a class="token" href="#/s:14SIMplePhoneKit12SPRecentCallC17ignoredPropertiesSaySSGyFZ">ignoredProperties()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -447,7 +608,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Defines ignored properties by Realm</p>
+
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
@@ -456,6 +618,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">ignoredProperties</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>String array of the properties names</p>
                       </div>
                       <div class="slightly-smaller">
                         

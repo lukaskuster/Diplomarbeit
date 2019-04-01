@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>SPNumber Class Reference</title>
+    <title>SPNetwork Class Reference</title>
     <link rel='stylesheet' type='text/css' href='../css/jazzy.css' />
     <link rel='stylesheet' type='text/css' href='../css/highlight.css' />
     <meta charset='utf-8'>
@@ -10,9 +10,9 @@
   </head>
   <body>
 
-    <a name='//apple_ref/swift/Class/SPNumber' class='dashAnchor'></a>
+    <a name='//apple_ref/swift/Class/SPNetwork' class='dashAnchor'></a>
 
-    <a title='SPNumber Class Reference'></a>
+    <a title='SPNetwork Class Reference'></a>
 
     <header class='header'>
       <p class='header-col header-col--primary'>
@@ -28,7 +28,7 @@
     <p class='breadcrumbs'>
       <a class='breadcrumb' href='../index.html'>SIMplePhoneKit Reference</a>
       <img class='carat' src='../img/carat.png' />
-      SPNumber Class Reference
+      SPNetwork Class Reference
     </p>
 
     <div class='content-wrapper'>
@@ -159,14 +159,14 @@
 
         <section class='section'>
           <div class='section-content'>
-            <h1>SPNumber</h1>
+            <h1>SPNetwork</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SPNumber</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SPNetwork</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
               </div>
-            <p>Data object representing a phone number</p>
+            <p>Object representing a wireless network</p>
 
           </div>
         </section>
@@ -178,9 +178,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPNumber(py)phoneNumber"></a>
-                    <a name="//apple_ref/swift/Property/phoneNumber" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPNumber(py)phoneNumber">phoneNumber</a>
+                    <a name="/s:14SIMplePhoneKit9SPNetworkC4ssidSSvp"></a>
+                    <a name="//apple_ref/swift/Property/ssid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit9SPNetworkC4ssidSSvp">ssid</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,15 +188,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The string representation of the phone call</p>
+                        <p>SSID (name) of the network</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">dynamic</span> <span class="k">var</span> <span class="nv">phoneNumber</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">ssid</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -209,9 +208,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/c:@M@SIMplePhoneKit@objc(cs)SPNumber(py)contact"></a>
-                    <a name="//apple_ref/swift/Property/contact" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@SIMplePhoneKit@objc(cs)SPNumber(py)contact">contact</a>
+                    <a name="/s:14SIMplePhoneKit9SPNetworkC4rssiSivp"></a>
+                    <a name="//apple_ref/swift/Property/rssi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit9SPNetworkC4rssiSivp">rssi</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -219,15 +218,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The associated CNContact on the users phone (if there is one)</p>
+                        <p>Signal strength of the network (RSSI)</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="k">var</span> <span class="nv">contact</span><span class="p">:</span> <span class="kt">CNContact</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rssi</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -240,9 +238,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:14SIMplePhoneKit8SPNumberC10withNumberACSS_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(withNumber:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit8SPNumberC10withNumberACSS_tcfc">init(withNumber:)</a>
+                    <a name="/s:14SIMplePhoneKit9SPNetworkC16requiresPasswordSbvp"></a>
+                    <a name="//apple_ref/swift/Property/requiresPassword" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit9SPNetworkC16requiresPasswordSbvp">requiresPassword</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -250,14 +248,44 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initializes a SPNumber object</p>
+                        <p>Boolean indicating whether the network is password-protected or not</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">withNumber</span> <span class="nv">phoneNumber</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">requiresPassword</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit9SPNetworkC4ssid4rssi16requiresPasswordACSS_SiSbtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(ssid:rssi:requiresPassword:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit9SPNetworkC4ssid4rssi16requiresPasswordACSS_SiSbtcfc">init(ssid:rssi:requiresPassword:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SPNetwork Initializer</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">ssid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">rssi</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">requiresPassword</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -268,109 +296,41 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>phoneNumber</em>
+                                <em>ssid</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A string representation of the phone call</p>
+                                  <p>SSID (name) of the network</p>
                                 </div>
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class='item-container'>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/c:@CM@SIMplePhoneKit@objc(cs)SPNumber(im)prettyPhoneNumber"></a>
-                    <a name="//apple_ref/swift/Method/prettyPhoneNumber()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@CM@SIMplePhoneKit@objc(cs)SPNumber(im)prettyPhoneNumber">prettyPhoneNumber()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Returns a prettified version of the stored phone number</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">prettyPhoneNumber</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h5>Return Value</h5>
-                        <p>Prettified version of the phone number</p>
-                      </div>
-                      <div class="slightly-smaller">
-                        
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div class="item-heading">
-                    <code>
-                    <a name="/s:14SIMplePhoneKit8SPNumberC7isEqual2toSbSS_tF"></a>
-                    <a name="//apple_ref/swift/Method/isEqual(to:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit8SPNumberC7isEqual2toSbSS_tF">isEqual(to:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Checks whether a number is equal to another one</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h5>Declaration</h5>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">phoneNumberString</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h5>Parameters</h5>
-                        <table class="graybox">
-                          <tbody>
                             <tr>
                               <td>
                                 <code>
-                                <em>phoneNumberString</em>
+                                <em>rssi</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A string of the other phone number to cross-check</p>
+                                  <p>Signal strength of the network (RSSI)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>requiresPassword</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Boolean indicating whether the network is password-protected or not</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h5>Return Value</h5>
-                        <p>Boolean, whether the number is equal or not</p>
                       </div>
                       <div class="slightly-smaller">
                         

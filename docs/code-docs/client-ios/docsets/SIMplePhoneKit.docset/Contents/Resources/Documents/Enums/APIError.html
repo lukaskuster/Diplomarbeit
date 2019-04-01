@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           SIMplePhoneKit Docs
         </a>
-         (9% documented)
+         (50% documented)
       </p>
     
     
@@ -42,6 +42,15 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/APIClient/GatewayPushEvent.html'>– GatewayPushEvent</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager.html'>BLESetupManager</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/SetupError.html'>– SetupError</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/Status.html'>– Status</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/CallKitManager.html'>CallKitManager</a>
@@ -81,6 +90,9 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPMessage/Direction.html'>– Direction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/SPNetwork.html'>SPNetwork</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPNumber.html'>SPNumber</a>
@@ -128,6 +140,9 @@
             <a class='nav-group-name-link' href='../Protocols.html'>Protocols</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/BLESetupManagerDelegate.html'>BLESetupManagerDelegate</a>
+              </li>
+              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/CallKitManagerDelegate.html'>CallKitManagerDelegate</a>
               </li>
               <li class='nav-group-task'>
@@ -151,7 +166,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Enum indicating an error returned by the APIClient</p>
 
           </div>
         </section>
@@ -173,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Endpoint requested without being authentificated</p>
 
                       </div>
                       <div class="declaration">
@@ -203,7 +218,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Invalid credentials used to authentificate request</p>
 
                       </div>
                       <div class="declaration">
@@ -233,7 +248,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A parameter in the request is missing</p>
 
                       </div>
                       <div class="declaration">
@@ -243,6 +258,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">missing</span><span class="p">(</span><span class="nv">parameter</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parameter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Textual representation of the missing parameter</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -263,7 +297,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A gateway with the same IMEI already exists for that account</p>
 
                       </div>
                       <div class="declaration">
@@ -293,7 +327,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The gateway with the supplied IMEI does not exist</p>
 
                       </div>
                       <div class="declaration">
@@ -323,7 +357,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An internal database error occurred</p>
 
                       </div>
                       <div class="declaration">
@@ -333,6 +367,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">databaseError</span><span class="p">(</span><span class="nv">desc</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>desc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Textual description of the error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -353,7 +406,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The supplied mail address has already been used for an account</p>
 
                       </div>
                       <div class="declaration">
@@ -383,7 +436,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The supplied mail address has already been used for an account</p>
 
                       </div>
                       <div class="declaration">
@@ -413,7 +466,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>No SPDevice with the supplied identifier was found</p>
 
                       </div>
                       <div class="declaration">
@@ -443,7 +496,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The supplied SPGateway is not connected to the service right now</p>
 
                       </div>
                       <div class="declaration">
@@ -453,6 +506,25 @@
                           <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">gatewayNotConnected</span><span class="p">(</span><span class="nv">withIMEI</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>withIMEI</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>IMEI of the respective SPGateway</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -473,7 +545,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The user does not have any SPGateways connected to his/her account</p>
 
                       </div>
                       <div class="declaration">
@@ -503,7 +575,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The user does not have any SPDevices conntected to his/her account</p>
 
                       </div>
                       <div class="declaration">
@@ -533,7 +605,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An error occurred while parsing the response</p>
 
                       </div>
                       <div class="declaration">
@@ -563,7 +635,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The device does not have a network connection and therefore can not reach the API</p>
 
                       </div>
                       <div class="declaration">
@@ -593,7 +665,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The iCloud User Identifier for this account differs from the one of this devices Apple ID</p>
 
                       </div>
                       <div class="declaration">
@@ -623,7 +695,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Another error occurred</p>
 
                       </div>
                       <div class="declaration">
@@ -634,6 +706,25 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>desc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Textual description of the error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
                         
                       </div>
@@ -643,9 +734,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:10Foundation14LocalizedErrorP16errorDescriptionSSSgvp"></a>
+                    <a name="/s:14SIMplePhoneKit8APIErrorO16errorDescriptionSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/errorDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10Foundation14LocalizedErrorP16errorDescriptionSSSgvp">errorDescription</a>
+                    <a class="token" href="#/s:14SIMplePhoneKit8APIErrorO16errorDescriptionSSSgvp">errorDescription</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -653,7 +744,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Overriding errorDescription to get a better error output</p>
+
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>

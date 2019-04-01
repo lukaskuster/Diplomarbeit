@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Status Enumeration Reference</title>
+    <title>SetupError Enumeration Reference</title>
     <link rel='stylesheet' type='text/css' href='../../css/jazzy.css' />
     <link rel='stylesheet' type='text/css' href='../../css/highlight.css' />
     <meta charset='utf-8'>
@@ -10,9 +10,9 @@
   </head>
   <body>
 
-    <a name='//apple_ref/swift/Enum/Status' class='dashAnchor'></a>
+    <a name='//apple_ref/swift/Enum/SetupError' class='dashAnchor'></a>
 
-    <a title='Status Enumeration Reference'></a>
+    <a title='SetupError Enumeration Reference'></a>
 
     <header class='header'>
       <p class='header-col header-col--primary'>
@@ -28,7 +28,7 @@
     <p class='breadcrumbs'>
       <a class='breadcrumb' href='../../index.html'>SIMplePhoneKit Reference</a>
       <img class='carat' src='../../img/carat.png' />
-      Status Enumeration Reference
+      SetupError Enumeration Reference
     </p>
 
     <div class='content-wrapper'>
@@ -159,14 +159,14 @@
 
         <section class='section'>
           <div class='section-content'>
-            <h1>Status</h1>
+            <h1>SetupError</h1>
               <div class='declaration'>
                 <div class='language'>
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SetupError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Enum representing errors that occur while setting up the gateway</p>
 
           </div>
         </section>
@@ -178,9 +178,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:14SIMplePhoneKit9SPMessageC6StatusO4sentyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/sent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit9SPMessageC6StatusO4sentyA2EmF">sent</a>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO011noGatewayToF5FoundyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/noGatewayToSetupFound" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO011noGatewayToF5FoundyA2EmF">noGatewayToSetupFound</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -188,14 +188,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>No Gateway found to set up</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sent</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noGatewayToSetupFound</span></code></pre>
 
                         </div>
                       </div>
@@ -208,9 +208,9 @@
                 <li class="item">
                   <div class="item-heading">
                     <code>
-                    <a name="/s:14SIMplePhoneKit9SPMessageC6StatusO6failedyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/failed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SIMplePhoneKit9SPMessageC6StatusO6failedyA2EmF">failed</a>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO020moreThanOneGatewayToF0yA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/moreThanOneGatewayToSetup" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO020moreThanOneGatewayToF0yA2EmF">moreThanOneGatewayToSetup</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -218,14 +218,134 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>More than one gateway is available to set up</p>
 
                       </div>
                       <div class="declaration">
                         <h5>Declaration</h5>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">failed</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">moreThanOneGatewayToSetup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO13missingWPAKeyyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/missingWPAKey" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO13missingWPAKeyyA2EmF">missingWPAKey</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Missing the required WPA Key, e.g. wifi password</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">missingWPAKey</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO07parsingG0yA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/parsingError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO07parsingG0yA2EmF">parsingError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Error while parsing a response</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">parsingError</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO17noDataFromGatewayyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/noDataFromGateway" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO17noDataFromGatewayyA2EmF">noDataFromGateway</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>No data available from the gateway</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noDataFromGateway</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div class="item-heading">
+                    <code>
+                    <a name="/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO018noNetworkToConnectJ0yA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/noNetworkToConnectTo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SIMplePhoneKit15BLESetupManagerC10SetupErrorO018noNetworkToConnectJ0yA2EmF">noNetworkToConnectTo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>No wireless network available to connect to</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h5>Declaration</h5>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noNetworkToConnectTo</span></code></pre>
 
                         </div>
                       </div>

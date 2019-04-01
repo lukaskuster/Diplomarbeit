@@ -19,7 +19,7 @@
         <a class='header-link' href='../index.html'>
           SIMplePhoneKit Docs
         </a>
-         (9% documented)
+         (50% documented)
       </p>
     
     
@@ -42,6 +42,15 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/APIClient/GatewayPushEvent.html'>– GatewayPushEvent</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager.html'>BLESetupManager</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/SetupError.html'>– SetupError</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/BLESetupManager/Status.html'>– Status</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/CallKitManager.html'>CallKitManager</a>
@@ -81,6 +90,9 @@
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPMessage/Direction.html'>– Direction</a>
+              </li>
+              <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Classes/SPNetwork.html'>SPNetwork</a>
               </li>
               <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Classes/SPNumber.html'>SPNumber</a>
@@ -128,6 +140,9 @@
             <a class='nav-group-name-link' href='../Protocols.html'>Protocols</a>
             <ul class='nav-group-tasks'>
               <li class='nav-group-task'>
+                <a class='nav-group-task-link' href='../Protocols/BLESetupManagerDelegate.html'>BLESetupManagerDelegate</a>
+              </li>
+              <li class='nav-group-task'>
                 <a class='nav-group-task-link' href='../Protocols/CallKitManagerDelegate.html'>CallKitManagerDelegate</a>
               </li>
               <li class='nav-group-task'>
@@ -151,7 +166,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Data object representing a phone number</p>
 
           </div>
         </section>
@@ -173,7 +188,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The string representation of the phone call</p>
 
                       </div>
                       <div class="declaration">
@@ -204,7 +219,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The associated CNContact on the users phone (if there is one)</p>
 
                       </div>
                       <div class="declaration">
@@ -235,7 +250,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a SPNumber object</p>
 
                       </div>
                       <div class="declaration">
@@ -245,6 +260,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">withNumber</span> <span class="nv">phoneNumber</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>phoneNumber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string representation of the phone call</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -269,7 +303,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns a prettified version of the stored phone number</p>
 
                       </div>
                       <div class="declaration">
@@ -280,6 +314,10 @@
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">prettyPhoneNumber</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>Prettified version of the phone number</p>
                       </div>
                       <div class="slightly-smaller">
                         
@@ -300,7 +338,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Checks whether a number is equal to another one</p>
 
                       </div>
                       <div class="declaration">
@@ -310,6 +348,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">phoneNumberString</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h5>Parameters</h5>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>phoneNumberString</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string of the other phone number to cross-check</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h5>Return Value</h5>
+                        <p>Boolean, whether the number is equal or not</p>
                       </div>
                       <div class="slightly-smaller">
                         
