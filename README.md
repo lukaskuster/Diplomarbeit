@@ -24,6 +24,7 @@ The diploma thesis will show, whether such a product is technically as well as e
 
 ## Links
 * [iOS-Client: SIMplePhoneKit Documentation](https://lukaskuster.github.io/Diplomarbeit/code-docs/client-ios/) ![SIMplePhoneKit Coverage](docs/code-docs/client-ios/badge.svg)
+* [Gateway: gatewayw Documentation](https://quentinwendegass.github.io/Diplomarbeit/code-docs/gatewayw/) ![gatewayw Coverage](docs/code-docs/gatewayw/badge.svg)
 
 + [Lukas' repo (@lukaskuster/Diplomarbeit)](https://github.com/lukaskuster/Diplomarbeit)
 + [Quentin's repo (@quentinwendegass/Diplomarbeit)](https://github.com/quentinwendegass/Diplomarbeit)
