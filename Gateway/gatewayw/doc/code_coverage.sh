@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+
+if [[ ! -e ${1}/coverage.log ]]; then
+    mkdir -p ${1}
+    touch ${1}/coverage.log
+fi
+
 docstr-coverage ../gateway > ${1}/coverage.log
 TOTAL_COVERAGE=$(cat ${1}/coverage.log | grep 'Total docstring coverage' | grep -Eo '[0-9.]{1,4}')
 
