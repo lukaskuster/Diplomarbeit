@@ -18,4 +18,5 @@ help:
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	$(shell ./code_coverage.sh ${BUILDDIR})
+	$(shell touch ${BUILDDIR}/html/.nojekyll)
 
