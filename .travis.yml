@@ -1,0 +1,34 @@
+matrix:
+  include:
+    - language: python
+      python: 3.6
+      dist: xenial
+      install:
+        - Gateway/bin/install_gatewayw_dependencies
+      before_script:
+        - cd Gateway/gatewayw/
+        - python setup.py sdist
+        - pip install dist/gatewayw*.tar.gz
+      script:
+        - cd tests/
+        - chmod +x test_gatewayw.sh
+        - ./test_gatewayw.sh ../../etc/
+#    - language: node_js
+#     node_js:
+#        - "7"
+#      before_script:
+#        - Do something
+#      script:
+#        - Do something
+#    - language: objective-c
+#      os: osx
+#      osx_image: xcode8.3
+#      before_script:
+#        - Do something
+#      script:
+#        - Do something
+
+notifications:
+  email:
+    - quentin@wendegass.com
+    - mail@lukaskuster.com
