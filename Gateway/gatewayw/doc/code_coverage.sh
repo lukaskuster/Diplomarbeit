@@ -28,4 +28,4 @@ then
     COLOR=orange
 fi;
 
-curl https://img.shields.io/badge/Documentation-${TOTAL_COVERAGE}%25-${COLOR}.svg --output ${1}/badge.svg
+curl https://img.shields.io/badge/documentation-${TOTAL_COVERAGE}%25-${COLOR}.svg --output ${1}/badge.svg
