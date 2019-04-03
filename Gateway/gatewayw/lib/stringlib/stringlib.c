@@ -46,7 +46,8 @@ args_t *split_command(char *command, short buffer_size)
 
     size_t arg_count = 1;
 
-    for (int k = 0; k < len; k++)
+    int k;
+    for (k = 0; k < len; k++)
     {
         current_pos++;
         if (arg_str[k] == ',')
