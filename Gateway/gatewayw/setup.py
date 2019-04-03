@@ -21,7 +21,7 @@ setup(
     ext_modules=ext,
     packages=find_packages('.'),
     install_requires=['websockets', 'av', 'pyee', 'attrs', 'asyncio',
-                      'pyserial', 'requests', 'aioice',
+                      'pyserial', 'requests', 'aioice', 'pigpio',
                       'aiortc-custom @ http://github.com/quentinwendegass/aiortc/tarball/master#egg=aiortc-custom-0.9.18'],
     entry_points={
         'console_scripts': ['gatewayw=gateway.core.main:start'],
