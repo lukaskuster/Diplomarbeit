@@ -3,8 +3,7 @@ matrix:
     - language: python
       cache:
         directories:
-          - /usr/local/lib/
-          - /usr/local/bin/
+          - ffmpeg-3.2/
       python: 3.6
       dist: xenial
       install:
