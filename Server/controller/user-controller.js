@@ -61,3 +61,13 @@ module.exports.putUser = function (req, res) {
         res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
     });
 };
+
+module.exports.deleteUser = function (req, res) {
+    let user = res.locals.user;
+    User.deleteOne({ _id: user._id }, function (e) {
+        if(e){
+            return res.status(409).json({errorMessage: `DBError(withName: ${e.name})`, errorCode: 10003});
+        }
+        return res.status(200).json();
+    })
+};
