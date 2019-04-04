@@ -4,6 +4,7 @@ matrix:
       cache:
         directories:
           - /usr/local/lib/
+          - /usr/local/bin/
       python: 3.6
       dist: xenial
       install:
