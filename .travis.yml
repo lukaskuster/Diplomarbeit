@@ -1,6 +1,7 @@
 matrix:
   include:
-    - language: python
+    - if: branch = master OR branch = gateway
+      language: python
       cache:
         directories:
           - ffmpeg-3.2/
@@ -14,7 +15,8 @@ matrix:
         - pip install dist/gatewayw*.tar.gz
       script:
         - ./tests/test_gatewayw.sh ../etc/
-    - language: node_js
+    - if: branch = master OR branch = server
+      language: node_js
       node_js:
         - "8"
       services:
@@ -26,7 +28,8 @@ matrix:
         - sleep 10
       script:
         - ./run_tests
-#    - language: objective-c
+#    - if: branch = master OR branch = ios-client
+#      language: objective-c
 #      os: osx
 #      osx_image: xcode8.3
 #      before_script:

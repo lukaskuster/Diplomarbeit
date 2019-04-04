@@ -12,7 +12,7 @@ mocha           # run tests
 MOCHA_EXIT_CODE="$?"
 
 # kill web-api
-API_WORKER_PID=$(pgrep -x node worker/api.js)
+API_WORKER_PID=$(pgrep -f "node worker/api.js")
 echo "Stop server [${API_WORKER_PID}]..."
 
 # If the api process isn't running any more, fail the test
