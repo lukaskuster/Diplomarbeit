@@ -1,6 +1,9 @@
 matrix:
   include:
     - language: python
+      cache:
+        directories:
+          - /usr/local/lib/
       python: 3.6
       dist: xenial
       install:
