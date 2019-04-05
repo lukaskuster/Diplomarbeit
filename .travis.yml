@@ -28,7 +28,7 @@ matrix:
         - sleep 10
       script:
         - ./run_tests
-    - if: branch = master OR branch = ios-client
+    - if: branch = master OR branch = client-ios
       language: objective-c
       os: osx
       osx_image: xcode8.3
