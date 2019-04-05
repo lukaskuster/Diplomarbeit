@@ -27,7 +27,9 @@ matrix:
       before_script:
         - sleep 10
       script:
-        - ./run_tests
+        - npm run test
+      after_success:
+        - npm run coverage
 #    - if: branch = master OR branch = ios-client
 #      language: objective-c
 #      os: osx
