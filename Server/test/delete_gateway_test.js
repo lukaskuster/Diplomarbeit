@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
+const app = require('../worker/api');
 const supertest = require('supertest');
-const api = supertest('localhost:3000/v1');
+const api = supertest(app);
 
 describe('DELETE /gateway', function () {
 
@@ -19,7 +20,7 @@ describe('DELETE /gateway', function () {
 
 
     before(function (done) {
-        api.post('/user')
+        api.post('/v1/user')
             .set('Accept', 'application/json')
             .send(user)
             .end(function (err, res) {
@@ -29,20 +30,20 @@ describe('DELETE /gateway', function () {
     });
 
     after(function (done) {
-        api.delete(`/user`)
+        api.delete(`/v1/user`)
             .auth(user.mail, user.password)
             .send()
             .expect(200, done)
     });
 
     beforeEach(function (done) {
-        api.post('/gateway')
+        api.post('/v1/gateway')
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send(gateway)
             .expect(200)
             .end(function (err, res) {
-                api.put(`/gateway/${gateway.imei}`)
+                api.put(`/v1/gateway/${gateway.imei}`)
                     .set('Accept', 'application/json')
                     .auth(user.mail, user.password)
                     .send(gateway)
@@ -51,7 +52,7 @@ describe('DELETE /gateway', function () {
     });
 
     afterEach(function (done) {
-        api.delete(`/gateway/${gateway.imei}`)
+        api.delete(`/v1/gateway/${gateway.imei}`)
             .auth(user.mail, user.password)
             .send()
             .end(function (err, res) {
@@ -61,7 +62,7 @@ describe('DELETE /gateway', function () {
     });
 
     it('should return a 200 response', function (done) {
-        api.delete(`/gateway/${gateway.imei}`)
+        api.delete(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send()
@@ -70,7 +71,7 @@ describe('DELETE /gateway', function () {
 
 
     it('should return a 404 response', function (done) {
-        api.delete(`/gateway/gatewaythatdoesnotexist`)
+        api.delete(`/v1/gateway/gatewaythatdoesnotexist`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send()
@@ -82,13 +83,13 @@ describe('DELETE /gateway', function () {
     });
 
     it('should remove the gateway', function (done) {
-        api.delete(`/gateway/${gateway.imei}`)
+        api.delete(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .send()
             .auth(user.mail, user.password)
             .expect(200)
             .end(function (err, res) {
-                api.get(`/gateway/${gateway.imei}`)
+                api.get(`/v1/gateway/${gateway.imei}`)
                     .set('Accept', 'application/json')
                     .auth(user.mail, user.password)
                     .send()
@@ -97,13 +98,13 @@ describe('DELETE /gateway', function () {
     });
 
     it('should return a 401 response', function (done) {
-        api.delete(`/gateway/${gateway.imei}`)
+        api.delete(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .send()
             .expect(401)
             .end(function (err, res) {
                 expect(res.body.errorCode).to.equal(10010);
-                api.delete(`/gateway/gatewaythatdoesnotexist`)
+                api.delete(`/v1/gateway/gatewaythatdoesnotexist`)
                     .set('Accept', 'application/json')
                     .send()
                     .expect(401 , done)

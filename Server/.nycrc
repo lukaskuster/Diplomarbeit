@@ -1,0 +1,9 @@
+{
+  "include": [
+    "controller/*.js",
+    "middleware/*.js",
+    "model/*.js"
+  ],
+  "cache": true,
+  "all": true
+}

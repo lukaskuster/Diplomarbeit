@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const supertest = require('supertest');
-const api = supertest('localhost:3000/v1');
+const app = require('../worker/api');
+const api = supertest(app);
 
 describe('PUT /gateway', function () {
 
@@ -19,7 +20,7 @@ describe('PUT /gateway', function () {
 
 
     before(function (done) {
-        api.post('/user')
+        api.post('/v1/user')
             .set('Accept', 'application/json')
             .send(user)
             .end(function (err, res) {
@@ -29,14 +30,14 @@ describe('PUT /gateway', function () {
     });
 
     after(function (done) {
-        api.delete(`/user`)
+        api.delete(`/v1/user`)
             .auth(user.mail, user.password)
             .send()
             .expect(200, done)
     });
 
     beforeEach(function (done) {
-        api.post('/gateway')
+        api.post('/v1/gateway')
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send(gateway)
@@ -44,14 +45,14 @@ describe('PUT /gateway', function () {
     });
 
     afterEach(function (done) {
-        api.delete(`/gateway/${gateway.imei}`)
+        api.delete(`/v1/gateway/${gateway.imei}`)
             .auth(user.mail, user.password)
             .send()
             .expect(200, done)
     });
 
     it('should return a 200 response', function (done) {
-        api.put(`/gateway/${gateway.imei}`)
+        api.put(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send(gateway)
@@ -59,14 +60,18 @@ describe('PUT /gateway', function () {
     });
 
     it('should return a 404 response', function (done) {
-        api.put(`/gateway`)
+        api.put(`/v1/gateway/gatewaydoeasnotexist`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
-            .expect(404, done)
+            .expect(404)
+            .end(function (err, res) {
+                expect(res.body).to.have.property('errorCode');
+                done()
+            })
     });
 
     it('should return the saved data', function (done) {
-        api.put(`/gateway/${gateway.imei}`)
+        api.put(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send(gateway)
@@ -78,13 +83,13 @@ describe('PUT /gateway', function () {
     });
 
     it('should return the gateway object', function (done) {
-        api.put(`/gateway/${gateway.imei}`)
+        api.put(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send(gateway)
             .expect(200)
             .end(function (err, res) {
-                api.put(`/gateway/${gateway.imei}`)
+                api.put(`/v1/gateway/${gateway.imei}`)
                     .set('Accept', 'application/json')
                     .auth(user.mail, user.password)
                     .expect(200)
@@ -96,13 +101,13 @@ describe('PUT /gateway', function () {
     });
 
     it('should return a 401 response', function (done) {
-        api.put(`/gateway/${gateway.imei}`)
+        api.put(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .send()
             .expect(401)
             .end(function (err, res) {
                 expect(res.body.errorCode).to.equal(10010);
-                api.put(`/gateway/${gateway.imei}`)
+                api.put(`/v1/gateway/${gateway.imei}`)
                     .set('Accept', 'application/json')
                     .auth(user.mail, user.password)
                     .send(gateway)
@@ -111,7 +116,7 @@ describe('PUT /gateway', function () {
     });
 
     it('should update gateway data', function (done) {
-        api.put(`/gateway/${gateway.imei}`)
+        api.put(`/v1/gateway/${gateway.imei}`)
             .set('Accept', 'application/json')
             .auth(user.mail, user.password)
             .send({name: 'Test'})
@@ -119,7 +124,7 @@ describe('PUT /gateway', function () {
             .end(function (err, res) {
                 expect(res.body).to.have.property('name');
 
-                api.get(`/gateway/${gateway.imei}`)
+                api.get(`/v1/gateway/${gateway.imei}`)
                     .set('Accept', 'application/json')
                     .auth(user.mail, user.password)
                     .send()
