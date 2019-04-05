@@ -220,6 +220,19 @@ public class APIClient: NSObject {
         }
     }
     
+    /// Deletes an existing user account
+    ///
+    /// - Parameter completion: Completion block that gets called on response
+    public func deleteAccount(completion: @escaping (APIError?) -> Void) {
+        self.request(API.user, type: .delete, parameters: nil) { (success, response, error) in
+            if success {
+                completion(nil)
+            }else{
+                completion(error)
+            }
+        }
+    }
+    
     /// Type of push notification (SSE) to the gateway
     public enum GatewayPushEvent {
         /// Dial the provided phone number

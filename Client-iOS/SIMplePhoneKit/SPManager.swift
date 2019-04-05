@@ -73,6 +73,13 @@ public protocol SPManagerDelegate {
         }
     }
     
+    /// Deletes the current users account
+    ///
+    /// - Parameter completion: Completion block that gets called on response
+    public func deleteAccount(completion: @escaping (APIError?) -> Void) {
+        self.apiClient.deleteAccount(completion: completion)
+    }
+    
     // MARK: - iCloud Related
     public enum SPKeychainEnvironment: Int {
         case cloud
