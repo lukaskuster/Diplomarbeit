@@ -3,6 +3,7 @@
 ### Diploma thesis by [Lukas Kuster](https://github.com/lukaskuster) and [Quentin Wendegass](https://github.com/quentinwendegass) at HTL Mössingerstraße - 4th April 2019
 
 [![Build Status](https://travis-ci.com/quentinwendegass/Diplomarbeit.svg?token=dapxrGe5xD9gN2KPEJf5&branch=master)](https://travis-ci.com/quentinwendegass/Diplomarbeit)
+[![codecov](https://codecov.io/gh/quentinwendegass/Diplomarbeit/branch/master/graph/badge.svg?token=Fio1N3aKtm)](https://codecov.io/gh/quentinwendegass/Diplomarbeit)
 
 ![Diagram depicting service structure](docs/diagrams-thesis/service-structure.png)
 
