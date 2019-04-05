@@ -1,12 +1,13 @@
-github "daltoniam/Starscream" >= 3.0.2
-github "SwiftyJSON/SwiftyJSON" ~> 4.0
-github "Alamofire/Alamofire" ~> 4.7
-github "SwiftyJSON/Alamofire-SwiftyJSON" >= 3.0.0
-github "marmelroy/PhoneNumberKit"
-github "evgenyneu/keychain-swift" ~> 13.0
-github "SwiftKickMobile/SwiftMessages"
-github "venmo/Static"
-github "mathiasnagler/SwiftyAcknowledgements"
-github "joncardasis/ChromaColorPicker"
-github "jordanebelanger/SwiftyBluetooth"
-github "shu223/Pulsator"
+github "Alamofire/Alamofire" == 4.8.0
+github "SwiftKickMobile/SwiftMessages" == 6.0.1
+github "SwiftyJSON/Alamofire-SwiftyJSON" == 3.0.0
+github "SwiftyJSON/SwiftyJSON" == 4.2.0
+github "daltoniam/Starscream" == 3.0.6
+github "evgenyneu/keychain-swift" == 13.0.0
+github "joncardasis/ChromaColorPicker" == 1.7.2
+github "jordanebelanger/SwiftyBluetooth" == 1.0.0
+github "marmelroy/PhoneNumberKit" == 2.5.0
+github "mathiasnagler/SwiftyAcknowledgements" == 0.3
+github "realm/realm-cocoa" == 3.14.1
+github "shu223/Pulsator" == 0.5.3
+github "venmo/Static" == 3.0.3

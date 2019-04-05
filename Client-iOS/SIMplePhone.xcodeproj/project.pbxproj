@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3A9219C623D0011AFC9 /* CloudKit.framework */; };
 		D603A3AC21A543BD0011AFC9 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3AB21A543BD0011AFC9 /* SwiftMessages.framework */; };
 		D603A3B221A5A0250011AFC9 /* CloudEnvironmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603A3B121A5A0250011AFC9 /* CloudEnvironmentButton.swift */; };
 		D604917D2194289F00F46B18 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604917C2194289F00F46B18 /* APIClient.swift */; };
-		D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
 		D615527F222DA32600E0208D /* CNContact+AttributedFullName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615527E222DA32600E0208D /* CNContact+AttributedFullName.swift */; };
 		D6155281222EE14A00E0208D /* UIBorderedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6155280222EE14A00E0208D /* UIBorderedLabel.swift */; };
 		D615528322314A0400E0208D /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615528222314A0400E0208D /* ChatsTableViewController.swift */; };
@@ -34,9 +32,6 @@
 		D6328CA821930FD200E48FD3 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA721930FD200E48FD3 /* RealmManager.swift */; };
 		D6328CAA2193128600E48FD3 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CA92193128600E48FD3 /* RealmExtensions.swift */; };
 		D6328CAC219313DF00E48FD3 /* SPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6328CAB219313DF00E48FD3 /* SPManager.swift */; };
-		D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */; };
-		D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358714217F49E900B395F9 /* Starscream.framework */; };
-		D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358717217F544800B395F9 /* SwiftyJSON.framework */; };
 		D649976521F3C19E00EF72DE /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649976421F3C19E00EF72DE /* CallViewController.swift */; };
 		D649976721F3C28000EF72DE /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D649976621F3C28000EF72DE /* Call.storyboard */; };
 		D653F5DF21A806EB005736FE /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D653F5DE21A806EB005736FE /* WebRTCClient.swift */; };
@@ -50,10 +45,6 @@
 		D65FD6F9217FD1C600BBE679 /* AVCaptureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD6F8217FD1C600BBE679 /* AVCaptureState.swift */; };
 		D65FD703218884DF00BBE679 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD702218884DF00BBE679 /* CallKitManager.swift */; };
 		D65FD708218893C200BBE679 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD707218893C200BBE679 /* ContactsTableViewController.swift */; };
-		D65FD70E2189C14E00BBE679 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70C2189C14D00BBE679 /* Realm.framework */; };
-		D65FD70F2189C14E00BBE679 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70C2189C14D00BBE679 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70D2189C14D00BBE679 /* RealmSwift.framework */; };
-		D65FD7112189C14E00BBE679 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70D2189C14D00BBE679 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D65FD7152189C55200BBE679 /* SPRecentCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD7142189C55200BBE679 /* SPRecentCall.swift */; };
 		D65FD7172189C7F700BBE679 /* SPNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD7162189C7F700BBE679 /* SPNumber.swift */; };
 		D65FD7192189C88700BBE679 /* SPChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD7182189C88700BBE679 /* SPChat.swift */; };
@@ -62,6 +53,21 @@
 		D65FD71F2189CAE800BBE679 /* SPGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD71E2189CAE800BBE679 /* SPGateway.swift */; };
 		D65FD7212189CBF400BBE679 /* RecentCallsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */; };
 		D65FD723218B2C1B00BBE679 /* RecentCallsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65FD722218B2C1A00BBE679 /* RecentCallsTableViewCell.swift */; };
+		D664CD5F2257726000E75675 /* SwiftyBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6881224220439290054C2F9 /* SwiftyBluetooth.framework */; };
+		D664CD632257726000E75675 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D603A3A9219C623D0011AFC9 /* CloudKit.framework */; };
+		D664CD642257726000E75675 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE88122196C7E500F87B35 /* KeychainSwift.framework */; };
+		D664CD652257726000E75675 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D604917E219431DD00F46B18 /* Alamofire.framework */; };
+		D664CD662257726000E75675 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */; };
+		D664CD672257726000E75675 /* PhoneNumberKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */; };
+		D664CD692257726000E75675 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70C2189C14D00BBE679 /* Realm.framework */; };
+		D664CD6A2257726000E75675 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FD70D2189C14D00BBE679 /* RealmSwift.framework */; };
+		D664CD6B2257726000E75675 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358717217F544800B395F9 /* SwiftyJSON.framework */; };
+		D664CD6C2257726000E75675 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358714217F49E900B395F9 /* Starscream.framework */; };
+		D664CD6D225775E700E75675 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
+		D664CD7122577AC700E75675 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
+		D664CD7222577AC700E75675 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D66D67F422560FED00B4B179 /* SIMplePhoneKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66D67F322560FED00B4B179 /* SIMplePhoneKitTests.swift */; };
+		D66D67F622560FED00B4B179 /* SIMplePhoneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D67818A32178929B00E650DB /* SIMplePhoneKit.framework */; };
 		D678184F216CD16D00E650DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D678184E216CD16D00E650DB /* AppDelegate.m */; };
 		D6781858216CD16D00E650DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6781856216CD16D00E650DB /* Main.storyboard */; };
 		D678185D216CD16F00E650DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D678185B216CD16F00E650DB /* LaunchScreen.storyboard */; };
@@ -81,7 +87,6 @@
 		D68812152203AA0F0054C2F9 /* SPDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812142203AA0D0054C2F9 /* SPDelegate.swift */; };
 		D68812172203C2C10054C2F9 /* UINavigation+TopMost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */; };
 		D688121B22041A400054C2F9 /* BLESetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688121A22041A3F0054C2F9 /* BLESetupManager.swift */; };
-		D6881225220439290054C2F9 /* SwiftyBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6881224220439290054C2F9 /* SwiftyBluetooth.framework */; };
 		D6881228220494B70054C2F9 /* GSSelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */; };
 		D688122A2204BF340054C2F9 /* GSSearchingForGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812292204BF340054C2F9 /* GSSearchingForGatewayViewController.swift */; };
 		D688122C2204C17F0054C2F9 /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D688122B2204C17F0054C2F9 /* Pulsator.framework */; };
@@ -92,10 +97,6 @@
 		D68812362205BE200054C2F9 /* FancyBounceVCAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68812352205BE200054C2F9 /* FancyBounceVCAnimation.swift */; };
 		D688F0C021EDEA8F00C465AA /* SelectGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D688F0BF21EDEA8F00C465AA /* SelectGatewayViewController.swift */; };
 		D68C23A822175FD9009B7809 /* DialpadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68C23A722175FD9009B7809 /* DialpadViewController.swift */; };
-		D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; };
-		D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880B2194398900F87B35 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */; };
-		D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BE88122196C7E500F87B35 /* KeychainSwift.framework */; };
 		D6BE8816219718AE00F87B35 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6BE8814219718AE00F87B35 /* Setup.storyboard */; };
 		D6BE881821971A8900F87B35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881721971A8900F87B35 /* LoginViewController.swift */; };
 		D6BE881A2199FBD300F87B35 /* SetupBoldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE88192199FBD300F87B35 /* SetupBoldButton.swift */; };
@@ -103,11 +104,24 @@
 		D6BE881E219ABAD300F87B35 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881D219ABAD300F87B35 /* RegisterViewController.swift */; };
 		D6BE8820219AE06400F87B35 /* FancyBounceAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE881F219AE06400F87B35 /* FancyBounceAnimationSegue.swift */; };
 		D6BE8822219AE7FB00F87B35 /* SPAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8821219AE7FA00F87B35 /* SPAccount.swift */; };
-		D6E0B80721B8797800D560D7 /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0B80621B8797800D560D7 /* SwiftyAcknowledgements.framework */; };
 		D6E0B80921B87AF400D560D7 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6E0B80821B87AF400D560D7 /* Acknowledgements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D664CD6F22577ABD00E75675 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6781842216CD16D00E650DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6781849216CD16D00E650DB;
+			remoteInfo = SIMplePhone;
+		};
+		D66D67F722560FED00B4B179 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6781842216CD16D00E650DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D67818A22178929B00E650DB;
+			remoteInfo = SIMplePhoneKit;
+		};
 		D67818A82178929B00E650DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6781842216CD16D00E650DB /* Project object */;
@@ -124,10 +138,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D65FD70F2189C14E00BBE679 /* Realm.framework in Embed Frameworks */,
 				D67818AB2178929B00E650DB /* SIMplePhoneKit.framework in Embed Frameworks */,
-				D65FD7112189C14E00BBE679 /* RealmSwift.framework in Embed Frameworks */,
-				D6BE880D2194398900F87B35 /* WebRTC.framework in Embed Frameworks */,
+				D664CD7222577AC700E75675 /* WebRTC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +203,9 @@
 		D65FD71E2189CAE800BBE679 /* SPGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPGateway.swift; sourceTree = "<group>"; };
 		D65FD7202189CBF400BBE679 /* RecentCallsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCallsTableViewController.swift; sourceTree = "<group>"; };
 		D65FD722218B2C1A00BBE679 /* RecentCallsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCallsTableViewCell.swift; sourceTree = "<group>"; };
+		D66D67F122560FED00B4B179 /* SIMplePhoneKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SIMplePhoneKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D66D67F322560FED00B4B179 /* SIMplePhoneKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIMplePhoneKitTests.swift; sourceTree = "<group>"; };
+		D66D67F522560FED00B4B179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D678184A216CD16D00E650DB /* SIMplePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMplePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D678184D216CD16D00E650DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D678184E216CD16D00E650DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -213,7 +228,6 @@
 		D67818BB217DC53000E650DB /* WebRTCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCTestViewController.swift; sourceTree = "<group>"; };
 		D68812142203AA0D0054C2F9 /* SPDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDelegate.swift; sourceTree = "<group>"; };
 		D68812162203C2C10054C2F9 /* UINavigation+TopMost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+TopMost.swift"; sourceTree = "<group>"; };
-		D6881218220418F60054C2F9 /* BluetoothKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothKit.framework; path = Carthage/Build/iOS/BluetoothKit.framework; sourceTree = "<group>"; };
 		D688121A22041A3F0054C2F9 /* BLESetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESetupManager.swift; sourceTree = "<group>"; };
 		D6881224220439290054C2F9 /* SwiftyBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBluetooth.framework; path = Carthage/Build/iOS/SwiftyBluetooth.framework; sourceTree = "<group>"; };
 		D6881227220494B70054C2F9 /* GSSelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSSelectNetworkViewController.swift; sourceTree = "<group>"; };
@@ -241,27 +255,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D66D67EE22560FED00B4B179 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D66D67F622560FED00B4B179 /* SIMplePhoneKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6781847216CD16D00E650DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D653F5E321B0179E005736FE /* Static.framework in Frameworks */,
-				D6328CAE2193215100E48FD3 /* PhoneNumberKit.framework in Frameworks */,
-				D6358718217F544800B395F9 /* SwiftyJSON.framework in Frameworks */,
-				D6881225220439290054C2F9 /* SwiftyBluetooth.framework in Frameworks */,
 				D688122C2204C17F0054C2F9 /* Pulsator.framework in Frameworks */,
 				D67818AA2178929B00E650DB /* SIMplePhoneKit.framework in Frameworks */,
-				D6BE880C2194398900F87B35 /* WebRTC.framework in Frameworks */,
-				D6BE88132196C7E500F87B35 /* KeychainSwift.framework in Frameworks */,
-				D6E0B80721B8797800D560D7 /* SwiftyAcknowledgements.framework in Frameworks */,
-				D65FD7102189C14E00BBE679 /* RealmSwift.framework in Frameworks */,
-				D604917F219431DD00F46B18 /* Alamofire.framework in Frameworks */,
-				D603A3AA219C623D0011AFC9 /* CloudKit.framework in Frameworks */,
 				D62731DB21E5482200CFCE28 /* ChromaColorPicker.framework in Frameworks */,
-				D6BE880F2194BABA00F87B35 /* AlamofireSwiftyJSON.framework in Frameworks */,
 				D603A3AC21A543BD0011AFC9 /* SwiftMessages.framework in Frameworks */,
-				D6358716217F49E900B395F9 /* Starscream.framework in Frameworks */,
-				D65FD70E2189C14E00BBE679 /* Realm.framework in Frameworks */,
+				D664CD7122577AC700E75675 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +280,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D664CD5F2257726000E75675 /* SwiftyBluetooth.framework in Frameworks */,
+				D664CD632257726000E75675 /* CloudKit.framework in Frameworks */,
+				D664CD642257726000E75675 /* KeychainSwift.framework in Frameworks */,
+				D664CD652257726000E75675 /* Alamofire.framework in Frameworks */,
+				D664CD662257726000E75675 /* AlamofireSwiftyJSON.framework in Frameworks */,
+				D664CD672257726000E75675 /* PhoneNumberKit.framework in Frameworks */,
+				D664CD692257726000E75675 /* Realm.framework in Frameworks */,
+				D664CD6A2257726000E75675 /* RealmSwift.framework in Frameworks */,
+				D664CD6B2257726000E75675 /* SwiftyJSON.framework in Frameworks */,
+				D664CD6C2257726000E75675 /* Starscream.framework in Frameworks */,
+				D664CD6D225775E700E75675 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +312,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		D66D67F222560FED00B4B179 /* SIMplePhoneKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D66D67F322560FED00B4B179 /* SIMplePhoneKitTests.swift */,
+				D66D67F522560FED00B4B179 /* Info.plist */,
+			);
+			path = SIMplePhoneKitTests;
+			sourceTree = "<group>";
+		};
 		D6781841216CD16D00E650DB = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +329,7 @@
 				D67818A42178929B00E650DB /* SIMplePhoneKit */,
 				D6781866216CD1B600E650DB /* .gitignore */,
 				D678189321788C8200E650DB /* Cartfile */,
+				D66D67F222560FED00B4B179 /* SIMplePhoneKitTests */,
 				D678184B216CD16D00E650DB /* Products */,
 				D6781871216CE7E600E650DB /* Frameworks */,
 			);
@@ -308,6 +340,7 @@
 			children = (
 				D678184A216CD16D00E650DB /* SIMplePhone.app */,
 				D67818A32178929B00E650DB /* SIMplePhoneKit.framework */,
+				D66D67F122560FED00B4B179 /* SIMplePhoneKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,7 +371,6 @@
 				D604917E219431DD00F46B18 /* Alamofire.framework */,
 				D6BE880E2194BABA00F87B35 /* AlamofireSwiftyJSON.framework */,
 				D6328CAD2193215100E48FD3 /* PhoneNumberKit.framework */,
-				D6881218220418F60054C2F9 /* BluetoothKit.framework */,
 				D62731DA21E5482100CFCE28 /* ChromaColorPicker.framework */,
 				D65FD70C2189C14D00BBE679 /* Realm.framework */,
 				D65FD70D2189C14D00BBE679 /* RealmSwift.framework */,
@@ -470,6 +502,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D66D67F022560FED00B4B179 /* SIMplePhoneKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D66D67F922560FED00B4B179 /* Build configuration list for PBXNativeTarget "SIMplePhoneKitTests" */;
+			buildPhases = (
+				D66D67ED22560FED00B4B179 /* Sources */,
+				D66D67EE22560FED00B4B179 /* Frameworks */,
+				D66D67EF22560FED00B4B179 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D66D67F822560FED00B4B179 /* PBXTargetDependency */,
+				D664CD7022577ABD00E75675 /* PBXTargetDependency */,
+			);
+			name = SIMplePhoneKitTests;
+			productName = SIMplePhoneKitTests;
+			productReference = D66D67F122560FED00B4B179 /* SIMplePhoneKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D6781849216CD16D00E650DB /* SIMplePhone */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D6781863216CD16F00E650DB /* Build configuration list for PBXNativeTarget "SIMplePhone" */;
@@ -479,7 +530,6 @@
 				D6781848216CD16D00E650DB /* Resources */,
 				D678189C21788E8B00E650DB /* Embed Frameworks */,
 				D678189521788E2800E650DB /* Carthage */,
-				D65FD7122189C19900BBE679 /* Realm Dynamic Framework */,
 				D6BE88112194C7BB00F87B35 /* Warnings for TODOs */,
 			);
 			buildRules = (
@@ -500,6 +550,7 @@
 				D678189F2178929B00E650DB /* Sources */,
 				D67818A02178929B00E650DB /* Frameworks */,
 				D67818A12178929B00E650DB /* Resources */,
+				D664CD5D2257717D00E75675 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -516,9 +567,14 @@
 		D6781842216CD16D00E650DB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Lukas Kuster";
 				TargetAttributes = {
+					D66D67F022560FED00B4B179 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = D6781849216CD16D00E650DB;
+					};
 					D6781849216CD16D00E650DB = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
@@ -552,11 +608,19 @@
 			targets = (
 				D6781849216CD16D00E650DB /* SIMplePhone */,
 				D67818A22178929B00E650DB /* SIMplePhoneKit */,
+				D66D67F022560FED00B4B179 /* SIMplePhoneKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D66D67EF22560FED00B4B179 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6781848216CD16D00E650DB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -583,7 +647,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D65FD7122189C19900BBE679 /* Realm Dynamic Framework */ = {
+		D664CD5D2257717D00E75675 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -591,15 +655,24 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBluetooth.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireSwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PhoneNumberKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
 			);
-			name = "Realm Dynamic Framework";
+			name = Carthage;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		D678189521788E2800E650DB /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -609,17 +682,10 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Starscream.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PhoneNumberKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireSwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Static.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ChromaColorPicker.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBluetooth.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Pulsator.framework",
 			);
 			name = Carthage;
@@ -652,6 +718,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D66D67ED22560FED00B4B179 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D66D67F422560FED00B4B179 /* SIMplePhoneKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6781846216CD16D00E650DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -736,6 +810,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D664CD7022577ABD00E75675 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6781849216CD16D00E650DB /* SIMplePhone */;
+			targetProxy = D664CD6F22577ABD00E75675 /* PBXContainerItemProxy */;
+		};
+		D66D67F822560FED00B4B179 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D67818A22178929B00E650DB /* SIMplePhoneKit */;
+			targetProxy = D66D67F722560FED00B4B179 /* PBXContainerItemProxy */;
+		};
 		D67818A92178929B00E650DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D67818A22178929B00E650DB /* SIMplePhoneKit */;
@@ -771,6 +855,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D66D67FA22560FED00B4B179 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UBFF39V752;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				INFOPLIST_FILE = SIMplePhoneKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhoneKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SIMplePhone.app/SIMplePhone";
+			};
+			name = Debug;
+		};
+		D66D67FB22560FED00B4B179 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UBFF39V752;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				INFOPLIST_FILE = SIMplePhoneKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskuster.diplomarbeit.SIMplePhoneKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SIMplePhone.app/SIMplePhone";
+			};
+			name = Release;
+		};
 		D6781861216CD16F00E650DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1015,6 +1145,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D66D67F922560FED00B4B179 /* Build configuration list for PBXNativeTarget "SIMplePhoneKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D66D67FA22560FED00B4B179 /* Debug */,
+				D66D67FB22560FED00B4B179 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D6781845216CD16D00E650DB /* Build configuration list for PBXProject "SIMplePhone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
