@@ -28,14 +28,23 @@ matrix:
         - sleep 10
       script:
         - ./run_tests
-#    - if: branch = master OR branch = ios-client
-#      language: objective-c
-#      os: osx
-#      osx_image: xcode8.3
-#      before_script:
-#        - Do something
-#      script:
-#        - Do something
+    - if: branch = master OR branch = ios-client
+      language: objective-c
+      os: osx
+      osx_image: xcode8.3
+      cache:
+        directories:
+        - Client-iOS/Carthage
+      before_install:
+        - brew install carthage || true
+        - brew outdated carthage || brew upgrade carthage
+        - gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
+      install:
+        - cd Client-iOS/
+        - sh build-dependancies.sh
+      script:
+        - set -o pipefail
+        - xcodebuild clean test -project "SIMplePhone.xcodeproj" -scheme "SIMplePhoneKitTests" -destination "OS=11.2,name=iPhone X" -sdk "iphonesimulator11.2" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -f 'xcpretty-travis-formatter'
 
 notifications:
   email:
