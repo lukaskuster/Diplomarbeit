@@ -1,6 +1,10 @@
 matrix:
   include:
-    - language: python
+    - if: branch = master OR branch = gateway
+      language: python
+      cache:
+        directories:
+          - ffmpeg-3.2/
       python: 3.6
       dist: xenial
       install:
@@ -10,17 +14,22 @@ matrix:
         - python setup.py sdist
         - pip install dist/gatewayw*.tar.gz
       script:
-        - cd tests/
-        - chmod +x test_gatewayw.sh
-        - ./test_gatewayw.sh ../../etc/
-#    - language: node_js
-#     node_js:
-#        - "7"
-#      before_script:
-#        - Do something
-#      script:
-#        - Do something
-#    - language: objective-c
+        - ./tests/test_gatewayw.sh ../etc/
+    - if: branch = master OR branch = server
+      language: node_js
+      node_js:
+        - "8"
+      services:
+        - mongodb
+      install:
+        - cd Server
+        - npm install
+      before_script:
+        - sleep 10
+      script:
+        - ./run_tests
+#    - if: branch = master OR branch = ios-client
+#      language: objective-c
 #      os: osx
 #      osx_image: xcode8.3
 #      before_script:

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+echo "Start server..."
+npm run api &   # start web-api
+
+sleep 5         # Wait for the server to start up
+
+mocha           # run tests
+
+MOCHA_EXIT_CODE="$?"
+
+# kill web-api
+API_WORKER_PID=$(pgrep -f "node worker/api.js")
+echo "Stop server [${API_WORKER_PID}]..."
+
+# If the api process isn't running any more, fail the test
+if [[ -z "API_WORKER_PID" ]]
+then
+      exit 1
+else
+    # Kill the server
+    sudo kill -9 ${API_WORKER_PID}
+
+    exit ${MOCHA_EXIT_CODE}
+fi

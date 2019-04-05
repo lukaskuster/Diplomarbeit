@@ -39,7 +39,7 @@ module.exports.getGateway = function (req, res) {
     let gateway = user.gateway.id(req.params.imei);
 
     if (!gateway) {
-        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.body.imei})`, errorCode: 10002});
+        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.params.imei})`, errorCode: 10002});
     }
     return res.json(gateway.toClient());
 };
@@ -50,7 +50,7 @@ module.exports.deleteGateway = function (req, res) {
     let gateway = user.gateway.id(req.params.imei);
 
     if (!gateway) {
-        return res.status(403).json({errorMessage: `NoGatewayFound(withIMEI: ${req.body.imei})`, errorCode: 10002});
+        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.params.imei})`, errorCode: 10002});
     }
 
     user.gateway = user.gateway.filter(element => element !== gateway);
@@ -68,7 +68,7 @@ module.exports.putGateway = function (req, res) {
     let gateway = user.gateway.id(req.params.imei);
 
     if (!gateway) {
-        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.body.imei})`, errorCode: 10002});
+        return res.status(404).json({errorMessage: `NoGatewayFound(withIMEI: ${req.params.imei})`, errorCode: 10002});
     }
 
     let index = user.gateway.indexOf(gateway);
