@@ -8,7 +8,8 @@ const app = express();
 const collection = 'simple-phone';
 const port = 3000;
 
-mongoose.connect('mongodb://localhost/' + collection);
+mongoose.connect('mongodb://localhost/' + collection, { useNewUrlParser: true });
+
 mongoose.Promise = global.Promise;
 
 let db = mongoose.connection;

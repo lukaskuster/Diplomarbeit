@@ -12,6 +12,8 @@ const router = express.Router();
 router.get('/user', basicAuth, userController.getUser);
 router.post('/user', userController.postUser);
 router.put('/user', basicAuth, userController.putUser);
+router.delete('/user', basicAuth, userController.deleteUser);
+
 
 router.get('/gateway/stream', basicAuth, sse, streamController.stream);
 router.post('/gateway/push', basicAuth, streamController.pushEvent);
