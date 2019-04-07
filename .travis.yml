@@ -39,6 +39,7 @@ matrix:
         - brew install carthage || true
         - brew outdated carthage || brew upgrade carthage
         - gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
+        - composer config github-oauth.github.com ${GITHUB_TOKEN}
       install:
         - cd Client-iOS/
         - sh build-dependancies.sh
