@@ -44,7 +44,7 @@ matrix:
         - sh build-dependancies.sh
       script:
         - set -o pipefail
-        - xcodebuild clean test -project "SIMplePhone.xcodeproj" -scheme "SIMplePhoneKitTests" -destination "OS=11.2,name=iPhone X" -sdk "iphonesimulator11.2" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -f 'xcpretty-travis-formatter'
+        - xcodebuild clean test -project "SIMplePhone.xcodeproj" -scheme "SIMplePhoneKitTests" -destination "OS=12.1,name=iPhone X" -sdk "iphonesimulator12.1" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -f 'xcpretty-travis-formatter'
 
 notifications:
   email:
