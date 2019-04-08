@@ -1,12 +1,19 @@
 #!/bin/bash
 # Build Dependacies
 
+carthage_loop=true
+echo "travis_fold:start:Carthage"
 echo "Run Carthage update..."
-while sleep 5m; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
+./print-time.sh Carthage &
 carthage bootstrap --cache-builds --platform iOS
-kill %1
+pid=$(pgrep -f print-time)
+kill -9 $pid
+echo "travis_fold:end:Carthage"
 
+echo "travis_fold:start:WebRTC"
 echo "Run WebRTC init..."
-while sleep 5m; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
+./print-time.sh WebRTC &
+pid=$(pgrep -f print-time)
 sh build-webrtc.sh
-kill %1
+kill -9 $pid
+echo "travis_fold:end:WebRTC"
