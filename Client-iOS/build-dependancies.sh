@@ -13,6 +13,7 @@ echo "travis_fold:start:WebRTC"
 echo "Run WebRTC init..."
 ./print-time.sh WebRTC &
 pid=$(pgrep -f print-time)
+mkdir Carthage/Build/iOS
 sh build-webrtc.sh
 kill -s KILL $pid
 echo "travis_fold:end:WebRTC"
