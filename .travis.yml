@@ -1,7 +1,6 @@
 matrix:
   include:
-    - if: branch = master OR branch = gateway
-      language: python
+    - language: python
       cache:
         directories:
           - ffmpeg-3.2/
@@ -9,14 +8,19 @@ matrix:
       dist: xenial
       install:
         - Gateway/bin/install_gatewayw_dependencies
+        - pip install pytest-cov pytest codecov
       before_script:
         - cd Gateway/gatewayw/
         - python setup.py sdist
         - pip install dist/gatewayw*.tar.gz
+        - python setup.py build
       script:
-        - ./tests/test_gatewayw.sh ../etc/
-    - if: branch = master OR branch = server
-      language: node_js
+        - ./test/test_gatewayw.sh ../etc/
+        - cd build/lib*
+        - pytest --cov gateway
+      after_success:
+        - codecov
+    - language: node_js
       node_js:
         - "8"
       services:

@@ -2,9 +2,6 @@ import threading
 from queue import Queue
 from threading import Thread
 
-import pyee
-from serial import Serial
-
 from gateway.utils import clear_str, logger
 
 
@@ -21,35 +18,30 @@ class SerialLoop(Thread):
     SerialLoop is a thread for communication with the sim800 module over the serial interface.
     """
 
-    def __init__(self, emitter, serial_port, debug):
+    def __init__(self, emitter, serial, debug):
         """
         Construct a new 'SerialLoop' object.
 
         :param emitter: Sim800 object
-        :param serial_port: port of the serial interface
+        :param serial: serial object
         :param debug: indicates debug mode
         :type emitter: object
-        :type serial_port: str
+        :type serial: object
         :type debug: bool
         :return: returns nothing
         """
 
+        super(SerialLoop, self).__init__()
+
         if not hasattr(emitter, 'emit'):
             raise ValueError
-
-        super(SerialLoop, self).__init__()
 
         # If debug is enabled the serial connection is emulated with the commandline
         self.debug = debug
 
         if not debug:
             # Initialize a new serial connection
-            self.serial = Serial(serial_port, baudrate=9600, timeout=1)
-
-        # Set the event emitter
-
-        if not isinstance(emitter, pyee.EventEmitter):
-            raise TypeError('emitter must be of type pyee.EventEmitter!')
+            self.serial = serial
 
         self.emitter = emitter
         self.echo = True
@@ -115,6 +107,7 @@ class SerialLoop(Thread):
                 response = clear_str(res.decode('utf-8'))
             except UnicodeDecodeError:
                 logger.error('Sim800', 'SerialError')
+                event.error = True
                 raise SerialError('Received data could not be decoded!')
 
             # If the prompt char is send back, serial800 expects some kind of data
@@ -140,6 +133,7 @@ class SerialLoop(Thread):
         Checks the response string for an event.
 
         :param response: event from serial interface e.g. RING
+        :type response str
         :return: boolean that indicates if the passed data was processed
         """
 
@@ -238,11 +232,8 @@ class SerialLoop(Thread):
         elif type(data) == str:
             data = str.encode(data)
 
-        # If debug is enabled print the data to the console
-        if self.debug:
-            logger.info('Sim800', 'Wrote data to interface (DEBUG): ' + str(data))
-            return
-
-        # Else write the data to the serial interface
-        self.serial.write(data)
         logger.debug('Sim800', 'Wrote data to serial interface: ' + str(data))
+
+        # Write the data to the serial interface
+        if not self.debug:
+            self.serial.write(data)

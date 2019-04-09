@@ -1,4 +1,4 @@
-from gateway.networking import WebRTC, Role
+from gateway.networking import Caller, Role
 from gateway.utils import logger, Level
 from gateway.core import set_config, get_config
 import asyncio
@@ -17,7 +17,7 @@ HOST = config['Server']['signalinghost']
 
 
 async def test(role):
-    con = WebRTC(USERNAME, PASSWORD, IMEI, HOST, debug=True, signaling_timeout=100)
+    con = Caller(USERNAME, PASSWORD, IMEI, HOST, debug=True, signaling_timeout=100)
     con.on('connectionClosed', asyncio.get_event_loop().stop)
     con.on('timeoutError', asyncio.get_event_loop().stop)
 

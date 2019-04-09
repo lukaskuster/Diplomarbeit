@@ -2,6 +2,8 @@ import asyncio
 
 from pyee import EventEmitter
 
+from serial import Serial
+
 from gateway.io.sim800.serial_loop import SerialLoop
 from gateway.io.sim800.at_command import ATCommand
 from gateway.io.sim800.at_event import ATEvent
@@ -39,7 +41,8 @@ class Sim800(EventEmitter):
         super().__init__(scheduler=asyncio.run_coroutine_threadsafe, loop=loop)
 
         # Create serial loop
-        self.serial_loop = SerialLoop(self, serial_port, debug)
+        serial = Serial(serial_port, baudrate=9600, timeout=1)
+        self.serial_loop = SerialLoop(self, serial, debug)
         if debug:
             self.serial_loop.echo = False
         # Set the event loop
