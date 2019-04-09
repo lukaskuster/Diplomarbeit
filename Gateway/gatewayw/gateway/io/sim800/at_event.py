@@ -17,7 +17,7 @@ class ATEvent(asyncio.Event):
         super().__init__()
 
         self.error = error
-        self.error_message = None
+        self.error_message = ''
         self.name = name
         self.command = command
         self.content = []
