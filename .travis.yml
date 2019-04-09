@@ -8,8 +8,7 @@ matrix:
       dist: xenial
       install:
         - Gateway/bin/install_gatewayw_dependencies
-        - sudo apt-get install python3-sphinx
-        - pip install pytest-cov pytest codecov hawkmoth
+        - pip install pytest-cov pytest codecov hawkmoth sphinx==1.8.5
         - export LD_LIBRARY_PATH=$(llvm-config --libdir)
       before_script:
         - cd Gateway/gatewayw/
