@@ -20,5 +20,5 @@ if [ ! -f Carthage/Build/iOS/WebRTC.framework ]; then
 
     ## Move generated .framework-File and cleanup
     cd ../../
-    mv WebRTC/release/WebRTC.framework Carthage/Build/iOS
+    mv WebRTC/release/WebRTC.framework Carthage/Build/iOS/
 fi
